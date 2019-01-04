@@ -11,7 +11,7 @@ title:            Jiyu Zhang
 tagline:          'A Jekyll theme'
 description:      ''
 url:              http://hyde.getpoole.com
-baseurl:          /
+baseurl:          https://jiyuzhang1994.github.io
 
 author:
   name:           'Mark Otto'
