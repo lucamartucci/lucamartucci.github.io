@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-05T00:39:32+08:00</updated>
+ <updated>2019-01-05T00:53:43+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -14,7 +14,7 @@
  
  <entry>
    <title>零知识证明：定义及变体 Zero-Knowledge Proofs:Definitions and Variants</title>
-   <link href="http://localhost:4000/zkdefvar/"/>
+   <link href="http://localhost:4000//zkdefvar/"/>
    <updated>2019-01-04T00:00:00+08:00</updated>
    <id>http://localhost:4000/zkdefvar</id>
    <content type="html">&lt;p&gt;Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and variants. &lt;br /&gt;
