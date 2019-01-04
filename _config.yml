@@ -10,12 +10,12 @@ relative_permalinks: false
 title:            Jiyu Zhang
 tagline:          'A Jekyll theme'
 description:      ''
-url:              https://jiyuzhang1994.github.io
+url:              http://hyde.getpoole.com
 baseurl:          /
 
 author:
-  name:           'Jiyu Zhang'
-  url:            https://jiyuzhang1994.github.io
+  name:           'Mark Otto'
+  url:            https://twitter.com/mdo
 
 paginate:         10000
 
