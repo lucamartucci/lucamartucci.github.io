@@ -1,5 +1,6 @@
 ---
 layout: default
+title: page
 ---
 
 <p class="message">
