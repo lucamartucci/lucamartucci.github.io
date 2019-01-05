@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Jiyu Zhang</title>
- <link href="http://hyde.getpoole.com/atom.xml" rel="self"/>
- <link href="http://hyde.getpoole.com/"/>
- <updated>2019-01-05T01:11:28+08:00</updated>
- <id>http://hyde.getpoole.com</id>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2019-01-05T11:23:56+08:00</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>零知识证明：定义及变体 Zero-Knowledge Proofs:Definitions and Variants</title>
-   <link href="http://hyde.getpoole.com/zkdefvar/"/>
+   <link href="http://localhost:4000/zkdefvar/"/>
    <updated>2019-01-04T00:00:00+08:00</updated>
-   <id>http://hyde.getpoole.com/zkdefvar</id>
+   <id>http://localhost:4000/zkdefvar</id>
    <content type="html">&lt;p&gt;Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and variants. &lt;br /&gt;
 最近在看一些密码学的论文，对其中&lt;strong&gt;零知识证明(zero-knowledge proofs)&lt;/strong&gt;这个重要的概念很感兴趣，就把相关的笔记（notes）都看了一遍，打算把定义方面的理解以及变体的问题总结下来，也是为了巩固梳理一下。因为完全是新人写手，如有错误，术语不正确或是不严谨的地方，还请指出。&lt;/p&gt;
 
