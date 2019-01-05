@@ -95,28 +95,27 @@
 
 <div>
 $$\forall V^{\prime} \exists S\in PPT\ s.t\ \ \forall x\in L$$
-&lt;/div?
+</div>
+
 <div>
 $$[View(S(x))]\simeq [View(PV^{\prime}(x))]$$
 </div>
 
-也就是说，对于任何验证者，都存在一个模拟者（多项式时间的概率图灵机）使得对于（语言L内）任意的x作为输入时，模拟者与验证者所看到的变量的分布是（几乎）相同的。
-更通俗地说， 对于任何验证者视角下交互证明过程中的变量的分布，该验证者都能自身生成（generate）这样的分布。
+<p>也就是说，对于任何验证者，都存在一个模拟者（多项式时间的概率图灵机）使得对于（语言L内）任意的x作为输入时，模拟者与验证者所看到的变量的分布是（几乎）相同的。
+更通俗地说， 对于任何验证者视角下交互证明过程中的变量的分布，该验证者都能自身生成（generate）这样的分布。</p>
 
-需要补充说明的是，上面定义里的量词是针对所有的 V'。特别地，PV'不一定是 L 的交互式证明或协议。也就是说，在上面的定义里，V'的目标只是想尽办法从证明者P那里获取有用的信息。而如果我们要求 PV' 是一个 L 的交互式证明或协议，那么我们称之为**诚实验证者零知识**（Honest Verifier Zero Knowledge，i.e. HVZK）。
+<p>需要补充说明的是，上面定义里的量词是针对所有的 V’。特别地，PV’不一定是 L 的交互式证明或协议。也就是说，在上面的定义里，V’的目标只是想尽办法从证明者P那里获取有用的信息。而如果我们要求 PV’ 是一个 L 的交互式证明或协议，那么我们称之为<strong>诚实验证者零知识</strong>（Honest Verifier Zero Knowledge，i.e. HVZK）。</p>
 
-另一方面，根据分布的“相同”的不同定义，零知识性质也可分类为：**完全零知识**（Perfect Zero Knowledge），**统计零知识**（Statistical Zero Knowledge), 以及 **计算零知识**（Computational Zero Knowledge）。其中完全零知识是指验证者与模拟者的输出分布完全相等，统计零知识是指两者的输出分布统计上接近（Statistically close），而计算零知识就是说这两个输出分布在多项式时间内是不可区分的。
+<p>另一方面，根据分布的“相同”的不同定义，零知识性质也可分类为：<strong>完全零知识</strong>（Perfect Zero Knowledge），<strong>统计零知识</strong>（Statistical Zero Knowledge), 以及 <strong>计算零知识</strong>（Computational Zero Knowledge）。其中完全零知识是指验证者与模拟者的输出分布完全相等，统计零知识是指两者的输出分布统计上接近（Statistically close），而计算零知识就是说这两个输出分布在多项式时间内是不可区分的。</p>
 
-在Oded的survey中，他还有提到通常还需要要考虑到敌方（adversary）有辅助信息（auxiliary information）的情况。在这种情况下的零知识，称之为**辅助输入零知识**（auxiliary-input zero knowledge）。辅助输入零知识需要在定义2里用[View(S(x, z))]和[View((P V'(z))(x))] 来分别替代模拟者的输出分布和验证者的输出分布，其中z代表的是辅助信息。
+<p>在Oded的survey中，他还有提到通常还需要要考虑到敌方（adversary）有辅助信息（auxiliary information）的情况。在这种情况下的零知识，称之为<strong>辅助输入零知识</strong>（auxiliary-input zero knowledge）。辅助输入零知识需要在定义2里用[View(S(x, z))]和[View((P V’(z))(x))] 来分别替代模拟者的输出分布和验证者的输出分布，其中z代表的是辅助信息。</p>
 
-除了以上的变体外，Oded的survey里提到了从对模拟者的要求出发衍生的一些变体， 其中一个就是要求有一个**通用模拟者**（Universal Simulator），这个模拟者拥有验证者B'的程序作为辅助输入。为了这个目的，我们需将定义2里的模拟者 S(x) 修改为 S(x, &lt;B'&gt;)，其中 &lt;B'&gt; 表示B'的程序(program)的描述。更进一步加强定义的话，我们还可以要求把验证者的程序作为一个黑箱（Black Box）或是神谕机（Oracle），称之为**黑箱模拟**（Black-box Simulation）。似乎最初大家都相信把B'的程序当作输入和把B'的程序作为黑箱使用对于零知识来说是没有区别的（这点我不肯定因为我还没仔细读过后面的部分），不过Boaz Barak [3] 在2001年的论文给出了它们的区别。
+<p>除了以上的变体外，Oded的survey里提到了从对模拟者的要求出发衍生的一些变体， 其中一个就是要求有一个<strong>通用模拟者</strong>（Universal Simulator），这个模拟者拥有验证者B’的程序作为辅助输入。为了这个目的，我们需将定义2里的模拟者 S(x) 修改为 S(x, &lt;B’&gt;)，其中 &lt;B’&gt; 表示B’的程序(program)的描述。更进一步加强定义的话，我们还可以要求把验证者的程序作为一个黑箱（Black Box）或是神谕机（Oracle），称之为<strong>黑箱模拟</strong>（Black-box Simulation）。似乎最初大家都相信把B’的程序当作输入和把B’的程序作为黑箱使用对于零知识来说是没有区别的（这点我不肯定因为我还没仔细读过后面的部分），不过Boaz Barak [3] 在2001年的论文给出了它们的区别。</p>
 
-
-**参考文献(References)**  
-[1] Oded Goldreich. Zero-knowledge twenty years after its invention. Unpublished manuscript. 2002.  
-[2] Rafail Ostrovsky. Foundations of Cryptography Draft Lecture Notes.  
-[3] Boaz Barak. How to go beyond the black-box simulation barrier. FOCS 2011.  
-</div>
+<p><strong>参考文献(References)</strong><br />
+[1] Oded Goldreich. Zero-knowledge twenty years after its invention. Unpublished manuscript. 2002.<br />
+[2] Rafail Ostrovsky. Foundations of Cryptography Draft Lecture Notes.<br />
+[3] Boaz Barak. How to go beyond the black-box simulation barrier. FOCS 2011.</p>
 
   </div>
   
