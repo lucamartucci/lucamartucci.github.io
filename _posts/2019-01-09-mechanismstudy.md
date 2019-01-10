@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /mechanismstudy/
-title: 'Algorithmic Mechanism Design: what do we care and what is the problem?'
+title: '学习小记 Algorithmic Mechanism Design: what do we care and what is the problem?'
+tags: Study Diary
 ---
 
-In preparation.
