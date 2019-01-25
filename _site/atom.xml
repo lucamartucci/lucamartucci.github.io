@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-10T11:43:28+08:00</updated>
+ <updated>2019-01-25T14:26:02-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -15,16 +15,16 @@
  <entry>
    <title>Algorithmic Mechanism Design: what do we care and what is the problem?</title>
    <link href="http://localhost:4000/mechanismstudy/"/>
-   <updated>2019-01-09T00:00:00+08:00</updated>
+   <updated>2019-01-09T00:00:00-05:00</updated>
    <id>http://localhost:4000/mechanismstudy</id>
    <content type="html">
 </content>
  </entry>
  
  <entry>
-   <title>零知识证明：定义及变体 Zero-Knowledge Proofs:Definitions and Variants</title>
+   <title>Zero-Knowledge Proofs:Definitions and Variants</title>
    <link href="http://localhost:4000/zkdefvar/"/>
-   <updated>2019-01-04T00:00:00+08:00</updated>
+   <updated>2019-01-04T00:00:00-05:00</updated>
    <id>http://localhost:4000/zkdefvar</id>
    <content type="html">&lt;p&gt;Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and its variants. &lt;br /&gt;
 最近在看一些密码学的论文，对其中&lt;strong&gt;零知识证明(zero-knowledge proofs)&lt;/strong&gt;这个重要的概念很感兴趣，就把相关的笔记（notes）都看了一遍，打算把定义方面的理解以及变体的问题总结下来。&lt;/p&gt;
