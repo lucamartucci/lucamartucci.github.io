@@ -4,13 +4,22 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-01-25T14:26:02-05:00</updated>
+ <updated>2019-01-26T15:03:45-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Derandomizing Log Space vs. Fooling Log Space</title>
+   <link href="http://localhost:4000/derandlogspace/"/>
+   <updated>2019-01-25T00:00:00-05:00</updated>
+   <id>http://localhost:4000/derandlogspace</id>
+   <content type="html">
+</content>
+ </entry>
  
  <entry>
    <title>Algorithmic Mechanism Design: what do we care and what is the problem?</title>
