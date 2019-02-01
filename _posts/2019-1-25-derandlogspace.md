@@ -10,9 +10,9 @@ tags: Study Diary
 
 一个branching program是一个acyclic graph。在这个图里面每一个node都有个label是 $x_i$，表示input的第$i$个variable。这个图有一个start node和两个end node。每个node（除了end node）都有两个ouput edge，一个由1标注，一个由0标注：如果node的variable的值是1，就沿1的边走，如果是0，就沿0的边走。 两个end nodes一个由0标注一个由1标注。 这样我们大概就可以想象一个长度为n的输入在这个model上是怎么计算的了：对于此输入，我们从start node看起，如果node上标注的variable的值为1的话就沿标注1的边看下一个node，如果是0就沿标注0的边看下一个node，沿着这样的一条计算路径（path)后最终会落到要么是0或是1的end nodes上。输出最后到达的end node的值。这个branching program的size就是这个图的node的数量
 
-要说明为什么一个polynomial size 的 branching program和L/poly 图灵机计算一样，试想我们上面说的一个configuration，是不是正好就和这个branching program里的一个node一样：node的标注（label）就是图灵机在input tape上的读取头的位置；我们一共有polynomial个nodes，正好对应work tape上的$2^{\log n}=poly(n)$种不同的binary string。这样就证明了poly-size branching program能计算L/poly。 另一个方向就仅仅是log space machine被给予这个branching program的description(which is poly-size)。
+要说明为什么一个polynomial size 的 branching program和L/poly 图灵机计算一样，试想我们上面说的一个configuration，是不是正好就和这个branching program里的一个node一样：node的标注（label）就是图灵机在input tape上的读取头的位置；我们一共有polynomial个nodes，正好对应work tape上的$2^{\log n}=poly(n)$种不同的binary string。这样就证明了poly-size branching program能计算L/poly。 另一个方向就仅仅是log space machine被给予这个branching program的description(which is poly-size)。  
 
-Fooling L/poly 就是指我们要构造一个PRG G，使得对于任意的branching program B，$|Pr[B(G(U_z))=1]-Pr[B(U_m)=1]|<\epsilon$。也就是说我们要把一个长度为z的truly random string，stretch成一个长度为|G(U_z)|=m 的 string $G(U_z)$，使得所有的distinguisher B都不能区别它与长度为m的uniformly random string的区别。  
+Fooling L/poly 就是指我们要构造一个PRG G，使得对于任意的branching program B，$\mid{Pr[B(G(U_z))=1]-Pr[B(U_m)=1]}\mid < \epsilon$。也就是说我们要把一个长度为z的truly random string，stretch成一个长度为 $\mid G(U_z)\mid=m$ 的 string $ G(U_z)$，使得所有的distinguisher B都不能区别它与长度为m的uniformly random string的区别。  
 
 
 再来看看BPL, 为了model BPL non-uniformly我们用一个特殊的branching program -- Read-Once Branching Program。回想一下log space的
