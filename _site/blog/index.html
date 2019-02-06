@@ -75,9 +75,7 @@
     </h1>
 
     <span class="post-date">25 Jan 2019</span>
-    <p>(Writing notes in Chinese is too hard = =, next time I’ll begin to write in English.)</p>
-
-<p>上周的ToC reading group上讲到了最近的一篇ITCS paper [CHLT18]，主要是讲怎么通过bound一类方程的second-level fourier tail， 构建对于那个function family的PRG(Pseudorandom Generator)。 特别地，通过这篇paper的一个猜想（conjecture），我们可以得到AC[$\oplus$]的PRG。 在meeting上，Michael就问了AC[$\oplus$]是不是在BPL里，原因是我们知道怎么构建对于BPL的PRG(而且并不optimal，且仅仅是nonuniformly），但我们好像不知道怎么去fool所有的log space 的计算（实际上应该是L/poly)，而AC[$\oplus$]看起来是不像是在BPL里面的。因为之前对pseudorandomness for space-bounded computation了解还比较少，于是我也就找了一些相关的笔记看，这次就主要是想写下derandomizing BPL 和 fooling log space的区别。</p>
+    <p>上周的ToC reading group上讲到了最近的一篇ITCS paper [CHLT18]，主要是讲怎么通过bound一类方程的second-level fourier tail， 构建对于那个function family的PRG(Pseudorandom Generator)。 特别地，通过这篇paper的一个猜想（conjecture），我们可以得到AC[$\oplus$]的PRG。 在meeting上，Michael就问了AC[$\oplus$]是不是在BPL里，原因是我们知道怎么构建对于BPL的PRG(而且并不optimal，且仅仅是nonuniformly），但我们好像不知道怎么去fool所有的log space 的计算（实际上应该是L/poly)，而AC[$\oplus$]看起来是不像是在BPL里面的。因为之前对pseudorandomness for space-bounded computation了解还比较少，于是我也就找了一些相关的笔记看，这次就主要是想写下derandomizing BPL 和 fooling log space的区别。</p>
 
 <h2 id="fooling-log-space"><strong>Fooling log space</strong></h2>
 <p>当我们说fooling log space的时候， 实际上是指fooling L/poly。首先我们来看看什么是L/poly。回想我们定义P/poly的一个目的是想用一个combinatorial model，也就是 circuits 来 non-uniformly 模拟多项式时间(polynomial time)内对于每个输入长度n有poly(n)长度的advice的图灵机。这个circuit有多项式长度的描述（polynomial size description），也就相当于是一个图灵机有了多项式长度的advice，所以才写作P/poly。那么类似地，我们想用一个有多项式长度的描述的 combinatorial model 来模拟 log space的图灵机的计算并把它记作L/poly。这次我们用的model是branching program。首先回忆一下 log space的图灵机是怎么运行的：我们有一个只读（read-only)的输入带（input tape)，还有一个可以读写（read-write）的只有log长度的工作带（work tape），和一个write-only的 output tape。对于一个长度为n的input，log space的图灵机可以在input tape 上来回读取输入，然后在 $\log n$ space的work tape上进行计算，最后在output tape上输出结果。能被这种图灵机计算的complexity class我们称之为 L。注意在这个计算过程中图灵机的每一步计算的格局（configuration)都可以由它的 1.读取头在input tape上的位置 2.work tape上的内容 3.读取头里的状态 这三个元素组成的triple表示。接下来我们定义 branching program 并展示它怎么模拟 log space 的图灵机的计算。</p>
@@ -88,7 +86,7 @@
 
 <p>而Fooling L/poly 就是指我们要构造一个PRG G，使得对于任意的branching program B，$\mid{Pr[B(G(U_z))=1]-Pr[B(U_m)=1]}\mid &lt; \epsilon$。也就是说我们要把一个长度为z的truly random string，stretch成一个长度为 $\mid G(U_z)\mid=m$ 的 string $ G(U_z)$，使得所有的distinguisher B都不能区别它与长度为m的uniformly random string的区别。</p>
 
-<h2 id="fooling-bpl"><strong>Fooling BPL</strong></h2>
+<h2 id="derandomizing-bpl"><strong>Derandomizing BPL</strong></h2>
 <p>再来看BPL。同样地，fooling BPL 也是指fool一个non-uniform model。 Non-uniformly modeling BPL其实是用一个上述的branching program 的一个special case – Read-Once Branching Program(ROBP)。回想一下log space的 randomized computation，实际上就是在除input tape, work tape, output tape 外额外增加一个randomness tape。需要注意的是这个randomness tape是read once的，也就是说在运行的每一步我们依次读一个上面的random bit，并且这个bit是不能retrieve的。试想在randomized log space computation里面，我们也是在每一步投掷一次硬币（flip a coin），然后决定下一步做什么，而log space不足以储存这些random bits。这个计算过程恰好可以由ROBP模拟。</p>
 
 <p>一个ROBP是一个acyclic layered graph。如下图所示，每层共有$2^S$个nodes，对应有S space的图灵机的 $2^S$个格局，每次从一层转移到下一层时，读取m个random bits，所以可以最多转移到2^m个configuration，即每个点有2^m个edge连接到下一层。在进行运算时，因为我们可以把input嵌入这个branching program中，所以可以每次只关心random bits。每读取m个ramdon bits，由一层转移到下一层，最后到达接受或拒绝的状态。</p>
@@ -97,7 +95,7 @@
 
 <p>Derandomizing BPL就是指我们能构造一个PRG G，使得对于任意的ROBP $B^{\prime}$，$\mid{Pr[B^{\prime}(G(U_z))=1]-Pr[B^{\prime}(U_m)=1]}\mid &lt; \epsilon$。</p>
 
-<p>由此可见，fooling log space 和 derandomizing BPL是不痛的，前者需要fool 所有的 branching program，而后者只需要fool 一个special branching program – ROBP。前者难度比后者更大。</p>
+<p>由此可见，fooling log space 和 derandomizing BPL是不痛的，前者需要fool 所有的 branching program，而后者只需要fool 一种特殊的 branching program – ROBP。前者难度比后者更大。</p>
 
 <p><strong>References</strong><br />
 [CHLT18]Eshan Chattopadhyay. Pooya Hatami. Shachar Lovett. Avishay Tal. Pseudorandom generators from the second Fourier level and applications to AC0 with parity gates</p>

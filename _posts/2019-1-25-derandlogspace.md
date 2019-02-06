@@ -4,7 +4,6 @@ permalink: /derandlogspace/
 title: Derandomizing Log Space vs. Fooling Log Space
 tags: Study Diary
 ---
-(Writing notes in Chinese is too hard = =, next time I'll begin to write in English.)
 
 上周的ToC reading group上讲到了最近的一篇ITCS paper [CHLT18]，主要是讲怎么通过bound一类方程的second-level fourier tail， 构建对于那个function family的PRG(Pseudorandom Generator)。 特别地，通过这篇paper的一个猜想（conjecture），我们可以得到AC[$\oplus$]的PRG。 在meeting上，Michael就问了AC[$\oplus$]是不是在BPL里，原因是我们知道怎么构建对于BPL的PRG(而且并不optimal，且仅仅是nonuniformly），但我们好像不知道怎么去fool所有的log space 的计算（实际上应该是L/poly)，而AC[$\oplus$]看起来是不像是在BPL里面的。因为之前对pseudorandomness for space-bounded computation了解还比较少，于是我也就找了一些相关的笔记看，这次就主要是想写下derandomizing BPL 和 fooling log space的区别。  
 
@@ -17,7 +16,7 @@ tags: Study Diary
 
 而Fooling L/poly 就是指我们要构造一个PRG G，使得对于任意的branching program B，$\mid{Pr[B(G(U_z))=1]-Pr[B(U_m)=1]}\mid < \epsilon$。也就是说我们要把一个长度为z的truly random string，stretch成一个长度为 $\mid G(U_z)\mid=m$ 的 string $ G(U_z)$，使得所有的distinguisher B都不能区别它与长度为m的uniformly random string的区别。  
 
-## **Fooling BPL**
+## **Derandomizing BPL**
 再来看BPL。同样地，fooling BPL 也是指fool一个non-uniform model。 Non-uniformly modeling BPL其实是用一个上述的branching program 的一个special case -- Read-Once Branching Program(ROBP)。回想一下log space的 randomized computation，实际上就是在除input tape, work tape, output tape 外额外增加一个randomness tape。需要注意的是这个randomness tape是read once的，也就是说在运行的每一步我们依次读一个上面的random bit，并且这个bit是不能retrieve的。试想在randomized log space computation里面，我们也是在每一步投掷一次硬币（flip a coin），然后决定下一步做什么，而log space不足以储存这些random bits。这个计算过程恰好可以由ROBP模拟。  
 
 一个ROBP是一个acyclic layered graph。如下图所示，每层共有$2^S$个nodes，对应有S space的图灵机的 $2^S$个格局，每次从一层转移到下一层时，读取m个random bits，所以可以最多转移到2^m个configuration，即每个点有2^m个edge连接到下一层。在进行运算时，因为我们可以把input嵌入这个branching program中，所以可以每次只关心random bits。每读取m个ramdon bits，由一层转移到下一层，最后到达接受或拒绝的状态。  
@@ -26,7 +25,7 @@ tags: Study Diary
 
 Derandomizing BPL就是指我们能构造一个PRG G，使得对于任意的ROBP $B^{\prime}$，$\mid{Pr[B^{\prime}(G(U_z))=1]-Pr[B^{\prime}(U_m)=1]}\mid < \epsilon$。  
 
-由此可见，fooling log space 和 derandomizing BPL是不痛的，前者需要fool 所有的 branching program，而后者只需要fool 一个special branching program -- ROBP。前者难度比后者更大。
+由此可见，fooling log space 和 derandomizing BPL是不痛的，前者需要fool 所有的 branching program，而后者只需要fool 一种特殊的 branching program -- ROBP。前者难度比后者更大。
 
 
 
