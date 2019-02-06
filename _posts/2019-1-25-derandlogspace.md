@@ -25,7 +25,7 @@ tags: Study Diary
 
 Derandomizing BPL就是指我们能构造一个PRG G，使得对于任意的ROBP $B^{\prime}$，$\mid{Pr[B^{\prime}(G(U_z))=1]-Pr[B^{\prime}(U_m)=1]}\mid < \epsilon$。  
 
-由此可见，fooling log space 和 derandomizing BPL是不痛的，前者需要fool 所有的 branching program，而后者只需要fool 一种特殊的 branching program -- ROBP。前者难度比后者更大。
+由此可见，fooling log space 和 derandomizing BPL是不同的，前者需要fool 所有的 branching program，而后者只需要fool 一种特殊的 branching program -- ROBP。前者难度比后者更大。
 
 
 
