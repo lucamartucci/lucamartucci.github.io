@@ -4,95 +4,13 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-02-05T20:29:50-05:00</updated>
+ <updated>2019-03-22T16:05:19-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
  </author>
 
- 
- <entry>
-   <title>Derandomizing Log Space vs. Fooling Log Space</title>
-   <link href="http://localhost:4000/derandlogspace/"/>
-   <updated>2019-01-25T00:00:00-05:00</updated>
-   <id>http://localhost:4000/derandlogspace</id>
-   <content type="html">&lt;p&gt;上周的ToC reading group上讲到了最近的一篇ITCS paper [CHLT18]，主要是讲怎么通过bound一类方程的second-level fourier tail， 构建对于那个function family的PRG(Pseudorandom Generator)。 特别地，通过这篇paper的一个猜想（conjecture），我们可以得到AC[$\oplus$]的PRG。 在meeting上，Michael就问了AC[$\oplus$]是不是在BPL里，原因是我们知道怎么构建对于BPL的PRG(而且并不optimal，且仅仅是nonuniformly），但我们好像不知道怎么去fool所有的log space 的计算（实际上应该是L/poly)，而AC[$\oplus$]看起来是不像是在BPL里面的。因为之前对pseudorandomness for space-bounded computation了解还比较少，于是我也就找了一些相关的笔记看，这次就主要是想写下derandomizing BPL 和 fooling log space的区别。&lt;/p&gt;
-
-&lt;h2 id=&quot;fooling-log-space&quot;&gt;&lt;strong&gt;Fooling log space&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;当我们说fooling log space的时候， 实际上是指fooling L/poly。首先我们来看看什么是L/poly。回想我们定义P/poly的一个目的是想用一个combinatorial model，也就是 circuits 来 non-uniformly 模拟多项式时间(polynomial time)内对于每个输入长度n有poly(n)长度的advice的图灵机。这个circuit有多项式长度的描述（polynomial size description），也就相当于是一个图灵机有了多项式长度的advice，所以才写作P/poly。那么类似地，我们想用一个有多项式长度的描述的 combinatorial model 来模拟 log space的图灵机的计算并把它记作L/poly。这次我们用的model是branching program。首先回忆一下 log space的图灵机是怎么运行的：我们有一个只读（read-only)的输入带（input tape)，还有一个可以读写（read-write）的只有log长度的工作带（work tape），和一个write-only的 output tape。对于一个长度为n的input，log space的图灵机可以在input tape 上来回读取输入，然后在 $\log n$ space的work tape上进行计算，最后在output tape上输出结果。能被这种图灵机计算的complexity class我们称之为 L。注意在这个计算过程中图灵机的每一步计算的格局（configuration)都可以由它的 1.读取头在input tape上的位置 2.work tape上的内容 3.读取头里的状态 这三个元素组成的triple表示。接下来我们定义 branching program 并展示它怎么模拟 log space 的图灵机的计算。&lt;/p&gt;
-
-&lt;p&gt;一个branching program是一个acyclic graph。在这个图里面每一个node都有个label是 $x_i$，表示input的第$i$个variable。这个图有一个start node和两个end node。每个node（除了end node）都有两个ouput edge，一个由1标注，一个由0标注：如果node的variable的值是1，就沿1的边走，如果是0，就沿0的边走。 两个end nodes一个由0标注一个由1标注。 有了这样的定义我们就可以描述一个长度为n的输入在这个model上是怎么计算的了：对于此长度为n的输入，我们从start node看起，如果node上标注的variable的值为1的话就沿标注1的边看下一个node，如果是0就沿标注0的边看下一个node，沿着这样的一条计算路径（path) 后最终会落到要么是0或是1的end nodes上。输出最后到达的end node的值。这个branching program的size就是这个图的node的数量。&lt;/p&gt;
-
-&lt;p&gt;要说明为什么一个polynomial size 的 branching program和L/poly 图灵机计算一样，试想我们上面说的一个configuration，是不是正好就和这个branching program里的一个node一样：node的标注（label）就是图灵机在input tape上的读取头的位置；我们一共有polynomial个nodes，正好对应work tape上的$2^{\log n}=poly(n)$种不同的binary string。这样就证明了poly-size branching program能计算L/poly。 另一个方向就仅仅是log space machine被给予这个branching program的description作为advice(which is poly-size)。&lt;/p&gt;
-
-&lt;p&gt;而Fooling L/poly 就是指我们要构造一个PRG G，使得对于任意的branching program B，$\mid{Pr[B(G(U_z))=1]-Pr[B(U_m)=1]}\mid &amp;lt; \epsilon$。也就是说我们要把一个长度为z的truly random string，stretch成一个长度为 $\mid G(U_z)\mid=m$ 的 string $ G(U_z)$，使得所有的distinguisher B都不能区别它与长度为m的uniformly random string的区别。&lt;/p&gt;
-
-&lt;h2 id=&quot;derandomizing-bpl&quot;&gt;&lt;strong&gt;Derandomizing BPL&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;再来看BPL。同样地，fooling BPL 也是指fool一个non-uniform model。 Non-uniformly modeling BPL其实是用一个上述的branching program 的一个special case – Read-Once Branching Program(ROBP)。回想一下log space的 randomized computation，实际上就是在除input tape, work tape, output tape 外额外增加一个randomness tape。需要注意的是这个randomness tape是read once的，也就是说在运行的每一步我们依次读一个上面的random bit，并且这个bit是不能retrieve的。试想在randomized log space computation里面，我们也是在每一步投掷一次硬币（flip a coin），然后决定下一步做什么，而log space不足以储存这些random bits。这个计算过程恰好可以由ROBP模拟。&lt;/p&gt;
-
-&lt;p&gt;一个ROBP是一个acyclic layered graph。如下图所示，每层共有$2^S$个nodes，对应有S space的图灵机的 $2^S$个格局，每次从一层转移到下一层时，读取m个random bits，所以可以最多转移到2^m个configuration，即每个点有2^m个edge连接到下一层。在进行运算时，因为我们可以把input嵌入这个branching program中，所以可以每次只关心random bits。每读取m个ramdon bits，由一层转移到下一层，最后到达接受或拒绝的状态。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ROBP.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Derandomizing BPL就是指我们能构造一个PRG G，使得对于任意的ROBP $B^{\prime}$，$\mid{Pr[B^{\prime}(G(U_z))=1]-Pr[B^{\prime}(U_m)=1]}\mid &amp;lt; \epsilon$。&lt;/p&gt;
-
-&lt;p&gt;由此可见，fooling log space 和 derandomizing BPL是不同的，前者需要fool 所有的 branching program，而后者只需要fool 一种特殊的 branching program – ROBP。前者难度比后者更大。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;br /&gt;
-[CHLT18]Eshan Chattopadhyay. Pooya Hatami. Shachar Lovett. Avishay Tal. Pseudorandom generators from the second Fourier level and applications to AC0 with parity gates&lt;/p&gt;
-
-&lt;p&gt;David Zuckerman. Lecture Notes of Pseudorandomness and Combinatorial Constructions (CS 395T), http://www.cs.utexas.edu/~diz/395T/01/&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>Zero-Knowledge Proofs:Definitions and Variants</title>
-   <link href="http://localhost:4000/zkdefvar/"/>
-   <updated>2019-01-04T00:00:00-05:00</updated>
-   <id>http://localhost:4000/zkdefvar</id>
-   <content type="html">&lt;p&gt;Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and its variants. &lt;br /&gt;
-最近在看一些密码学的论文，对其中&lt;strong&gt;零知识证明(zero-knowledge proofs)&lt;/strong&gt;这个重要的概念很感兴趣，就把相关的笔记（notes）都看了一遍，打算把定义方面的理解以及变体的问题总结下来。&lt;/p&gt;
-
-&lt;p&gt;零知识证明是一种特殊的交互式证明方法（Interactive Proof）。我们知道，在交互式证明中， 我们要求证明或协议（Protocol）满足两个性质：完备性（Completeness）和 可靠性（Soundness），其中可靠性是为了防止恶意的（adversarial）证明者（Prover）。 一个恶意的证明者会想要欺骗验证者（Verifier）从而使验证者相信一个错误的命题，可靠性要求证明者只能有很小的概率能够欺骗验证者。而零知识证明在此之外增设了需满足的第三个性质–零知识性（Zero Knowledge）。不同于可靠性是为了针对恶意的证明者，零知识性是为了防止恶意的验证者获取一些他们想要的信息。&lt;/p&gt;
-
-&lt;p&gt;简单地说，零知识证明要求只保证验证者能确信命题的正确性， 除此以外，在证明过程中验证者不能获取其他任何的信息。比如说，在图同构问题（Graph Isomorphism）中，对于两个同构的图（G, H）这样的输入（a yes instance），零知识证明要求在交互证明结束后验证者 &lt;strong&gt;只能得出 “G和H确实是同构的”&lt;/strong&gt; 这样一个结论，除此以外，他不能获取其他任何信息。比如说验证者不能得到一个排列（Permutation）- π， 使得对 G 的节点施加 π 后得到 H（i.e. π(G)=H）。&lt;/p&gt;
-
-&lt;p&gt;那么应该怎么合理地正式表达（Formulate）这样的要求呢？我们采用以下的方法来阐述这样的要求：任何验证者能从零知识证明过程中获取的信息，都能被与验证者有相同的计算能力的模拟者（Simulator）通过计算得到。模拟者（Simulator）在零知识证明中是一个很重要的概念，根据对模拟者的要求不同，会衍生出一些变体（variants）的定义，这点会在之后介绍。接下来要正式定义零知识：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;定义1.&lt;/strong&gt;  对于一个协议 PV，我们用 View(PV(x)) 来表示在输入为x的情况下，按照 PV 来进行交互证明过程中，验证者视角所看到的信息。具体地说，View(PV(x)) 包含有：
-1.整个证明过程中证明者P和验证者V之间来往的讯息
-2.验证者V所使用的随机性（Randomness），或者说验证者的用来投掷并决定下一步的硬币（Coins）&lt;/p&gt;
-
-&lt;p&gt;此外，用 [View(PV(x))] 来表示 View(PV(x)) 在P和V所用的随机性下的概率分布（distribution）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;定义2.&lt;/strong&gt;  对于一个语言 L，我们称一个交互式证明或协议 PV 是&lt;strong&gt;零知识&lt;/strong&gt;的，如果&lt;/p&gt;
-
-&lt;div&gt;
-$$\forall V^{\prime} \exists S\in PPT\ s.t\ \ \forall x\in L$$  
-&lt;/div&gt;
-&lt;div&gt;
-$$[View(S(x))]\simeq [View(PV^{\prime}(x))]$$
-&lt;/div&gt;
-
-&lt;p&gt;也就是说，对于任何验证者，都存在一个模拟者（多项式时间的概率图灵机）使得对于（语言L内）任意的x作为输入时，模拟者与验证者所看到的变量的分布是（几乎）相同的。
-更通俗地说， 对于任何验证者视角下交互证明过程中的变量的分布，该验证者都能自身生成（generate）这样的分布。&lt;/p&gt;
-
-&lt;p&gt;需要补充说明的是，上面定义里的量词是针对所有的 V’。特别地，PV’不一定是 L 的交互式证明或协议。也就是说，在上面的定义里，V’的目标只是想尽办法从证明者P那里获取有用的信息。而如果我们要求 PV’ 是一个 L 的交互式证明或协议，那么我们称之为&lt;strong&gt;诚实验证者零知识&lt;/strong&gt;（Honest Verifier Zero Knowledge，i.e. HVZK）。&lt;/p&gt;
-
-&lt;p&gt;另一方面，根据分布的“相同”的不同定义，零知识性质也可分类为：&lt;strong&gt;完全零知识&lt;/strong&gt;（Perfect Zero Knowledge），&lt;strong&gt;统计零知识&lt;/strong&gt;（Statistical Zero Knowledge), 以及 &lt;strong&gt;计算零知识&lt;/strong&gt;（Computational Zero Knowledge）。其中完全零知识是指验证者与模拟者的输出分布完全相等，统计零知识是指两者的输出分布统计上接近（Statistically close），而计算零知识就是说这两个输出分布在多项式时间内是不可区分的。&lt;/p&gt;
-
-&lt;p&gt;在Oded的survey中，他还有提到通常还需要要考虑到敌方（adversary）有辅助信息（auxiliary information）的情况。在这种情况下的零知识，称之为&lt;strong&gt;辅助输入零知识&lt;/strong&gt;（auxiliary-input zero knowledge）。辅助输入零知识需要在定义2里用[View(S(x, z))]和[View((P V’(z))(x))] 来分别替代模拟者的输出分布和验证者的输出分布，其中z代表的是辅助信息。&lt;/p&gt;
-
-&lt;p&gt;除了以上的变体外，Oded的survey里提到了从对模拟者的要求出发衍生的一些变体， 其中一个就是要求有一个&lt;strong&gt;通用模拟者&lt;/strong&gt;（Universal Simulator），这个模拟者拥有验证者B’的程序作为辅助输入。为了这个目的，我们需将定义2里的模拟者 S(x) 修改为 S(x, &amp;lt;B’&amp;gt;)，其中 &amp;lt;B’&amp;gt; 表示B’的程序(program)的描述。更进一步加强定义的话，我们还可以要求把验证者的程序作为一个黑箱（Black Box）或是神谕机（Oracle），称之为&lt;strong&gt;黑箱模拟&lt;/strong&gt;（Black-box Simulation）。似乎最初大家都相信把B’的程序当作输入和把B’的程序作为黑箱使用对于零知识来说是没有区别的，不过Boaz Barak [3] 在2001年的论文给出了它们的区别。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;参考文献(References)&lt;/strong&gt;&lt;br /&gt;
-[1] Oded Goldreich. Zero-knowledge twenty years after its invention. Unpublished manuscript. 2002.&lt;br /&gt;
-[2] Rafail Ostrovsky. Foundations of Cryptography Draft Lecture Notes.&lt;br /&gt;
-[3] Boaz Barak. How to go beyond the black-box simulation barrier. FOCS 2011.&lt;/p&gt;
-</content>
- </entry>
  
 
 </feed>
