@@ -3,7 +3,7 @@ layout: default
 title: About Me
 ---
 
-I'm a second-year master student at Rutgers University. I have broad interest in theoretical computer science. Particular interest lies in **Computational Complexity**. Currently, I mainly study **Circuit Lower Bounds**. Centering on this topic, I also study techniques from other related topics and investigate their connections.(e.g. algorithm design, derandomization, communication protocols etc..).
+I'm a second-year master student at Rutgers University. I have broad interest in theoretical computer science. Particular interest lies in **Computational Complexity**. Recently, I'm working on problems in **Learning Theory**
 
 I also find the following topics interesting and hope to explore them in the future --
 

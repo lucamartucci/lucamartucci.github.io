@@ -11,7 +11,7 @@
 
   <title>
     
-      Blog &middot; Jiyu Zhang
+      Zero-Knowledge Proofs:Definitions and Variants &middot; Jiyu Zhang
     
   </title>
 
@@ -65,55 +65,7 @@
 
 
     <div class="content container">
-      <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/derandlogspace/">
-        Derandomizing Log Space vs. Fooling Log Space
-      </a>
-    </h1>
-
-    <span class="post-date">25 Jan 2019</span>
-    <p>上周的ToC reading group上讲到了最近的一篇ITCS paper [CHLT18]，主要是讲怎么通过bound一类方程的second-level fourier tail， 构建对于那个function family的PRG(Pseudorandom Generator)。 特别地，通过这篇paper的一个猜想（conjecture），我们可以得到AC[$\oplus$]的PRG。 在meeting上，Michael就问了AC[$\oplus$]是不是在BPL里，原因是我们知道怎么构建对于BPL的PRG(而且并不optimal，且仅仅是nonuniformly），但我们好像不知道怎么去fool所有的log space 的计算（实际上应该是L/poly)，而AC[$\oplus$]看起来是不像是在BPL里面的。因为之前对pseudorandomness for space-bounded computation了解还比较少，于是我也就找了一些相关的笔记看，这次就主要是想写下derandomizing BPL 和 fooling log space的区别。</p>
-
-<h2 id="fooling-log-space"><strong>Fooling log space</strong></h2>
-<p>当我们说fooling log space的时候， 实际上是指fooling L/poly。首先我们来看看什么是L/poly。回想我们定义P/poly的一个目的是想用一个combinatorial model，也就是 circuits 来 non-uniformly 模拟多项式时间(polynomial time)内对于每个输入长度n有poly(n)长度的advice的图灵机。这个circuit有多项式长度的描述（polynomial size description），也就相当于是一个图灵机有了多项式长度的advice，所以才写作P/poly。那么类似地，我们想用一个有多项式长度的描述的 combinatorial model 来模拟 log space的图灵机的计算并把它记作L/poly。这次我们用的model是branching program。首先回忆一下 log space的图灵机是怎么运行的：我们有一个只读（read-only)的输入带（input tape)，还有一个可以读写（read-write）的只有log长度的工作带（work tape），和一个write-only的 output tape。对于一个长度为n的input，log space的图灵机可以在input tape 上来回读取输入，然后在 $\log n$ space的work tape上进行计算，最后在output tape上输出结果。能被这种图灵机计算的complexity class我们称之为 L。注意在这个计算过程中图灵机的每一步计算的格局（configuration)都可以由它的 1.读取头在input tape上的位置 2.work tape上的内容 3.读取头里的状态 这三个元素组成的triple表示。接下来我们定义 branching program 并展示它怎么模拟 log space 的图灵机的计算。</p>
-
-<p>一个branching program是一个acyclic graph。在这个图里面每一个node都有个label是 $x_i$，表示input的第$i$个variable。这个图有一个start node和两个end node。每个node（除了end node）都有两个ouput edge，一个由1标注，一个由0标注：如果node的variable的值是1，就沿1的边走，如果是0，就沿0的边走。 两个end nodes一个由0标注一个由1标注。 有了这样的定义我们就可以描述一个长度为n的输入在这个model上是怎么计算的了：对于此长度为n的输入，我们从start node看起，如果node上标注的variable的值为1的话就沿标注1的边看下一个node，如果是0就沿标注0的边看下一个node，沿着这样的一条计算路径（path) 后最终会落到要么是0或是1的end nodes上。输出最后到达的end node的值。这个branching program的size就是这个图的node的数量。</p>
-
-<p>要说明为什么一个polynomial size 的 branching program和L/poly 图灵机计算一样，试想我们上面说的一个configuration，是不是正好就和这个branching program里的一个node一样：node的标注（label）就是图灵机在input tape上的读取头的位置；我们一共有polynomial个nodes，正好对应work tape上的$2^{\log n}=poly(n)$种不同的binary string。这样就证明了poly-size branching program能计算L/poly。 另一个方向就仅仅是log space machine被给予这个branching program的description作为advice(which is poly-size)。</p>
-
-<p>而Fooling L/poly 就是指我们要构造一个PRG G，使得对于任意的branching program B，$\mid{Pr[B(G(U_z))=1]-Pr[B(U_m)=1]}\mid &lt; \epsilon$。也就是说我们要把一个长度为z的truly random string，stretch成一个长度为 $\mid G(U_z)\mid=m$ 的 string $ G(U_z)$，使得所有的distinguisher B都不能区别它与长度为m的uniformly random string的区别。</p>
-
-<h2 id="derandomizing-bpl"><strong>Derandomizing BPL</strong></h2>
-<p>再来看BPL。同样地，fooling BPL 也是指fool一个non-uniform model。 Non-uniformly modeling BPL其实是用一个上述的branching program 的一个special case – Read-Once Branching Program(ROBP)。回想一下log space的 randomized computation，实际上就是在除input tape, work tape, output tape 外额外增加一个randomness tape。需要注意的是这个randomness tape是read once的，也就是说在运行的每一步我们依次读一个上面的random bit，并且这个bit是不能retrieve的。试想在randomized log space computation里面，我们也是在每一步投掷一次硬币（flip a coin），然后决定下一步做什么，而log space不足以储存这些random bits。这个计算过程恰好可以由ROBP模拟。</p>
-
-<p>一个ROBP是一个acyclic layered graph。如下图所示，每层共有$2^S$个nodes，对应有S space的图灵机的 $2^S$个格局，每次从一层转移到下一层时，读取m个random bits，所以可以最多转移到2^m个configuration，即每个点有2^m个edge连接到下一层。在进行运算时，因为我们可以把input嵌入这个branching program中，所以可以每次只关心random bits。每读取m个ramdon bits，由一层转移到下一层，最后到达接受或拒绝的状态。</p>
-
-<p><img src="/assets/ROBP.jpg" alt="" /></p>
-
-<p>Derandomizing BPL就是指我们能构造一个PRG G，使得对于任意的ROBP $B^{\prime}$，$\mid{Pr[B^{\prime}(G(U_z))=1]-Pr[B^{\prime}(U_m)=1]}\mid &lt; \epsilon$。</p>
-
-<p>由此可见，fooling log space 和 derandomizing BPL是不同的，前者需要fool 所有的 branching program，而后者只需要fool 一种特殊的 branching program – ROBP。前者难度比后者更大。</p>
-
-<p><strong>References</strong><br />
-[CHLT18]Eshan Chattopadhyay. Pooya Hatami. Shachar Lovett. Avishay Tal. Pseudorandom generators from the second Fourier level and applications to AC0 with parity gates</p>
-
-<p>David Zuckerman. Lecture Notes of Pseudorandomness and Combinatorial Constructions (CS 395T), http://www.cs.utexas.edu/~diz/395T/01/</p>
-
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/zkdefvar/">
-        Zero-Knowledge Proofs:Definitions and Variants
-      </a>
-    </h1>
-
-    <span class="post-date">04 Jan 2019</span>
-    <p>Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and its variants. <br />
+      <p>Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and its variants. <br />
 最近在看一些密码学的论文，对其中<strong>零知识证明(zero-knowledge proofs)</strong>这个重要的概念很感兴趣，就把相关的笔记（notes）都看了一遍，打算把定义方面的理解以及变体的问题总结下来。</p>
 
 <p>零知识证明是一种特殊的交互式证明方法（Interactive Proof）。我们知道，在交互式证明中， 我们要求证明或协议（Protocol）满足两个性质：完备性（Completeness）和 可靠性（Soundness），其中可靠性是为了防止恶意的（adversarial）证明者（Prover）。 一个恶意的证明者会想要欺骗验证者（Verifier）从而使验证者相信一个错误的命题，可靠性要求证明者只能有很小的概率能够欺骗验证者。而零知识证明在此之外增设了需满足的第三个性质–零知识性（Zero Knowledge）。不同于可靠性是为了针对恶意的证明者，零知识性是为了防止恶意的验证者获取一些他们想要的信息。</p>
@@ -153,9 +105,6 @@ $$[View(S(x))]\simeq [View(PV^{\prime}(x))]$$
 [2] Rafail Ostrovsky. Foundations of Cryptography Draft Lecture Notes.<br />
 [3] Boaz Barak. How to go beyond the black-box simulation barrier. FOCS 2011.</p>
 
-  </div>
-  
-</div>
     </div>
 
   </body>
