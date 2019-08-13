@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Intro to Cryptography Lecture 1 &middot; Jiyu Zhang
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+   <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true
+       }
+     });
+   </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Jiyu Zhang
+        </a>
+      </h1>
+      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item active" href="/">About Me</a>
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+    </nav>
+
+    <p>&copy; 2019. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <p>I’m starting to study cryptography by reading Yevgeniy Dodis’ notes at this <a href="https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html">link</a>, and would like to record this process and make some interesting notes.</p>
+
+<p>Today I’ve read the notes of lecture 1. I want to explain the argument for the necessity of secret, which I spent some time thinking about and had fun playing with.</p>
+
+<h2 id="the-scenario-of-the-problem"><strong>The Scenario of the Problem</strong></h2>
+
+<p>The scenario involves three agents, Alice, Bob and Eve. Bob wants to send a message $m$ to Alice that <strong>only</strong> Alice can read. Therefore Bob would like to encrypt $m$ making it the ciphertext $c$ and send $c$ to Alice. Eve is the third party (adversary) who can see $c$ and wants to know $m$. We name Bob’s encryption function as $Enc:$ $Enc(m, ???) \rightarrow c$ and Alice’s decryption function as $Dec:$ $Dec(c, ???) \rightarrow m$. The pair $(Enc, Dec)$ consistitutes the communication scheme they use.</p>
+
+<p>Initial assumptions we made are:</p>
+
+<ul>
+  <li>The encryption and decryption functions (algorithms) are known by all agents (in particular, Eve).</li>
+  <li>Alice must always be able to recover $m$ (deterministially).</li>
+  <li>Eve has unbounded computational power.</li>
+</ul>
+
+<h2 id="the-necessity-of-secret"><strong>The Necessity of Secret</strong></h2>
+
+<p>Base on the initial assumption, Do Alice and Bob necessarily need secret in order to achieve their private communication? The answer is yes, the following arguments establish the necessity.</p>
+
+<ol>
+  <li>
+    <p><strong>Alice must have a secret from Eve.</strong><br />
+If Alice doesn’t have a secret, then Alice should be no different from Eve, while by assumption Eve is even computationally stronger than Alice (Eve has unbounded computationl power). Therefore what Alice can do can also be done by Eve, the communication scheme must fail.</p>
+  </li>
+  <li>
+    <p><strong>Bob must have a secret from Eve. In fact, Alice and Bob must share a secret $s$ not known to Eve.</strong><br />
+Since Eve has unbounded computational power, she can iterate (try) all the message $m$ and (possibly) other information $X$ used by Bob to produce $c$, which is the ciphertext sent by Bob. She can claim that the message $m$ she had tried so that $Enc(m, X)\rightarrow c$ is exactly the message sent by Bob. Why? <br />
+The reason is that, if otherwise Bob has sent a different $m^{\prime} \neq m$ and $Enc(m^\prime, X^\prime)=c$, (Here $X^\prime$ is not necessarily different from $X$. In fact X can be viewed as the same thing as $m$ plus $X$ together, so does $X^\prime$. They all represent the information Bob/Eve used to encrypt message) then how can Alice know which of $m$ and $m^\prime$ was sent by Bob? As we discussed above, Alice holds a secret $s$, which is a part of $m$ plus $X$ and enables her to differentiate $(m, X)$ and $(m^\prime, X^\prime)$. Also, Bob must know this secret in order to send his message (express his intention) correctly. On the other hand, Eve cannot distinguish $(m, X)$ and $(m, X^\prime)$ because of the lack of the secret key $s$.</p>
+  </li>
+</ol>
+
+<h2 id="other-summary"><strong>Other Summary</strong></h2>
+<p>In the lecture 1 notes we can see that the above initial assumptions give negative results. Shannon’s theorem says that perfect security against adversary with unbounded computational power needs that the secret $s$ has at least the same length as message communicated, which is not practical. (I think I also saw somewhere that secret sharing is expensive?).</p>
+
+<p>In real world we may not want to assume Eve has unbounded computational power, because Eve is just a human being like us all! While Eve does have the ability to guess. We can now relax the assumption and assume Eve is in <em>Probabilistic Polynomial Time (PPT)</em>. This actually makes a big difference. Let’s re-examine the two necessity above.</p>
+
+<ol>
+  <li>
+    <p><strong>Alice must have a secret from Eve.</strong><br />
+Well this should still hold because the same reason as above.</p>
+  </li>
+  <li>
+    <p><strong>Bob must have a secret from Eve. In fact, Alice and Bob must share a secret $s$ not known to Eve.</strong><br />
+This may not hold as previous. Why? Because now Eve is bounded in PPT, she is not allowed to do the previous iterative method. For now I think this is intuitive, maybe we can see more formal arguments (proofs) in later notes.</p>
+  </li>
+</ol>
+
+<p>In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may nbe shorter than message length (overcoming shannon’s barrier).</p>
+
+    </div>
+
+  </body>
+</html>

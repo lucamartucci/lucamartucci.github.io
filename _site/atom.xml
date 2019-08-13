@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-03-30T17:10:52-04:00</updated>
+ <updated>2019-08-12T21:15:11-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -13,9 +13,75 @@
 
  
  <entry>
+   <title>Intro to Cryptography Lecture 1</title>
+   <link href="http://localhost:4000/LearningCrypto01/"/>
+   <updated>2019-08-10T00:00:00-07:00</updated>
+   <id>http://localhost:4000/LearnCrypto01</id>
+   <content type="html">&lt;p&gt;I’m starting to study cryptography by reading Yevgeniy Dodis’ notes at this &lt;a href=&quot;https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html&quot;&gt;link&lt;/a&gt;, and would like to record this process and make some interesting notes.&lt;/p&gt;
+
+&lt;p&gt;Today I’ve read the notes of lecture 1. I want to explain the argument for the necessity of secret, which I spent some time thinking about and had fun playing with.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-scenario-of-the-problem&quot;&gt;&lt;strong&gt;The Scenario of the Problem&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The scenario involves three agents, Alice, Bob and Eve. Bob wants to send a message $m$ to Alice that &lt;strong&gt;only&lt;/strong&gt; Alice can read. Therefore Bob would like to encrypt $m$ making it the ciphertext $c$ and send $c$ to Alice. Eve is the third party (adversary) who can see $c$ and wants to know $m$. We name Bob’s encryption function as $Enc:$ $Enc(m, ???) \rightarrow c$ and Alice’s decryption function as $Dec:$ $Dec(c, ???) \rightarrow m$. The pair $(Enc, Dec)$ consistitutes the communication scheme they use.&lt;/p&gt;
+
+&lt;p&gt;Initial assumptions we made are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The encryption and decryption functions (algorithms) are known by all agents (in particular, Eve).&lt;/li&gt;
+  &lt;li&gt;Alice must always be able to recover $m$ (deterministially).&lt;/li&gt;
+  &lt;li&gt;Eve has unbounded computational power.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-necessity-of-secret&quot;&gt;&lt;strong&gt;The Necessity of Secret&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Base on the initial assumption, Do Alice and Bob necessarily need secret in order to achieve their private communication? The answer is yes, the following arguments establish the necessity.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Alice must have a secret from Eve.&lt;/strong&gt;&lt;br /&gt;
+If Alice doesn’t have a secret, then Alice should be no different from Eve, while by assumption Eve is even computationally stronger than Alice (Eve has unbounded computationl power). Therefore what Alice can do can also be done by Eve, the communication scheme must fail.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Bob must have a secret from Eve. In fact, Alice and Bob must share a secret $s$ not known to Eve.&lt;/strong&gt;&lt;br /&gt;
+Since Eve has unbounded computational power, she can iterate (try) all the message $m$ and (possibly) other information $X$ used by Bob to produce $c$, which is the ciphertext sent by Bob. She can claim that the message $m$ she had tried so that $Enc(m, X)\rightarrow c$ is exactly the message sent by Bob. Why? &lt;br /&gt;
+The reason is that, if otherwise Bob has sent a different $m^{\prime} \neq m$ and $Enc(m^\prime, X^\prime)=c$, (Here $X^\prime$ is not necessarily different from $X$. In fact X can be viewed as the same thing as $m$ plus $X$ together, so does $X^\prime$. They all represent the information Bob/Eve used to encrypt message) then how can Alice know which of $m$ and $m^\prime$ was sent by Bob? As we discussed above, Alice holds a secret $s$, which is a part of $m$ plus $X$ and enables her to differentiate $(m, X)$ and $(m^\prime, X^\prime)$. Also, Bob must know this secret in order to send his message (express his intention) correctly. On the other hand, Eve cannot distinguish $(m, X)$ and $(m, X^\prime)$ because of the lack of the secret key $s$.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;other-summary&quot;&gt;&lt;strong&gt;Other Summary&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;In the lecture 1 notes we can see that the above initial assumptions give negative results. Shannon’s theorem says that perfect security against adversary with unbounded computational power needs that the secret $s$ has at least the same length as message communicated, which is not practical. (I think I also saw somewhere that secret sharing is expensive?).&lt;/p&gt;
+
+&lt;p&gt;In real world we may not want to assume Eve has unbounded computational power, because Eve is just a human being like us all! While Eve does have the ability to guess. We can now relax the assumption and assume Eve is in &lt;em&gt;Probabilistic Polynomial Time (PPT)&lt;/em&gt;. This actually makes a big difference. Let’s re-examine the two necessity above.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Alice must have a secret from Eve.&lt;/strong&gt;&lt;br /&gt;
+Well this should still hold because the same reason as above.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Bob must have a secret from Eve. In fact, Alice and Bob must share a secret $s$ not known to Eve.&lt;/strong&gt;&lt;br /&gt;
+This may not hold as previous. Why? Because now Eve is bounded in PPT, she is not allowed to do the previous iterative method. For now I think this is intuitive, maybe we can see more formal arguments (proofs) in later notes.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may nbe shorter than message length (overcoming shannon’s barrier).&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Aw85</title>
+   <link href="http://localhost:4000/2019/08/01/aw85/"/>
+   <updated>2019-08-01T00:00:00-07:00</updated>
+   <id>http://localhost:4000/2019/08/01/aw85</id>
+   <content type="html">
+</content>
+ </entry>
+ 
+ <entry>
    <title>Derandomizing Log Space vs. Fooling Log Space</title>
    <link href="http://localhost:4000/derandlogspace/"/>
-   <updated>2019-01-25T00:00:00-05:00</updated>
+   <updated>2019-01-25T00:00:00-08:00</updated>
    <id>http://localhost:4000/derandlogspace</id>
    <content type="html">&lt;p&gt;上周的ToC reading group上讲到了最近的一篇ITCS paper [CHLT18]，主要是讲怎么通过bound一类方程的second-level fourier tail， 构建对于那个function family的PRG(Pseudorandom Generator)。 特别地，通过这篇paper的一个猜想（conjecture），我们可以得到AC[$\oplus$]的PRG。 在meeting上，Michael就问了AC[$\oplus$]是不是在BPL里，原因是我们知道怎么构建对于BPL的PRG(而且并不optimal，且仅仅是nonuniformly），但我们好像不知道怎么去fool所有的log space 的计算（实际上应该是L/poly)，而AC[$\oplus$]看起来是不像是在BPL里面的。因为之前对pseudorandomness for space-bounded computation了解还比较少，于是我也就找了一些相关的笔记看，这次就主要是想写下derandomizing BPL 和 fooling log space的区别。&lt;/p&gt;
 
@@ -50,7 +116,7 @@
  <entry>
    <title>Zero-Knowledge Proofs:Definitions and Variants</title>
    <link href="http://localhost:4000/zkdefvar/"/>
-   <updated>2019-01-04T00:00:00-05:00</updated>
+   <updated>2019-01-04T00:00:00-08:00</updated>
    <id>http://localhost:4000/zkdefvar</id>
    <content type="html">&lt;p&gt;Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and its variants. &lt;br /&gt;
 最近在看一些密码学的论文，对其中&lt;strong&gt;零知识证明(zero-knowledge proofs)&lt;/strong&gt;这个重要的概念很感兴趣，就把相关的笔记（notes）都看了一遍，打算把定义方面的理解以及变体的问题总结下来。&lt;/p&gt;
