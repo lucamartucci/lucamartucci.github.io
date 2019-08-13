@@ -4,13 +4,13 @@ permalink: /LearningCrypto01/
 title: Intro to Cryptography Lecture 1
 tags: Cryptography
 ---
-I'm starting to study cryptography by reading Yevgeniy Dodis' notes at this [link](https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html), and would like to record this process and make some interesting notes. 
+I'm starting to study cryptography by reading Yevgeniy Dodis' notes at this [link](https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html), and would like to make some interesting notes. 
 
 Today I've read the notes of lecture 1. I want to explain the argument for the necessity of secret, which I spent some time thinking about and had fun playing with.
 
 ## **The Scenario of the Problem**
 
-The scenario involves three agents, Alice, Bob and Eve. Bob wants to send a message $m$ to Alice that **only** Alice can read. Therefore Bob would like to encrypt $m$ making it the ciphertext $c$ and send $c$ to Alice. Eve is the third party (adversary) who can see $c$ and wants to know $m$. We name Bob's encryption function as $Enc:$ $Enc(m, ???) \rightarrow c$ and Alice's decryption function as $Dec:$ $Dec(c, ???) \rightarrow m$. The pair $(Enc, Dec)$ consistitutes the communication scheme they use.
+The scenario involves three agents, Alice, Bob and Eve. Bob wants to send a message $m$ to Alice that **only** Alice can read. Therefore Bob would like to encrypt $m$ making it the ciphertext $c$ and send $c$ to Alice. Eve is the third party (adversary) who can see $c$ and wants to know $m$. We name Bob's encryption function as $Enc:$ $Enc(m, ???) \rightarrow c$ and Alice's decryption function as $Dec:$ $Dec(c, ???) \rightarrow m$. The pair $(Enc, Dec)$ constitutes the communication scheme they use.
 
 Initial assumptions we made are:
 
@@ -40,4 +40,4 @@ Well this should still hold because the same reason as above.
 2. **Bob must have a secret from Eve. In fact, Alice and Bob must share a secret $s$ not known to Eve.**  
 This may not hold as previous. Why? Because now Eve is bounded in PPT, she is not allowed to do the previous iterative method. For now I think this is intuitive, maybe we can see more formal arguments (proofs) in later notes.
 
-In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may nbe shorter than message length (overcoming shannon's barrier). 
+In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may be shorter than message length (overcoming shannon's barrier). 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Argument of Correctness of Undo Implementation &middot; Jiyu Zhang
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+   <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true
+       }
+     });
+   </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Jiyu Zhang
+        </a>
+      </h1>
+      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item active" href="/">About Me</a>
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+    </nav>
+
+    <p>&copy; 2019. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <p>Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. However, an interesting thing is that I can prove that my implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>Undo is the operation that can undo the user’s last $n$ operation(inserting/deleting characters).</p>
+
+<p>The difficulty lies in how can one keep track of the original position of the characters deleted. Well, in my implementation, nothing else is needed: just remove the node(which contains a character) and put it into a stack.</p>
+
+<p>The data strucutre I used for text editor is a doubly linked list, each node has a value contains the specific character, and a <strong>prev</strong> pointer to the previous character node and a <strong>next</strong> pointer to the next character node. Visualized as following:</p>
+
+<div>$$a\leftarrow s \rightarrow b$$  </div>
+
+<p>To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: <strong>what if when (the deleted) $s$ is to recover, its previous nodes a and b are not in the data structure, i.e. a and b haven’t been recovered</strong>. Therefore we can’t find its position. While I argue that this will not happen.</p>
+
+<h2 id="the-argument">The Argument</h2>
+<p>I’d like to show the following: <strong>when $s$ is to recover, its previous or next nodes must exist in the data structure</strong>, which is a simple argument by contradiction:<br />
+Suppose for the contradiction that $a$ and $b$ are not in the data structure, then $a$ and $b$ must be deleted before $s$ is deleted. However, in this case, by the time $s$ is deleted, its <strong>prev</strong> and <strong>next</strong> cannot be $a$ and $b$, which is a contradiction.</p>
+
+
+    </div>
+
+  </body>
+</html>

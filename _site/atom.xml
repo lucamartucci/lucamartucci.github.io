@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-08-12T21:15:11-07:00</updated>
+ <updated>2019-08-12T22:24:53-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -13,17 +13,42 @@
 
  
  <entry>
+   <title>Argument of Correctness of Undo Implementation</title>
+   <link href="http://localhost:4000/ProofOfUndo/"/>
+   <updated>2019-08-12T00:00:00-07:00</updated>
+   <id>http://localhost:4000/ProofOfUndo</id>
+   <content type="html">&lt;p&gt;Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. However, an interesting thing is that I can prove that my implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Undo is the operation that can undo the user’s last $n$ operation(inserting/deleting characters).&lt;/p&gt;
+
+&lt;p&gt;The difficulty lies in how can one keep track of the original position of the characters deleted. Well, in my implementation, nothing else is needed: just remove the node(which contains a character) and put it into a stack.&lt;/p&gt;
+
+&lt;p&gt;The data strucutre I used for text editor is a doubly linked list, each node has a value contains the specific character, and a &lt;strong&gt;prev&lt;/strong&gt; pointer to the previous character node and a &lt;strong&gt;next&lt;/strong&gt; pointer to the next character node. Visualized as following:&lt;/p&gt;
+
+&lt;div&gt;$$a\leftarrow s \rightarrow b$$  &lt;/div&gt;
+
+&lt;p&gt;To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: &lt;strong&gt;what if when (the deleted) $s$ is to recover, its previous nodes a and b are not in the data structure, i.e. a and b haven’t been recovered&lt;/strong&gt;. Therefore we can’t find its position. While I argue that this will not happen.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-argument&quot;&gt;The Argument&lt;/h2&gt;
+&lt;p&gt;I’d like to show the following: &lt;strong&gt;when $s$ is to recover, its previous or next nodes must exist in the data structure&lt;/strong&gt;, which is a simple argument by contradiction:&lt;br /&gt;
+Suppose for the contradiction that $a$ and $b$ are not in the data structure, then $a$ and $b$ must be deleted before $s$ is deleted. However, in this case, by the time $s$ is deleted, its &lt;strong&gt;prev&lt;/strong&gt; and &lt;strong&gt;next&lt;/strong&gt; cannot be $a$ and $b$, which is a contradiction.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
    <title>Intro to Cryptography Lecture 1</title>
    <link href="http://localhost:4000/LearningCrypto01/"/>
    <updated>2019-08-10T00:00:00-07:00</updated>
    <id>http://localhost:4000/LearnCrypto01</id>
-   <content type="html">&lt;p&gt;I’m starting to study cryptography by reading Yevgeniy Dodis’ notes at this &lt;a href=&quot;https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html&quot;&gt;link&lt;/a&gt;, and would like to record this process and make some interesting notes.&lt;/p&gt;
+   <content type="html">&lt;p&gt;I’m starting to study cryptography by reading Yevgeniy Dodis’ notes at this &lt;a href=&quot;https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html&quot;&gt;link&lt;/a&gt;, and would like to make some interesting notes.&lt;/p&gt;
 
 &lt;p&gt;Today I’ve read the notes of lecture 1. I want to explain the argument for the necessity of secret, which I spent some time thinking about and had fun playing with.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-scenario-of-the-problem&quot;&gt;&lt;strong&gt;The Scenario of the Problem&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;The scenario involves three agents, Alice, Bob and Eve. Bob wants to send a message $m$ to Alice that &lt;strong&gt;only&lt;/strong&gt; Alice can read. Therefore Bob would like to encrypt $m$ making it the ciphertext $c$ and send $c$ to Alice. Eve is the third party (adversary) who can see $c$ and wants to know $m$. We name Bob’s encryption function as $Enc:$ $Enc(m, ???) \rightarrow c$ and Alice’s decryption function as $Dec:$ $Dec(c, ???) \rightarrow m$. The pair $(Enc, Dec)$ consistitutes the communication scheme they use.&lt;/p&gt;
+&lt;p&gt;The scenario involves three agents, Alice, Bob and Eve. Bob wants to send a message $m$ to Alice that &lt;strong&gt;only&lt;/strong&gt; Alice can read. Therefore Bob would like to encrypt $m$ making it the ciphertext $c$ and send $c$ to Alice. Eve is the third party (adversary) who can see $c$ and wants to know $m$. We name Bob’s encryption function as $Enc:$ $Enc(m, ???) \rightarrow c$ and Alice’s decryption function as $Dec:$ $Dec(c, ???) \rightarrow m$. The pair $(Enc, Dec)$ constitutes the communication scheme they use.&lt;/p&gt;
 
 &lt;p&gt;Initial assumptions we made are:&lt;/p&gt;
 
@@ -65,7 +90,7 @@ This may not hold as previous. Why? Because now Eve is bounded in PPT, she is no
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may nbe shorter than message length (overcoming shannon’s barrier).&lt;/p&gt;
+&lt;p&gt;In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may be shorter than message length (overcoming shannon’s barrier).&lt;/p&gt;
 </content>
  </entry>
  
