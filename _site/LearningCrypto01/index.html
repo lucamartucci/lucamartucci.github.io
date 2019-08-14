@@ -81,7 +81,7 @@
   <li>Eve has unbounded computational power.</li>
 </ul>
 
-<h2 id="the-necessity-of-secret"><strong>The Necessity of Secret</strong></h2>
+<h2 id="the-necessity-of-shared-secret"><strong>The Necessity of (Shared) Secret</strong></h2>
 
 <p>Base on the initial assumption, Do Alice and Bob necessarily need secret in order to achieve their private communication? The answer is yes, the following arguments establish the necessity.</p>
 
@@ -97,8 +97,8 @@ The reason is that, if otherwise Bob has sent a different $m^{\prime} \neq m$ an
   </li>
 </ol>
 
-<h2 id="other-summary"><strong>Other Summary</strong></h2>
-<p>In the lecture 1 notes we can see that the above initial assumptions give negative results. Shannon’s theorem says that perfect security against adversary with unbounded computational power needs that the secret $s$ has at least the same length as message communicated, which is not practical. (I think I also saw somewhere that secret sharing is expensive?).</p>
+<h2 id="more-discussion"><strong>More Discussion</strong></h2>
+<p>In the lecture 1 notes we can see that the above initial assumptions give negative results. Shannon’s theorem says that perfect security against adversary with unbounded computational power requires that the secret $s$ has at least the same length as message communicated, which is not practical. (I think I also saw somewhere that secret sharing is expensive?).</p>
 
 <p>In real world we may not want to assume Eve has unbounded computational power, because Eve is just a human being like us all! While Eve does have the ability to guess. We can now relax the assumption and assume Eve is in <em>Probabilistic Polynomial Time (PPT)</em>. This actually makes a big difference. Let’s re-examine the two necessity above.</p>
 

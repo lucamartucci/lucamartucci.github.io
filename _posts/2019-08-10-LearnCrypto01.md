@@ -18,7 +18,7 @@ Initial assumptions we made are:
 * Alice must always be able to recover $m$ (deterministially).
 * Eve has unbounded computational power.
 
-## **The Necessity of Secret**
+## **The Necessity of (Shared) Secret**
 
 Base on the initial assumption, Do Alice and Bob necessarily need secret in order to achieve their private communication? The answer is yes, the following arguments establish the necessity.
 
@@ -29,8 +29,8 @@ If Alice doesn't have a secret, then Alice should be no different from Eve, whil
 Since Eve has unbounded computational power, she can iterate (try) all the message $m$ and (possibly) other information $X$ used by Bob to produce $c$, which is the ciphertext sent by Bob. She can claim that the message $m$ she had tried so that $Enc(m, X)\rightarrow c$ is exactly the message sent by Bob. Why?   
 The reason is that, if otherwise Bob has sent a different $m^{\prime} \neq m$ and $Enc(m^\prime, X^\prime)=c$, (Here $X^\prime$ is not necessarily different from $X$. In fact X can be viewed as the same thing as $m$ plus $X$ together, so does $X^\prime$. They all represent the information Bob/Eve used to encrypt message) then how can Alice know which of $m$ and $m^\prime$ was sent by Bob? As we discussed above, Alice holds a secret $s$, which is a part of $m$ plus $X$ and enables her to differentiate $(m, X)$ and $(m^\prime, X^\prime)$. Also, Bob must know this secret in order to send his message (express his intention) correctly. On the other hand, Eve cannot distinguish $(m, X)$ and $(m, X^\prime)$ because of the lack of the secret key $s$.
 
-## **Other Summary**
-In the lecture 1 notes we can see that the above initial assumptions give negative results. Shannon's theorem says that perfect security against adversary with unbounded computational power needs that the secret $s$ has at least the same length as message communicated, which is not practical. (I think I also saw somewhere that secret sharing is expensive?).  
+## **More Discussion**
+In the lecture 1 notes we can see that the above initial assumptions give negative results. Shannon's theorem says that perfect security against adversary with unbounded computational power requires that the secret $s$ has at least the same length as message communicated, which is not practical. (I think I also saw somewhere that secret sharing is expensive?).  
 
 In real world we may not want to assume Eve has unbounded computational power, because Eve is just a human being like us all! While Eve does have the ability to guess. We can now relax the assumption and assume Eve is in *Probabilistic Polynomial Time (PPT)*. This actually makes a big difference. Let's re-examine the two necessity above.
 

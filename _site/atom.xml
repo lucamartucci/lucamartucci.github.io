@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-08-12T22:24:53-07:00</updated>
+ <updated>2019-08-14T12:02:49-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -58,7 +58,7 @@ Suppose for the contradiction that $a$ and $b$ are not in the data structure, th
   &lt;li&gt;Eve has unbounded computational power.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;the-necessity-of-secret&quot;&gt;&lt;strong&gt;The Necessity of Secret&lt;/strong&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;the-necessity-of-shared-secret&quot;&gt;&lt;strong&gt;The Necessity of (Shared) Secret&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;Base on the initial assumption, Do Alice and Bob necessarily need secret in order to achieve their private communication? The answer is yes, the following arguments establish the necessity.&lt;/p&gt;
 
@@ -74,8 +74,8 @@ The reason is that, if otherwise Bob has sent a different $m^{\prime} \neq m$ an
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;other-summary&quot;&gt;&lt;strong&gt;Other Summary&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;In the lecture 1 notes we can see that the above initial assumptions give negative results. Shannon’s theorem says that perfect security against adversary with unbounded computational power needs that the secret $s$ has at least the same length as message communicated, which is not practical. (I think I also saw somewhere that secret sharing is expensive?).&lt;/p&gt;
+&lt;h2 id=&quot;more-discussion&quot;&gt;&lt;strong&gt;More Discussion&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;In the lecture 1 notes we can see that the above initial assumptions give negative results. Shannon’s theorem says that perfect security against adversary with unbounded computational power requires that the secret $s$ has at least the same length as message communicated, which is not practical. (I think I also saw somewhere that secret sharing is expensive?).&lt;/p&gt;
 
 &lt;p&gt;In real world we may not want to assume Eve has unbounded computational power, because Eve is just a human being like us all! While Eve does have the ability to guess. We can now relax the assumption and assume Eve is in &lt;em&gt;Probabilistic Polynomial Time (PPT)&lt;/em&gt;. This actually makes a big difference. Let’s re-examine the two necessity above.&lt;/p&gt;
 
