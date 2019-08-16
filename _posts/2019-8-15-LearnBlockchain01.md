@@ -7,7 +7,7 @@ tags: Cryptography
 
 Cryptocurrency relies on special cryptographic hash functions with nice properties. Today I'd like to explain these properties and discuss their applications.  This notes refered to < Bitcoin And Cryptocurrency Technologies A Comprehensive Introduction > by Bonneau et al.
 
-A *hash function* is an efficiently computable function $H: \{0,1\}^*\rightarrow \{0,1\}^k$ where $k$ is a fixed parameter. That is  
+A *hash function* is an efficiently computable function $$H: \{0,1\}^*\rightarrow \{0,1\}^k$$ where $k$ is a fixed parameter. That is  
 1. Its input can be of string of any size.  
 2. Its output is of fixed length, usually set to be 256 bits.  
 3. It is efficiently computable.

@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-08-16T01:09:50-07:00</updated>
+ <updated>2019-08-16T01:13:33-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -19,7 +19,7 @@
    <id>http://localhost:4000/LearnBlockchain01</id>
    <content type="html">&lt;p&gt;Cryptocurrency relies on special cryptographic hash functions with nice properties. Today I’d like to explain these properties and discuss their applications.  This notes refered to &amp;lt; Bitcoin And Cryptocurrency Technologies A Comprehensive Introduction &amp;gt; by Bonneau et al.&lt;/p&gt;
 
-&lt;p&gt;A &lt;em&gt;hash function&lt;/em&gt; is an efficiently computable function $H: {0,1}^*\rightarrow {0,1}^k$ where $k$ is a fixed parameter. That is&lt;/p&gt;
+&lt;p&gt;A &lt;em&gt;hash function&lt;/em&gt; is an efficiently computable function &lt;script type=&quot;math/tex&quot;&gt;H: \{0,1\}^*\rightarrow \{0,1\}^k&lt;/script&gt; where $k$ is a fixed parameter. That is&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;Its input can be of string of any size.&lt;/li&gt;
   &lt;li&gt;Its output is of fixed length, usually set to be 256 bits.&lt;/li&gt;
