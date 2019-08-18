@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-08-17T14:18:05-07:00</updated>
+ <updated>2019-08-18T15:52:23-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -41,7 +41,7 @@
   &lt;li&gt;No hash functions have been proved to be collision resistant. i.e, there is possibility that there exists efficient (feasible) algorithm to find collisions. The hash functions we rely on in practice are those people have tried very very hard to find a method to break (i.e. find an efficient algorithm to compute collisions).&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;application&quot;&gt;Application&lt;/h3&gt;
+&lt;h3 id=&quot;application-online-file-storage&quot;&gt;Application: Online File Storage&lt;/h3&gt;
 &lt;p&gt;The collision resistant property can be used in the following logic: If one knows $x$ and $y$ are different, then it’s safe to say $H(x)$ and $H(y)$ are different. This can be confirmed by a contradictory argument. If one knows/can find/can compute a pair of $x$ and $y$ s.t $x\neq y$ and $H(x) = H(y)$, this violates our assumption that $H$ is collision resistant.&lt;/p&gt;
 
 &lt;p&gt;Now one application of this logic is &lt;em&gt;Online File Storage&lt;/em&gt;. Suppose you have a very large file and would like to upload it to a online file storage system so that you can download it later, possibly on another computer. How can you be sure that the file you download later is the same as you uploaded. One way is to store the file locally and compare it with the downloaded version bit by bit. Well, this may not be efficient since the file is very large. However, if you only store the hash of the file locally, and compare it with the hash of the file you downloaded, it is much more efficient. And the collision resistant property guarantees that, the system is hard to find a different file and its hash is the same as that of the one you uploaded.&lt;/p&gt;
@@ -49,6 +49,56 @@
 &lt;p&gt;This is like you’re memorizing a specifc sign of your item while no one can find a fake item that has the sign as yours. When you get it back, you just examine this sign and figure out whether it is indeed the item you stored.&lt;/p&gt;
 
 &lt;h2 id=&quot;property-2-hiding&quot;&gt;Property 2: Hiding&lt;/h2&gt;
+
+&lt;p&gt;Informally the hiding property says that if one is given the output of the hash function $y=H(x)$, he is infeasible to find the value of $x$. Again, there is a trivial way to find $x$, just try all the possible $x$ and compute $H(x)$ to find the specific $x$ with $y=H(x)$. Note here we don’t take the case where $x\neq x^\prime$ and $y=H(x)=H(x^\prime)$ into consideration.&lt;/p&gt;
+
+&lt;p&gt;So one way to implement this property is to make the input set large enough so it takes “infeasible” time to use the above algorithm. But we want to do this with a small input set, and this can be done by concatenating the input with a random string. Formally,&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Definition.&lt;/strong&gt; &lt;em&gt;(Hiding)&lt;/em&gt; A hash function $H$ is said to be &lt;em&gt;Hiding&lt;/em&gt; if when a secret value $r$ is chosen from a probability distribution that has &lt;em&gt;high min-entropy&lt;/em&gt;, then given $H(r||x)$, it’s infeasible to find $x$.&lt;/p&gt;
+
+&lt;p&gt;The definition of min-entropy can be found in many text books , for example, at &lt;a href=&quot;http://people.seas.harvard.edu/~salil/pseudorandomness/&quot;&gt;here&lt;/a&gt;. Informally, a distribution with &lt;em&gt;high min-entropy&lt;/em&gt; means that the distribution is close to “flat”, i.e. each of the event has almost identical chance to happen.&lt;/p&gt;
+
+&lt;h3 id=&quot;application-commitment-digital-envelope&quot;&gt;Application: Commitment (Digital Envelope)&lt;/h3&gt;
+
+&lt;p&gt;A commitment, also called a digital envelope, is the abstraction of taking a value $x$ and put it into an envelope then send it to a receiver. Later the sender can reveal the value in the envelope to the receiver. Informally, two properties are required for a commitment:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Hiding. No one is able to figure out the value $x$ when the value is not revealed.&lt;/li&gt;
+  &lt;li&gt;Binding. After the sender has made a commitment, he is not able to change the value in the envelope.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Formally, a commitment scheme consists of two algorithms:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;commit(msg, nonce) The commit function takes as input a message and a secret random value nonce then return a commitment.&lt;/li&gt;
+  &lt;li&gt;verify(com, msg, nonce) The verify function takes as input a commitmentm, a message and a nonce. It return true iff com == commit(msg, nonce).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The hiding and binding property can be formalized as following:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Hiding. Given $com$, it is infeasible to find $msg$.&lt;/li&gt;
+  &lt;li&gt;Binding. It is infeasible to find two pairs &lt;script type=&quot;math/tex&quot;&gt;(msg, nonce)&lt;/script&gt; and $(msg^\prime, nonce^\prime)$ such that $msg\neq msg^\prime$ and $commit(msg, nonce) == commit(msg^\prime, nonce^\prime)$.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Note that the $nonce$ and $nonce^\prime$ is not necessarily the same. Also $nonce$ can only be used once.&lt;/p&gt;
+
+&lt;p&gt;To use a commitment scheme, the sender first generate a random $nonce$, then apply $commit$ to $msg$ and $nonce$ and return $com$. Later when the sender wants to reveal $msg$, he publishes the $nonce$ and the $msg$, others can verify $msg$ is indeed what the sender has commited using $verify$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Implementation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Commitment can be implemented using cryptographic hash function.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$commit(msg, nonce) = H(msg||nonce) = com$&lt;/li&gt;
+  &lt;li&gt;$verify(com, msg, nonce) = (boolean)\ (H(msg||nonce) == com)$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is an easy practice to check that the &lt;em&gt;Hiding&lt;/em&gt; property of $H$ implies the hiding property of the commitment. The &lt;em&gt;Binding&lt;/em&gt; property is implied by the &lt;em&gt;Collision Resistant&lt;/em&gt; property of $H$.&lt;/p&gt;
+
+&lt;h2 id=&quot;property-3-puzzle-friendliness&quot;&gt;Property 3: Puzzle Friendliness&lt;/h2&gt;
+
+&lt;p&gt;sdf&lt;/p&gt;
 </content>
  </entry>
  
