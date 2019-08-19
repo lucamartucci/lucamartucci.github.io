@@ -17,6 +17,9 @@ I'll explain these properties in detail.
 
 ## Property 1: Collision Resistant
 
+
+<!--more-->
+
 **Definition.** *(Collision Resistant)* A hash function $H$ is said to be *Collision Resistant* if it is **infeasible to find** two values $x$ and $y$, such that $x\neq y$ yet $H(x) = H(y)$.
 
 The following notes are made:  

@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-08-18T15:52:23-07:00</updated>
+ <updated>2019-08-18T20:30:50-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -31,6 +31,8 @@
 &lt;p&gt;I’ll explain these properties in detail.&lt;/p&gt;
 
 &lt;h2 id=&quot;property-1-collision-resistant&quot;&gt;Property 1: Collision Resistant&lt;/h2&gt;
+
+&lt;!--more--&gt;
 
 &lt;p&gt;&lt;strong&gt;Definition.&lt;/strong&gt; &lt;em&gt;(Collision Resistant)&lt;/em&gt; A hash function $H$ is said to be &lt;em&gt;Collision Resistant&lt;/em&gt; if it is &lt;strong&gt;infeasible to find&lt;/strong&gt; two values $x$ and $y$, such that $x\neq y$ yet $H(x) = H(y)$.&lt;/p&gt;
 

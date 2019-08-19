@@ -26,3 +26,4 @@ github:
   repo:           https://github.com/poole/hyde
 
 # plug-ins
+excerpt_separator: '<!--more-->'
