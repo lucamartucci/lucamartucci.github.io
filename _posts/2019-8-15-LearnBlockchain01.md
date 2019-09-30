@@ -4,7 +4,7 @@ permalink: /LearningBlockchain01/
 title: Hash Function for Cryptocurrency
 tags: Cryptography
 ---
-Cryptocurrency relies on special cryptographic hash functions with nice properties. Today I'd like to explain these properties and discuss their applications.  This notes refered to < Bitcoin And Cryptocurrency Technologies A Comprehensive Introduction > by Bonneau et al.
+Cryptocurrency relies on special cryptographic hash functions with nice properties. Today I'd like to explain these properties and discuss their applications.  This notes refered to chapter 1 of < Bitcoin And Cryptocurrency Technologies A Comprehensive Introduction > by Bonneau et al.
 
 A *hash function* is an efficiently computable function $$H: \{0,1\}^*\rightarrow \{0,1\}^k$$ where $k$ is a fixed parameter. That is  
 1. Its input can be of string of any size.  
@@ -22,10 +22,10 @@ I'll explain these properties in detail.
 
 **Definition.** *(Collision Resistant)* A hash function $H$ is said to be *Collision Resistant* if it is **infeasible to find** two values $x$ and $y$, such that $x\neq y$ yet $H(x) = H(y)$.
 
-The following notes are made:  
+The following facts should be noted:  
 1. Collision exists as long as the input set size is larger than the output set size.  
 2. There is a trivial algorithm to find a collision for a (say) 256-bit output: pick $2^{256}+1$ distinctive values, compute the hashes for each of them and check equivalence for each pair. However, this method will take more than octillion years before finding such a pair. And we consider this method **not feasible**.  
-3. No hash functions have been proved to be collision resistant. i.e, there is possibility that there exists efficient (feasible) algorithm to find collisions. The hash functions we rely on in practice are those people have tried very very hard to find a method to break (i.e. find an efficient algorithm to compute collisions).   
+3. No hash functions have been proved to be collision resistant. i.e, there is possibility that there exists efficient (feasible) algorithms to find collisions. The hash functions we rely on in practice are those people have tried very very hard to find a method to break (i.e. to find an efficient algorithm to compute collisions).   
 
 ### Application: Online File Storage
 The collision resistant property can be used in the following logic: If one knows $x$ and $y$ are different, then it's safe to say $H(x)$ and $H(y)$ are different. This can be confirmed by a contradictory argument. If one knows/can find/can compute a pair of $x$ and $y$ s.t $x\neq y$ and $H(x) = H(y)$, this violates our assumption that $H$ is collision resistant.  
@@ -76,4 +76,11 @@ It is an easy practice to check that the *Hiding* property of $H$ implies the hi
 
 ## Property 3: Puzzle Friendliness  
 
-sdf
+**Definition** (puzzle friendliness) A hash function is said to be *puzzle-friendly* if for every possible n-bit output value $y$, if $k$ is chosen from a distribution with high min-entropy , then it is infeasible to find $x$ such that $H(k\|x) = y$ in time significantly less than $2^n$.  
+
+That is to say, given a particular target $y$, it is hard for someone to find a $x$, combined with a random partial string, hits exactly $y$.
+
+
+##References
+
+1. Bonneau et al. Bitcoin And Cryptocurrency Technologies A Comprehensive Introduction. Princeton University Press.
