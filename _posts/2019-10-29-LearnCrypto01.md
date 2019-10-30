@@ -1,10 +1,10 @@
 ---
 layout: default
-permalink: /LearningCrypto01/
+permalink: /CryptoLec01/
 title: Intro to Cryptography Lecture 1
 tags: Cryptography
 ---
-I'm starting to study cryptography by reading Yevgeniy Dodis' notes at this [link](https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html), and would like to make some summary notes. 
+I'm starting to study cryptography by following Yevgeniy Dodis' notes at this [link](https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html), and would like to make some summary notes. The notes will mostly focus on proofs. I will also use other material as references [1][2][3] in order to make notes about additional details.
 
 
 ## 1. The Basic Scenario in Cryptography
@@ -17,7 +17,7 @@ Initial assumptions we made are:
 * Alice must always be able to recover $m$ (deterministially).
 * Eve has unbounded computational power.
 
-## 2. The Necessity of (Shared) Secret
+## 2. The Necessity of Secret
 
 Base on the initial assumption, Do Alice and Bob necessarily need secret in order to achieve their private communication? The answer is yes, the following arguments establish the necessity.
 
@@ -62,3 +62,9 @@ Well this should still hold because the same reason as above.
 This may not hold as previous. Why? Because now Eve is bounded in PPT, she is not allowed to do the previous iterative method. For now I think this is intuitive, maybe we can see more formal arguments (proofs) in later notes.
 
 In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may be shorter than message length (overcoming shannon's barrier). 
+
+## References
+
+[1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf  
+[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf
+[3] Shafi Goldwasser, Mihir Bellare. Lecture Notes on Cryptography. https://cseweb.ucsd.edu/~mihir/papers/gb.pdf
