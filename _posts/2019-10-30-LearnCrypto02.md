@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /CryptoLec02/
-title: Intro to Cryptography 02 : One Way Functions
+title: Intro to Cryptography 02:One Way Functions
 tags: Cryptography
 ---
 

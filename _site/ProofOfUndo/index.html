@@ -57,6 +57,7 @@
     <nav class="sidebar-nav">
       <a class="sidebar-nav-item active" href="/">About Me</a>
       <a class="sidebar-nav-item" href="/blog/">Blog</a>
+      <a class="sidebar-nav-item" href="/Links/">Links</a>
     </nav>
 
     <p>&copy; 2019. All rights reserved.</p>
@@ -65,7 +66,7 @@
 
 
     <div class="content container">
-      <p>Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. However, an interesting thing is that I can prove that my implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.</p>
+      <p>Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. In case the recuiter might be interested, I’d like to provide a proof here that my idea of implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.</p>
 
 <h2 id="introduction">Introduction</h2>
 <p>Undo is the operation that can undo the user’s last $n$ operation(inserting/deleting characters).</p>
@@ -76,7 +77,7 @@
 
 <div>$$a\leftarrow s \rightarrow b$$  </div>
 
-<p>To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: <strong>what if when (the deleted) $s$ is to recover, its previous nodes a and b are not in the data structure, i.e. a and b haven’t been recovered</strong>. Therefore we can’t find its position. While I argue that this will not happen.</p>
+<p>To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: <strong>what if when (the deleted) $s$ is to recover, its previous nodes a or b are not in the data structure, i.e. a and b haven’t been recovered</strong>. Therefore we can’t find its position. While I argue that this will not happen.</p>
 
 <h2 id="the-argument">The Argument</h2>
 <p>I’d like to show the following: <strong>when $s$ is to recover, its previous or next nodes must exist in the data structure</strong>, which is a simple argument by contradiction:<br />

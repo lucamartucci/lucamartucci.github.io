@@ -1,72 +1,4 @@
-<!DOCTYPE html>
-<html lang="en-us">
-
-  <head>
-  <link href="https://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  <title>
-    
-      Zero-Knowledge Proofs:Definitions and Variants &middot; Jiyu Zhang
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="/public/favicon.ico">
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
-   <script type="text/x-mathjax-config">
-     MathJax.Hub.Config({
-       tex2jax: {
-         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-         processEscapes: true
-       }
-     });
-   </script>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-</head>
-
-
-  <body class="theme-base-0d">
-
-    <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <h1>
-        <a href="/">
-          Jiyu Zhang
-        </a>
-      </h1>
-      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a class="sidebar-nav-item active" href="/">About Me</a>
-      <a class="sidebar-nav-item" href="/blog/">Blog</a>
-      <a class="sidebar-nav-item" href="/Links/">Links</a>
-    </nav>
-
-    <p>&copy; 2019. All rights reserved.</p>
-  </div>
-</div>
-
-
-    <div class="content container">
-      <p>Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and its variants. <br />
+I"�<p>Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and its variants. <br />
 最近在看一些密码学的论文，对其中<strong>零知识证明(zero-knowledge proofs)</strong>这个重要的概念很感兴趣，就把相关的笔记（notes）都看了一遍，打算把定义方面的理解以及变体的问题总结下来。</p>
 
 <p>零知识证明是一种特殊的交互式证明方法（Interactive Proof）。我们知道，在交互式证明中， 我们要求证明或协议（Protocol）满足两个性质：完备性（Completeness）和 可靠性（Soundness），其中可靠性是为了防止恶意的（adversarial）证明者（Prover）。 一个恶意的证明者会想要欺骗验证者（Verifier）从而使验证者相信一个错误的命题，可靠性要求证明者只能有很小的概率能够欺骗验证者。而零知识证明在此之外增设了需满足的第三个性质–零知识性（Zero Knowledge）。不同于可靠性是为了针对恶意的证明者，零知识性是为了防止恶意的验证者获取一些他们想要的信息。</p>
@@ -105,8 +37,4 @@ $$[View(S(x))]\simeq [View(PV^{\prime}(x))]$$
 [1] Oded Goldreich. Zero-knowledge twenty years after its invention. Unpublished manuscript. 2002.<br />
 [2] Rafail Ostrovsky. Foundations of Cryptography Draft Lecture Notes.<br />
 [3] Boaz Barak. How to go beyond the black-box simulation barrier. FOCS 2011.</p>
-
-    </div>
-
-  </body>
-</html>
+:ET

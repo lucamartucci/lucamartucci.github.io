@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Goldreich Levin Theorem &middot; Jiyu Zhang
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+   <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true
+       }
+     });
+   </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Jiyu Zhang
+        </a>
+      </h1>
+      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item active" href="/">About Me</a>
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+      <a class="sidebar-nav-item" href="/Links/">Links</a>
+    </nav>
+
+    <p>&copy; 2019. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <p>In this blog we study and present the proof of Goldreich-Levin theorem. The main material we use is the  course notes of Prof. Luca Trevisan (see references at the end).</p>
+
+<p>The Goldreich-Levin Theorem has several interpretations. We will first explain and prove it from cryptographic view. Then we will see in fact it can also be viewed as list-decoding of Hadamard code.</p>
+
+<h2 id="background">Background</h2>
+<p>In this section we present necessary definitions and math inequalities we will be using. The first theorem is a variant of Markov inequality.</p>
+
+<p><strong>Theorem 1 (Markov Inequality, Variant)</strong> Suppose $X$ is a random variable in $[0, 1]$ and $0&lt;t&lt;E[X]$, then</p>
+
+<script type="math/tex; mode=display">Pr[X\geq t] \geq \frac{E[X]-t}{1-t}</script>
+
+<p><strong>Proof:</strong></p>
+
+<p>Let $S$ denote the set of $x$ such that $X(x)\geq t$, then</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} 
+E[X] &= \sum_{x\in S}Pr(x)X(x) + \sum_{x\not\in S}Pr(x)X(x)\\ 
+ &\leq \sum_{x\in S}Pr(x)\cdot 1 + \sum_{x\not\in S}Pr(x)\cdot t\\
+ &= Pr(S) + t\cdot (1-Pr(S))\\
+ &= (1-t)\cdot Pr(S) + t
+\end{align*} %]]></script>
+
+<p><strong>Theorem 2 (Chernoff Bound)</strong>  Suppose $X_1, \ldots, X_k$ are $0, 1$ <em>i.i.d</em> random variables and $ X = \sum_i^{k} X_i$, then for any $0&lt;\epsilon&lt;1$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+Pr[\ X>(1+\epsilon)E[X]\ ]<e^{-\frac{\epsilon^2}{3}\cdot E[X]} %]]></script>
+
+<script type="math/tex; mode=display">% <![CDATA[
+Pr[\ X<(1-\epsilon)E[X]\ ]<e^{-\frac{\epsilon^2}{3}\cdot E[X]} %]]></script>
+
+<p><strong>Theorem 3 (Chebyshev Inequality)</strong><br />
+Suppose $X= X_1 + \cdots + X_k$ where $X_1, \ldots ,X_k$ are $0, 1$ pairwise independent variables and $t&gt;0$, then</p>
+
+<script type="math/tex; mode=display">Pr[\mid X-E[X]\mid \geq t] \leq \frac{Var(X_1) + \cdots + Var(X_k)}{t^2}</script>
+
+<p>In particular, if for each $X_i$, $Pr[X_i = 1] \geq 1/2 + \epsilon$, then $Var(X_i)&lt;\frac{1}{4}$, therefore</p>
+
+<script type="math/tex; mode=display">Pr[\mid X-E[X]\mid \geq t] \leq \frac{Var(X_1) + \cdots + Var(X_k)}{t^2}\leq \frac{k}{4t^2}</script>
+
+<p><strong>Proof</strong></p>
+
+<p>Let $S$ be the set of $x$ such that $\mid X(x)-E[X]\mid \geq t$</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} 
+Var[X] &= \sum_x (X(x)-E[X])^2 \cdot Pr(x)\\
+ &= \sum_{x\in S}(X(x)-E[X])^2 \cdot Pr(x) + \sum_{x\not\in S}(X(x)-E[X])^2 \cdot Pr(x)\\
+ &\geq Pr(S)\cdot t^2 + 0
+\end{align*} %]]></script>
+
+<p>So</p>
+
+<script type="math/tex; mode=display">Pr(S) \leq \frac{Var[X]}{t^2}</script>
+
+<p>and</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} 
+Var[X_1+X_2] &= E[(X_1+X_2)^2] - E(X_1+X_2)^2\\
+&= E[X_1^2] + 2E[X_1X_2] + E[X_2]^2 - E[X_1]^2 -2E[X_1]E[X_2] - E[X_2]^2\\
+&= Var[X_1]+Var[X_2]
+\end{align*} %]]></script>
+
+<p>this can be easily generalized to show $Var[X_1 + \cdots + X_k]= Var[X_1] + \cdots + Var[X_k]$</p>
+
+<p><strong>Definition 1 (Hard-Core Predicate)</strong> A boolean function <script type="math/tex">P: \{0, 1 \}^n \rightarrow \{0, 1\}</script> is $(t, \epsilon)$ - hard core for a permutation <script type="math/tex">f: \{0,1\}^n \rightarrow \{0,1\}^n</script> if for every algorithm $A$ of complexity $t$</p>
+
+<script type="math/tex; mode=display">\Pr_{x\sim \{0, 1\}^n}[A(f(x)) = P(x)]\leq \frac{1}{2}+\epsilon</script>
+
+<p>Note: we use <script type="math/tex">x\sim \{0, 1\}^n</script> to denote uniform distribution over <script type="math/tex">\{0, 1\}^n</script></p>
+
+<h2 id="goldreich-levin-theorem">Goldreich-Levin Theorem</h2>
+
+<p>We denote inner product modulo 2 using the following notation:</p>
+
+<script type="math/tex; mode=display">\langle x,r\rangle = \sum_i x_i\cdot r_i\ mod\ 2</script>
+
+<p>The Goldreich-Levin theorem says that a random XOR is hard-core for every one-way permutation. This means that if there is an efficient algorithm to predict $\langle x, r\rangle$, given $f(x)$ and $r$, then there is also an efficient algorithm to compute a pre-image of $f(x)$, so if $f(x)$ is a one-way function, we can invert it with noticeable probability.</p>
+
+<p><strong>Theorem 1 (Goldreich-Levin Theorem)</strong> <em>Suppose $A$ is an algorithm of complexity $t$ such that</em></p>
+
+<script type="math/tex; mode=display">\Pr_{x, r} [A(f(x),r)\ =\ \langle x ,r\rangle] \geq \frac{1}{2} + \epsilon</script>
+
+<p><em>Then there is an algorithm $A^\prime$ of complexity at most $O(t\epsilon^{-2}n^{O(1)})$ such that</em></p>
+
+<script type="math/tex; mode=display">\Pr_x[A^\prime(f(x)) = x] \geq \Omega(\epsilon)</script>
+
+<p>We will first prove a weak Goldreich-Levin algorithm, which will later be used in our proof of GL theorem.</p>
+
+<p><strong>Theorem 2 (Goldreich-Levin Algorithm Weak Version)</strong> <em>Suppose there is a function $H$ such that, for some $x$</em></p>
+
+<script type="math/tex; mode=display">\Pr_r[H(r)\ =\ \langle x,r\rangle]\ \geq \frac{3}{4} + \epsilon</script>
+
+<p><em>Then there is an algorithm $GLW$ that can output $x$ with high probability ( $\geq 1-\frac{1}{n}$ ).</em></p>
+
+<p>Let’s first see how an easy algorithm can find $x$ when the probability on the right side is 1 in the above (so that $H(r)$ outputs $\langle x,r\rangle$ correctly).</p>
+
+<p>Let $e_i$ denote the vector in which the $i$th bit is 1 and 0 otherwise. $x_i = H(e_i) = \langle x, e_i \rangle$. Then we can output $x$ by enumerating all the $e_i$.</p>
+
+<p>Now to prove Theorem 2, note that $H(r)$ fails with small probability, we’ll use the majority vote method. Intuitively,  we randomly sample several points $r_1 \ldots r_k$. Let $H^\prime_{r_1 \ldots r_k}(e_i)$ be the function that take the majority of  $H(r_j+e_i) - H(r_j)$ on these $r_j$s. The observation is that if $H(r)$ computes $\langle x, r\rangle$ correctly, then we have:</p>
+
+<script type="math/tex; mode=display">\langle x, r_j+e_i \rangle - \langle x, r_j \rangle = \langle x, e_i\rangle</script>
+
+<p>We now bound the probability that $H(r_j + e_i) - H(r_j)$ fails.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+  Pr[H(r_j + e_i) - H(r_i) \neq  \langle x, e_i\rangle] &= Pr[H(r_j + e_i) \neq \langle x, r_j+e_i \rangle\ \cup H(r_j) \neq \langle x, r_j \rangle]\\
+  &\leq Pr[H(r_j + e_i) \neq \langle x, r_j+e_i \rangle]\ + Pr[H(r_j) \neq \langle x, r_j \rangle]\\
+  &\leq \frac{1}{4} - \epsilon + \frac{1}{4} - \epsilon\\
+  &\leq \frac{1}{2} - 2\epsilon
+ \end{align*} %]]></script>
+
+<p>The GLW algorithm is as follows:</p>
+
+<ul>
+  <li>GLW Algorithm:</li>
+  <li>for $i= 1, 2, \ldots , n$:
+    <ul>
+      <li>for $j = 1, 2, \ldots , 4\log n/ \epsilon^2$:
+        <ul>
+          <li>randomly sample <script type="math/tex">r_j\in \{0, 1\}^n</script></li>
+          <li>compute $H(r_j + e_i) - H(r_j)$</li>
+        </ul>
+      </li>
+      <li>compute <script type="math/tex">x_i = H^\prime_{r_1 \ldots r_k}(e_i) = Majority\{H(r_j + e_i) - H(r_j): j = 1, 2, \ldots , 4\log n/ \epsilon^2 \}</script></li>
+    </ul>
+  </li>
+  <li>return $x$</li>
+</ul>
+
+<p>Now we analyze this algorithm. Since each $H(r_j + e_i) - H(r_j)$ outputs the correct answer with probability at least $1/2 + 2\epsilon$. By the Chernoff Bound (Theorem 2 in Background), the probability that the majority function $H^\prime_{r_1 \ldots r_k}(e_i)$ fails to output $x_i$ is at most $e^{-2\log n} = O(\frac{1}{n^2})$. Then the union bound gives us that GLW outputs $x$ correctly with probability at least $1-1/n$. The algorithm runs in time $O(\frac{n^2 \log n}{\epsilon^2})$, makes $O(\frac{n\log n}{\epsilon^2})$ queries to $H$.</p>
+
+<p><strong>Discussion.</strong> The above framework only works for cases where $\Pr_r[H(r) = \langle x, r \rangle]$ greater than $\frac{3}{4}$. For the case in Goldreich-Levin theorem where $H(r)$ makes more error,the union bound gives probability less than $1/2$ and the Chernoff Bound won’t work. In fact, it is possible to construct a function $H$ such that $Pr[H(r) = \langle x, r\rangle] = 3/4$ and $Pr[H(r) = \langle x^\prime, r\rangle] = 3/4$ where $x \neq x^\prime$. So no algorithm can guarantee to find the correct $x$ when given such $H$, since $x$ is not uniquely defined by $H$. However, the Goldreich-Levin theorem tells us how to find a list of possible candidates of $x$ with good probability. We present their algorithm below.</p>
+
+<p>We proceed to prove the Goldreich-Levin Theorem.</p>
+
+<p>Given (as in the Goldreich-Levin theorem) $\Pr_{x, r} [A(f(x),r)\ =\ \langle x ,r\rangle] \geq \frac{1}{2} + \epsilon$, we first show that there is a certain fraction of $x$,  $\Pr_r[A(f(x), r) = \langle x, r \rangle] \geq \frac{1}{2} + \frac{1}{2}\epsilon$ holds, and we call such $x$ “good” :</p>
+
+<p><script type="math/tex">\Pr_{x, r} [A(f(x),r)\ =\ \langle x ,r\rangle]</script> can be viewed as <script type="math/tex">\sum_x Pr(x)\Pr_r[A(f(x),r)\ =\ \langle x ,r\rangle]</script>,  which is equal to the expectation <script type="math/tex">E_x[\ \Pr_r[A(f(x),r)\ =\ \langle x ,r\rangle]\ ]</script> ( so we view <script type="math/tex">\Pr_r[A(f(x),r)\ =\ \langle x ,r\rangle]</script> as a random variable of $x$). Now we have the expectation is greater than $1/2 + \epsilon$, by the Markov ineuality (Theorem 1 in background) we have:</p>
+
+<script type="math/tex; mode=display">\Pr_x \left[\ \Pr[A(f(x),r)\ =\ \langle x ,r\rangle ]\geq \frac{1}{2} + \frac{1}{2}\epsilon\ \right]\geq \frac{\frac{1}{2}\epsilon}{\frac{1}{2}-\frac{1}{2}\epsilon}\geq \frac{\epsilon}{2}</script>
+
+<p>So at least $\frac{\epsilon}{2}$ of $x$ are good. On these good $x$, we prove the GL algorithm:</p>
+
+<p><strong>Theorem 3 (Goldreich-Levin Algorithm)</strong>
+<em>Suppose there is a function $H$ such that, for some $x$:</em></p>
+
+<script type="math/tex; mode=display">\Pr_r[H(r) = \langle x, r \rangle] \geq \frac{1}{2} + \epsilon</script>
+
+<p><em>Then there is an algorithm GL outputs a list $L$ of candidates of $x$, such that $L$ is of size $O(\epsilon^{-2})$ and $x\in L$ with probability  at least $1/2$. The GL algorithm runs in time $O(n^2 \epsilon^{-4} \log n)$, makes $O(n\epsilon^{-4}\log n)$ queries to $H$.</em></p>
+
+<p>As discussed above, we now don’t have $H(r)$ that predicts $\langle x, r \rangle$ well, so $H(r+r_j) - H(r_j)$ fails to predict $\langle x, r \rangle$ with high probability ($ &gt; 1/2$). However, let’s make an assumption that, instead of $H(r_j)$, we get the correct $\langle x, r_j \rangle$ for every $j$, so now $H(r+r_j) - \langle x, r_j \rangle$ succeeds with probability at least $1/2 + \epsilon$. We do an error reduction by taking $k= O(\frac{1}{\epsilon^2})$ samples of $r_j$, then apply the majority vote method. Thus we can reduce the probability to match that in Theorem 2 and apply the GLW algorithm to find $x$.   <br />
+Moreover, since we dont’ know the correct $\langle x, r_j \rangle$, we just enumerate all the possible values of it, which gives the following (inefficient) algorithm:</p>
+
+<ul>
+  <li>Inefficient GL algorithm:</li>
+  <li>randomly sample <script type="math/tex">r_1, \ldots, r_k \in \{0, 1\}^n</script> where $k =  O(\frac{1}{\epsilon^2})$</li>
+  <li>for <script type="math/tex">b_1, \ldots, b_k \in \{0, 1\}</script> (each $b_j$ corresponds to a possible value of $\langle x, r_j \rangle$) :
+    <ul>
+      <li>let <script type="math/tex">H^\prime_{r_1 \ldots r_k}(r) :=  Majority\{H(r_j + r) - b_j: j = 1, 2, \ldots, k \}</script></li>
+      <li>run GLW algorithm in Theorem 2, using $H^\prime_{r_1 \ldots r_k}(r)$ instead of $H(r)$, outputs $x$</li>
+      <li>add $x$ to list $L$</li>
+    </ul>
+  </li>
+  <li>return $L$</li>
+</ul>
+
+<p><em>Analysis:</em>  By the Chernoff Bound we have, on the correct $b_j$’s,</p>
+
+<script type="math/tex; mode=display">\Pr_{r,r_1,\ldots, r_k}[H^\prime_{r_1 \ldots r_k}(r) = \langle x, r\rangle]\geq 1-o(1)\geq 1-\frac{1}{32}</script>
+
+<p>It follow by the Markov Inequality that</p>
+
+<script type="math/tex; mode=display">\Pr_{r_1, \ldots, r_k}[\Pr_r[H^\prime_{r_1 \ldots r_k}(r) = \langle x, r\rangle] > \frac{3}{4}]> \frac{31}{32}</script>
+
+<p>By the GLW algorithm, with probability at least $\frac{31}{32} - \frac{1}{n} &gt; \frac{1}{2}$, $x$ is in the list.</p>
+
+<p><strong>Discussion.</strong> The above algorithm is inefficient in that the size of $L$ is $2^k$, which is exponential in $k$, the GL algorithm below reduces this using pairwise independence.</p>
+
+<ul>
+  <li>GL algorithm:</li>
+  <li>Randomly sample <script type="math/tex">r_1, \ldots, r_k \in \{0, 1\}^n</script> where $k =  O(\log \frac{1}{\epsilon^2})$</li>
+  <li>for each subset <script type="math/tex">S\subseteq \{r_1, \ldots, r_k\}</script>, define $r_S = \sum_{i\in S} r_i$</li>
+  <li>for all <script type="math/tex">b_1 \ldots, b_k \in \{0, 1\}</script>:
+    <ul>
+      <li>define $b_S = \sum_{i\in S} b_i$</li>
+      <li>define <script type="math/tex">H^\prime(r) :=  Majority\{H(r_S + r) - b_S: S\subseteq \{r_1, \ldots, r_k\} \}</script></li>
+      <li>run GLW algorithm in Theorem 2, using $H^\prime(r)$ instead of $H(r)$, outputs $x$</li>
+      <li>add $x$ to list $L$</li>
+    </ul>
+  </li>
+  <li>return $L$</li>
+</ul>
+
+<p>Now we analyze this GL algorithm. Since $r_1, \ldots, r_k$ are randomly picked, for any two different sets $S$ and $T$, $r_S$ and $r_T$ are pairwise independent, therefore $H(r_S+r) - b_S$ and $H(r_T+r) - b_T$ are pairwise independent. In addition, on the correct $b_S$, $H(r_S+r) - b_S = \langle x, r \rangle$ with probability at least $1/2 + \epsilon$. By the Chebyshev Ineuqality (Theorem 3 in background), $H^\prime(r)$ outputs the wrong value with probability at most $\frac{1}{4\epsilon^2 \cdot 2^{k}}$ where $k=O(\log \frac{8}{\epsilon^2})$, so the probability is at most $\frac{1}{32}$. Given such $H^\prime(r)$ the GLW algorithm will work well. <br />
+The running time of GL algorithm is $O(n^2 \log n \cdot \epsilon^{-4})$, it makes$O(n^2\log n\cdot \epsilon^{-4})$ queries to $H$ and outputs a list $L$ of size $O(\frac{1}{\epsilon^2})$. $x$ is in $L$ with probability greater than $1/2$.</p>
+
+<p><strong>Finalizing the proof.</strong> Since we have at least $\epsilon/2$ fraction of good $x$, combinging this with the GL algorithm we can conclude that with probability at least $\epsilon /4$ $x$ is in the list $L$. We can check $x$ by evaluating $f(x)$ to see if it equals our input $y$.</p>
+
+<h2 id="references">References</h2>
+<p>Lecture Notes 11, 12 of Luca Trevisan’s Spring 2009 Cryptography Courses, see this <a href="https://people.eecs.berkeley.edu/~luca/cs276/#notes">Link</a>.</p>
+
+    </div>
+
+  </body>
+</html>

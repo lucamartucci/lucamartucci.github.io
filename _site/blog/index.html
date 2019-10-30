@@ -57,6 +57,7 @@
     <nav class="sidebar-nav">
       <a class="sidebar-nav-item active" href="/">About Me</a>
       <a class="sidebar-nav-item" href="/blog/">Blog</a>
+      <a class="sidebar-nav-item" href="/Links/">Links</a>
     </nav>
 
     <p>&copy; 2019. All rights reserved.</p>
@@ -69,79 +70,32 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/LearningBlockchain01/">
-        Hash Function for Cryptocurrency
+      <a href="/CryptoLec02/">
+        Intro to Cryptography 02:One Way Functions
       </a>
     </h1>
 
-    <span class="post-date">15 Aug 2019</span>
+    <span class="post-date">30 Oct 2019</span>
     
-      <p>Cryptocurrency relies on special cryptographic hash functions with nice properties. Today I’d like to explain these properties and discuss their applications.  This notes refered to &lt; Bitcoin And Cryptocurrency Technologies A Comprehensive Introduction &gt; by Bonneau et al.</p>
-
-<p>A <em>hash function</em> is an efficiently computable function <script type="math/tex">H: \{0,1\}^*\rightarrow \{0,1\}^k</script> where $k$ is a fixed parameter. That is</p>
-<ol>
-  <li>Its input can be of string of any size.</li>
-  <li>Its output is of fixed length, usually set to be 256 bits.</li>
-  <li>It is efficiently computable.</li>
-</ol>
-
-<p>While to be useful for cryptocurrency, it requires the hash function to be of special <em>cryptographic</em> hash function. Specifically, the following three properties hold: (1) Collision resistant;  (2) Hiding; (3) Puzzlefriendliness.</p>
-
-<p>I’ll explain these properties in detail.</p>
-
-<h2 id="property-1-collision-resistant">Property 1: Collision Resistant</h2>
-
-
-      <a href="/LearningBlockchain01/">Read more...</a>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/ProofOfUndo/">
-        Argument of Correctness of Undo Implementation
-      </a>
-    </h1>
-
-    <span class="post-date">12 Aug 2019</span>
-    
-      <p>Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. However, an interesting thing is that I can prove that my implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.</p>
-
-<h2 id="introduction">Introduction</h2>
-<p>Undo is the operation that can undo the user’s last $n$ operation(inserting/deleting characters).</p>
-
-<p>The difficulty lies in how can one keep track of the original position of the characters deleted. Well, in my implementation, nothing else is needed: just remove the node(which contains a character) and put it into a stack.</p>
-
-<p>The data strucutre I used for text editor is a doubly linked list, each node has a value contains the specific character, and a <strong>prev</strong> pointer to the previous character node and a <strong>next</strong> pointer to the next character node. Visualized as following:</p>
-
-<div>$$a\leftarrow s \rightarrow b$$  </div>
-
-<p>To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: <strong>what if when (the deleted) $s$ is to recover, its previous nodes a and b are not in the data structure, i.e. a and b haven’t been recovered</strong>. Therefore we can’t find its position. While I argue that this will not happen.</p>
-
-<h2 id="the-argument">The Argument</h2>
-<p>I’d like to show the following: <strong>when $s$ is to recover, its previous or next nodes must exist in the data structure</strong>, which is a simple argument by contradiction:<br />
-Suppose for the contradiction that $a$ and $b$ are not in the data structure, then $a$ and $b$ must be deleted before $s$ is deleted. However, in this case, by the time $s$ is deleted, its <strong>prev</strong> and <strong>next</strong> cannot be $a$ and $b$, which is a contradiction.</p>
-
+      <p>In this note we mainly discuss common cryptographic primitives: one-way functions (OWF), one-way permutations (OWP) and trapdoor functions (TDP).</p>
 
     
   </div>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/LearningCrypto01/">
+      <a href="/CryptoLec01/">
         Intro to Cryptography Lecture 1
       </a>
     </h1>
 
-    <span class="post-date">10 Aug 2019</span>
+    <span class="post-date">29 Oct 2019</span>
     
-      <p>I’m starting to study cryptography by reading Yevgeniy Dodis’ notes at this <a href="https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html">link</a>, and would like to make some interesting notes.</p>
+      <p>I’m starting to study cryptography by following Yevgeniy Dodis’ notes at this <a href="https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html">link</a>, and would like to make some summary notes. The notes will mostly focus on proofs. I will also use other material as references [1][2][3] in order to make notes about additional details.</p>
 
-<p>Today I’ve read the notes of lecture 1. I want to explain the argument for the necessity of secret, which I spent some time thinking about and had fun playing with.</p>
+<h2 id="1-the-basic-scenario-in-cryptography">1. The Basic Scenario in Cryptography</h2>
 
-<h2 id="the-scenario-of-the-problem"><strong>The Scenario of the Problem</strong></h2>
-
-<p>The scenario involves three agents, Alice, Bob and Eve. Bob wants to send a message $m$ to Alice that <strong>only</strong> Alice can read. Therefore Bob would like to encrypt $m$ making it the ciphertext $c$ and send $c$ to Alice. Eve is the third party (adversary) who can see $c$ and wants to know $m$. We name Bob’s encryption function as $Enc:$ $Enc(m, ???) \rightarrow c$ and Alice’s decryption function as $Dec:$ $Dec(c, ???) \rightarrow m$. The pair $(Enc, Dec)$ constitutes the communication scheme they use.</p>
+<p>The scenario involves three agents, Alice, Bob and Eve. Alice and Bob want to chat on a channel by sending messages to each other. Moreover, they would like to do this secretly so that only they know the (even partial) contents. In the basic model, Eve is the adversary who can observe whatever texts that are sent on the channel. Therefore Alice and Bob would like to encrypt their messages $m$ into a ciphertext $c$ that (as a goal) only they can decrypt. The goal of Eve is to infer the contents of $m$ based on $c$. WLOG, we assume Bob is the sender and Alice is the receiver. We name Bob’s encryption function as $Enc:$ $Enc(m, ???) \rightarrow c$ and Alice’s decryption function as $Dec:$ $Dec(c, ???) \rightarrow m$. The pair $(Enc, Dec)$ constitutes the communication scheme they use.</p>
 
 <p>Initial assumptions we made are:</p>
 
@@ -151,7 +105,7 @@ Suppose for the contradiction that $a$ and $b$ are not in the data structure, th
   <li>Eve has unbounded computational power.</li>
 </ul>
 
-<h2 id="the-necessity-of-shared-secret"><strong>The Necessity of (Shared) Secret</strong></h2>
+<h2 id="2-the-necessity-of-secret">2. The Necessity of Secret</h2>
 
 <p>Base on the initial assumption, Do Alice and Bob necessarily need secret in order to achieve their private communication? The answer is yes, the following arguments establish the necessity.</p>
 
@@ -162,14 +116,35 @@ If Alice doesn’t have a secret, then Alice should be no different from Eve, wh
   </li>
   <li>
     <p><strong>Bob must have a secret from Eve. In fact, Alice and Bob must share a secret $s$ not known to Eve.</strong><br />
-Since Eve has unbounded computational power, she can iterate (try) all the message $m$ and (possibly) other information $X$ used by Bob to produce $c$, which is the ciphertext sent by Bob. She can claim that the message $m$ she had tried so that $Enc(m, X)\rightarrow c$ is exactly the message sent by Bob. Why? <br />
-The reason is that, if otherwise Bob has sent a different $m^{\prime} \neq m$ and $Enc(m^\prime, X^\prime)=c$, (Here $X^\prime$ is not necessarily different from $X$. In fact X can be viewed as the same thing as $m$ plus $X$ together, so does $X^\prime$. They all represent the information Bob/Eve used to encrypt message) then how can Alice know which of $m$ and $m^\prime$ was sent by Bob? As we discussed above, Alice holds a secret $s$, which is a part of $m$ plus $X$ and enables her to differentiate $(m, X)$ and $(m^\prime, X^\prime)$. Also, Bob must know this secret in order to send his message (express his intention) correctly. On the other hand, Eve cannot distinguish $(m, X)$ and $(m, X^\prime)$ because of the lack of the secret key $s$.</p>
+Suppose Bob doesn’t have a secret, since Eve has unbounded computational power, she can iterate (try) all the message $m$ and other information $X$ used by Bob to produce $c$, which is the ciphertext sent by Bob. She can claim that the message $m$ she had tried so that $Enc(m, X)\rightarrow c$ is exactly the message sent by Bob. Why? <br />
+The reason is that, if otherwise there is a different $m^{\prime} \neq m$ such that $Enc(m^\prime, X^\prime)=c$, (Here $X^\prime$ is not necessarily different from $X$, as long as we have $(m, X) \neq (m^\prime, X)$) then how can Alice know which of $m$ and $m^\prime$ was sent by Bob? As we discussed above, Alice holds a secret $s$, which is a part of $m$ plus $X$ and enables her to differentiate $(m, X)$ and $(m^\prime, X^\prime)$. Also, Bob must know this secret in order to send his message (express his intention) correctly. On the other hand, Eve cannot distinguish $(m, X)$ and $(m, X^\prime)$ because of the lack of the secret key $s$.</p>
   </li>
 </ol>
 
-<h2 id="more-discussion"><strong>More Discussion</strong></h2>
-<p>In the lecture 1 notes we can see that the above initial assumptions give negative results. Shannon’s theorem says that perfect security against adversary with unbounded computational power requires that the secret $s$ has at least the same length as message communicated, which is not practical. (I think I also saw somewhere that secret sharing is expensive?).</p>
+<h2 id="3-perfect-security">3. Perfect Security</h2>
 
+<p>We formally define what we mean by a scheme is secure. Ideally, we want that the event Eve seeing the ciphertext $c$ does not increase her chance to guess the message $m$. We denote $M$ as the random variable of message, $C$ for ciphertext accordingly.</p>
+
+<p><strong>Definition 3.1 (Perfect Security)</strong> We say a system is secure if for any message $m$, $c = Enc_s(m)$ where $s$ is chosen uniformly at random. <script type="math/tex">\Pr(M=m) = \Pr(M=m\mid C=c)</script></p>
+
+<p>One-Time Pad (OTP) is a perfectly secure system.</p>
+
+<p><strong>Definition 3.2 (One-Time Pad)</strong> One-Time Pad is the the system $(Enc, Dec)$ where $Enc$ gets $c$ by XOR a random key $s$ with message $m$ and $Dec$ decrypts by XOR the same key $s$ with $c$:</p>
+
+<script type="math/tex; mode=display">Enc(m, s) = m\oplus s</script>
+
+<script type="math/tex; mode=display">Dec(c, s) = c\oplus s</script>
+
+<p><strong>Exercise.</strong> Prove that OTP is perfectly secure.</p>
+
+<p><strong>Discussion.</strong> <strong>1.</strong> Although OTP is perfectly secure, as its name suggests, the same key mustn’t be used twice. Indeed if we XOR $m \oplus s$ and $m^\prime \oplus s$ we get $m \oplus m^\prime$. <strong>2.</strong> In fact the following theorem due to Shannon says that perfect security under our initial assumptions requires that the secret $s$ has at least the same length as message communicated, which is not practical.</p>
+
+<p><strong>Theorem 3.1</strong>  (Shannon) For any perfectly secure system where Alice and Bob share a key $s$ from space $S$ assume messages $m$ are from space $M$, we must have $\mid S \mid \geq \mid M\mid$.</p>
+
+<p><strong>Proof</strong> 
+Fix any ciphertext $c$ and key $s$, since $Dec_s$ is deterministic, $c$  must be decrypted into at most message. Therefore, the number of possible one messages resulted from all $s\in S$, we denote by $A$, should satisfy $A\leq \mid S\mid$. On the other hand, we should have $A = \mid M\mid$. Otherwise for some $m$ $Pr[M=m \mid C=c] = 0$, which contradicts the perfect security.</p>
+
+<h2 id="4-more-discussion">4. More Discussion</h2>
 <p>In real world we may not want to assume Eve has unbounded computational power, because Eve is just a human being like us all! While Eve does have the ability to guess. We can now relax the assumption and assume Eve is in <em>Probabilistic Polynomial Time (PPT)</em>. This actually makes a big difference. Let’s re-examine the two necessity above.</p>
 
 <ol>
@@ -185,19 +160,340 @@ This may not hold as previous. Why? Because now Eve is bounded in PPT, she is no
 
 <p>In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may be shorter than message length (overcoming shannon’s barrier).</p>
 
+<h2 id="references">References</h2>
+
+<p>[1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf<br />
+[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf
+[3] Shafi Goldwasser, Mihir Bellare. Lecture Notes on Cryptography. https://cseweb.ucsd.edu/~mihir/papers/gb.pdf</p>
+
     
   </div>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2019/08/01/aw85/">
-        Aw85
+      <a href="/dpsurvey/">
+        差分隐私 Differential Privacy
       </a>
     </h1>
 
-    <span class="post-date">01 Aug 2019</span>
+    <span class="post-date">16 Oct 2019</span>
     
-      
+      <p>注：这篇文章的目的在于通过介绍问题背景与实例来使读者对差分隐私这一概念的建立直觉/初步的理解，并对它的数学定义进行讨论。由于时间关系，我们不对前沿的细节做深入的调研，只做简单地了解。</p>
+
+<h2 id="一问题背景">一、问题背景</h2>
+
+<p>在大数据时代，很多互联网公司将收集的用户使用信息或记录保存于数据库，并通过数据分析手段来提高用户的体验。 在这个过程中不可避免地就会出现隐私泄露的问题。数据集中可能包含有用户的医疗诊断信息，个人消费偏好等信息，个人的此类信息遭遇泄露的话，难免会被有心人利用并导致对个人不利的后果。</p>
+
+<p>一个比较典型的隐私泄露事件发生在06年的时候，Netflix（美国一家媒体服务提供商） 发起了一个有100万美金奖励的数据挖掘竞赛。 他们发布了一组关于用户浏览记录的数据集， 如果有人能通过这份数据集使他们的推荐系统的效能提高10%就可获得奖金。 当然，为了保护用户隐私，他们声称已经把包含用户ID的信息都删除以实现匿名化。 问题在于，这样是否真的已经将用户的信息隐藏起来？答案是否定的。来自 UT Austin 的 Arvind Narayanan 和 Vitaly Shmatikov 的工作[1]通过把已公布的数据库与 Internet Movie Database (IMDb) 结合起来，实现了一定程度反匿名化，暴露了用户的信息。</p>
+
+<p>可以举一个简单的例子来从直觉上解释怎么做到反匿名的过程: 假如有一个数据库 $A$，里面包含了一些用户的 性别，出生日期，邮政编码，或是在一段时间内看过某场电影，但没有姓名，身份证信息。而另外一个数据库 $B$ 里包含一些用户的姓名，性别，邮政编码，出生日期，医疗信息，住址。 这样，通过对比这两个公开的数据库（比如相同的邮编和出生日期），我们可以很容易地猜出 $B$ 中的哪些人对应 $A$ 中的哪些信息。这样的攻击我们称为<strong>链接攻击 (Linkage Attack)</strong>。</p>
+
+<p>另外一个例子解释攻击者可以通过不同的询问方式来问出私人信息。攻击者第一次进行这样的提问：“在2001年，P大学的大一新生有多少人家庭年收入35万以上？” 他得到准确答案是200。他接着提问：“在2002年， P大学的大二学生有多少人家庭年收入在35万以上？” 这次他得到答案是199。 于是他通过另外一种方式得知一名叫张知秋的同学在大二时退学了（比如查询在校学生表格）。 这样他可以得出结论：张知秋同学的家庭年收入在35万以上。这样的攻击我们称为<strong>差分攻击 (Differencing Attack)</strong>。</p>
+
+<p>差分隐私就是为了防止这样的攻击而提出，它的最终目的是使得数据分析者能对数据库进行<strong>隐私保护的数据分析(privacy-preserving data analysis)</strong>。在差分隐私机制中，我们希望通过对数据库返回的值进行一定的处理，从而使得返回结果具有一定的随机性，但大致保持一定的精确度。这样，就能防止攻击者通过对比不同的查询结果来获取<strong>个体</strong>的私人隐私。注意我们希望保护的是<strong>特定的某个个体</strong>的隐私，也就是说，对于任何的个体，他的隐私都不被泄露。</p>
+
+<h2 id="二差分隐私机制">二、差分隐私机制</h2>
+
+<p>为了解决隐私泄露的问题，差分隐私的概念由Dwork等人提出。从直觉上介绍，一个差分隐私机制掌控有一个数据库，接收用户的查询要求，根据要求返回一个统计数值。比如可以是这个数据库里带有某个性质的人的人数。 但返回精确的数值必定会导致隐私泄露，所以在差分隐私机制中我们引入随机性，使得每次机制返回的值不相同，但大致保持一定的准确度，从而达到隐私保护的作用。</p>
+
+<p>回到第一部分最后一个例子中，假如对于攻击者的第一次询问的回答是：198。那么攻击者会有这样的结论：大概有200个人年收入在35万以上。假如对于攻击者第二次询问的回答是：201。同样地，攻击者得到的结论是：大概有200个人年收入在35万以上。这样一来，他就没有办法进行差分攻击来获得某个个体的隐私信息。</p>
+
+<p>具体地说，差分隐私要求对于分析者（或以上的攻击者）的提问，根据数据库$A$概率性地输出一个结果，这个结果在基于数据库包含某个用户$i$的情况和不包含$i$的情况下是相似的。 等价地说，假如有两个数据库 $A$ 和 $A^\prime$ ，其中$A$包含$i$的信息，$A^\prime$不包含$i$的信息，那么我们的差分隐私机制接收提问者的问题，然后分别基于这两个数据库的所输出的结果是大致相似的。更通俗地说，特定的某个$i$在不在分析考虑范围内对差分隐私机制所输出的结果影响不大。接下来我们严格定义这一概念。</p>
+
+<h2 id="三定义">三、定义</h2>
+<p>我们定义数据集 $D$ 和 $D^\prime$ （$D,D^\prime\in \chi^n$， $\chi$为数据空间)为相邻数据集如果它们只在某一个位置不同。 如果它们在$k$个位置不同，我们称它们间的距离为$k$。</p>
+
+<p><strong>定义</strong> 我们设随机算法为 $M$，数据分析者的查询函数空间为 $Q$，$M$的输出空间为$Y$。我们说 $M$ 是 <strong>$\epsilon-$差分隐私</strong>的，如果对于任意两个相邻数据集 $D$ 和 $D^\prime$，查询函数$q\in Q$，以及 $Y$ 的子集 $S$，$M$ 满足</p>
+
+<script type="math/tex; mode=display">Pr[M(D)\in S]\leq e^\epsilon\cdot Pr[M(D^\prime)\in S]</script>
+
+<p><strong>讨论</strong> 在定义两个输出相接近时，为什么不使用<em>统计距离（statistical distance）</em>？ 也就是说，为什么不使用定义 $SD \left( M(D),M(D^\prime)\right)&lt;\epsilon$？</p>
+
+<p>我们分两种情况讨论使用统计距离的不合理性 —</p>
+<ol>
+  <li>设 $\epsilon&lt; \frac{1}{10n}$，那么对于原数据库 $D$ 以及任意不同的数据库 $D^\prime$（即使$D$与$D^\prime$之间的距离为$n$），$M(D)$ 与 $M(D^\prime)$ 的统计距离最多相差$n\cdot \frac{1}{10n}=\frac{1}{10}$。特别地，$M(D)$与$M(0^n)$的距离最多为$\frac{1}{10}$。 换句话说，基于任意两个数据集的分析结果差距都不大，那我们所收集的$D$的使用价值就不大。</li>
+  <li>设$\epsilon\geq\frac{1}{10n}$。考虑以下机制：以$\frac{1}{10}$的概率随机输出数据库的某行信息。可以验证这样的机制满足我们的定义。但这样的机制是不被允许的 （暴露了输出的那个<strong>个体</strong>的信息）。</li>
+</ol>
+
+<h2 id="四一个差分隐私机制的例子">四、一个差分隐私机制的例子</h2>
+
+<p>我们考虑计数查询函数<script type="math/tex">q\in Q:\chi^n \rightarrow \{0, 1\}</script> 并定义 $q(x) = \sum_i^{n} q(x_i)\ mod\ 2$， 考虑以下机制：</p>
+
+<script type="math/tex; mode=display">M(x,q) = q(x) + Lap(1/\epsilon)</script>
+
+<p>其中 $Lap(\lambda)$ 为拉普拉斯分布，其概率密度函数正比于$e^{-\mid y\mid /\lambda}$。我们证明$M$为<strong>$\epsilon-$差分隐私</strong>的。</p>
+
+<p><strong>证明</strong></p>
+
+<p>可以得到$[M(q,x)=y]$的概率密度函数正比于$e^{-\epsilon\mid y-q(x)\mid}$。 同样地，$[M(q,x^\prime)=y]$正比于$e^{-\epsilon\mid y-q(x^\prime)\mid}$。 由于$q(x)$与$q(x^\prime)$最多相差为1，因此将他们的概率密度函数相除，剩余因数大小为$e^\epsilon$，刚好满足$\epsilon-$差分隐私的要求。</p>
+
+<h2 id="五总结讨论">五、总结讨论</h2>
+
+<h3 id="缺点">缺点</h3>
+
+<p>差分隐私的缺点在于加入随机性会使数据的可用性下降，所以在保护隐私的同时对数据分析的结果有一定的影响，在实际应用中要在这两个因素中做权衡。</p>
+
+<h3 id="与计算复杂度">与计算复杂度</h3>
+
+<p>对如今大部分的差分隐私机制设计，我们都没有考虑复杂度假设。假如我们限制数据库的监护者（机制的设计者）的计算能力（比如多项式时间的计算能力），这样会使差分隐私的实现难度变大。特别地，在[3]中的第9章Dwork&amp;Roth给出了在存在复杂度假设的情况下，根据某一些计数查询函数，不能高效地生成有用的数据库的例子，有兴趣可进行查阅。</p>
+
+<h3 id="工业界应用情况">工业界应用情况</h3>
+
+<p>近期已经有一些业界企业将差分隐私应用于他们的业务中，比如Apple已经将差分隐私的技术用于使用机器学习改善用户体验的过程，具体报告可见此<a href="https://machinelearning.apple.com/2017/12/06/learning-with-privacy-at-scale.html">链接</a>。 另外，谷歌最近也有做此类尝试，<a href="https://arxiv.org/abs/1905.02249">链接</a>。</p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p>[1] Narayanan, Arvind, and Vitaly Shmatikov. “Robust de-anonymization of large sparse datasets.” Security and Privacy, 2008. SP 2008. IEEE Symposium on. IEEE, 2008.<br />
+[2] Dwork “Differential Privacy: A Survey of Results”. https://web.cs.ucdavis.edu/~franklin/ecs289/2010/dwork_2008.pdf<br />
+[3] Dwork and Roth “The Algorithmic Foundations
+of Differential Privacy”. https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf<br />
+[4] Vadhan “The Complexity of Differential Privacy” http://privacytools.seas.harvard.edu/files/privacytools/files/complexityprivacy_1.pdf</p>
+
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/glthm/">
+        Goldreich Levin Theorem
+      </a>
+    </h1>
+
+    <span class="post-date">04 Oct 2019</span>
+    
+      <p>In this blog we study and present the proof of Goldreich-Levin theorem. The main material we use is the  course notes of Prof. Luca Trevisan (see references at the end).</p>
+
+<p>The Goldreich-Levin Theorem has several interpretations. We will first explain and prove it from cryptographic view. Then we will see in fact it can also be viewed as list-decoding of Hadamard code.</p>
+
+<h2 id="background">Background</h2>
+<p>In this section we present necessary definitions and math inequalities we will be using. The first theorem is a variant of Markov inequality.</p>
+
+<p><strong>Theorem 1 (Markov Inequality, Variant)</strong> Suppose $X$ is a random variable in $[0, 1]$ and $0&lt;t&lt;E[X]$, then</p>
+
+<script type="math/tex; mode=display">Pr[X\geq t] \geq \frac{E[X]-t}{1-t}</script>
+
+<p><strong>Proof:</strong></p>
+
+<p>Let $S$ denote the set of $x$ such that $X(x)\geq t$, then</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} 
+E[X] &= \sum_{x\in S}Pr(x)X(x) + \sum_{x\not\in S}Pr(x)X(x)\\ 
+ &\leq \sum_{x\in S}Pr(x)\cdot 1 + \sum_{x\not\in S}Pr(x)\cdot t\\
+ &= Pr(S) + t\cdot (1-Pr(S))\\
+ &= (1-t)\cdot Pr(S) + t
+\end{align*} %]]></script>
+
+<p><strong>Theorem 2 (Chernoff Bound)</strong>  Suppose $X_1, \ldots, X_k$ are $0, 1$ <em>i.i.d</em> random variables and $ X = \sum_i^{k} X_i$, then for any $0&lt;\epsilon&lt;1$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+Pr[\ X>(1+\epsilon)E[X]\ ]<e^{-\frac{\epsilon^2}{3}\cdot E[X]} %]]></script>
+
+<script type="math/tex; mode=display">% <![CDATA[
+Pr[\ X<(1-\epsilon)E[X]\ ]<e^{-\frac{\epsilon^2}{3}\cdot E[X]} %]]></script>
+
+<p><strong>Theorem 3 (Chebyshev Inequality)</strong><br />
+Suppose $X= X_1 + \cdots + X_k$ where $X_1, \ldots ,X_k$ are $0, 1$ pairwise independent variables and $t&gt;0$, then</p>
+
+<script type="math/tex; mode=display">Pr[\mid X-E[X]\mid \geq t] \leq \frac{Var(X_1) + \cdots + Var(X_k)}{t^2}</script>
+
+<p>In particular, if for each $X_i$, $Pr[X_i = 1] \geq 1/2 + \epsilon$, then $Var(X_i)&lt;\frac{1}{4}$, therefore</p>
+
+<script type="math/tex; mode=display">Pr[\mid X-E[X]\mid \geq t] \leq \frac{Var(X_1) + \cdots + Var(X_k)}{t^2}\leq \frac{k}{4t^2}</script>
+
+<p><strong>Proof</strong></p>
+
+<p>Let $S$ be the set of $x$ such that $\mid X(x)-E[X]\mid \geq t$</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} 
+Var[X] &= \sum_x (X(x)-E[X])^2 \cdot Pr(x)\\
+ &= \sum_{x\in S}(X(x)-E[X])^2 \cdot Pr(x) + \sum_{x\not\in S}(X(x)-E[X])^2 \cdot Pr(x)\\
+ &\geq Pr(S)\cdot t^2 + 0
+\end{align*} %]]></script>
+
+<p>So</p>
+
+<script type="math/tex; mode=display">Pr(S) \leq \frac{Var[X]}{t^2}</script>
+
+<p>and</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*} 
+Var[X_1+X_2] &= E[(X_1+X_2)^2] - E(X_1+X_2)^2\\
+&= E[X_1^2] + 2E[X_1X_2] + E[X_2]^2 - E[X_1]^2 -2E[X_1]E[X_2] - E[X_2]^2\\
+&= Var[X_1]+Var[X_2]
+\end{align*} %]]></script>
+
+<p>this can be easily generalized to show $Var[X_1 + \cdots + X_k]= Var[X_1] + \cdots + Var[X_k]$</p>
+
+<p><strong>Definition 1 (Hard-Core Predicate)</strong> A boolean function <script type="math/tex">P: \{0, 1 \}^n \rightarrow \{0, 1\}</script> is $(t, \epsilon)$ - hard core for a permutation <script type="math/tex">f: \{0,1\}^n \rightarrow \{0,1\}^n</script> if for every algorithm $A$ of complexity $t$</p>
+
+<script type="math/tex; mode=display">\Pr_{x\sim \{0, 1\}^n}[A(f(x)) = P(x)]\leq \frac{1}{2}+\epsilon</script>
+
+<p>Note: we use <script type="math/tex">x\sim \{0, 1\}^n</script> to denote uniform distribution over <script type="math/tex">\{0, 1\}^n</script></p>
+
+<h2 id="goldreich-levin-theorem">Goldreich-Levin Theorem</h2>
+
+<p>We denote inner product modulo 2 using the following notation:</p>
+
+<script type="math/tex; mode=display">\langle x,r\rangle = \sum_i x_i\cdot r_i\ mod\ 2</script>
+
+<p>The Goldreich-Levin theorem says that a random XOR is hard-core for every one-way permutation. This means that if there is an efficient algorithm to predict $\langle x, r\rangle$, given $f(x)$ and $r$, then there is also an efficient algorithm to compute a pre-image of $f(x)$, so if $f(x)$ is a one-way function, we can invert it with noticeable probability.</p>
+
+<p><strong>Theorem 1 (Goldreich-Levin Theorem)</strong> <em>Suppose $A$ is an algorithm of complexity $t$ such that</em></p>
+
+<script type="math/tex; mode=display">\Pr_{x, r} [A(f(x),r)\ =\ \langle x ,r\rangle] \geq \frac{1}{2} + \epsilon</script>
+
+<p><em>Then there is an algorithm $A^\prime$ of complexity at most $O(t\epsilon^{-2}n^{O(1)})$ such that</em></p>
+
+<script type="math/tex; mode=display">\Pr_x[A^\prime(f(x)) = x] \geq \Omega(\epsilon)</script>
+
+<p>We will first prove a weak Goldreich-Levin algorithm, which will later be used in our proof of GL theorem.</p>
+
+<p><strong>Theorem 2 (Goldreich-Levin Algorithm Weak Version)</strong> <em>Suppose there is a function $H$ such that, for some $x$</em></p>
+
+<script type="math/tex; mode=display">\Pr_r[H(r)\ =\ \langle x,r\rangle]\ \geq \frac{3}{4} + \epsilon</script>
+
+<p><em>Then there is an algorithm $GLW$ that can output $x$ with high probability ( $\geq 1-\frac{1}{n}$ ).</em></p>
+
+<p>Let’s first see how an easy algorithm can find $x$ when the probability on the right side is 1 in the above (so that $H(r)$ outputs $\langle x,r\rangle$ correctly).</p>
+
+<p>Let $e_i$ denote the vector in which the $i$th bit is 1 and 0 otherwise. $x_i = H(e_i) = \langle x, e_i \rangle$. Then we can output $x$ by enumerating all the $e_i$.</p>
+
+<p>Now to prove Theorem 2, note that $H(r)$ fails with small probability, we’ll use the majority vote method. Intuitively,  we randomly sample several points $r_1 \ldots r_k$. Let $H^\prime_{r_1 \ldots r_k}(e_i)$ be the function that take the majority of  $H(r_j+e_i) - H(r_j)$ on these $r_j$s. The observation is that if $H(r)$ computes $\langle x, r\rangle$ correctly, then we have:</p>
+
+<script type="math/tex; mode=display">\langle x, r_j+e_i \rangle - \langle x, r_j \rangle = \langle x, e_i\rangle</script>
+
+<p>We now bound the probability that $H(r_j + e_i) - H(r_j)$ fails.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+  Pr[H(r_j + e_i) - H(r_i) \neq  \langle x, e_i\rangle] &= Pr[H(r_j + e_i) \neq \langle x, r_j+e_i \rangle\ \cup H(r_j) \neq \langle x, r_j \rangle]\\
+  &\leq Pr[H(r_j + e_i) \neq \langle x, r_j+e_i \rangle]\ + Pr[H(r_j) \neq \langle x, r_j \rangle]\\
+  &\leq \frac{1}{4} - \epsilon + \frac{1}{4} - \epsilon\\
+  &\leq \frac{1}{2} - 2\epsilon
+ \end{align*} %]]></script>
+
+<p>The GLW algorithm is as follows:</p>
+
+<ul>
+  <li>GLW Algorithm:</li>
+  <li>for $i= 1, 2, \ldots , n$:
+    <ul>
+      <li>for $j = 1, 2, \ldots , 4\log n/ \epsilon^2$:
+        <ul>
+          <li>randomly sample <script type="math/tex">r_j\in \{0, 1\}^n</script></li>
+          <li>compute $H(r_j + e_i) - H(r_j)$</li>
+        </ul>
+      </li>
+      <li>compute <script type="math/tex">x_i = H^\prime_{r_1 \ldots r_k}(e_i) = Majority\{H(r_j + e_i) - H(r_j): j = 1, 2, \ldots , 4\log n/ \epsilon^2 \}</script></li>
+    </ul>
+  </li>
+  <li>return $x$</li>
+</ul>
+
+<p>Now we analyze this algorithm. Since each $H(r_j + e_i) - H(r_j)$ outputs the correct answer with probability at least $1/2 + 2\epsilon$. By the Chernoff Bound (Theorem 2 in Background), the probability that the majority function $H^\prime_{r_1 \ldots r_k}(e_i)$ fails to output $x_i$ is at most $e^{-2\log n} = O(\frac{1}{n^2})$. Then the union bound gives us that GLW outputs $x$ correctly with probability at least $1-1/n$. The algorithm runs in time $O(\frac{n^2 \log n}{\epsilon^2})$, makes $O(\frac{n\log n}{\epsilon^2})$ queries to $H$.</p>
+
+<p><strong>Discussion.</strong> The above framework only works for cases where $\Pr_r[H(r) = \langle x, r \rangle]$ greater than $\frac{3}{4}$. For the case in Goldreich-Levin theorem where $H(r)$ makes more error,the union bound gives probability less than $1/2$ and the Chernoff Bound won’t work. In fact, it is possible to construct a function $H$ such that $Pr[H(r) = \langle x, r\rangle] = 3/4$ and $Pr[H(r) = \langle x^\prime, r\rangle] = 3/4$ where $x \neq x^\prime$. So no algorithm can guarantee to find the correct $x$ when given such $H$, since $x$ is not uniquely defined by $H$. However, the Goldreich-Levin theorem tells us how to find a list of possible candidates of $x$ with good probability. We present their algorithm below.</p>
+
+<p>We proceed to prove the Goldreich-Levin Theorem.</p>
+
+<p>Given (as in the Goldreich-Levin theorem) $\Pr_{x, r} [A(f(x),r)\ =\ \langle x ,r\rangle] \geq \frac{1}{2} + \epsilon$, we first show that there is a certain fraction of $x$,  $\Pr_r[A(f(x), r) = \langle x, r \rangle] \geq \frac{1}{2} + \frac{1}{2}\epsilon$ holds, and we call such $x$ “good” :</p>
+
+<p><script type="math/tex">\Pr_{x, r} [A(f(x),r)\ =\ \langle x ,r\rangle]</script> can be viewed as <script type="math/tex">\sum_x Pr(x)\Pr_r[A(f(x),r)\ =\ \langle x ,r\rangle]</script>,  which is equal to the expectation <script type="math/tex">E_x[\ \Pr_r[A(f(x),r)\ =\ \langle x ,r\rangle]\ ]</script> ( so we view <script type="math/tex">\Pr_r[A(f(x),r)\ =\ \langle x ,r\rangle]</script> as a random variable of $x$). Now we have the expectation is greater than $1/2 + \epsilon$, by the Markov ineuality (Theorem 1 in background) we have:</p>
+
+<script type="math/tex; mode=display">\Pr_x \left[\ \Pr[A(f(x),r)\ =\ \langle x ,r\rangle ]\geq \frac{1}{2} + \frac{1}{2}\epsilon\ \right]\geq \frac{\frac{1}{2}\epsilon}{\frac{1}{2}-\frac{1}{2}\epsilon}\geq \frac{\epsilon}{2}</script>
+
+<p>So at least $\frac{\epsilon}{2}$ of $x$ are good. On these good $x$, we prove the GL algorithm:</p>
+
+<p><strong>Theorem 3 (Goldreich-Levin Algorithm)</strong>
+<em>Suppose there is a function $H$ such that, for some $x$:</em></p>
+
+<script type="math/tex; mode=display">\Pr_r[H(r) = \langle x, r \rangle] \geq \frac{1}{2} + \epsilon</script>
+
+<p><em>Then there is an algorithm GL outputs a list $L$ of candidates of $x$, such that $L$ is of size $O(\epsilon^{-2})$ and $x\in L$ with probability  at least $1/2$. The GL algorithm runs in time $O(n^2 \epsilon^{-4} \log n)$, makes $O(n\epsilon^{-4}\log n)$ queries to $H$.</em></p>
+
+<p>As discussed above, we now don’t have $H(r)$ that predicts $\langle x, r \rangle$ well, so $H(r+r_j) - H(r_j)$ fails to predict $\langle x, r \rangle$ with high probability ($ &gt; 1/2$). However, let’s make an assumption that, instead of $H(r_j)$, we get the correct $\langle x, r_j \rangle$ for every $j$, so now $H(r+r_j) - \langle x, r_j \rangle$ succeeds with probability at least $1/2 + \epsilon$. We do an error reduction by taking $k= O(\frac{1}{\epsilon^2})$ samples of $r_j$, then apply the majority vote method. Thus we can reduce the probability to match that in Theorem 2 and apply the GLW algorithm to find $x$.   <br />
+Moreover, since we dont’ know the correct $\langle x, r_j \rangle$, we just enumerate all the possible values of it, which gives the following (inefficient) algorithm:</p>
+
+<ul>
+  <li>Inefficient GL algorithm:</li>
+  <li>randomly sample <script type="math/tex">r_1, \ldots, r_k \in \{0, 1\}^n</script> where $k =  O(\frac{1}{\epsilon^2})$</li>
+  <li>for <script type="math/tex">b_1, \ldots, b_k \in \{0, 1\}</script> (each $b_j$ corresponds to a possible value of $\langle x, r_j \rangle$) :
+    <ul>
+      <li>let <script type="math/tex">H^\prime_{r_1 \ldots r_k}(r) :=  Majority\{H(r_j + r) - b_j: j = 1, 2, \ldots, k \}</script></li>
+      <li>run GLW algorithm in Theorem 2, using $H^\prime_{r_1 \ldots r_k}(r)$ instead of $H(r)$, outputs $x$</li>
+      <li>add $x$ to list $L$</li>
+    </ul>
+  </li>
+  <li>return $L$</li>
+</ul>
+
+<p><em>Analysis:</em>  By the Chernoff Bound we have, on the correct $b_j$’s,</p>
+
+<script type="math/tex; mode=display">\Pr_{r,r_1,\ldots, r_k}[H^\prime_{r_1 \ldots r_k}(r) = \langle x, r\rangle]\geq 1-o(1)\geq 1-\frac{1}{32}</script>
+
+<p>It follow by the Markov Inequality that</p>
+
+<script type="math/tex; mode=display">\Pr_{r_1, \ldots, r_k}[\Pr_r[H^\prime_{r_1 \ldots r_k}(r) = \langle x, r\rangle] > \frac{3}{4}]> \frac{31}{32}</script>
+
+<p>By the GLW algorithm, with probability at least $\frac{31}{32} - \frac{1}{n} &gt; \frac{1}{2}$, $x$ is in the list.</p>
+
+<p><strong>Discussion.</strong> The above algorithm is inefficient in that the size of $L$ is $2^k$, which is exponential in $k$, the GL algorithm below reduces this using pairwise independence.</p>
+
+<ul>
+  <li>GL algorithm:</li>
+  <li>Randomly sample <script type="math/tex">r_1, \ldots, r_k \in \{0, 1\}^n</script> where $k =  O(\log \frac{1}{\epsilon^2})$</li>
+  <li>for each subset <script type="math/tex">S\subseteq \{r_1, \ldots, r_k\}</script>, define $r_S = \sum_{i\in S} r_i$</li>
+  <li>for all <script type="math/tex">b_1 \ldots, b_k \in \{0, 1\}</script>:
+    <ul>
+      <li>define $b_S = \sum_{i\in S} b_i$</li>
+      <li>define <script type="math/tex">H^\prime(r) :=  Majority\{H(r_S + r) - b_S: S\subseteq \{r_1, \ldots, r_k\} \}</script></li>
+      <li>run GLW algorithm in Theorem 2, using $H^\prime(r)$ instead of $H(r)$, outputs $x$</li>
+      <li>add $x$ to list $L$</li>
+    </ul>
+  </li>
+  <li>return $L$</li>
+</ul>
+
+<p>Now we analyze this GL algorithm. Since $r_1, \ldots, r_k$ are randomly picked, for any two different sets $S$ and $T$, $r_S$ and $r_T$ are pairwise independent, therefore $H(r_S+r) - b_S$ and $H(r_T+r) - b_T$ are pairwise independent. In addition, on the correct $b_S$, $H(r_S+r) - b_S = \langle x, r \rangle$ with probability at least $1/2 + \epsilon$. By the Chebyshev Ineuqality (Theorem 3 in background), $H^\prime(r)$ outputs the wrong value with probability at most $\frac{1}{4\epsilon^2 \cdot 2^{k}}$ where $k=O(\log \frac{8}{\epsilon^2})$, so the probability is at most $\frac{1}{32}$. Given such $H^\prime(r)$ the GLW algorithm will work well. <br />
+The running time of GL algorithm is $O(n^2 \log n \cdot \epsilon^{-4})$, it makes$O(n^2\log n\cdot \epsilon^{-4})$ queries to $H$ and outputs a list $L$ of size $O(\frac{1}{\epsilon^2})$. $x$ is in $L$ with probability greater than $1/2$.</p>
+
+<p><strong>Finalizing the proof.</strong> Since we have at least $\epsilon/2$ fraction of good $x$, combinging this with the GL algorithm we can conclude that with probability at least $\epsilon /4$ $x$ is in the list $L$. We can check $x$ by evaluating $f(x)$ to see if it equals our input $y$.</p>
+
+<h2 id="references">References</h2>
+<p>Lecture Notes 11, 12 of Luca Trevisan’s Spring 2009 Cryptography Courses, see this <a href="https://people.eecs.berkeley.edu/~luca/cs276/#notes">Link</a>.</p>
+
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/ProofOfUndo/">
+        Argument of Correctness of Undo Implementation
+      </a>
+    </h1>
+
+    <span class="post-date">12 Aug 2019</span>
+    
+      <p>Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. In case the recuiter might be interested, I’d like to provide a proof here that my idea of implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>Undo is the operation that can undo the user’s last $n$ operation(inserting/deleting characters).</p>
+
+<p>The difficulty lies in how can one keep track of the original position of the characters deleted. Well, in my implementation, nothing else is needed: just remove the node(which contains a character) and put it into a stack.</p>
+
+<p>The data strucutre I used for text editor is a doubly linked list, each node has a value contains the specific character, and a <strong>prev</strong> pointer to the previous character node and a <strong>next</strong> pointer to the next character node. Visualized as following:</p>
+
+<div>$$a\leftarrow s \rightarrow b$$  </div>
+
+<p>To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: <strong>what if when (the deleted) $s$ is to recover, its previous nodes a or b are not in the data structure, i.e. a and b haven’t been recovered</strong>. Therefore we can’t find its position. While I argue that this will not happen.</p>
+
+<h2 id="the-argument">The Argument</h2>
+<p>I’d like to show the following: <strong>when $s$ is to recover, its previous or next nodes must exist in the data structure</strong>, which is a simple argument by contradiction:<br />
+Suppose for the contradiction that $a$ and $b$ are not in the data structure, then $a$ and $b$ must be deleted before $s$ is deleted. However, in this case, by the time $s$ is deleted, its <strong>prev</strong> and <strong>next</strong> cannot be $a$ and $b$, which is a contradiction.</p>
+
 
     
   </div>

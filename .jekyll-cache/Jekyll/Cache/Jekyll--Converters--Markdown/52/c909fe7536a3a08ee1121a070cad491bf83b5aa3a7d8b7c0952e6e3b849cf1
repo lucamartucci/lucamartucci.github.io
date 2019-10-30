@@ -1,72 +1,4 @@
-<!DOCTYPE html>
-<html lang="en-us">
-
-  <head>
-  <link href="https://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  <title>
-    
-      Derandomizing Log Space vs. Fooling Log Space &middot; Jiyu Zhang
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="/public/favicon.ico">
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
-   <script type="text/x-mathjax-config">
-     MathJax.Hub.Config({
-       tex2jax: {
-         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-         processEscapes: true
-       }
-     });
-   </script>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-</head>
-
-
-  <body class="theme-base-0d">
-
-    <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <h1>
-        <a href="/">
-          Jiyu Zhang
-        </a>
-      </h1>
-      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a class="sidebar-nav-item active" href="/">About Me</a>
-      <a class="sidebar-nav-item" href="/blog/">Blog</a>
-      <a class="sidebar-nav-item" href="/Links/">Links</a>
-    </nav>
-
-    <p>&copy; 2019. All rights reserved.</p>
-  </div>
-</div>
-
-
-    <div class="content container">
-      <p>上周的ToC reading group上讲到了最近的一篇ITCS paper [CHLT18]，主要是讲怎么通过bound一类方程的second-level fourier tail， 构建对于那个function family的PRG(Pseudorandom Generator)。 特别地，通过这篇paper的一个猜想（conjecture），我们可以得到AC[$\oplus$]的PRG。 在meeting上，Michael就问了AC[$\oplus$]是不是在BPL里，原因是我们知道怎么构建对于BPL的PRG(而且并不optimal，且仅仅是nonuniformly），但我们好像不知道怎么去fool所有的log space 的计算（实际上应该是L/poly)，而AC[$\oplus$]看起来是不像是在BPL里面的。因为之前对pseudorandomness for space-bounded computation了解还比较少，于是我也就找了一些相关的笔记看，这次就主要是想写下derandomizing BPL 和 fooling log space的区别。</p>
+I"�<p>上周的ToC reading group上讲到了最近的一篇ITCS paper [CHLT18]，主要是讲怎么通过bound一类方程的second-level fourier tail， 构建对于那个function family的PRG(Pseudorandom Generator)。 特别地，通过这篇paper的一个猜想（conjecture），我们可以得到AC[$\oplus$]的PRG。 在meeting上，Michael就问了AC[$\oplus$]是不是在BPL里，原因是我们知道怎么构建对于BPL的PRG(而且并不optimal，且仅仅是nonuniformly），但我们好像不知道怎么去fool所有的log space 的计算（实际上应该是L/poly)，而AC[$\oplus$]看起来是不像是在BPL里面的。因为之前对pseudorandomness for space-bounded computation了解还比较少，于是我也就找了一些相关的笔记看，这次就主要是想写下derandomizing BPL 和 fooling log space的区别。</p>
 
 <h2 id="fooling-log-space"><strong>Fooling log space</strong></h2>
 <p>当我们说fooling log space的时候， 实际上是指fooling L/poly。首先我们来看看什么是L/poly。回想我们定义P/poly的一个目的是想用一个combinatorial model，也就是 circuits 来 non-uniformly 模拟多项式时间(polynomial time)内对于每个输入长度n有poly(n)长度的advice的图灵机。这个circuit有多项式长度的描述（polynomial size description），也就相当于是一个图灵机有了多项式长度的advice，所以才写作P/poly。那么类似地，我们想用一个有多项式长度的描述的 combinatorial model 来模拟 log space的图灵机的计算并把它记作L/poly。这次我们用的model是branching program。首先回忆一下 log space的图灵机是怎么运行的：我们有一个只读（read-only)的输入带（input tape)，还有一个可以读写（read-write）的只有log长度的工作带（work tape），和一个write-only的 output tape。对于一个长度为n的input，log space的图灵机可以在input tape 上来回读取输入，然后在 $\log n$ space的work tape上进行计算，最后在output tape上输出结果。能被这种图灵机计算的complexity class我们称之为 L。注意在这个计算过程中图灵机的每一步计算的格局（configuration)都可以由它的 1.读取头在input tape上的位置 2.work tape上的内容 3.读取头里的状态 这三个元素组成的triple表示。接下来我们定义 branching program 并展示它怎么模拟 log space 的图灵机的计算。</p>
@@ -93,8 +25,4 @@
 
 <p>David Zuckerman. Lecture Notes of Pseudorandomness and Combinatorial Constructions (CS 395T), http://www.cs.utexas.edu/~diz/395T/01/</p>
 
-
-    </div>
-
-  </body>
-</html>
+:ET
