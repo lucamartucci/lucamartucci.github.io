@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Jiyu Zhang</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2019-10-30T19:24:33+08:00</updated>
- <id>http://localhost:4000</id>
+ <link href="http://hyde.getpoole.com/atom.xml" rel="self"/>
+ <link href="http://hyde.getpoole.com/"/>
+ <updated>2019-10-30T19:27:32+08:00</updated>
+ <id>http://hyde.getpoole.com</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
@@ -14,18 +14,18 @@
  
  <entry>
    <title>Intro to Cryptography 02:One Way Functions</title>
-   <link href="http://localhost:4000/CryptoLec02/"/>
+   <link href="http://hyde.getpoole.com/CryptoLec02/"/>
    <updated>2019-10-30T00:00:00+08:00</updated>
-   <id>http://localhost:4000/LearnCrypto02</id>
+   <id>http://hyde.getpoole.com/LearnCrypto02</id>
    <content type="html">&lt;p&gt;In this note we mainly discuss common cryptographic primitives: one-way functions (OWF), one-way permutations (OWP) and trapdoor functions (TDP).&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>Intro to Cryptography 01</title>
-   <link href="http://localhost:4000/CryptoLec01/"/>
+   <link href="http://hyde.getpoole.com/CryptoLec01/"/>
    <updated>2019-10-29T00:00:00+08:00</updated>
-   <id>http://localhost:4000/LearnCrypto01</id>
+   <id>http://hyde.getpoole.com/LearnCrypto01</id>
    <content type="html">&lt;p&gt;I’m starting to study cryptography and would like to make some summary notes. I’ll mainly follow Yevgeniy Dodis’ notes at this &lt;a href=&quot;https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html&quot;&gt;link&lt;/a&gt;. Additionally, I also refer to other great notes such as [1][2][3] to cover additional discussions.&lt;/p&gt;
 
 &lt;p&gt;These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct some proofs to complete originally omitted parts.&lt;/p&gt;
@@ -107,9 +107,9 @@ This may not hold as previous. Why? Because now Eve is bounded in PPT, she is no
  
  <entry>
    <title>差分隐私 Differential Privacy</title>
-   <link href="http://localhost:4000/dpsurvey/"/>
+   <link href="http://hyde.getpoole.com/dpsurvey/"/>
    <updated>2019-10-16T00:00:00+08:00</updated>
-   <id>http://localhost:4000/DPsurvey</id>
+   <id>http://hyde.getpoole.com/DPsurvey</id>
    <content type="html">&lt;p&gt;注：这篇文章的目的在于通过介绍问题背景与实例来使读者对差分隐私这一概念的建立直觉/初步的理解，并对它的数学定义进行讨论。由于时间关系，我们不对前沿的细节做深入的调研，只做简单地了解。&lt;/p&gt;
 
 &lt;h2 id=&quot;一问题背景&quot;&gt;一、问题背景&lt;/h2&gt;
@@ -185,9 +185,9 @@ of Differential Privacy”. https://www.cis.upenn.edu/~aaroth/Papers/privacybook
  
  <entry>
    <title>Goldreich Levin Theorem</title>
-   <link href="http://localhost:4000/glthm/"/>
+   <link href="http://hyde.getpoole.com/glthm/"/>
    <updated>2019-10-04T00:00:00+08:00</updated>
-   <id>http://localhost:4000/glthm</id>
+   <id>http://hyde.getpoole.com/glthm</id>
    <content type="html">&lt;p&gt;In this blog we study and present the proof of Goldreich-Levin theorem. The main material we use is the  course notes of Prof. Luca Trevisan (see references at the end).&lt;/p&gt;
 
 &lt;p&gt;The Goldreich-Levin Theorem has several interpretations. We will first explain and prove it from cryptographic view. Then we will see in fact it can also be viewed as list-decoding of Hadamard code.&lt;/p&gt;
@@ -396,9 +396,9 @@ The running time of GL algorithm is $O(n^2 \log n \cdot \epsilon^{-4})$, it make
  
  <entry>
    <title>Argument of Correctness of Undo Implementation</title>
-   <link href="http://localhost:4000/ProofOfUndo/"/>
+   <link href="http://hyde.getpoole.com/ProofOfUndo/"/>
    <updated>2019-08-12T00:00:00+08:00</updated>
-   <id>http://localhost:4000/ProofOfUndo</id>
+   <id>http://hyde.getpoole.com/ProofOfUndo</id>
    <content type="html">&lt;p&gt;Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. In case the recuiter might be interested, I’d like to provide a proof here that my idea of implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.&lt;/p&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
@@ -421,9 +421,9 @@ Suppose for the contradiction that $a$ and $b$ are not in the data structure, th
  
  <entry>
    <title>Derandomizing Log Space vs. Fooling Log Space</title>
-   <link href="http://localhost:4000/derandlogspace/"/>
+   <link href="http://hyde.getpoole.com/derandlogspace/"/>
    <updated>2019-01-25T00:00:00+08:00</updated>
-   <id>http://localhost:4000/derandlogspace</id>
+   <id>http://hyde.getpoole.com/derandlogspace</id>
    <content type="html">&lt;p&gt;上周的ToC reading group上讲到了最近的一篇ITCS paper [CHLT18]，主要是讲怎么通过bound一类方程的second-level fourier tail， 构建对于那个function family的PRG(Pseudorandom Generator)。 特别地，通过这篇paper的一个猜想（conjecture），我们可以得到AC[$\oplus$]的PRG。 在meeting上，Michael就问了AC[$\oplus$]是不是在BPL里，原因是我们知道怎么构建对于BPL的PRG(而且并不optimal，且仅仅是nonuniformly），但我们好像不知道怎么去fool所有的log space 的计算（实际上应该是L/poly)，而AC[$\oplus$]看起来是不像是在BPL里面的。因为之前对pseudorandomness for space-bounded computation了解还比较少，于是我也就找了一些相关的笔记看，这次就主要是想写下derandomizing BPL 和 fooling log space的区别。&lt;/p&gt;
 
 &lt;h2 id=&quot;fooling-log-space&quot;&gt;&lt;strong&gt;Fooling log space&lt;/strong&gt;&lt;/h2&gt;
@@ -456,9 +456,9 @@ Suppose for the contradiction that $a$ and $b$ are not in the data structure, th
  
  <entry>
    <title>Zero-Knowledge Proofs:Definitions and Variants</title>
-   <link href="http://localhost:4000/zkdefvar/"/>
+   <link href="http://hyde.getpoole.com/zkdefvar/"/>
    <updated>2019-01-04T00:00:00+08:00</updated>
-   <id>http://localhost:4000/zkdefvar</id>
+   <id>http://hyde.getpoole.com/zkdefvar</id>
    <content type="html">&lt;p&gt;Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and its variants. &lt;br /&gt;
 最近在看一些密码学的论文，对其中&lt;strong&gt;零知识证明(zero-knowledge proofs)&lt;/strong&gt;这个重要的概念很感兴趣，就把相关的笔记（notes）都看了一遍，打算把定义方面的理解以及变体的问题总结下来。&lt;/p&gt;
 
