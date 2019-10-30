@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-10-30T18:27:14+08:00</updated>
+ <updated>2019-10-30T19:24:33+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -22,11 +22,13 @@
  </entry>
  
  <entry>
-   <title>Intro to Cryptography Lecture 1</title>
+   <title>Intro to Cryptography 01</title>
    <link href="http://localhost:4000/CryptoLec01/"/>
    <updated>2019-10-29T00:00:00+08:00</updated>
    <id>http://localhost:4000/LearnCrypto01</id>
-   <content type="html">&lt;p&gt;I’m starting to study cryptography by following Yevgeniy Dodis’ notes at this &lt;a href=&quot;https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html&quot;&gt;link&lt;/a&gt;, and would like to make some summary notes. The notes will mostly focus on proofs. I will also use other material as references [1][2][3] in order to make notes about additional details.&lt;/p&gt;
+   <content type="html">&lt;p&gt;I’m starting to study cryptography and would like to make some summary notes. I’ll mainly follow Yevgeniy Dodis’ notes at this &lt;a href=&quot;https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html&quot;&gt;link&lt;/a&gt;. Additionally, I also refer to other great notes such as [1][2][3] to cover additional discussions.&lt;/p&gt;
+
+&lt;p&gt;These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct some proofs to complete originally omitted parts.&lt;/p&gt;
 
 &lt;h2 id=&quot;1-the-basic-scenario-in-cryptography&quot;&gt;1. The Basic Scenario in Cryptography&lt;/h2&gt;
 
@@ -98,7 +100,7 @@ This may not hold as previous. Why? Because now Eve is bounded in PPT, she is no
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
 &lt;p&gt;[1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf&lt;br /&gt;
-[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf
+[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf&lt;br /&gt;
 [3] Shafi Goldwasser, Mihir Bellare. Lecture Notes on Cryptography. https://cseweb.ucsd.edu/~mihir/papers/gb.pdf&lt;/p&gt;
 </content>
  </entry>
