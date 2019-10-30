@@ -1,10 +1,14 @@
 ---
 layout: default
 permalink: /CryptoLec01/
-title: Intro to Cryptography Lecture 1
+title: Intro to Cryptography 01
 tags: Cryptography
 ---
-I'm starting to study cryptography by following Yevgeniy Dodis' notes at this [link](https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html), and would like to make some summary notes. The notes will mostly focus on proofs. I will also use other material as references [1][2][3] in order to make notes about additional details.
+I'm starting to study cryptography and would like to make some summary notes. I'll mainly follow Yevgeniy Dodis' notes at this [link](https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html). Additionally, I also refer to other great notes such as [1][2][3] to cover additional discussions.
+  
+These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct some proofs to complete originally omitted parts.  
+
+
 
 
 ## 1. The Basic Scenario in Cryptography
@@ -66,5 +70,5 @@ In summary, two things might be improved from the relaxation of assumptions. Fir
 ## References
 
 [1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf  
-[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf
+[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf  
 [3] Shafi Goldwasser, Mihir Bellare. Lecture Notes on Cryptography. https://cseweb.ucsd.edu/~mihir/papers/gb.pdf
