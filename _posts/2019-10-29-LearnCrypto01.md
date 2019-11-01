@@ -4,11 +4,15 @@ permalink: /CryptoLec01/
 title: Intro to Cryptography 01
 tags: Cryptography
 ---
-I'm starting to study cryptography and would like to make some summary notes. I'll mainly follow Yevgeniy Dodis' notes at this [link](https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html). Additionally, I also refer to other great notes such as [1][2][3] to cover additional discussions.
+I'm starting to study cryptography and would like to make some notes. I'll mainly follow Yevgeniy Dodis' notes at this [link](https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html). Additionally, I also refer to other great notes in the following to cover more discussions.
   
-These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct some proofs to complete originally omitted parts.  
+These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct proofs to complete originally omitted proofs.  
 
-
+[1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf  
+[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf  
+[3] Shafi Goldwasser, Mihir Bellare. Lecture Notes on Cryptography. 
+https://cseweb.ucsd.edu/~mihir/papers/gb.pdf  
+[4] Oded Goldreich. Foundation of Cryptography. 
 
 
 ## 1. The Basic Scenario in Cryptography
@@ -52,7 +56,7 @@ $$Dec(c, s) = c\oplus s $$
 
 **Theorem 3.1**  (Shannon) For any perfectly secure system where Alice and Bob share a key $s$ from space $S$ assume messages $m$ are from space $M$, we must have $\mid S \mid \geq \mid M\mid$.   
 
-**Proof** 
+**Proof.** 
 Fix any ciphertext $c$ and key $s$, since $Dec_s$ is deterministic, $c$  must be decrypted into at most message. Therefore, the number of possible one messages resulted from all $s\in S$, we denote by $A$, should satisfy $A\leq \mid S\mid$. On the other hand, we should have $A = \mid M\mid$. Otherwise for some $m$ $Pr[M=m \mid C=c] = 0$, which contradicts the perfect security.
 
 
@@ -67,8 +71,3 @@ This may not hold as previous. Why? Because now Eve is bounded in PPT, she is no
 
 In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may be shorter than message length (overcoming shannon's barrier). 
 
-## References
-
-[1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf  
-[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf  
-[3] Shafi Goldwasser, Mihir Bellare. Lecture Notes on Cryptography. https://cseweb.ucsd.edu/~mihir/papers/gb.pdf

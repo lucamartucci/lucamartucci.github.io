@@ -13,5 +13,5 @@ I also find the following topics interesting and hope to explore them in the fut
 
 Five [worlds](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.678.8930&rep=rep1&type=pdf) by Impagliazzo.  
 Computational Complexity and Philosophy (see [this](https://www.scottaaronson.com/papers/philos.pdf))   
-[Lens](https://www.ias.edu/ideas/2014/lens-of-computation-workshop) of Computation on the Scieces.
+[Lens](https://www.ias.edu/ideas/2014/lens-of-computation-workshop) of Computation on the Sciences.
 

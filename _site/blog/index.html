@@ -92,9 +92,15 @@
 
     <span class="post-date">29 Oct 2019</span>
     
-      <p>I’m starting to study cryptography and would like to make some summary notes. I’ll mainly follow Yevgeniy Dodis’ notes at this <a href="https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html">link</a>. Additionally, I also refer to other great notes such as [1][2][3] to cover additional discussions.</p>
+      <p>I’m starting to study cryptography and would like to make some notes. I’ll mainly follow Yevgeniy Dodis’ notes at this <a href="https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html">link</a>. Additionally, I also refer to other great notes in the following to cover more discussions.</p>
 
-<p>These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct some proofs to complete originally omitted parts.</p>
+<p>These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct proofs to complete originally omitted proofs.</p>
+
+<p>[1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf<br />
+[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf<br />
+[3] Shafi Goldwasser, Mihir Bellare. Lecture Notes on Cryptography. 
+https://cseweb.ucsd.edu/~mihir/papers/gb.pdf<br />
+[4] Oded Goldreich. Foundation of Cryptography.</p>
 
 <h2 id="1-the-basic-scenario-in-cryptography">1. The Basic Scenario in Cryptography</h2>
 
@@ -144,7 +150,7 @@ The reason is that, if otherwise there is a different $m^{\prime} \neq m$ such t
 
 <p><strong>Theorem 3.1</strong>  (Shannon) For any perfectly secure system where Alice and Bob share a key $s$ from space $S$ assume messages $m$ are from space $M$, we must have $\mid S \mid \geq \mid M\mid$.</p>
 
-<p><strong>Proof</strong> 
+<p><strong>Proof.</strong> 
 Fix any ciphertext $c$ and key $s$, since $Dec_s$ is deterministic, $c$  must be decrypted into at most message. Therefore, the number of possible one messages resulted from all $s\in S$, we denote by $A$, should satisfy $A\leq \mid S\mid$. On the other hand, we should have $A = \mid M\mid$. Otherwise for some $m$ $Pr[M=m \mid C=c] = 0$, which contradicts the perfect security.</p>
 
 <h2 id="4-more-discussion">4. More Discussion</h2>
@@ -163,94 +169,6 @@ This may not hold as previous. Why? Because now Eve is bounded in PPT, she is no
 
 <p>In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may be shorter than message length (overcoming shannon’s barrier).</p>
 
-<h2 id="references">References</h2>
-
-<p>[1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf<br />
-[2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf<br />
-[3] Shafi Goldwasser, Mihir Bellare. Lecture Notes on Cryptography. https://cseweb.ucsd.edu/~mihir/papers/gb.pdf</p>
-
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/dpsurvey/">
-        差分隐私 Differential Privacy
-      </a>
-    </h1>
-
-    <span class="post-date">16 Oct 2019</span>
-    
-      <p>注：这篇文章的目的在于通过介绍问题背景与实例来使读者对差分隐私这一概念的建立直觉/初步的理解，并对它的数学定义进行讨论。由于时间关系，我们不对前沿的细节做深入的调研，只做简单地了解。</p>
-
-<h2 id="一问题背景">一、问题背景</h2>
-
-<p>在大数据时代，很多互联网公司将收集的用户使用信息或记录保存于数据库，并通过数据分析手段来提高用户的体验。 在这个过程中不可避免地就会出现隐私泄露的问题。数据集中可能包含有用户的医疗诊断信息，个人消费偏好等信息，个人的此类信息遭遇泄露的话，难免会被有心人利用并导致对个人不利的后果。</p>
-
-<p>一个比较典型的隐私泄露事件发生在06年的时候，Netflix（美国一家媒体服务提供商） 发起了一个有100万美金奖励的数据挖掘竞赛。 他们发布了一组关于用户浏览记录的数据集， 如果有人能通过这份数据集使他们的推荐系统的效能提高10%就可获得奖金。 当然，为了保护用户隐私，他们声称已经把包含用户ID的信息都删除以实现匿名化。 问题在于，这样是否真的已经将用户的信息隐藏起来？答案是否定的。来自 UT Austin 的 Arvind Narayanan 和 Vitaly Shmatikov 的工作[1]通过把已公布的数据库与 Internet Movie Database (IMDb) 结合起来，实现了一定程度反匿名化，暴露了用户的信息。</p>
-
-<p>可以举一个简单的例子来从直觉上解释怎么做到反匿名的过程: 假如有一个数据库 $A$，里面包含了一些用户的 性别，出生日期，邮政编码，或是在一段时间内看过某场电影，但没有姓名，身份证信息。而另外一个数据库 $B$ 里包含一些用户的姓名，性别，邮政编码，出生日期，医疗信息，住址。 这样，通过对比这两个公开的数据库（比如相同的邮编和出生日期），我们可以很容易地猜出 $B$ 中的哪些人对应 $A$ 中的哪些信息。这样的攻击我们称为<strong>链接攻击 (Linkage Attack)</strong>。</p>
-
-<p>另外一个例子解释攻击者可以通过不同的询问方式来问出私人信息。攻击者第一次进行这样的提问：“在2001年，P大学的大一新生有多少人家庭年收入35万以上？” 他得到准确答案是200。他接着提问：“在2002年， P大学的大二学生有多少人家庭年收入在35万以上？” 这次他得到答案是199。 于是他通过另外一种方式得知一名叫张知秋的同学在大二时退学了（比如查询在校学生表格）。 这样他可以得出结论：张知秋同学的家庭年收入在35万以上。这样的攻击我们称为<strong>差分攻击 (Differencing Attack)</strong>。</p>
-
-<p>差分隐私就是为了防止这样的攻击而提出，它的最终目的是使得数据分析者能对数据库进行<strong>隐私保护的数据分析(privacy-preserving data analysis)</strong>。在差分隐私机制中，我们希望通过对数据库返回的值进行一定的处理，从而使得返回结果具有一定的随机性，但大致保持一定的精确度。这样，就能防止攻击者通过对比不同的查询结果来获取<strong>个体</strong>的私人隐私。注意我们希望保护的是<strong>特定的某个个体</strong>的隐私，也就是说，对于任何的个体，他的隐私都不被泄露。</p>
-
-<h2 id="二差分隐私机制">二、差分隐私机制</h2>
-
-<p>为了解决隐私泄露的问题，差分隐私的概念由Dwork等人提出。从直觉上介绍，一个差分隐私机制掌控有一个数据库，接收用户的查询要求，根据要求返回一个统计数值。比如可以是这个数据库里带有某个性质的人的人数。 但返回精确的数值必定会导致隐私泄露，所以在差分隐私机制中我们引入随机性，使得每次机制返回的值不相同，但大致保持一定的准确度，从而达到隐私保护的作用。</p>
-
-<p>回到第一部分最后一个例子中，假如对于攻击者的第一次询问的回答是：198。那么攻击者会有这样的结论：大概有200个人年收入在35万以上。假如对于攻击者第二次询问的回答是：201。同样地，攻击者得到的结论是：大概有200个人年收入在35万以上。这样一来，他就没有办法进行差分攻击来获得某个个体的隐私信息。</p>
-
-<p>具体地说，差分隐私要求对于分析者（或以上的攻击者）的提问，根据数据库$A$概率性地输出一个结果，这个结果在基于数据库包含某个用户$i$的情况和不包含$i$的情况下是相似的。 等价地说，假如有两个数据库 $A$ 和 $A^\prime$ ，其中$A$包含$i$的信息，$A^\prime$不包含$i$的信息，那么我们的差分隐私机制接收提问者的问题，然后分别基于这两个数据库的所输出的结果是大致相似的。更通俗地说，特定的某个$i$在不在分析考虑范围内对差分隐私机制所输出的结果影响不大。接下来我们严格定义这一概念。</p>
-
-<h2 id="三定义">三、定义</h2>
-<p>我们定义数据集 $D$ 和 $D^\prime$ （$D,D^\prime\in \chi^n$， $\chi$为数据空间)为相邻数据集如果它们只在某一个位置不同。 如果它们在$k$个位置不同，我们称它们间的距离为$k$。</p>
-
-<p><strong>定义</strong> 我们设随机算法为 $M$，数据分析者的查询函数空间为 $Q$，$M$的输出空间为$Y$。我们说 $M$ 是 <strong>$\epsilon-$差分隐私</strong>的，如果对于任意两个相邻数据集 $D$ 和 $D^\prime$，查询函数$q\in Q$，以及 $Y$ 的子集 $S$，$M$ 满足</p>
-
-<script type="math/tex; mode=display">Pr[M(D)\in S]\leq e^\epsilon\cdot Pr[M(D^\prime)\in S]</script>
-
-<p><strong>讨论</strong> 在定义两个输出相接近时，为什么不使用<em>统计距离（statistical distance）</em>？ 也就是说，为什么不使用定义 $SD \left( M(D),M(D^\prime)\right)&lt;\epsilon$？</p>
-
-<p>我们分两种情况讨论使用统计距离的不合理性 —</p>
-<ol>
-  <li>设 $\epsilon&lt; \frac{1}{10n}$，那么对于原数据库 $D$ 以及任意不同的数据库 $D^\prime$（即使$D$与$D^\prime$之间的距离为$n$），$M(D)$ 与 $M(D^\prime)$ 的统计距离最多相差$n\cdot \frac{1}{10n}=\frac{1}{10}$。特别地，$M(D)$与$M(0^n)$的距离最多为$\frac{1}{10}$。 换句话说，基于任意两个数据集的分析结果差距都不大，那我们所收集的$D$的使用价值就不大。</li>
-  <li>设$\epsilon\geq\frac{1}{10n}$。考虑以下机制：以$\frac{1}{10}$的概率随机输出数据库的某行信息。可以验证这样的机制满足我们的定义。但这样的机制是不被允许的 （暴露了输出的那个<strong>个体</strong>的信息）。</li>
-</ol>
-
-<h2 id="四一个差分隐私机制的例子">四、一个差分隐私机制的例子</h2>
-
-<p>我们考虑计数查询函数<script type="math/tex">q\in Q:\chi^n \rightarrow \{0, 1\}</script> 并定义 $q(x) = \sum_i^{n} q(x_i)\ mod\ 2$， 考虑以下机制：</p>
-
-<script type="math/tex; mode=display">M(x,q) = q(x) + Lap(1/\epsilon)</script>
-
-<p>其中 $Lap(\lambda)$ 为拉普拉斯分布，其概率密度函数正比于$e^{-\mid y\mid /\lambda}$。我们证明$M$为<strong>$\epsilon-$差分隐私</strong>的。</p>
-
-<p><strong>证明</strong></p>
-
-<p>可以得到$[M(q,x)=y]$的概率密度函数正比于$e^{-\epsilon\mid y-q(x)\mid}$。 同样地，$[M(q,x^\prime)=y]$正比于$e^{-\epsilon\mid y-q(x^\prime)\mid}$。 由于$q(x)$与$q(x^\prime)$最多相差为1，因此将他们的概率密度函数相除，剩余因数大小为$e^\epsilon$，刚好满足$\epsilon-$差分隐私的要求。</p>
-
-<h2 id="五总结讨论">五、总结讨论</h2>
-
-<h3 id="缺点">缺点</h3>
-
-<p>差分隐私的缺点在于加入随机性会使数据的可用性下降，所以在保护隐私的同时对数据分析的结果有一定的影响，在实际应用中要在这两个因素中做权衡。</p>
-
-<h3 id="与计算复杂度">与计算复杂度</h3>
-
-<p>对如今大部分的差分隐私机制设计，我们都没有考虑复杂度假设。假如我们限制数据库的监护者（机制的设计者）的计算能力（比如多项式时间的计算能力），这样会使差分隐私的实现难度变大。特别地，在[3]中的第9章Dwork&amp;Roth给出了在存在复杂度假设的情况下，根据某一些计数查询函数，不能高效地生成有用的数据库的例子，有兴趣可进行查阅。</p>
-
-<h3 id="工业界应用情况">工业界应用情况</h3>
-
-<p>近期已经有一些业界企业将差分隐私应用于他们的业务中，比如Apple已经将差分隐私的技术用于使用机器学习改善用户体验的过程，具体报告可见此<a href="https://machinelearning.apple.com/2017/12/06/learning-with-privacy-at-scale.html">链接</a>。 另外，谷歌最近也有做此类尝试，<a href="https://arxiv.org/abs/1905.02249">链接</a>。</p>
-
-<h2 id="参考文献">参考文献</h2>
-
-<p>[1] Narayanan, Arvind, and Vitaly Shmatikov. “Robust de-anonymization of large sparse datasets.” Security and Privacy, 2008. SP 2008. IEEE Symposium on. IEEE, 2008.<br />
-[2] Dwork “Differential Privacy: A Survey of Results”. https://web.cs.ucdavis.edu/~franklin/ecs289/2010/dwork_2008.pdf<br />
-[3] Dwork and Roth “The Algorithmic Foundations
-of Differential Privacy”. https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf<br />
-[4] Vadhan “The Complexity of Differential Privacy” http://privacytools.seas.harvard.edu/files/privacytools/files/complexityprivacy_1.pdf</p>
 
     
   </div>
@@ -467,6 +385,89 @@ The running time of GL algorithm is $O(n^2 \log n \cdot \epsilon^{-4})$, it make
 
 <h2 id="references">References</h2>
 <p>Lecture Notes 11, 12 of Luca Trevisan’s Spring 2009 Cryptography Courses, see this <a href="https://people.eecs.berkeley.edu/~luca/cs276/#notes">Link</a>.</p>
+
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/dpsurvey/">
+        差分隐私 Differential Privacy
+      </a>
+    </h1>
+
+    <span class="post-date">16 Aug 2019</span>
+    
+      <p>注：这篇文章的目的在于通过介绍问题背景与实例来使读者对差分隐私这一概念的建立直觉/初步的理解，并对它的数学定义进行讨论。由于时间关系，我们不对前沿的细节做深入的调研，只做简单地了解。</p>
+
+<h2 id="一问题背景">一、问题背景</h2>
+
+<p>在大数据时代，很多互联网公司将收集的用户使用信息或记录保存于数据库，并通过数据分析手段来提高用户的体验。 在这个过程中不可避免地就会出现隐私泄露的问题。数据集中可能包含有用户的医疗诊断信息，个人消费偏好等信息，个人的此类信息遭遇泄露的话，难免会被有心人利用并导致对个人不利的后果。</p>
+
+<p>一个比较典型的隐私泄露事件发生在06年的时候，Netflix（美国一家媒体服务提供商） 发起了一个有100万美金奖励的数据挖掘竞赛。 他们发布了一组关于用户浏览记录的数据集， 如果有人能通过这份数据集使他们的推荐系统的效能提高10%就可获得奖金。 当然，为了保护用户隐私，他们声称已经把包含用户ID的信息都删除以实现匿名化。 问题在于，这样是否真的已经将用户的信息隐藏起来？答案是否定的。来自 UT Austin 的 Arvind Narayanan 和 Vitaly Shmatikov 的工作[1]通过把已公布的数据库与 Internet Movie Database (IMDb) 结合起来，实现了一定程度反匿名化，暴露了用户的信息。</p>
+
+<p>可以举一个简单的例子来从直觉上解释怎么做到反匿名的过程: 假如有一个数据库 $A$，里面包含了一些用户的 性别，出生日期，邮政编码，或是在一段时间内看过某场电影，但没有姓名，身份证信息。而另外一个数据库 $B$ 里包含一些用户的姓名，性别，邮政编码，出生日期，医疗信息，住址。 这样，通过对比这两个公开的数据库（比如相同的邮编和出生日期），我们可以很容易地猜出 $B$ 中的哪些人对应 $A$ 中的哪些信息。这样的攻击我们称为<strong>链接攻击 (Linkage Attack)</strong>。</p>
+
+<p>另外一个例子解释攻击者可以通过不同的询问方式来问出私人信息。攻击者第一次进行这样的提问：“在2001年，P大学的大一新生有多少人家庭年收入35万以上？” 他得到准确答案是200。他接着提问：“在2002年， P大学的大二学生有多少人家庭年收入在35万以上？” 这次他得到答案是199。 于是他通过另外一种方式得知一名叫张知秋的同学在大二时退学了（比如查询在校学生表格）。 这样他可以得出结论：张知秋同学的家庭年收入在35万以上。这样的攻击我们称为<strong>差分攻击 (Differencing Attack)</strong>。</p>
+
+<p>差分隐私就是为了防止这样的攻击而提出，它的最终目的是使得数据分析者能对数据库进行<strong>隐私保护的数据分析(privacy-preserving data analysis)</strong>。在差分隐私机制中，我们希望通过对数据库返回的值进行一定的处理，从而使得返回结果具有一定的随机性，但大致保持一定的精确度。这样，就能防止攻击者通过对比不同的查询结果来获取<strong>个体</strong>的私人隐私。注意我们希望保护的是<strong>特定的某个个体</strong>的隐私，也就是说，对于任何的个体，他的隐私都不被泄露。</p>
+
+<h2 id="二差分隐私机制">二、差分隐私机制</h2>
+
+<p>为了解决隐私泄露的问题，差分隐私的概念由Dwork等人提出。从直觉上介绍，一个差分隐私机制掌控有一个数据库，接收用户的查询要求，根据要求返回一个统计数值。比如可以是这个数据库里带有某个性质的人的人数。 但返回精确的数值必定会导致隐私泄露，所以在差分隐私机制中我们引入随机性，使得每次机制返回的值不相同，但大致保持一定的准确度，从而达到隐私保护的作用。</p>
+
+<p>回到第一部分最后一个例子中，假如对于攻击者的第一次询问的回答是：198。那么攻击者会有这样的结论：大概有200个人年收入在35万以上。假如对于攻击者第二次询问的回答是：201。同样地，攻击者得到的结论是：大概有200个人年收入在35万以上。这样一来，他就没有办法进行差分攻击来获得某个个体的隐私信息。</p>
+
+<p>具体地说，差分隐私要求对于分析者（或以上的攻击者）的提问，根据数据库$A$概率性地输出一个结果，这个结果在基于数据库包含某个用户$i$的情况和不包含$i$的情况下是相似的。 等价地说，假如有两个数据库 $A$ 和 $A^\prime$ ，其中$A$包含$i$的信息，$A^\prime$不包含$i$的信息，那么我们的差分隐私机制接收提问者的问题，然后分别基于这两个数据库的所输出的结果是大致相似的。更通俗地说，特定的某个$i$在不在分析考虑范围内对差分隐私机制所输出的结果影响不大。接下来我们严格定义这一概念。</p>
+
+<h2 id="三定义">三、定义</h2>
+<p>我们定义数据集 $D$ 和 $D^\prime$ （$D,D^\prime\in \chi^n$， $\chi$为数据空间)为相邻数据集如果它们只在某一个位置不同。 如果它们在$k$个位置不同，我们称它们间的距离为$k$。</p>
+
+<p><strong>定义</strong> 我们设随机算法为 $M$，数据分析者的查询函数空间为 $Q$，$M$的输出空间为$Y$。我们说 $M$ 是 <strong>$\epsilon-$差分隐私</strong>的，如果对于任意两个相邻数据集 $D$ 和 $D^\prime$，查询函数$q\in Q$，以及 $Y$ 的子集 $S$，$M$ 满足</p>
+
+<script type="math/tex; mode=display">Pr[M(D)\in S]\leq e^\epsilon\cdot Pr[M(D^\prime)\in S]</script>
+
+<p><strong>讨论</strong> 在定义两个输出相接近时，为什么不使用<em>统计距离（statistical distance）</em>？ 也就是说，为什么不使用定义 $SD \left( M(D),M(D^\prime)\right)&lt;\epsilon$？</p>
+
+<p>我们分两种情况讨论使用统计距离的不合理性 —</p>
+<ol>
+  <li>设 $\epsilon&lt; \frac{1}{10n}$，那么对于原数据库 $D$ 以及任意不同的数据库 $D^\prime$（即使$D$与$D^\prime$之间的距离为$n$），$M(D)$ 与 $M(D^\prime)$ 的统计距离最多相差$n\cdot \frac{1}{10n}=\frac{1}{10}$。特别地，$M(D)$与$M(0^n)$的距离最多为$\frac{1}{10}$。 换句话说，基于任意两个数据集的分析结果差距都不大，那我们所收集的$D$的使用价值就不大。</li>
+  <li>设$\epsilon\geq\frac{1}{10n}$。考虑以下机制：以$\frac{1}{10}$的概率随机输出数据库的某行信息。可以验证这样的机制满足我们的定义。但这样的机制是不被允许的 （暴露了输出的那个<strong>个体</strong>的信息）。</li>
+</ol>
+
+<h2 id="四一个差分隐私机制的例子">四、一个差分隐私机制的例子</h2>
+
+<p>我们考虑计数查询函数<script type="math/tex">q\in Q:\chi^n \rightarrow \{0, 1\}</script> 并定义 $q(x) = \sum_i^{n} q(x_i)\ mod\ 2$， 考虑以下机制：</p>
+
+<script type="math/tex; mode=display">M(x,q) = q(x) + Lap(1/\epsilon)</script>
+
+<p>其中 $Lap(\lambda)$ 为拉普拉斯分布，其概率密度函数正比于$e^{-\mid y\mid /\lambda}$。我们证明$M$为<strong>$\epsilon-$差分隐私</strong>的。</p>
+
+<p><strong>证明</strong></p>
+
+<p>可以得到$[M(q,x)=y]$的概率密度函数正比于$e^{-\epsilon\mid y-q(x)\mid}$。 同样地，$[M(q,x^\prime)=y]$正比于$e^{-\epsilon\mid y-q(x^\prime)\mid}$。 由于$q(x)$与$q(x^\prime)$最多相差为1，因此将他们的概率密度函数相除，剩余因数大小为$e^\epsilon$，刚好满足$\epsilon-$差分隐私的要求。</p>
+
+<h2 id="五总结讨论">五、总结讨论</h2>
+
+<h3 id="缺点">缺点</h3>
+
+<p>差分隐私的缺点在于加入随机性会使数据的可用性下降，所以在保护隐私的同时对数据分析的结果有一定的影响，在实际应用中要在这两个因素中做权衡。</p>
+
+<h3 id="与计算复杂度">与计算复杂度</h3>
+
+<p>对如今大部分的差分隐私机制设计，我们都没有考虑复杂度假设。假如我们限制数据库的监护者（机制的设计者）的计算能力（比如多项式时间的计算能力），这样会使差分隐私的实现难度变大。特别地，在[3]中的第9章Dwork&amp;Roth给出了在存在复杂度假设的情况下，根据某一些计数查询函数，不能高效地生成有用的数据库的例子，有兴趣可进行查阅。</p>
+
+<h3 id="工业界应用情况">工业界应用情况</h3>
+
+<p>近期已经有一些业界企业将差分隐私应用于他们的业务中，比如Apple已经将差分隐私的技术用于使用机器学习改善用户体验的过程，具体报告可见此<a href="https://machinelearning.apple.com/2017/12/06/learning-with-privacy-at-scale.html">链接</a>。 另外，谷歌最近也有做此类尝试，<a href="https://arxiv.org/abs/1905.02249">链接</a>。</p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p>[1] Narayanan, Arvind, and Vitaly Shmatikov. “Robust de-anonymization of large sparse datasets.” Security and Privacy, 2008. SP 2008. IEEE Symposium on. IEEE, 2008.<br />
+[2] Dwork “Differential Privacy: A Survey of Results”. https://web.cs.ucdavis.edu/~franklin/ecs289/2010/dwork_2008.pdf<br />
+[3] Dwork and Roth “The Algorithmic Foundations
+of Differential Privacy”. https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf<br />
+[4] Vadhan “The Complexity of Differential Privacy” http://privacytools.seas.harvard.edu/files/privacytools/files/complexityprivacy_1.pdf</p>
 
     
   </div>
