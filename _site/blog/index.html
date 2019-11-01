@@ -80,6 +80,52 @@
     
       <p>In this note we mainly discuss common cryptographic primitives: one-way functions (OWF), one-way permutations (OWP) and trapdoor functions (TDP).</p>
 
+<h2 id="1one-way-functions">1.One-Way Functions</h2>
+
+<p>Intuitively, a one-way function is a function that is easy to compute but difficulty to invert. Formally,</p>
+
+<p><strong>Definition 1.1 (OWF)</strong> A function <script type="math/tex">f: \{0,1\}^* \rightarrow \{0,1\}^*</script> is one-way if</p>
+
+<ol>
+  <li>For any $x$ that is in the domain of $f$, $f(x)=y$ can be computed in polynomial time.</li>
+  <li>For any PPT algorithm $A$ and all suffciently large $n$ ($n&gt;N_c$ for some $N_c$),<br />
+<script type="math/tex">\Pr[f(z) = y \mid x \leftarrow \{0,1\}^n,\ f(x) = y,\ z\leftarrow A(y, 1^n)\ ]\leq negl(n)</script><br />
+where $negl(n)$ is the negligible function.</li>
+</ol>
+
+<p><strong>Definition 1.2 (negligible function)</strong> A function $negl(\cdot)$ is negligible if $\forall$ $c&gt;0$ $\exists$ $N_c$ such that $\forall$ $n&gt;N_c$, $negl(n)&lt;\frac{1}{n^c}$.</p>
+
+<p><strong>Discussion.</strong> We note that requiring the unary number $1^n$ as adversary’s input is necessary. Consider the function <script type="math/tex">f(x) = \lvert x\rvert</script>. The adversary’s input has length $log(\lvert x \rvert)$, while the output length is exponential in that. There function should be one-way because the adversary doesn’t have enough time to write down the answer. But it is intuitively easy to invert.</p>
+
+<p><strong>Discussion.</strong> The function that satisfies the above definition is called a <strong>uniformly strong one-way</strong> function. We will talk about weak one-way function later. It is <em>uniform</em> because we assume the adversary is a uniform algorithm that can take any input length. If in the second requirement above, we allow the adversary to use different algorithms for different lengths (i.e. it is a non-uniform circuits family), then we say the function is <strong>non-uniform strong one-way</strong>.</p>
+
+<p>We now introduce weak one-way functions. A weak one-way function is a function that is hard to invert with noticeable probability.</p>
+
+<p><strong>Definition 1.3 (weak OWF)</strong> A function is called (uniformly) weak one-way if</p>
+
+<ol>
+  <li>For any $x$ that is in the domain of $f$, $f(x)=y$ can be computed in polynomial time.</li>
+  <li>$\exists\ c$ such that for any PPT algorithm $A$ and all suffciently large $n$ ($n&gt;N_c$ for some $N_c$) 
+<script type="math/tex">\Pr[f(z) = y \mid x \leftarrow \{0,1\}^n,\ f(x) = y,\ z\leftarrow A(y, 1^n)\ ]> \frac{1}{n^c}</script><br />
+where $negl(n)$ is the negligible function.</li>
+</ol>
+
+<p>However, there is a theorem due to Yao says that any weak one-way function can be transformed into a strong one-way function.</p>
+
+<p><strong>Theorem 1.4 (Yao)</strong> There exists a weak one-way function iff there is a strong one-way function.</p>
+
+<p><strong>Proof</strong> will complete later</p>
+
+<h2 id="2-necessary-complexity-assumptions">2. Necessary Complexity Assumptions</h2>
+
+<p>We state necessary complexity assumptions for the existence of one-way functions.</p>
+
+<p>First of all, we should observe that</p>
+
+<p><strong>Theorem 2.1</strong> If $P=NP$, then one-way functions don’t exist.</p>
+
+<p><strong>Proof.</strong> If $P=NP$, then the adversary can non-deterministically guess all values of $x$ and evaluate f(x).</p>
+
     
   </div>
   
@@ -148,10 +194,10 @@ The reason is that, if otherwise there is a different $m^{\prime} \neq m$ such t
 
 <p><strong>Discussion.</strong> <strong>1.</strong> Although OTP is perfectly secure, as its name suggests, the same key mustn’t be used twice. Indeed if we XOR $m \oplus s$ and $m^\prime \oplus s$ we get $m \oplus m^\prime$. <strong>2.</strong> In fact the following theorem due to Shannon says that perfect security under our initial assumptions requires that the secret $s$ has at least the same length as message communicated, which is not practical.</p>
 
-<p><strong>Theorem 3.1</strong>  (Shannon) For any perfectly secure system where Alice and Bob share a key $s$ from space $S$ assume messages $m$ are from space $M$, we must have $\mid S \mid \geq \mid M\mid$.</p>
+<p><strong>Theorem 3.1</strong>  (Shannon) For any perfectly secure system where Alice and Bob share a key $s$ from space $S$ assume messages $m$ are from space $M$, we must have $\lvert S\rvert \geq\lvert M \rvert$.</p>
 
 <p><strong>Proof.</strong> 
-Fix any ciphertext $c$ and key $s$, since $Dec_s$ is deterministic, $c$  must be decrypted into at most message. Therefore, the number of possible one messages resulted from all $s\in S$, we denote by $A$, should satisfy $A\leq \mid S\mid$. On the other hand, we should have $A = \mid M\mid$. Otherwise for some $m$ $Pr[M=m \mid C=c] = 0$, which contradicts the perfect security.</p>
+Fix any ciphertext $c$ and key $s$, since $Dec_s$ is deterministic, $c$  must be decrypted into at most message. Therefore, the number of possible one messages resulted from all $s\in S$, we denote by $A$, should satisfy $A\leq \lvert S\rvert$. On the other hand, we should have $A = \lvert M\rvert$. Otherwise for some $m$ $Pr[M=m \mid C=c] = 0$, which contradicts the perfect security.</p>
 
 <h2 id="4-more-discussion">4. More Discussion</h2>
 <p>In real world we may not want to assume Eve has unbounded computational power, because Eve is just a human being like us all! While Eve does have the ability to guess. We can now relax the assumption and assume Eve is in <em>Probabilistic Polynomial Time (PPT)</em>. This actually makes a big difference. Let’s re-examine the two necessity above.</p>

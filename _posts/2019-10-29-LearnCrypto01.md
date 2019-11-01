@@ -54,10 +54,10 @@ $$Dec(c, s) = c\oplus s $$
 
 **Discussion.** **1.** Although OTP is perfectly secure, as its name suggests, the same key mustn't be used twice. Indeed if we XOR $m \oplus s$ and $m^\prime \oplus s$ we get $m \oplus m^\prime$. **2.** In fact the following theorem due to Shannon says that perfect security under our initial assumptions requires that the secret $s$ has at least the same length as message communicated, which is not practical.  
 
-**Theorem 3.1**  (Shannon) For any perfectly secure system where Alice and Bob share a key $s$ from space $S$ assume messages $m$ are from space $M$, we must have $\mid S \mid \geq \mid M\mid$.   
+**Theorem 3.1**  (Shannon) For any perfectly secure system where Alice and Bob share a key $s$ from space $S$ assume messages $m$ are from space $M$, we must have $\lvert S\rvert \geq\lvert M \rvert$.   
 
 **Proof.** 
-Fix any ciphertext $c$ and key $s$, since $Dec_s$ is deterministic, $c$  must be decrypted into at most message. Therefore, the number of possible one messages resulted from all $s\in S$, we denote by $A$, should satisfy $A\leq \mid S\mid$. On the other hand, we should have $A = \mid M\mid$. Otherwise for some $m$ $Pr[M=m \mid C=c] = 0$, which contradicts the perfect security.
+Fix any ciphertext $c$ and key $s$, since $Dec_s$ is deterministic, $c$  must be decrypted into at most message. Therefore, the number of possible one messages resulted from all $s\in S$, we denote by $A$, should satisfy $A\leq \lvert S\rvert$. On the other hand, we should have $A = \lvert M\rvert$. Otherwise for some $m$ $Pr[M=m \mid C=c] = 0$, which contradicts the perfect security.
 
 
 ## 4. More Discussion

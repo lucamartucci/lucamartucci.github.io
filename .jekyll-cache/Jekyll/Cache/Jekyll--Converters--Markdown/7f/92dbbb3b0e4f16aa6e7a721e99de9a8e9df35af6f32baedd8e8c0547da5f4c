@@ -1,73 +1,4 @@
-<!DOCTYPE html>
-<html lang="en-us">
-
-  <head>
-  <link href="https://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  <title>
-    
-      Intro to Cryptography 01 &middot; Jiyu Zhang
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="/public/favicon.ico">
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
-   <script type="text/x-mathjax-config">
-     MathJax.Hub.Config({
-       tex2jax: {
-         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-         processEscapes: true
-       }
-     });
-   </script>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-</head>
-
-
-  <body class="theme-base-0d">
-
-    <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <h1>
-        <a href="/">
-          Jiyu Zhang
-        </a>
-      </h1>
-      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a class="sidebar-nav-item active" href="/">About Me</a>
-      <a class="sidebar-nav-item" href="/blog/">Blog</a>
-      <a class="sidebar-nav-item" href="/Notes/">Notes</a>
-      <a class="sidebar-nav-item" href="/Links/">Links</a>
-    </nav>
-
-    <p>&copy; 2019. All rights reserved.</p>
-  </div>
-</div>
-
-
-    <div class="content container">
-      <p>I’m starting to study cryptography and would like to make some notes. I’ll mainly follow Yevgeniy Dodis’ notes at this <a href="https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html">link</a>. Additionally, I also refer to other great notes in the following to cover more discussions.</p>
+I"�<p>I’m starting to study cryptography and would like to make some notes. I’ll mainly follow Yevgeniy Dodis’ notes at this <a href="https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html">link</a>. Additionally, I also refer to other great notes in the following to cover more discussions.</p>
 
 <p>These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct proofs to complete originally omitted proofs.</p>
 
@@ -144,8 +75,4 @@ This may not hold as previous. Why? Because now Eve is bounded in PPT, she is no
 
 <p>In summary, two things might be improved from the relaxation of assumptions. First, Bob may not need a secret from Eve. Second, the length of secret key may be shorter than message length (overcoming shannon’s barrier).</p>
 
-
-    </div>
-
-  </body>
-</html>
+:ET
