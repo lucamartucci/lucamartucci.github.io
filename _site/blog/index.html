@@ -95,9 +95,9 @@ where $negl(n)$ is the negligible function.</li>
 
 <p><strong>Definition 1.2 (negligible function)</strong> A function $negl(\cdot)$ is negligible if $\forall$ $c&gt;0$ $\exists$ $N_c$ such that $\forall$ $n&gt;N_c$, $negl(n)&lt;\frac{1}{n^c}$.</p>
 
-<p><strong>Discussion.</strong> We note that requiring the unary number $1^n$ as adversary’s input is necessary. Consider the function <script type="math/tex">f(x) = \lvert x\rvert</script>. The adversary’s input has length $log(\lvert x \rvert)$, while the output length is exponential in that. There function should be one-way because the adversary doesn’t have enough time to write down the answer. But it is intuitively easy to invert.</p>
+<p><strong>Discussion.</strong> We note that requiring the unary number $1^n$ as adversary’s input is necessary. Consider the function <script type="math/tex">f(x) = \lvert x\rvert</script>. The adversary’s input has length $log(\lvert x \rvert)$, while the original $x$ has length exponential in that. This function should be one-way because the adversary doesn’t have enough time to write down the answer. But it is intuitively easy to invert.</p>
 
-<p><strong>Discussion.</strong> The function that satisfies the above definition is called a <strong>uniformly strong one-way</strong> function. We will talk about weak one-way function later. It is <em>uniform</em> because we assume the adversary is a uniform algorithm that can take any input length. If in the second requirement above, we allow the adversary to use different algorithms for different lengths (i.e. it is a non-uniform circuits family), then we say the function is <strong>non-uniform strong one-way</strong>.</p>
+<p><strong>Discussion.</strong> The function that satisfies the above definition is called a <strong>uniformly strong one-way</strong> function. We will talk about weak one-way function later. It is <em>uniform</em> because we assume the adversary is a uniform algorithm that can take any input length. If in the second requirement above, we allow the adversary to use different algorithms for different lengths (i.e. it is a non-uniform circuits family.), then we say the function is <strong>non-uniform strong one-way</strong>.</p>
 
 <p>We now introduce weak one-way functions. A weak one-way function is a function that is hard to invert with noticeable probability.</p>
 
@@ -114,17 +114,40 @@ where $negl(n)$ is the negligible function.</li>
 
 <p><strong>Theorem 1.4 (Yao)</strong> There exists a weak one-way function iff there is a strong one-way function.</p>
 
-<p><strong>Proof</strong> will complete later</p>
+<p><strong>Proof</strong> will complete later.</p>
+
+<p>We now introduce one-way permutations,  trapdoor permutations.</p>
+
+<p><strong>Definition 1.5 (OWP)</strong> A function is a one-way permutation if</p>
+<ol>
+  <li>It satisfies all requirements of one-way function.</li>
+  <li>It is a permutation.</li>
+</ol>
+
+<p>Trapdoor functions are OWPs that, given auxiliary information, can 
+<strong>Definition 1.6 (TDP)</strong> A function is a TDP</p>
 
 <h2 id="2-necessary-complexity-assumptions">2. Necessary Complexity Assumptions</h2>
 
-<p>We state necessary complexity assumptions for the existence of one-way functions.</p>
+<p>We state necessary complexity assumptions for the existence of one-way functions. These assumptions are useful for us to argue in the form: a protocol $A$ is not secure because it can break our complexity assumptions.</p>
 
 <p>First of all, we should observe that</p>
 
 <p><strong>Theorem 2.1</strong> If $P=NP$, then one-way functions don’t exist.</p>
 
-<p><strong>Proof.</strong> If $P=NP$, then the adversary can non-deterministically guess all values of $x$ and evaluate f(x).</p>
+<p><strong>Proof.</strong> If $P=NP$, then the adversary can non-deterministically guess all values of $x$ and evaluate f(x) to verify the answer.</p>
+
+<p>Since we assume (in the uniform model) that the adversary is a PPT (i.e. in BPP), we should see that even $BPP = NP$ will imply the non-existence of uniform OWF.</p>
+
+<p>In summary, our two basic assumptios will be: $P\subseteq BPP \not\subseteq NP$.</p>
+
+<p>While we don’t know whether $BPP \neq NP$ or $P/poly \neq NP$ hold, we can show that $BPP \subseteq P/poly$.</p>
+
+<p><strong>Theorem 2.2 (Adleman)</strong> $BPP\subseteq P/poly$</p>
+
+<p><strong>Proof.</strong> For a language $L$ in BPP that can be recognized by a Turing machine $M$, it can be shown that by repeatedly running $M$ many (at most polynomial) times and taking the majority vote, we can reduce the error probability to arbitrary exponentially small value. Let’s assume the error probability on both sides is $2^{-r}$ for some $r&gt;n$, so the number of coin flips used by the new Turing machine $M^\prime$ is at most $r$.<br />
+    According to the above, its’ equivalent to say that for any fixed $x$, for a random string of length $r$, the probability that $M^\prime(x, r)$ accepts is at most $2^{-r}$. We use the union bound to bound that, for all possible inputs <script type="math/tex">x\in \{0,1\}^n</script>, the probability that $M^\prime$ rejects at least one of these $x$ is at most $2^{n-r} &lt; 1$. Therefore, for a random string, there is a positive probability (greater than $1-2^{n-r}$) that can make all $x$ be accepted by $M^\prime$. We take the existence of such a string and hardwire it into our circuit. By doing this the circuits family can decide $L$ without any randomness.</p>
+
 
     
   </div>
@@ -140,7 +163,7 @@ where $negl(n)$ is the negligible function.</li>
     
       <p>I’m starting to study cryptography and would like to make some notes. I’ll mainly follow Yevgeniy Dodis’ notes at this <a href="https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html">link</a>. Additionally, I also refer to other great notes in the following to cover more discussions.</p>
 
-<p>These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct proofs to complete originally omitted proofs.</p>
+<p>These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I usually try to prove first as exercise. In some situations I also construct proofs to complete originally omitted proofs.</p>
 
 <p>[1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf<br />
 [2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf<br />

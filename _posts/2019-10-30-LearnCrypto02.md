@@ -37,11 +37,20 @@ However, there is a theorem due to Yao says that any weak one-way function can b
 
 **Theorem 1.4 (Yao)** There exists a weak one-way function iff there is a strong one-way function.  
 
-**Proof** will complete later
+**Proof** will complete later.
+
+We now introduce one-way permutations,  trapdoor permutations.  
+
+**Definition 1.5 (OWP)** A function is a one-way permutation if 
+1. It satisfies all requirements of one-way function.
+2. It is a permutation.
+
+Trapdoor functions are OWPs that, given auxiliary information, can 
+**Definition 1.6 (TDP)** A function is a TDP
 
 ## 2. Necessary Complexity Assumptions
 
-We state necessary complexity assumptions for the existence of one-way functions.  
+We state necessary complexity assumptions for the existence of one-way functions. These assumptions are useful for us to argue in the form: a protocol $A$ is not secure because it can break our complexity assumptions.  
 
 First of all, we should observe that  
  
@@ -51,9 +60,12 @@ First of all, we should observe that
 
 Since we assume (in the uniform model) that the adversary is a PPT (i.e. in BPP), we should see that even $BPP = NP$ will imply the non-existence of uniform OWF. 
 
+In summary, our two basic assumptios will be: $P\subseteq BPP \not\subseteq NP$.
+
 While we don't know whether $BPP \neq NP$ or $P/poly \neq NP$ hold, we can show that $BPP \subseteq P/poly$.  
 
 **Theorem 2.2 (Adleman)** $BPP\subseteq P/poly$  
 
 **Proof.** For a language $L$ in BPP that can be recognized by a Turing machine $M$, it can be shown that by repeatedly running $M$ many (at most polynomial) times and taking the majority vote, we can reduce the error probability to arbitrary exponentially small value. Let's assume the error probability on both sides is $2^{-r}$ for some $r>n$, so the number of coin flips used by the new Turing machine $M^\prime$ is at most $r$.  
-According to the above, its' equivalent to say that for any fixed $x$, for a random string of length $r$, the probability that $M^\prime(x, r)$ accepts is at most $2^{-r}$. We use the union bound to bound that, for all possible inputs $$x\in \{0,1\}^n$$, the probability that $M^\prime$ rejects at least one of these $x$ is at most $2^{n-r} < 1$. Therefore, for a random string, there is a positive probability (greater than $1-2^{n-r}$) that can make all $x$ be accepted by $M^\prime$. We take the existence of such a string and hardwire it into our circuit. By doing this the circuits family can decide $L$ without any randomness.
+    According to the above, its' equivalent to say that for any fixed $x$, for a random string of length $r$, the probability that $M^\prime(x, r)$ accepts is at most $2^{-r}$. We use the union bound to bound that, for all possible inputs $$x\in \{0,1\}^n$$, the probability that $M^\prime$ rejects at least one of these $x$ is at most $2^{n-r} < 1$. Therefore, for a random string, there is a positive probability (greater than $1-2^{n-r}$) that can make all $x$ be accepted by $M^\prime$. We take the existence of such a string and hardwire it into our circuit. By doing this the circuits family can decide $L$ without any randomness.    
+

@@ -6,7 +6,7 @@ tags: Cryptography
 ---
 I'm starting to study cryptography and would like to make some notes. I'll mainly follow Yevgeniy Dodis' notes at this [link](https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html). Additionally, I also refer to other great notes in the following to cover more discussions.
   
-These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct proofs to complete originally omitted proofs.  
+These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I usually try to prove first as exercise. In some situations I also construct proofs to complete originally omitted proofs.  
 
 [1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf  
 [2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf  

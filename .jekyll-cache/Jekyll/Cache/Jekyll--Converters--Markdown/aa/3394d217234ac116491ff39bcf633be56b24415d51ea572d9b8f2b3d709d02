@@ -1,0 +1,8 @@
+I"¼<p>Here I put links to notes I made when study.</p>
+
+<h3 id="cryptography">Cryptography</h3>
+<p>These notes will mostly focus on proofs and discussions. Each part may cover discussion on an interesting topic. The collection of material referred can be found in the first notes.<br />
+<strong>Disclaimer.</strong> Some of the proofs are constructed by myself and donâ€™t necessarily follow the proof in the original references.<br />
+<a href="https://jiyuzhang1994.github.io/CryptoLec01/">01</a> : Logistics; Secret, Perfect Security, One-Time Pad.<br />
+<a href="https://jiyuzhang1994.github.io/CryptoLec02/">02</a> : Discussion on OWFs; OWPs, TDPs; Complexity assumptions; Candidates functions.</p>
+:ET

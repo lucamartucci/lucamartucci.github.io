@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-11-01T19:12:20+08:00</updated>
+ <updated>2019-11-03T22:39:19+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -34,9 +34,9 @@ where $negl(n)$ is the negligible function.&lt;/li&gt;
 
 &lt;p&gt;&lt;strong&gt;Definition 1.2 (negligible function)&lt;/strong&gt; A function $negl(\cdot)$ is negligible if $\forall$ $c&amp;gt;0$ $\exists$ $N_c$ such that $\forall$ $n&amp;gt;N_c$, $negl(n)&amp;lt;\frac{1}{n^c}$.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Discussion.&lt;/strong&gt; We note that requiring the unary number $1^n$ as adversary’s input is necessary. Consider the function &lt;script type=&quot;math/tex&quot;&gt;f(x) = \lvert x\rvert&lt;/script&gt;. The adversary’s input has length $log(\lvert x \rvert)$, while the output length is exponential in that. There function should be one-way because the adversary doesn’t have enough time to write down the answer. But it is intuitively easy to invert.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Discussion.&lt;/strong&gt; We note that requiring the unary number $1^n$ as adversary’s input is necessary. Consider the function &lt;script type=&quot;math/tex&quot;&gt;f(x) = \lvert x\rvert&lt;/script&gt;. The adversary’s input has length $log(\lvert x \rvert)$, while the original $x$ has length exponential in that. This function should be one-way because the adversary doesn’t have enough time to write down the answer. But it is intuitively easy to invert.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Discussion.&lt;/strong&gt; The function that satisfies the above definition is called a &lt;strong&gt;uniformly strong one-way&lt;/strong&gt; function. We will talk about weak one-way function later. It is &lt;em&gt;uniform&lt;/em&gt; because we assume the adversary is a uniform algorithm that can take any input length. If in the second requirement above, we allow the adversary to use different algorithms for different lengths (i.e. it is a non-uniform circuits family), then we say the function is &lt;strong&gt;non-uniform strong one-way&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Discussion.&lt;/strong&gt; The function that satisfies the above definition is called a &lt;strong&gt;uniformly strong one-way&lt;/strong&gt; function. We will talk about weak one-way function later. It is &lt;em&gt;uniform&lt;/em&gt; because we assume the adversary is a uniform algorithm that can take any input length. If in the second requirement above, we allow the adversary to use different algorithms for different lengths (i.e. it is a non-uniform circuits family.), then we say the function is &lt;strong&gt;non-uniform strong one-way&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;We now introduce weak one-way functions. A weak one-way function is a function that is hard to invert with noticeable probability.&lt;/p&gt;
 
@@ -53,17 +53,40 @@ where $negl(n)$ is the negligible function.&lt;/li&gt;
 
 &lt;p&gt;&lt;strong&gt;Theorem 1.4 (Yao)&lt;/strong&gt; There exists a weak one-way function iff there is a strong one-way function.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt; will complete later&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt; will complete later.&lt;/p&gt;
+
+&lt;p&gt;We now introduce one-way permutations,  trapdoor permutations.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Definition 1.5 (OWP)&lt;/strong&gt; A function is a one-way permutation if&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;It satisfies all requirements of one-way function.&lt;/li&gt;
+  &lt;li&gt;It is a permutation.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Trapdoor functions are OWPs that, given auxiliary information, can 
+&lt;strong&gt;Definition 1.6 (TDP)&lt;/strong&gt; A function is a TDP&lt;/p&gt;
 
 &lt;h2 id=&quot;2-necessary-complexity-assumptions&quot;&gt;2. Necessary Complexity Assumptions&lt;/h2&gt;
 
-&lt;p&gt;We state necessary complexity assumptions for the existence of one-way functions.&lt;/p&gt;
+&lt;p&gt;We state necessary complexity assumptions for the existence of one-way functions. These assumptions are useful for us to argue in the form: a protocol $A$ is not secure because it can break our complexity assumptions.&lt;/p&gt;
 
 &lt;p&gt;First of all, we should observe that&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Theorem 2.1&lt;/strong&gt; If $P=NP$, then one-way functions don’t exist.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Proof.&lt;/strong&gt; If $P=NP$, then the adversary can non-deterministically guess all values of $x$ and evaluate f(x).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof.&lt;/strong&gt; If $P=NP$, then the adversary can non-deterministically guess all values of $x$ and evaluate f(x) to verify the answer.&lt;/p&gt;
+
+&lt;p&gt;Since we assume (in the uniform model) that the adversary is a PPT (i.e. in BPP), we should see that even $BPP = NP$ will imply the non-existence of uniform OWF.&lt;/p&gt;
+
+&lt;p&gt;In summary, our two basic assumptios will be: $P\subseteq BPP \not\subseteq NP$.&lt;/p&gt;
+
+&lt;p&gt;While we don’t know whether $BPP \neq NP$ or $P/poly \neq NP$ hold, we can show that $BPP \subseteq P/poly$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Theorem 2.2 (Adleman)&lt;/strong&gt; $BPP\subseteq P/poly$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proof.&lt;/strong&gt; For a language $L$ in BPP that can be recognized by a Turing machine $M$, it can be shown that by repeatedly running $M$ many (at most polynomial) times and taking the majority vote, we can reduce the error probability to arbitrary exponentially small value. Let’s assume the error probability on both sides is $2^{-r}$ for some $r&amp;gt;n$, so the number of coin flips used by the new Turing machine $M^\prime$ is at most $r$.&lt;br /&gt;
+    According to the above, its’ equivalent to say that for any fixed $x$, for a random string of length $r$, the probability that $M^\prime(x, r)$ accepts is at most $2^{-r}$. We use the union bound to bound that, for all possible inputs &lt;script type=&quot;math/tex&quot;&gt;x\in \{0,1\}^n&lt;/script&gt;, the probability that $M^\prime$ rejects at least one of these $x$ is at most $2^{n-r} &amp;lt; 1$. Therefore, for a random string, there is a positive probability (greater than $1-2^{n-r}$) that can make all $x$ be accepted by $M^\prime$. We take the existence of such a string and hardwire it into our circuit. By doing this the circuits family can decide $L$ without any randomness.&lt;/p&gt;
+
 </content>
  </entry>
  
@@ -74,7 +97,7 @@ where $negl(n)$ is the negligible function.&lt;/li&gt;
    <id>http://localhost:4000/LearnCrypto01</id>
    <content type="html">&lt;p&gt;I’m starting to study cryptography and would like to make some notes. I’ll mainly follow Yevgeniy Dodis’ notes at this &lt;a href=&quot;https://cs.nyu.edu/courses/fall08/G22.3210-001/index.html&quot;&gt;link&lt;/a&gt;. Additionally, I also refer to other great notes in the following to cover more discussions.&lt;/p&gt;
 
-&lt;p&gt;These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I try to present in some equivalent ways as exercise. In some situations I also construct proofs to complete originally omitted proofs.&lt;/p&gt;
+&lt;p&gt;These notes will mostly focus on proofs and discussion on definitions and other details for the purpose of better understanding. Proofs are often based on the original notes, but I usually try to prove first as exercise. In some situations I also construct proofs to complete originally omitted proofs.&lt;/p&gt;
 
 &lt;p&gt;[1] Rafail Ostrovsky. Foundation of Cryptography. http://web.cs.ucla.edu/~rafail/PUBLIC/OstrovskyDraftLecNotes2010.pdf&lt;br /&gt;
 [2] R. Pass and A. Shelat. A Course in Cryptography. http://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf&lt;br /&gt;
