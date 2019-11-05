@@ -71,6 +71,38 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/derandbpl/">
+        BPL, Derandomize BPL
+      </a>
+    </h1>
+
+    <span class="post-date">03 Nov 2019</span>
+    
+      <p>Starting from this post I will discuss about the $BPL\ vs.\ L$ problem and write notes about some known, important result.</p>
+
+<ul>
+  <li><a href="#bpl">BPL</a></li>
+</ul>
+
+<h2 id="-1-log-space-computation-and-the-class-bpl"><a name="bpl"></a> 1. Log-space Computation and the class BPL</h2>
+
+<p>We will be interested in space-bounded probabilistic computation and specifically, on Turing machines that have logarithmic working space. We start by describing such machines.</p>
+<h3 id="log-space-probabilistic-turing-machine">Log-space Probabilistic Turing Machine</h3>
+
+<p>A log-space probabilistic turing machine consists of the following part:  a two-way read-only input tape, assuming that the input is of size $n$; a normal read-write working tape of size $O(\log n)$, a finite state control that has a finite number of states, a output tape that is write-only. In addition, we need to model the condition that the machine has access to infinite randomness. That is, every time the machine doesn’t know what to do, it flips a coin and decides its next step. We model this by giving it access to a infinite one-way random tape, it reads the next random bit when it is needed. It must write the random bit down (in the work tape) if it wants to retrieve it later.</p>
+
+<p><img src="/assets/L-PTM.jpg" alt="log-space PTM" /></p>
+
+<p>In the execution of this TM, a <em>configuration</em> consists of the position of read head on the input tape plus the contents on it, the position of read-write head on the working tape plus the contents, the specific state on the finite state control. We should see that the total number of configurations is $\log n \cdot 2^{O(\log n)}$(# of possible work tape configuration) $\cdot \lvert \Delta \rvert$(# of states which is finite) $\cdot n$ (# of possible input tape configuration) $=2^{O(\log n)}$.</p>
+
+<p><img src="/assets/ROBP.jpg" alt="ROBP" /></p>
+
+
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/glthm/">
         Goldreich Levin Theorem
       </a>
@@ -343,20 +375,6 @@ The running time of GL algorithm is $O(n^2 \log n \cdot \epsilon^{-4})$, it make
 
 <p>可以得到$[M(q,x)=y]$的概率密度函数正比于$e^{-\epsilon\mid y-q(x)\mid}$。 同样地，$[M(q,x^\prime)=y]$正比于$e^{-\epsilon\mid y-q(x^\prime)\mid}$。 由于$q(x)$与$q(x^\prime)$最多相差为1，因此将他们的概率密度函数相除，剩余因数大小为$e^\epsilon$，刚好满足$\epsilon-$差分隐私的要求。</p>
 
-<h2 id="五总结讨论">五、总结讨论</h2>
-
-<h3 id="缺点">缺点</h3>
-
-<p>差分隐私的缺点在于加入随机性会使数据的可用性下降，所以在保护隐私的同时对数据分析的结果有一定的影响，在实际应用中要在这两个因素中做权衡。</p>
-
-<h3 id="与计算复杂度">与计算复杂度</h3>
-
-<p>对如今大部分的差分隐私机制设计，我们都没有考虑复杂度假设。假如我们限制数据库的监护者（机制的设计者）的计算能力（比如多项式时间的计算能力），这样会使差分隐私的实现难度变大。特别地，在[3]中的第9章Dwork&amp;Roth给出了在存在复杂度假设的情况下，根据某一些计数查询函数，不能高效地生成有用的数据库的例子，有兴趣可进行查阅。</p>
-
-<h3 id="工业界应用情况">工业界应用情况</h3>
-
-<p>近期已经有一些业界企业将差分隐私应用于他们的业务中，比如Apple已经将差分隐私的技术用于使用机器学习改善用户体验的过程，具体报告可见此<a href="https://machinelearning.apple.com/2017/12/06/learning-with-privacy-at-scale.html">链接</a>。 另外，谷歌最近也有做此类尝试，<a href="https://arxiv.org/abs/1905.02249">链接</a>。</p>
-
 <h2 id="参考文献">参考文献</h2>
 
 <p>[1] Narayanan, Arvind, and Vitaly Shmatikov. “Robust de-anonymization of large sparse datasets.” Security and Privacy, 2008. SP 2008. IEEE Symposium on. IEEE, 2008.<br />
@@ -370,47 +388,14 @@ of Differential Privacy”. https://www.cis.upenn.edu/~aaroth/Papers/privacybook
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/ProofOfUndo/">
-        Argument of Correctness of Undo Implementation
-      </a>
-    </h1>
-
-    <span class="post-date">12 Aug 2019</span>
-    
-      <p>Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. In case the recuiter might be interested, I’d like to provide a proof here that my idea of implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.</p>
-
-<h2 id="introduction">Introduction</h2>
-<p>Undo is the operation that can undo the user’s last $n$ operation(inserting/deleting characters).</p>
-
-<p>The difficulty lies in how can one keep track of the original position of the characters deleted. Well, in my implementation, nothing else is needed: just remove the node(which contains a character) and put it into a stack.</p>
-
-<p>The data strucutre I used for text editor is a doubly linked list, each node has a value contains the specific character, and a <strong>prev</strong> pointer to the previous character node and a <strong>next</strong> pointer to the next character node. Visualized as following:</p>
-
-<div>$$a\leftarrow s \rightarrow b$$  </div>
-
-<p>To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: <strong>what if when (the deleted) $s$ is to recover, its previous nodes a or b are not in the data structure, i.e. a and b haven’t been recovered</strong>. Therefore we can’t find its position. While I argue that this will not happen.</p>
-
-<h2 id="the-argument">The Argument</h2>
-<p>I’d like to show the following: <strong>when $s$ is to recover, its previous or next nodes must exist in the data structure</strong>, which is a simple argument by contradiction:<br />
-Suppose for the contradiction that $a$ and $b$ are not in the data structure, then $a$ and $b$ must be deleted before $s$ is deleted. However, in this case, by the time $s$ is deleted, its <strong>prev</strong> and <strong>next</strong> cannot be $a$ and $b$, which is a contradiction.</p>
-
-
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
       <a href="/zkdefvar/">
         Zero-Knowledge Proofs:Definitions and Variants
       </a>
     </h1>
 
-    <span class="post-date">04 Jan 2019</span>
+    <span class="post-date">14 Aug 2019</span>
     
-      <p>Recently I’ve been reading some crypto papers. The concept of zero-knowledge proofs somehow interests me so I referred to some surveys and lecture notes to study this topic. I plan to write down some summaries within this topic, with an emphasis on the basic definition and its variants. <br />
-最近在看一些密码学的论文，对其中<strong>零知识证明(zero-knowledge proofs)</strong>这个重要的概念很感兴趣，就把相关的笔记（notes）都看了一遍，打算把定义方面的理解以及变体的问题总结下来。</p>
-
-<p>零知识证明是一种特殊的交互式证明方法（Interactive Proof）。我们知道，在交互式证明中， 我们要求证明或协议（Protocol）满足两个性质：完备性（Completeness）和 可靠性（Soundness），其中可靠性是为了防止恶意的（adversarial）证明者（Prover）。 一个恶意的证明者会想要欺骗验证者（Verifier）从而使验证者相信一个错误的命题，可靠性要求证明者只能有很小的概率能够欺骗验证者。而零知识证明在此之外增设了需满足的第三个性质–零知识性（Zero Knowledge）。不同于可靠性是为了针对恶意的证明者，零知识性是为了防止恶意的验证者获取一些他们想要的信息。</p>
+      <p>零知识证明是一种特殊的交互式证明方法（Interactive Proof）。我们知道，在交互式证明中， 我们要求证明或协议（Protocol）满足两个性质：完备性（Completeness）和 可靠性（Soundness），其中可靠性是为了防止恶意的（adversarial）证明者（Prover）。 一个恶意的证明者会想要欺骗验证者（Verifier）从而使验证者相信一个错误的命题，可靠性要求证明者只能有很小的概率能够欺骗验证者。而零知识证明在此之外增设了需满足的第三个性质–零知识性（Zero Knowledge）。不同于可靠性是为了针对恶意的证明者，零知识性是为了防止恶意的验证者获取一些他们想要的信息。</p>
 
 <p>简单地说，零知识证明要求只保证验证者能确信命题的正确性， 除此以外，在证明过程中验证者不能获取其他任何的信息。比如说，在图同构问题（Graph Isomorphism）中，对于两个同构的图（G, H）这样的输入（a yes instance），零知识证明要求在交互证明结束后验证者 <strong>只能得出 “G和H确实是同构的”</strong> 这样一个结论，除此以外，他不能获取其他任何信息。比如说验证者不能得到一个排列（Permutation）- π， 使得对 G 的节点施加 π 后得到 H（i.e. π(G)=H）。</p>
 
@@ -446,6 +431,36 @@ $$[View(S(x))]\simeq [View(PV^{\prime}(x))]$$
 [1] Oded Goldreich. Zero-knowledge twenty years after its invention. Unpublished manuscript. 2002.<br />
 [2] Rafail Ostrovsky. Foundations of Cryptography Draft Lecture Notes.<br />
 [3] Boaz Barak. How to go beyond the black-box simulation barrier. FOCS 2011.</p>
+
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/ProofOfUndo/">
+        Argument of Correctness of Undo Implementation
+      </a>
+    </h1>
+
+    <span class="post-date">12 Aug 2019</span>
+    
+      <p>Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. In case the recuiter might be interested, I’d like to provide a proof here that my idea of implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>Undo is the operation that can undo the user’s last $n$ operation(inserting/deleting characters).</p>
+
+<p>The difficulty lies in how can one keep track of the original position of the characters deleted. Well, in my implementation, nothing else is needed: just remove the node(which contains a character) and put it into a stack.</p>
+
+<p>The data strucutre I used for text editor is a doubly linked list, each node has a value contains the specific character, and a <strong>prev</strong> pointer to the previous character node and a <strong>next</strong> pointer to the next character node. Visualized as following:</p>
+
+<div>$$a\leftarrow s \rightarrow b$$  </div>
+
+<p>To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: <strong>what if when (the deleted) $s$ is to recover, its previous nodes a or b are not in the data structure, i.e. a and b haven’t been recovered</strong>. Therefore we can’t find its position. While I argue that this will not happen.</p>
+
+<h2 id="the-argument">The Argument</h2>
+<p>I’d like to show the following: <strong>when $s$ is to recover, its previous or next nodes must exist in the data structure</strong>, which is a simple argument by contradiction:<br />
+Suppose for the contradiction that $a$ and $b$ are not in the data structure, then $a$ and $b$ must be deleted before $s$ is deleted. However, in this case, by the time $s$ is deleted, its <strong>prev</strong> and <strong>next</strong> cannot be $a$ and $b$, which is a contradiction.</p>
+
 
     
   </div>

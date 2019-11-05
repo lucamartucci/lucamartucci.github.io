@@ -1,0 +1,14 @@
+I")<p>Starting from this post I will discuss about the $BPL\ vs.\ L$ problem and write notes about some known, important result.</p>
+
+<ul>
+  <li><a href="#bpl">BPL</a></li>
+</ul>
+
+<h2 id="-log-space-computation-and-bpl"><a name="bpl"></a> Log-space Computation and BPL</h2>
+
+<p>We will be interested in space-bounded computation and specifically, on Turing machines that have logarithmic working space. We start by describing such machines.</p>
+<h3 id="log-space-turing-machine">Log-space Turing Machine</h3>
+
+<p><img src="/assets/ROBP.jpg" alt="" /></p>
+
+:ET

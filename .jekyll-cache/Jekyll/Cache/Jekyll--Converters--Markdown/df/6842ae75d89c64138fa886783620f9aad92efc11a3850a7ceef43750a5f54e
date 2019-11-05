@@ -1,73 +1,4 @@
-<!DOCTYPE html>
-<html lang="en-us">
-
-  <head>
-  <link href="https://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  <title>
-    
-      差分隐私 Differential Privacy &middot; Jiyu Zhang
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="/public/favicon.ico">
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
-   <script type="text/x-mathjax-config">
-     MathJax.Hub.Config({
-       tex2jax: {
-         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-         processEscapes: true
-       }
-     });
-   </script>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-</head>
-
-
-  <body class="theme-base-0d">
-
-    <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <h1>
-        <a href="/">
-          Jiyu Zhang
-        </a>
-      </h1>
-      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a class="sidebar-nav-item active" href="/">About Me</a>
-      <a class="sidebar-nav-item" href="/blog/">Blog</a>
-      <a class="sidebar-nav-item" href="/Notes/">Notes</a>
-      <a class="sidebar-nav-item" href="/Links/">Links</a>
-    </nav>
-
-    <p>&copy; 2019. All rights reserved.</p>
-  </div>
-</div>
-
-
-    <div class="content container">
-      <p>注：这篇文章的目的在于通过介绍问题背景与实例来使读者对差分隐私这一概念的建立直觉/初步的理解，并对它的数学定义进行讨论。由于时间关系，我们不对前沿的细节做深入的调研，只做简单地了解。</p>
+I"!<p>注：这篇文章的目的在于通过介绍问题背景与实例来使读者对差分隐私这一概念的建立直觉/初步的理解，并对它的数学定义进行讨论。由于时间关系，我们不对前沿的细节做深入的调研，只做简单地了解。</p>
 
 <h2 id="一问题背景">一、问题背景</h2>
 
@@ -123,8 +54,4 @@
 [3] Dwork and Roth “The Algorithmic Foundations
 of Differential Privacy”. https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf<br />
 [4] Vadhan “The Complexity of Differential Privacy” http://privacytools.seas.harvard.edu/files/privacytools/files/complexityprivacy_1.pdf</p>
-
-    </div>
-
-  </body>
-</html>
+:ET
