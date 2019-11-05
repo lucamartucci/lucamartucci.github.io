@@ -51,9 +51,10 @@ For a computation on the BPL machine with input $x$, you can think of a ROBP sim
 
 The picture below represents a branching program using $r_n$ randomness and has $2^{O(\log n)}$ nodes in each layer.  
 
-For convenience, we denote that maximum number in a layer of the (RO)BP the *width* of it. We denote the length of the (RO)BP as the number of layers in it.
 
-![ROBP](/assets/ROBP.jpg)
+![ROBP](/assets/ROBP1.jpg)
+
+For convenience, we denote that maximum number of nodes in a layer of the (RO)BP as the *width* of it. We denote the length of the (RO)BP as the number of layers in it.
 
 ## <a name="fool"></a> 3. Fooling BPL  
 
