@@ -8,7 +8,7 @@ I'm a second-year master student at Rutgers University. I have broad interest in
 I also find the following topics interesting and hope to explore them in the future --
 
 **Cryptography**  
-**Randomness and Pseudorandomness** ([link](http://www.math.ias.edu/~avi/BOOKS/Randomness_and_Pseudorandomness.pdf))  
+**Randomness in Computation, Pseudorandomness** ([link](http://www.math.ias.edu/~avi/BOOKS/Randomness_and_Pseudorandomness.pdf))  
 
 Five [worlds](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.678.8930&rep=rep1&type=pdf) by Impagliazzo.  
 Computational Complexity and [Philosophy](https://www.scottaaronson.com/papers/philos.pdf)   
