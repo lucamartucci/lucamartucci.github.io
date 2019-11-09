@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-11-05T16:23:23+08:00</updated>
+ <updated>2019-11-09T18:46:48+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -13,58 +13,67 @@
 
  
  <entry>
+   <title>derandomize BPL:Nisan's Generator</title>
+   <link href="http://localhost:4000/nisanprg/"/>
+   <updated>2019-11-06T00:00:00+08:00</updated>
+   <id>http://localhost:4000/nisanprg</id>
+   <content type="html">
+</content>
+ </entry>
+ 
+ <entry>
    <title>BPL and Fooling BPL</title>
    <link href="http://localhost:4000/derandbpl/"/>
    <updated>2019-11-03T00:00:00+08:00</updated>
    <id>http://localhost:4000/derandlogspace</id>
-   <content type="html">&lt;p&gt;Starting from this post I will discuss about the $BPL\ vs.\ L$ problem and write notes about some known, important result. This post is an introduction to this problem.&lt;/p&gt;
-
-&lt;ul&gt;
+   <content type="html">&lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;#bpl&quot;&gt;Log-space computation and BPL&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#robp&quot;&gt;ROBP&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#fool&quot;&gt;Fooling BPL&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;Starting from this post I will discuss about the $BPL\ vs.\ L$ problem and write notes about some known, important result. This post is an introduction to the model.&lt;/p&gt;
 
 &lt;h2 id=&quot;-1-log-space-computation-and-the-class-bpl&quot;&gt;&lt;a name=&quot;bpl&quot;&gt;&lt;/a&gt; 1. Log-space Computation and the class BPL&lt;/h2&gt;
 
 &lt;p&gt;We are interested in space-bounded probabilistic computation, specifically, on Turing machines that have logarithmic working space. We start by describing such machines.&lt;/p&gt;
 &lt;h3 id=&quot;log-space-probabilistic-turing-machine&quot;&gt;Log-space Probabilistic Turing Machine&lt;/h3&gt;
 
-&lt;p&gt;A log-space probabilistic turing machine(PTM) consists of the following parts:  a two-way read-only input tape, assuming that the input is of size $n$; a normal read-write working tape of size $O(\log n)$, a finite state control that has a finite number of states, a output tape that is write-only. In addition, we need to model the condition that the machine has access to infinite randomness. That is, every time the machine doesn’t know what to do, it flips a coin and decides its next step. We model this by giving it access to an infinite one-way random tape, it reads the next random bit when it is needed. It must write the random bit down (in the work tape) if it wants to retrieve it later.&lt;/p&gt;
+&lt;p&gt;A log-space probabilistic turing machine(PTM) consists of the following parts:  a two-way read-only input tape where we assume that the input is of size $n$; a normal read-write working tape of size $O(\log n)$, a finite states control that has a finite number of states, a output tape that is write-only. In addition, the machine has access to infinite randomness. That is, the machine is allowed to flip coins to decide the next step. We model this by giving it access to an infinite one-way random tape, it reads the next random bit when it is needed. Note that it must write the random bit down (on the work tape) if it wants to retrieve it later.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/L-PTM.jpg&quot; alt=&quot;log-space PTM&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;In the execution of this TM, a &lt;em&gt;configuration&lt;/em&gt; consists of the position of read head on the input tape plus the contents on it, the position of read-write head on the working tape plus the contents, the specific state on the finite state control. We should see that the total number of configurations is $O(\log n) \cdot 2^{O(\log n)}$(# of possible work tape configuration) $\cdot \lvert \Delta \rvert$(# of states which is finite) $\cdot n$ (# of possible input tape configuration) $=2^{O(\log n)}$.&lt;/p&gt;
+&lt;p&gt;In the execution of this TM, a &lt;em&gt;configuration&lt;/em&gt; consists of the position of read head on the input tape plus the contents on it, the position of read-write head on the working tape plus the contents, the specific state on the finite states control. We should see that the total number of configurations is $O(\log n) \cdot 2^{O(\log n)}$(# of possible work tape configuration) $\cdot \lvert \Delta \rvert$(# of states which is finite) $\cdot n$ (# of possible input tape configuration) $=2^{O(\log n)}$.&lt;/p&gt;
 
 &lt;h3 id=&quot;bpl&quot;&gt;BPL&lt;/h3&gt;
 
-&lt;p&gt;$BPL$ can be written as $BP_HL$ or $BP_HSPACE(\log n)$. It refers to &lt;em&gt;Bounded-error Probabilistic Log-space&lt;/em&gt; that halts absolutely (hence the sub “H”). Formally, we say a language $L$ is in $BPL$ if there is a log-space PTM recognizes it and satisfies the following:&lt;/p&gt;
+&lt;p&gt;$BPL$ can be written as $BP_HL$ or $BP_HSPACE(\log n)$. It refers to &lt;em&gt;Bounded-error Probabilistic Log-space that halts absolutely&lt;/em&gt; (hence the sub “H”). Formally, we say a language $L$ is in $BPL$ if there is a log-space PTM recognizes it and satisfies the following:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;it always halts.&lt;/li&gt;
   &lt;li&gt;if $x\in L$, it accepts with probability at least 2/3.&lt;/li&gt;
   &lt;li&gt;if $x\not\in L$, it rejects with probability at least 2/3.&lt;/li&gt;
-  &lt;li&gt;the probability is taken over the coin flips of the TM.&lt;/li&gt;
+  &lt;li&gt;the probability is taken over the coin flips of the PTM.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;We emphasize that in the definition of $BPL$ the PTM halts absolutely, which is the case we’re interested in. For discussion on other PTMs(e.g. PTM that halts almost surely) , readers should refer to the survey [1]. We now state some observations:&lt;/p&gt;
+&lt;p&gt;We emphasize that in the definition of $BPL$ the PTM halts absolutely, which is the case we’re interested in. For space-bounded computation there are other PTMs(e.g. PTM that halts almost surely) which we will not discuss here. Interested reader should refer to the survey [1]. We now state some observations:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;The PTM runs in time at most $2^{O(\log n)}$, otherwise the PTM falls in loop and never halts.&lt;/li&gt;
+  &lt;li&gt;The PTM runs in time at most $2^{O(\log n)}$, which is the total number of configurations. Otherwise the PTM falls in loop and may never halt.&lt;/li&gt;
   &lt;li&gt;Since it runs in time at most $2^{O(\log n)}$, it uses at most $2^{O(\log n)}$ random bits.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;In fact, restricting a PTM to use at most $2^{O(\log n)}$ randomness is equivalent to say it halts absolutely. Consider the following: the PTM uses space $O(\log n)$ to maintain a counter, every time the PTM flips a coin, the counter is reset to 0, if the counter reaches $2^{O(\log n)}$, then it halts and reject. It can be seen that this halting PTM recognizes the same language.&lt;/p&gt;
+&lt;p&gt;In fact, restricting a PTM to use at most $2^{O(\log n)}$ randomness is “equivalent” to it halts absolutely. Consider the following: the PTM uses space $O(\log n)$ to maintain a counter, every time the PTM flips a coin, the counter is reset to 0, if the counter reaches $2^{O(\log n)}$, then it halts and rejects. It can be seen that this halting PTM recognizes the same language.&lt;/p&gt;
 
 &lt;h2 id=&quot;-2-read-once-branching-program&quot;&gt;&lt;a name=&quot;robp&quot;&gt;&lt;/a&gt; 2. Read-once Branching Program&lt;/h2&gt;
 
-&lt;p&gt;In this section we introduce a (non-uniform) computational model that simulates space-bounded computation. A branching program (in our interest) is a layed acyclic graph, each layer has a total number of $2^{O(\log n)}$ nodes. You can think of each of these nodes as a configuration in the execution of the above BPL machine on a given input, so each layer has the same nodes and, since it’s halting, the same node isn’t entered twice. For each input, there is a starting node in the first layer that represents the starting configuration. In the last layer there are only 2 nodes, one represents the “accept” state and the other represents the “reject” state. Between the $i$th and $i+1$th layer there are transition edges mapping from nodes in the $i$th layer to the nodes in the $i+1$th layer. Each of these edges is labeled a string &lt;script type=&quot;math/tex&quot;&gt;r_i \in\{0,1\}^m&lt;/script&gt;. You should think of this string as the $m$ coin flips tossed by the machine to decide which configuration to enter in the next step (tossing $m$ coins just generalizes the case of tossing one coin). A computation on a branching program with input $r_n$ is just a path from a node in the first layer to the Accepting/Rejecting node in the last layer, between it reads $r_i$ and chooses the edge accordingly. We say a branching program is ROBP (Read Once Branching Program) if it reads its input in a one-way fashion.&lt;/p&gt;
+&lt;p&gt;In this section we introduce a (non-uniform) computation model that simulates space-bounded computation. A branching program (in our interest) is a layed acyclic graph, each layer has a total number of $2^{O(\log n)}$ nodes. For our purpose, you should think of each of these nodes as a configuration in the execution of the above BPL machine on a given input, so each layer has the same nodes and, since it’s halting, the same node won’t be entered twice. For each input, there is a starting node in the first layer that represents the starting configuration. In the last layer there are only 2 nodes, one represents the “accept” state and the other represents the “reject” state. Between the $i$th and $i+1$th layer there are transition edges mapping from nodes in the $i$th layer to the nodes in the $i+1$th layer. Each of these edges is labeled a string &lt;script type=&quot;math/tex&quot;&gt;r_i \in\{0,1\}^m&lt;/script&gt;. You should think of this string as the $m$ coin flips tossed by the machine to decide which configuration to enter in the next step, and it’s an exercise to see that this is equivalent to repeating $m$ times the process of tossing one coin then perform some deterministic computation . A computation on a branching program with input $r_n$ is just a path from a node in the first layer to the accepting/rejecting node in the last layer. Among the intermediate layers it reads $r_i$s and chooses the edges to traverse accordingly. We say a branching program is a ROBP (Read Once Branching Program) if it reads its input in a one-way fashion.&lt;/p&gt;
 
 &lt;p&gt;For a computation on the BPL machine with input $x$, you can think of a ROBP simulates the computation by:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;picking a node in the first layer as starting node according to the input $x$;&lt;/li&gt;
-  &lt;li&gt;read the sequence of random bits on the original random tape as input and execute accordingly.&lt;/li&gt;
+  &lt;li&gt;pick a node in the first layer as starting node according to the input $x$;&lt;/li&gt;
+  &lt;li&gt;read the sequence of random bits (at most $2^{O(\log n)}$) on the original random tape as input and traverses the graph accordingly.&lt;/li&gt;
   &lt;li&gt;note that it reads the input in a streaming (one-way) fashion.&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -72,13 +81,13 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/ROBP1.jpg&quot; alt=&quot;ROBP&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;For convenience, we denote that maximum number of nodes in a layer of the (RO)BP as the &lt;em&gt;width&lt;/em&gt; of it. We denote the length of the (RO)BP as the number of layers in it.&lt;/p&gt;
+&lt;p&gt;For convenience, we denote the &lt;em&gt;width&lt;/em&gt; of the (RO)BP as the maximum number of nodes in a layer of it. We denote the &lt;em&gt;length&lt;/em&gt; of the (RO)BP as the number of layers in it.&lt;/p&gt;
 
 &lt;h2 id=&quot;-3-fooling-bpl&quot;&gt;&lt;a name=&quot;fool&quot;&gt;&lt;/a&gt; 3. Fooling BPL&lt;/h2&gt;
 
-&lt;p&gt;From the previous sections, we can see that to fool every language in BPL, it suffices to fool all ROBPs that have width at most $2^{O(\log n)}$. We formally define what we mean by fooling a ROBP.&lt;/p&gt;
+&lt;p&gt;From the previous sections, we can see that to fool every language in BPL, it suffices to fool all ROBPs that have width at most $2^{O(\log n)}$ and length at most $2^{O(\log n)}$. We formally define what we mean by fooling a ROBP.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Definition 3.1&lt;/strong&gt; For a ROBP $B: {0,1}^{n} \rightarrow {0,1}$, we say a pseudorandom generator &lt;script type=&quot;math/tex&quot;&gt;G: \{0,1\}^{r} \rightarrow \{0,1\}^{n}&lt;/script&gt;  where $r&amp;lt;n = 2^{O(\log n)}$ $\epsilon$-fools $B$ if&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 3.1&lt;/strong&gt; For a ROBP &lt;script type=&quot;math/tex&quot;&gt;B: \{0,1\}^{n} \rightarrow \{0,1\}&lt;/script&gt; and $r&amp;lt;n = 2^{O(\log n)}$, we say a pseudorandom generator &lt;script type=&quot;math/tex&quot;&gt;G: \{0,1\}^{r} \rightarrow \{0,1\}^{n}&lt;/script&gt; $\epsilon$-fools $B$ if&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 \lvert \Pr \left[ B(G(U_{r}))\right] - \Pr\left[B(U_n) \right]\rvert &lt; \epsilon %]]&gt;&lt;/script&gt;
