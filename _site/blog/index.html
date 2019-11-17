@@ -72,13 +72,50 @@
   <div class="post">
     <h1 class="post-title">
       <a href="/nisanprg/">
-        derandomize BPL:Nisan's Generator
+        Nisan's Generator for Space-Bounded Computation
       </a>
     </h1>
 
     <span class="post-date">06 Nov 2019</span>
     
-      
+      <ul>
+  <li><a href="#robp">ROBP and Matrix Multiplication</a></li>
+  <li>[Techniques] (#tech)</li>
+</ul>
+
+<h2 id="-1-robp-and-matrix-multiplication"><a name="robp"></a> 1. ROBP and Matrix Multiplication</h2>
+
+<p>In this post we present Nisan’s pseudorandom generator (PRG). In the next post, we will see how Saks and Zhou use this PRG to prove that $BPL\subseteq L^{3/2}$.</p>
+
+<p>Recall that we are interested in the ROBP where each layer of it has the same set of nodes, and the set is of size $2^s$. Each node in a layer has $2^m$ out edges each labeled with a string of length $m$ and maps to a node in the next layer. We can visualize the computing process as following:  we associate the transition from the $i$th layer to the $j$th layer with a transition matrix $M$ which is substochastic. So after $r$ times transition the resulting matrix is $M^r$. The entry $M^r_{i, j}$ is the probability that the ROBP starts at node $i$ and ends at node $j$ after $r$ transitions. The randomness is taken over the possible input to this ROBP.</p>
+
+<p>With this in mind we now present some techniques we need in order to analyze Nisan’s PRG (which we will present later).</p>
+
+<h2 id="2--techniques">2. <a name="tech"></a> Techniques</h2>
+
+<p><strong>Definition 2.1</strong> (Matrix Norm) Let $M$ be a $2^s \times 2^s$ matrix, we use the matrix norm <script type="math/tex">\lvert \lvert M\rvert \rvert</script> which is the largest row sum of $M$:</p>
+
+<script type="math/tex; mode=display">\lvert \lvert M\rvert \rvert = \max_{i} \sum_j \lvert M_{i, j} \rvert</script>
+
+<p>The following are some standard facts:</p>
+
+<p><strong>Proposition 2.2</strong></p>
+
+<script type="math/tex; mode=display">\lvert \lvert M+N\rvert \rvert \leq \lvert \lvert M\rvert \rvert  + \lvert \lvert N\rvert \rvert</script>
+
+<script type="math/tex; mode=display">\lvert \lvert MN\rvert \rvert \leq \lvert \lvert M\rvert \rvert  \cdot  \lvert \lvert N\rvert \rvert</script>
+
+<p><strong>Definition 2.3</strong> (Pairwise Independent Hashing Family) We call a family of hashing functions $H$ is pairwise independent if for any $x_1, x_2 \in A$ and $x_1 \neq x_2$, $y_1, y_2\in B$</p>
+
+<script type="math/tex; mode=display">\Pr_{h\in H}\left [\ h(x_1) = y_1 \land h(x_2) = y_2 \right ] = \frac{1}{\lvert B\rvert ^2}</script>
+
+<p><strong>Definition 2.4</strong> Let $A, B\subseteq {0,1}^m$, $h:{0,1}^m \rightarrow {0,1}^m$. We say a hash function is <em>$\epsilon$-independent for $A$, $B$</em> if</p>
+
+<script type="math/tex; mode=display">\left \lvert \Pr_x \left[ x\in A \land h(x)\in B \right] - \frac{\lvert A\rvert \lvert B \rvert}{2^{2m}} \right \rvert \leq \epsilon</script>
+
+<p>From now on we denote $\frac{\lvert A\rvert}{2^m}$ as $\alpha$ and $\frac{\lvert B\rvert}{2^m}$ as $\beta$.</p>
+
+<p>We now prove a mixing lemma which roughtly says that functions from pairwise independent hashing family are almost all $\epsilon$-independent.</p>
 
     
   </div>

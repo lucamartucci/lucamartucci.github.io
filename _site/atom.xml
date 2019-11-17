@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-11-09T18:46:48+08:00</updated>
+ <updated>2019-11-17T16:07:43+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -13,11 +13,48 @@
 
  
  <entry>
-   <title>derandomize BPL:Nisan's Generator</title>
+   <title>Nisan's Generator for Space-Bounded Computation</title>
    <link href="http://localhost:4000/nisanprg/"/>
    <updated>2019-11-06T00:00:00+08:00</updated>
    <id>http://localhost:4000/nisanprg</id>
-   <content type="html">
+   <content type="html">&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#robp&quot;&gt;ROBP and Matrix Multiplication&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;[Techniques] (#tech)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-1-robp-and-matrix-multiplication&quot;&gt;&lt;a name=&quot;robp&quot;&gt;&lt;/a&gt; 1. ROBP and Matrix Multiplication&lt;/h2&gt;
+
+&lt;p&gt;In this post we present Nisan’s pseudorandom generator (PRG). In the next post, we will see how Saks and Zhou use this PRG to prove that $BPL\subseteq L^{3/2}$.&lt;/p&gt;
+
+&lt;p&gt;Recall that we are interested in the ROBP where each layer of it has the same set of nodes, and the set is of size $2^s$. Each node in a layer has $2^m$ out edges each labeled with a string of length $m$ and maps to a node in the next layer. We can visualize the computing process as following:  we associate the transition from the $i$th layer to the $j$th layer with a transition matrix $M$ which is substochastic. So after $r$ times transition the resulting matrix is $M^r$. The entry $M^r_{i, j}$ is the probability that the ROBP starts at node $i$ and ends at node $j$ after $r$ transitions. The randomness is taken over the possible input to this ROBP.&lt;/p&gt;
+
+&lt;p&gt;With this in mind we now present some techniques we need in order to analyze Nisan’s PRG (which we will present later).&lt;/p&gt;
+
+&lt;h2 id=&quot;2--techniques&quot;&gt;2. &lt;a name=&quot;tech&quot;&gt;&lt;/a&gt; Techniques&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Definition 2.1&lt;/strong&gt; (Matrix Norm) Let $M$ be a $2^s \times 2^s$ matrix, we use the matrix norm &lt;script type=&quot;math/tex&quot;&gt;\lvert \lvert M\rvert \rvert&lt;/script&gt; which is the largest row sum of $M$:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\lvert \lvert M\rvert \rvert = \max_{i} \sum_j \lvert M_{i, j} \rvert&lt;/script&gt;
+
+&lt;p&gt;The following are some standard facts:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proposition 2.2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\lvert \lvert M+N\rvert \rvert \leq \lvert \lvert M\rvert \rvert  + \lvert \lvert N\rvert \rvert&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\lvert \lvert MN\rvert \rvert \leq \lvert \lvert M\rvert \rvert  \cdot  \lvert \lvert N\rvert \rvert&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;Definition 2.3&lt;/strong&gt; (Pairwise Independent Hashing Family) We call a family of hashing functions $H$ is pairwise independent if for any $x_1, x_2 \in A$ and $x_1 \neq x_2$, $y_1, y_2\in B$&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\Pr_{h\in H}\left [\ h(x_1) = y_1 \land h(x_2) = y_2 \right ] = \frac{1}{\lvert B\rvert ^2}&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;Definition 2.4&lt;/strong&gt; Let $A, B\subseteq {0,1}^m$, $h:{0,1}^m \rightarrow {0,1}^m$. We say a hash function is &lt;em&gt;$\epsilon$-independent for $A$, $B$&lt;/em&gt; if&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\left \lvert \Pr_x \left[ x\in A \land h(x)\in B \right] - \frac{\lvert A\rvert \lvert B \rvert}{2^{2m}} \right \rvert \leq \epsilon&lt;/script&gt;
+
+&lt;p&gt;From now on we denote $\frac{\lvert A\rvert}{2^m}$ as $\alpha$ and $\frac{\lvert B\rvert}{2^m}$ as $\beta$.&lt;/p&gt;
+
+&lt;p&gt;We now prove a mixing lemma which roughtly says that functions from pairwise independent hashing family are almost all $\epsilon$-independent.&lt;/p&gt;
 </content>
  </entry>
  
