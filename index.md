@@ -3,12 +3,10 @@ layout: default
 title: About Me
 ---
 
-I'm a second-year master student at Rutgers University. I have broad interest in theoretical computer science. In particular, I'm interested in **Computational Complexity**.
+I'm a second-year master student at Rutgers University. I have broad interest in theoretical computer science. My long-term goal is to develop better deterministic simulating algorithm for randomized space-bounded computation. The related areas are called **Derandomization** and **Pseudorandomness**.
 
-I also find the following topics interesting and hope to explore them in the future --
-
-**Cryptography**  
-**Randomness in Computation, Pseudorandomness** ([link](http://www.math.ias.edu/~avi/BOOKS/Randomness_and_Pseudorandomness.pdf))  
+I'm also interested in working on **Cryptography** in the future.  
+ 
 
 Five [worlds](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.678.8930&rep=rep1&type=pdf) by Impagliazzo.  
 Computational Complexity and [Philosophy](https://www.scottaaronson.com/papers/philos.pdf)   
