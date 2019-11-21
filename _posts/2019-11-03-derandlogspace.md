@@ -62,7 +62,7 @@ From the previous sections, we can see that to fool every language in BPL, it su
 
 **Definition 3.1** For a ROBP $$Q: \{0,1\}^{n} \rightarrow \{0,1\}$$ and $r<n = 2^{O(\log n)}$, we say a pseudorandom generator $$G: \{0,1\}^{r} \rightarrow \{0,1\}^{n}$$ $\epsilon$-fools $B$ if  
 
-$$\lvert \Pr \left[ Q(G(U_{r}))\right] - \Pr\left[Q(U_n) \right]\rvert < \epsilon$$
+$$\lvert \Pr \left[ Q(G(U_{r}))=1\right] - \Pr\left[Q(U_n)=1 \right]\rvert < \epsilon$$
 
 **References**  
 
