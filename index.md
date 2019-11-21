@@ -3,7 +3,9 @@ layout: default
 title: About Me
 ---
 
-I'm a second-year master student at Rutgers University. I have broad interest in theoretical computer science. My current goal is to develop better deterministic simulating algorithm for randomized space-bounded computation. The related areas are called **Derandomization** and **Pseudorandomness**.
+I'm a second-year master student at Rutgers University. I have broad interest in theoretical computer science.  
+ 
+My current goal is to develop better deterministic simulating algorithm for randomized space-bounded computation. The related areas are called **Derandomization** and **Pseudorandomness**.
 
 I'm also interested in working on **Cryptography** in the future.  
  
