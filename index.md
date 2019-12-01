@@ -11,6 +11,5 @@ I'm also interested in working on **Cryptography** in the future.
  
 
 Five [worlds](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.678.8930&rep=rep1&type=pdf) by Impagliazzo.  
-Computational Complexity and [Philosophy](https://www.scottaaronson.com/papers/philos.pdf)   
-[Lens](https://www.ias.edu/ideas/2014/lens-of-computation-workshop) of Computation on the Sciences.
+
 
