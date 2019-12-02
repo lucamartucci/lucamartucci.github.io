@@ -71,29 +71,147 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/sakszhou/">
+        Derandomize BPL:BPL is in L^{3/2}
+      </a>
+    </h1>
+
+    <span class="post-date">20 Nov 2019</span>
+    
+      <ul>
+  <li><a href="#algo">An Algorithm for Estimating Success Probability via Nisan’s PRG</a></li>
+  <li><a href="#sakszhou">Saks and Zhou’s Algorithm</a></li>
+</ul>
+
+<p>Given a ROBP of our interest, there is a trivial algorithm to compute the $(i,j)$-th entry of one layer’s transition matrix $M$: for input $(i,j)$, simply enumerates all transition strings <script type="math/tex">\{0,1\}^m</script> and counts the number of strings that lead to $j$, then divide this number by $2^m$. This algorithm uses space $O(d+m)$.</p>
+
+<p>To derandomize $BPL$, it’s enough to show a deterministic algorithm that runs in small space and estimates the $(i, j)$-th  entry with error $1/d$ in the matrix $M^{2^r}$. We say this algorithm approximates $M^{2^r}$.</p>
+
+<p>For reasons above, from now on we phrase everything in terms of matrix exponentiation.</p>
+
+<p><strong>Fact.</strong> The repeated squaring algorithm computes exact $M^{2^r}$ with space $O(rd)$.</p>
+
+<p>From Nisan’s generator, we should see that it implicitly gives an algorithm for approximating matrix exponentiation. Let’s show the algorithm below.</p>
+
+<h2 id="-1-an-algorithm-for-approximating-matrix-exponentiation-via-nisans-prg"><a name="algo"></a> 1. An Algorithm for Approximating Matrix Exponentiation via Nisan’s PRG</h2>
+
+<p>The algorithm starts by randomly picking a set of hash functions and store these functions, we call the space we need for this purpose the <em>random bit complexity</em>. We think of this step as the outer layer of this algorithm. It then starts to feed the pseudorandom bits, produced by computing these hash functions, to the ROBP and computes using the trivial counting algorithm. We call the space for this purpose the <em>processing space complexity</em>. We think of this step as the inner layer (or subroutine) of the algorithm. The following algorithm from [1] captures the subroutine for processing matrices. Saks and Zhou’s algorithm is a variant of this subroutine.</p>
+
+<p><strong>Lemma 4.1</strong> (Saks and Zhou; Nisan) For a $d\times d$ matrix $M$ and integers $r, m$, there is an algorithm PRS(M, r, m; h) (meaning <em>Pseudorandom Repeated Squaring</em>) that takes a random string <script type="math/tex">h\in \{0,1\}^{2m\cdot r}</script>, runs in space $O(m+r+\log d)$ and, if $m= O(\log d)$, approximates the matrix $M^{2^r}$ with error $O(1/d)$.</p>
+
+<p>Therefore, if we use Nisan’s generator and apply the algorithm in Lemma 4.1 in a straightforward way, we have an algorithm for deterministically simulating $BPL$ in space $O(\log n^2)$ (for random bit complexity) + $O(\log n)$ (for processing space complexity) = $O(\log n^2)$. For comparison, the recursive repeated squaring algorithm has processing space complexity $O(\log n^2)$.</p>
+
+<p>The main idea of Saks and Zhou for proving $BPL\subseteq L^{3/2}$ is , by combining these two algorithms (<em>PRS + Recursive Repeated Squaring</em>) in a sophisticated way, so the final random bit complexity falls down to $O(\log n^{3/2})$ and the processing space complexity becomes $O(\log n^{3/2})$.</p>
+
+<h2 id="2--saks-and-zhous-algorithm">2. <a name="sakszhou"></a> Saks and Zhou’s Algorithm</h2>
+
+<p>As mentioned in the last section, we gonna combine PRS and the repeated squaring algorithm in a “sophisticated” way. To illustrate this way of combining, we first define some operators for real numbers in $[0,1]$ and similarly, for matrix.</p>
+
+<p><strong>Definition 2.1</strong> (<em>Perturbation Operator</em>) a perturbation opertaor $\Sigma_\delta$ is a function mapping nonnegative real number $z\in [0,1]$ to <script type="math/tex">\Sigma_\delta = \max \{z-\delta, 0\}</script>. The operator applies to matrices by applying it entry by entry to the matrix.</p>
+
+<p><strong>Definition 2.2</strong> (<em>Truncation Operator</em>) for a positive integer $t$, a truncation operator $\lfloor\  \rfloor_t$ is a function that, for a nonnegative real number $z$, truncating the binary expansion of $z$ after $t$ binary digits. That is, $\lfloor z\rfloor _t = 2^{-t} \lfloor 2^t z\rfloor$. Again, the operator applies to matrices by applying it entry by entry to the matrix.</p>
+
+<p>Some facts for applying these operators on matrices will be useful for our purpose:</p>
+
+<p><strong>Proposition 2.3</strong> For $M, N \in R^d\times R^d$,</p>
+
+<ol>
+  <li>$\lvert\lvert M - \lfloor M \rfloor_t \rvert\rvert \leq d\cdot 2^{-t}$</li>
+  <li>$\lvert\lvert M - \Sigma_\delta M  \rvert\rvert \leq d\cdot \delta$</li>
+  <li>$\lvert\lvert \Sigma_\delta M - \Sigma_\delta N\rvert\rvert \leq \lvert\lvert M - N\rvert\rvert$</li>
+</ol>
+
+<p>We now start to give an overview of Saks and Zhou’s algorithm. The idea is to apply PRS recursively, but not in the direct way.</p>
+
+<p>Let $A^r(M)$ be the matrix obtained by repeatedly squaring $M$ for $r$ times, i.e. $A^r(M) = M^{2^r}$. Consider $A^r(M) = A^{r_1\cdot r_2}(M) = A^{r_2}(A^{r_1}(M))$ where $r_1 \cdot r_2 = r$, if we apply PRS recursively, that is, we repeatedly compute $A^{r_1}$ for $r_2$ times. Now the random bit complexity will be $r_2\cdot r_1 m = O(rd)$ and the processing space complexity is $r_2\cdot O(d)$. Therefore the random bit complexity has not been improved, and we paid additional cost for processing space complexity.</p>
+
+<p>The additional idea is to feed the same random bits for each level of these PRSs, so we can reduce the random bit complexity, and if necessary we are willing to pay more processing space complexity. However it’s hard to prove that there exists such a sequence of random bits that works for every level. To present how Saks and Zhou get avoid of this obstacle, we will introduce some objects which are useful both for presenting and for analyzing.</p>
+
+<p>We define the <strong>exact repeated squaring matrices sequence</strong></p>
+
+<p>$s_1:N_0=M_0, N_1 \ldots N_{r_2}$</p>
+
+<p>where $N_i$ is the matrix obtained by computing $A^{r_1}(N_{i-1})= N^{2^{r_1}}_{i-1}$. The last matrix in the sequence is the one we would like to approximate.  We also define a <strong>pseudorandom matrices sequence</strong></p>
+
+<p>$s_2:M_0, M_1, \ldots, M_{r_2}$</p>
+
+<p>where $M_i = PRS(M_{i-1}, m, r_1; h)$. We will not directly show that $s_2$ approximates $s_1$ well because… it’s not known how to prove it. Instead we want to show a modified version of $s_2$ that is good for our purpose.</p>
+
+<p>We define the third sequence, which we call  <strong>pseudorandom matrices sequence SZ ver.</strong> (pseudorandom matrices sequence under Saks and Zhou’s manipulation)</p>
+
+<p>$s_3:M_0, M^P_1, M^\Sigma_1, M_1, \ldots, M^P_{r_2}, M^\Sigma_{r_2}, M_{r_2}$</p>
+
+<p>where $M^P_i = PRS(M_{i-1}, r_1, m; h)$; $M^\Sigma_i = \Sigma_{\delta_i}M^P_i$; $M_i = \lfloor M^\Sigma_i \rfloor_t$.</p>
+
+<p>Saks and Zhou’s algorithm recursively computes $M_i$ in $s_3$.</p>
+
+<p>We now present Saks and Zhou’s algorithm which we denote as SZ for computing sequence $M_{r_2}$ in $s_3$, and will prove its correctness in the next section.</p>
+
+<hr />
+
+<p>Algorithm SZ:</p>
+
+<p><strong>Input</strong><br />
+a $d\times d$ substochastic matrix $M$, intgers $r$ and $a$, indices $u, v\in [d]$.</p>
+
+<p>Then the parameters $m, D, K, t= K-D$ are computed.</p>
+
+<p><strong>Randomn input (stored in the outer layer as random bit complexity)</strong><br />
+$h \in ({0,1}^{2m})^{r_2}$ and $q\in ({0,1}^{D})^{r_2}$</p>
+
+<p>The algorithm SZ then recursively computes $M_i[u,v]$ in $s_3$</p>
+
+<p><strong>Output</strong><br />
+$M_{r_2}[u,v]$</p>
+
+<hr />
+
+<p>For the rest of this post we’ll prove the following theorem</p>
+
+<p><strong>Theorem 2.4</strong>  The algorithm SZ approximates $A^r(M)$ with error $K-D-2r-\log d$ except with probability $\frac{2^{r+ 2\log d}}{2^m(2^D + 2^{2K+4r+5\log d})}$</p>
+
+<h2 id="references">References</h2>
+
+<p>[1] Michael Saks and Shiyu Zhou, “BPHSPACE(S) ⊆ DSPACE(S^3/2)”. http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.225.8850&amp;rep=rep1&amp;type=pdf</p>
+
+
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/nisanprg/">
-        Nisan's Generator for Space-Bounded Computation
+        Nisan's Pseudorandom Generator for Space-Bounded Computation
       </a>
     </h1>
 
     <span class="post-date">06 Nov 2019</span>
     
       <ul>
-  <li><a href="#robp">ROBP and Matrix Multiplication</a></li>
-  <li>[Techniques] (#tech)</li>
+  <li><a href="#robp">ROBP and Matrix Exponentiation</a></li>
+  <li><a href="#pre">Preliminaries</a></li>
+  <li><a href="#nisan">Nisan’s Pseudorandom Generator</a></li>
 </ul>
-
-<h2 id="-1-robp-and-matrix-multiplication"><a name="robp"></a> 1. ROBP and Matrix Multiplication</h2>
 
 <p>In this post we present Nisan’s pseudorandom generator (PRG). In the next post, we will see how Saks and Zhou use this PRG to prove that $BPL\subseteq L^{3/2}$.</p>
 
-<p>Recall that we are interested in the ROBP where each layer of it has the same set of nodes, and the set is of size $2^s$. Each node in a layer has $2^m$ out edges each labeled with a string of length $m$ and maps to a node in the next layer. We can visualize the computing process as following:  we associate the transition from the $i$th layer to the $j$th layer with a transition matrix $M$ which is substochastic. So after $r$ times transition the resulting matrix is $M^r$. The entry $M^r_{i, j}$ is the probability that the ROBP starts at node $i$ and ends at node $j$ after $r$ transitions. The randomness is taken over the possible input to this ROBP.</p>
+<h2 id="-1-robp-and-matrix-exponentiation"><a name="robp"></a> 1. ROBP and Matrix Exponentiation</h2>
+
+<p>Recall that we are interested in the ROBP where each layer of it has the same set of nodes, and the set is of size $2^s$. Each node in a layer has $2^m$ out edges each labeled with a binary string of length $m$ and maps to a node in the next layer. We can visualize the computation on a ROBP as following:  we associate the transition from the $i$th layer to the $i+1$th layer with a $2^s\times 2^s$ transition matrix $M$ which is substochastic. Therefore each time the ROBP makes a transition, the previous product is multiplied with the same $M$. After $r$ times transition the resulting matrix is denoted as $M^r$. The entry $M^r_{i, j}$ is the probability that the ROBP starts at node $i$ and ends at node $j$ after $r$ transitions when we choose input uniformly at random. The randomness is taken over the possible inputs to this ROBP.</p>
+
+<p>Let’s examine some more properties about the matrix $M$. For each entry in $M$, say $M_{i,j}$, we can associate it with a subset of strings in <script type="math/tex">\{0,1\}^m</script>, which means that the the $i$th node given one of this set of strings will transit to the $j$th node in the next layer. Moreover, the same string does not appear twice in the a row. and the set of all strings in a row of $M$ is exactly the set of all strings <script type="math/tex">\{0,1\}^m</script>.</p>
+
+<p>Recall our goal is to construct a pseudorandom generator for the above ROBP. This is equivalent to we want that the final matrix $M_{prg}^r$ obtained by feeding the ROBP with pseudorandom bits is “close” to the final matrix $M^r$ obtained by feeding with uniformly random bits.</p>
 
 <p>With this in mind we now present some techniques we need in order to analyze Nisan’s PRG (which we will present later).</p>
 
-<h2 id="2--techniques">2. <a name="tech"></a> Techniques</h2>
+<h2 id="2--preliminaries">2. <a name="pre"></a> Preliminaries</h2>
 
-<p><strong>Definition 2.1</strong> (Matrix Norm) Let $M$ be a $2^s \times 2^s$ matrix, we use the matrix norm <script type="math/tex">\lvert \lvert M\rvert \rvert</script> which is the largest row sum of $M$:</p>
+<p>For convenience, we set $d = 2^s$. We then introduce more notations. Let $[d]$ be the set of all nodes in a layer and <script type="math/tex">Q: [d]\times \{0,1\}^m\rightarrow [d]</script> be the transition function for two consecutive layers’s computation. <script type="math/tex">Q^r:[d]\times \{0,1\}^{m\cdot r}\rightarrow [d]</script> is the transition function for $r$ consecutive layers. Then we use $Q[x]$ to represent the behavior of $Q$ on <script type="math/tex">x \in \{0,1\}^m</script>, and the corresponding matrix is denoted as $M[x]$.</p>
+
+<p>Let $Q_{i,j}$ be the subset of strings in <script type="math/tex">\{0,1\}^m</script> that maps node $i$ to node $j$ in the next layer. Similarly, let $Q^r_{i,j}$ be the subset of strings in <script type="math/tex">\{0,1\}^{m\cdot r}</script> which can be viewed as paths from node $i$ in the first layer to node $j$ in the last layer. Clearly, $M^r_{i,j}=\frac{\lvert Q^r_{i,j} \rvert}{2^{mr}}$.</p>
+
+<p><strong>Definition 2.1</strong> (Matrix Norm) Let $M$ be a $d \times d$ matrix, we use the matrix norm <script type="math/tex">\lvert \lvert M\rvert \rvert</script> which is the largest row sum of $M$:</p>
 
 <script type="math/tex; mode=display">\lvert \lvert M\rvert \rvert = \max_{i} \sum_j \lvert M_{i, j} \rvert</script>
 
@@ -101,21 +219,130 @@
 
 <p><strong>Proposition 2.2</strong></p>
 
+<p>For matrices $M, N \in R^{d}\times R^d$,</p>
+
 <script type="math/tex; mode=display">\lvert \lvert M+N\rvert \rvert \leq \lvert \lvert M\rvert \rvert  + \lvert \lvert N\rvert \rvert</script>
 
 <script type="math/tex; mode=display">\lvert \lvert MN\rvert \rvert \leq \lvert \lvert M\rvert \rvert  \cdot  \lvert \lvert N\rvert \rvert</script>
 
-<p><strong>Definition 2.3</strong> (Pairwise Independent Hashing Family) We call a family of hashing functions $H$ is pairwise independent if for any $x_1, x_2 \in A$ and $x_1 \neq x_2$, $y_1, y_2\in B$</p>
+<p><strong>Proposition 2.3</strong></p>
 
-<script type="math/tex; mode=display">\Pr_{h\in H}\left [\ h(x_1) = y_1 \land h(x_2) = y_2 \right ] = \frac{1}{\lvert B\rvert ^2}</script>
+<p>If $M, M^\prime, N, N^\prime$ are substochastic matrices, then</p>
 
-<p><strong>Definition 2.4</strong> Let $A, B\subseteq {0,1}^m$, $h:{0,1}^m \rightarrow {0,1}^m$. We say a hash function is <em>$\epsilon$-independent for $A$, $B$</em> if</p>
+<script type="math/tex; mode=display">\lvert\lvert MM^\prime - NN^\prime \rvert\rvert \leq \lvert\lvert M-N\rvert\rvert + \lvert\lvert M^\prime- N^\prime\rvert\rvert</script>
 
-<script type="math/tex; mode=display">\left \lvert \Pr_x \left[ x\in A \land h(x)\in B \right] - \frac{\lvert A\rvert \lvert B \rvert}{2^{2m}} \right \rvert \leq \epsilon</script>
+<p><strong>Definition 2.4</strong> (Pairwise Independent Hashing Family) We call a family of hashing functions <script type="math/tex">H:\{0,1\}^m\rightarrow \{0,1\}^n</script> is pairwise independent if for any <script type="math/tex">x_1, x_2 \in \{0,1\}^m</script> and $x_1 \neq x_2$, <script type="math/tex">y_1, y_2\in \{0,1\}^n</script> , when <script type="math/tex">h:\{0,1\}^m\rightarrow \{0,1\}^n</script> is chosen randomly from $H$, then</p>
+
+<script type="math/tex; mode=display">\Pr_{h\in H}\left [\ h(x_1) = y_1 \land h(x_2) = y_2 \right ] = \frac{1}{2^{2n}}</script>
+
+<p>An explicit construction of such hash family is known to exist and can be encoded using $2m$ bits. Moreover, it can be computed using $O(m)$ space.</p>
+
+<p><strong>Definition 2.5</strong> Let $A, B\subseteq {0,1}^m$, $h:{0,1}^m \rightarrow {0,1}^m$. We say a hash function is <em>$\epsilon$-independent for $A$, $B$</em> if</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\left \lvert \Pr_x \left[ x\in A \land h(x)\in B \right] - \frac{\lvert A\rvert \lvert B \rvert}{2^{2m}} \right \rvert < \epsilon %]]></script>
 
 <p>From now on we denote $\frac{\lvert A\rvert}{2^m}$ as $\alpha$ and $\frac{\lvert B\rvert}{2^m}$ as $\beta$.</p>
 
-<p>We now prove a mixing lemma which roughtly says that functions from pairwise independent hashing family are almost all $\epsilon$-independent.</p>
+<p>We now prove a mixing lemma which roughtly says that the functions from a pairwise independent hashing family are almost all $\epsilon$-independent.</p>
+
+<p><strong>Theorem 2.6</strong> (Mixing Lemma) Fix any $A$ ,$B$, if <script type="math/tex">h:\{0,1\}^m\rightarrow \{0,1\}^m</script> is chosen randomly from a pairwise independent hashing family $H$, then</p>
+
+<script type="math/tex; mode=display">\Pr_{h\in H} \left[ \text{h is not } \epsilon \text{-independent} \right]\leq \frac{\alpha\beta/\epsilon^2}{2^m}</script>
+
+<p><strong>Proof.</strong></p>
+
+<p>For any $h$, let $X_i$ be the indicator variable that $h(x_i)\in B$, and $X= \sum_{i\in A}X_i$. $h$ is  $\epsilon$-independent iff <script type="math/tex">% <![CDATA[
+\lvert\frac{X}{2^m}-\alpha\beta\rvert < \epsilon %]]></script>. Consider the expectation $E[\frac{X}{2^m}] = \frac{1}{2^m}E[X]$.  By linearity of expectation, $ E[\frac{X}{2^m}] = \frac{1}{2^m}\sum_{i\in A} E[X_i] =  \frac{1}{2^m}\cdot \beta \lvert A\rvert = \alpha\beta$. Since $X_i$’s are pairwise independent, by Chebyshev inequality we have:</p>
+
+<script type="math/tex; mode=display">\Pr\left[ \lvert\frac{X}{2^m}-\alpha\beta\rvert \geq \epsilon \right ]\leq \frac{Var[X]}{2^{2m}\cdot \epsilon^2} \leq\frac{\sum_{i\in A}Var[X_i]}{2^{2m}\cdot \epsilon^2} \leq \frac{\lvert A\rvert\cdot \beta(1-\beta)}{2^{2m}\cdot \epsilon^2}\leq \frac{\alpha\beta}{2^m\cdot \epsilon^2}</script>
+
+<h2 id="-3-nisans-pseudorandom-generator"><a name="prg"></a> 3. Nisan’s Pseudorandom Generator</h2>
+
+<p>Nisan’s generator is constructed by using random hash functions from pairwise independent hash family. <br />
+Consider the matrix $M^2[x_1,x_2]$ of $Q^2[x_1, x_2]$ where $x_1x_2$ is chosen uniformly at random, we first show that if we choose $h_1$ randomly from $H$, then $M^2(x_1, h_1(x_1)$ of is close to $M^2(x_1,x_2)$.</p>
+
+<p><strong>Lemma 3.1</strong></p>
+
+<script type="math/tex; mode=display">\Pr \left[ \lvert\lvert M^2[x_1, h_1(x_1)] -M^2[x_1,x_2]\rvert\rvert \geq \epsilon \right ] \leq \frac{\alpha\beta\cdot d^7}{2^m \epsilon^2}</script>
+
+<p><strong>Proof.</strong></p>
+
+<p>Consider the $(i, j)$-th entry of $M^2[x_1, h_1(x_1)] -M^2(x_1,x_2)$,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+  \left\lvert M^2[x_1, h_1(x_1)]_{i,j} -M^2[x_1,x_2]_{i,j}\right\rvert &= \lvert \sum_p (M[x_1]_{i,p}\cdot M[h(x_1)]_{p, j} - M[x_1]_{i,p}\cdot M[x_2]_{p, j})\rvert\\
+  &\leq \sum_p \left\lvert M[x_1]_{i,p}\cdot M[h(x_1)]_{p, j} - \alpha\beta \right\rvert\\
+ \end{align*} %]]></script>
+
+<p>Inparticular, if $h$ is $\epsilon/d^2$-independent for all $Q_{i,p}$ and $Q_{p, j}$, then</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\sum_p \left\lvert M[x_1]_{i,p}\cdot M[h(x_1)]_{p, j} - \alpha\beta \right\rvert < \epsilon/d %]]></script>
+
+<p>and</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\lvert\lvert M^2[x_1, h_1(x_1)] -M^2[x_1,x_2]\rvert\rvert <\epsilon %]]></script>
+
+<p>With Lemma 2.6, if we want this holds for all triples $(i, p, j)$, a union bound gives us that</p>
+
+<script type="math/tex; mode=display">\Pr \left[ \lvert\lvert M^2[x_1, h_1(x_1)] -M^2(x_1,x_2)\rvert\rvert \geq \epsilon \right ] \leq \frac{\alpha\beta\cdot d^4 \cdot d^3}{2^m \epsilon^2} = \frac{\alpha\beta\cdot d^7}{2^m \epsilon^2}</script>
+
+<p>Now we have a lemma for the case $r=2$, we can do it by repeatedly squaring to prove a lemma for the case $r$. For the next steps, every time we pick a new hash function from the above family, we will generate our pseudorandom bits by compositing these picked hash functions. For example, when we pick $h_2$, then new pseudorandom bits are generated by concatenating $h_2(x)$ and $h_2(h_1(x))$. From now on we will denote the new matrix as $M^{2^r}[x; h_1,..\ldots h_r]$ and the matrix we feed with uniformly random bits $x_1, \ldots x_{2^r}$ is denoted simply as $M^{2^r}$. Let’s do some more steps:</p>
+
+<p>when $r=4$,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+  \lvert\lvert M^4[x, h_1, h_2]_{i,j} -M^4_{i,j}\rvert\rvert &= \lvert\lvert M^4[x, h_1, h_2]_{i,j}-(M^2[x, h_1])^2 + (M^2[x, h_1])^2 - M^4\rvert\rvert\\
+  &\leq \lvert\lvert M^4[x, h_1, h_2]_{i,j}-(M^2[x, h_1])^2\rvert\rvert + \lvert\lvert (M^2[x, h_1])^2 - M^4\rvert\rvert\\
+  &\leq \epsilon + 2\cdot \epsilon\\
+  &\leq 3\epsilon
+ \end{align*} %]]></script>
+
+<p>when $r=8$,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+  \lvert\lvert M^8[x, h_1, h_2, h_3]_{i,j} -M^8_{i,j}\rvert\rvert &= \lvert\lvert M^8[x, h_1, h_2, h_3]_{i,j}-(M^4[x, h_1, h_2])^2 + (M^4[x, h_1, h_2])^2 - M^8\rvert\rvert\\
+  &\leq \epsilon + 2\cdot 3\epsilon\\
+  &\leq 7\epsilon
+ \end{align*} %]]></script>
+
+<p>The recursive relation for error is $\epsilon(r)=\epsilon + 2\cdot \epsilon(\log r)$.  In general, we have</p>
+
+<script type="math/tex; mode=display">\epsilon(r) = (r-1)\epsilon</script>
+
+<p><strong>Theorem 3.2</strong> If we pick $h_1,\ldots ,h_{\log r}$ uniformly random from the pairwise independent hash family, then</p>
+
+<script type="math/tex; mode=display">\Pr_{h_1,\ldots ,h_{\log r}}\left[\lvert\lvert M^r[h_1,\ldots ,h_{\log r}] - M^r\rvert\rvert \geq (r-1)\epsilon \right]\leq (\log r) \cdot \frac{\alpha\beta\cdot d^7}{2^m \epsilon^2}</script>
+
+<p>With these we’re ready to present Nisan’s pseudorandom generator.</p>
+
+<p><strong>Definition 3.3</strong> (<em>Pseudorandom Generator for Matirx Exponentiation</em>) A pseudorandom generator $G$ is $\epsilon$-pseudorandom for $M^r$ if</p>
+
+<script type="math/tex; mode=display">\lvert M^r[G(x)]_{i,j} - M^r[x_1 \ldots x_r]_{i,j}\rvert \leq \epsilon</script>
+
+<p>Nisan’s generator is thus constructed by compositing these randomly chosen hash functions as we described above. For <script type="math/tex">x\in \{0,1\}^m</script>,</p>
+
+<script type="math/tex; mode=display">G_{h_1,\ldots ,h_{\log r}}(x) = x,h_1(x), h_2(x), h_2(h_1(x)), \ldots, h_{\log r}(x),\ldots h_{\log r}(h_{\log r-1}(\ldots h_1(x)))</script>
+
+<p><strong>Theorem 3.4</strong> (Nisan) For $d, m$ and $r&lt;d$, there is a pseudorandom generator $G$ that is $1/d$-pseudorandom for $M^r$. Moreover, the generator takes a seed of length $O(m\log r)$ and produces a sequence of pseudorandom bits block by block for a total length of $m\cdot r$. Finally, the outputs can be computed in space $O(m+\log r)$.</p>
+
+<p><strong>Proof.</strong></p>
+
+<p>In Theorem 3.2, let’s set $\epsilon = 1/2dr$ and $m = \Theta(\log d) = C\log d$ for some large $C$. Therefore</p>
+
+<script type="math/tex; mode=display">\lvert\lvert M^r[h_1,\ldots ,h_{\log r}] - M^r\rvert\rvert \leq 1/2d</script>
+
+<p>except with probability at most $\frac{d^9 r^2 \log r}{d^C} = O(1/d)$ for large $C$. While in the later case, the difference is bounded to be at most $1\cdot O(1/d) = 1/2d$.</p>
+
+<p>Finally, we have</p>
+
+<script type="math/tex; mode=display">\left \lvert\Pr_{x, h_1, \ldots ,h_{\log r}}\left[ Q(i; G(x)) = j\right ]- \Pr_{x_1, \ldots , x_{2^r}}\left[ Q(i; x_1, \ldots , x^{2^r}) = j\right ]\right \lvert \leq 1/d</script>
+
 
     
   </div>
@@ -170,7 +397,7 @@
 
 <h2 id="-2-read-once-branching-program"><a name="robp"></a> 2. Read-once Branching Program</h2>
 
-<p>In this section we introduce a (non-uniform) computation model that simulates space-bounded computation. A branching program (in our interest) is a layed acyclic graph, each layer has a total number of $2^{O(\log n)}$ nodes. For our purpose, you should think of each of these nodes as a configuration in the execution of the above BPL machine on a given input, so each layer has the same nodes and, since it’s halting, the same node won’t be entered twice. For each input, there is a starting node in the first layer that represents the starting configuration. In the last layer there are only 2 nodes, one represents the “accept” state and the other represents the “reject” state. Between the $i$th and $i+1$th layer there are transition edges mapping from nodes in the $i$th layer to the nodes in the $i+1$th layer. Each of these edges is labeled a string <script type="math/tex">r_i \in\{0,1\}^m</script>. You should think of this string as the $m$ coin flips tossed by the machine to decide which configuration to enter in the next step, and it’s an exercise to see that this is equivalent to repeating $m$ times the process of tossing one coin then perform some deterministic computation . A computation on a branching program with input $r_n$ is just a path from a node in the first layer to the accepting/rejecting node in the last layer. Among the intermediate layers it reads $r_i$s and chooses the edges to traverse accordingly. We say a branching program is a ROBP (Read Once Branching Program) if it reads its input in a one-way fashion.</p>
+<p>In this section we introduce a (non-uniform) computation model that simulates space-bounded computation. A branching program (in our interest) is a layed acyclic graph, each layer has a total number of $2^{O(\log n)}$ nodes. For our purpose, you should think of each of these nodes as a configuration in the execution of the above BPL machine on a given input, so each layer has the same nodes and, since it’s halting, the same node won’t be entered twice. For each input, there is a starting node in the first layer that represents the starting configuration. In the last layer there are only 2 nodes, one represents the “accept” state and the other represents the “reject” state. Between the $i$th and $i+1$th layer there are transition edges mapping from nodes in the $i$th layer to the nodes in the $i+1$th layer. Each of these edges is labeled a string <script type="math/tex">r_i \in\{0,1\}^m</script>. You should think of this string as the $m$ coin flips tossed by the machine to decide which configuration to enter in the next step, and it’s an exercise to see that this is equivalent to repeating $m$ times the process of tossing one coin then perform some deterministic computation . A computation on a branching program with input $r_n$ is just a path from a node in the first layer to the accepting/rejecting node in the last layer. Among the intermediate layers it reads $r_i$s and chooses the edges to traverse layer by layer. We say a branching program is a ROBP (Read Once Branching Program) if it reads its input in a one-way fashion.</p>
 
 <p>For a computation on the BPL machine with input $x$, you can think of a ROBP simulates the computation by:</p>
 
@@ -190,10 +417,10 @@
 
 <p>From the previous sections, we can see that to fool every language in BPL, it suffices to fool all ROBPs that have width at most $2^{O(\log n)}$ and length at most $2^{O(\log n)}$. We formally define what we mean by fooling a ROBP.</p>
 
-<p><strong>Definition 3.1</strong> For a ROBP <script type="math/tex">B: \{0,1\}^{n} \rightarrow \{0,1\}</script> and $r&lt;n = 2^{O(\log n)}$, we say a pseudorandom generator <script type="math/tex">G: \{0,1\}^{r} \rightarrow \{0,1\}^{n}</script> $\epsilon$-fools $B$ if</p>
+<p><strong>Definition 3.1</strong> For a ROBP <script type="math/tex">Q: \{0,1\}^{n} \rightarrow \{0,1\}</script> and $r&lt;n = 2^{O(\log n)}$, we say a pseudorandom generator <script type="math/tex">G: \{0,1\}^{r} \rightarrow \{0,1\}^{n}</script> $\epsilon$-fools $B$ if</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-\lvert \Pr \left[ B(G(U_{r}))\right] - \Pr\left[B(U_n) \right]\rvert < \epsilon %]]></script>
+\lvert \Pr \left[ Q(G(U_{r}))=1\right] - \Pr\left[Q(U_n)=1 \right]\rvert < \epsilon %]]></script>
 
 <p><strong>References</strong></p>
 
