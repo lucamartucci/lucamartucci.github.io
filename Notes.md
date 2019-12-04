@@ -3,7 +3,6 @@ layout: default
 title: Notes
 permalink: /Notes/
 ---
-Here I put links to notes I made when study.
 
 ### Cryptography   
 **Disclaimer.** Proofs don't necessarily follow the proof in the original references.  
