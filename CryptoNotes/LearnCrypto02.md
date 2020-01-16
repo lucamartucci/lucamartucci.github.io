@@ -46,7 +46,9 @@ We now introduce one-way permutations,  trapdoor permutations.
 2. It is a permutation.
 
 Trapdoor functions are OWPs that, given auxiliary information, can 
-**Definition 1.6 (TDP)** A function is a TDP
+**Definition 1.6 (TDP)** A function $f$ is a TDP if  
+1. It satisfies all requirements in Definition 1.5  
+2. There is a polynomial-time algorithm $I$, a constant $c$ and a string $t_k$ such that, for all large enough $k$, $t_k$ is of length at most $O(k^c)$, and for any $x\in \{0,1\}^k$, $I(f(x), t_k) = z$ where $f(z) = f(x)$.
 
 ## 2. Necessary Complexity Assumptions
 
@@ -67,5 +69,9 @@ While we don't know whether $BPP \neq NP$ or $P/poly \neq NP$ hold, we can show 
 **Theorem 2.2 (Adleman)** $BPP\subseteq P/poly$  
 
 **Proof.** For a language $L$ in BPP that can be recognized by a Turing machine $M$, it can be shown that by repeatedly running $M$ many (at most polynomial) times and taking the majority vote, we can reduce the error probability to arbitrary exponentially small value. Let's assume the error probability on both sides is $2^{-r}$ for some $r>n$, so the number of coin flips used by the new Turing machine $M^\prime$ is at most $r$.  
-    According to the above, its' equivalent to say that for any fixed $x$, for a random string of length $r$, the probability that $M^\prime(x, r)$ accepts is at most $2^{-r}$. We use the union bound to bound that, for all possible inputs $$x\in \{0,1\}^n$$, the probability that $M^\prime$ rejects at least one of these $x$ is at most $2^{n-r} < 1$. Therefore, for a random string, there is a positive probability (greater than $1-2^{n-r}$) that can make all $x$ be accepted by $M^\prime$. We take the existence of such a string and hardwire it into our circuit. By doing this the circuits family can decide $L$ without any randomness.    
+    According to the above, its' equivalent to say that for any fixed $x$, for a random string of length $r$, the probability that $M^\prime(x, r)$ accepts is at most $2^{-r}$. We use the union bound to bound that, for all possible inputs $$x\in \{0,1\}^n$$, the probability that $M^\prime$ rejects at least one of these $x$ is at most $2^{n-r} < 1$. Therefore, for a random string, there is a positive probability (greater than $1-2^{n-r}$) that can make all $x$ be accepted by $M^\prime$. We take the existence of such a string and hardwire it into our circuit. By doing this the circuits family can decide $L$ without any randomness.  
+    
+## 3. Candidates Functions for OWFs, OWPs and TDPs  
+
+
 
