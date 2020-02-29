@@ -5,4 +5,4 @@ title: Intro to Cryptography 03:Computational Indistinguishability and Pseudoran
 tags: Cryptography
 ---
 
-In this note we discuss pseudorandom generators.
+Definition 

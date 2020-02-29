@@ -1,4 +1,4 @@
-I"1<ul>
+I"1<ul>
   <li><a href="#robp">ROBP and Matrix Exponentiation</a></li>
   <li><a href="#pre">Preliminaries</a></li>
   <li><a href="#nisan">Nisan’s Pseudorandom Generator</a></li>
@@ -8,7 +8,7 @@
 
 <h2 id="-1-robp-and-matrix-exponentiation"><a name="robp"></a> 1. ROBP and Matrix Exponentiation</h2>
 
-<p>Recall that we are interested in the ROBP where each layer of it has the same set of nodes, and the set is of size $2^s$. Each node in a layer has $2^m$ out edges each labeled with a binary string of length $m$ and maps to a node in the next layer. We can visualize the computation on a ROBP as following:  we associate the transition from the $i$th layer to the $i+1$th layer with a $2^s\times 2^s$ transition matrix $M$ which is substochastic. Therefore each time the ROBP makes a transition, the previous product is multiplied with the same $M$. After $r$ times transition the resulting matrix is denoted as $M^r$. The entry $M^r_{i, j}$ is the probability that the ROBP starts at node $i$ and ends at node $j$ after $r$ transitions when we choose input uniformly at random. The randomness is taken over the possible inputs to this ROBP.</p>
+<p>Recall that we are interested in the ROBP where each layer of it has the same set of nodes, and the set is of size $2^s$. Each node in a layer has $2^m$ out edges each labeled with a binary string of length $m$ and maps to a node in the next layer. We can visualize the computation on a ROBP as following:  we associate the transition from the $i$th layer to the $i+1$th layer with a $2^s\times 2^s$ transition matrix $M$ which is substochastic. Therefore each time the ROBP makes a transition, the previous product is multiplied with the same $M$. After $r$ times transition the resulting matrix is denoted as $M^r$. The entry $M^r_{i, j}$ is the probability that the ROBP starts at node $i$ and ends at node $j$ after $r$ transitions when we choose input uniformly at random. This view of the distribution as matrix will also be useful for analyzing.</p>
 
 <p>Let’s examine some more properties about the matrix $M$. For each entry in $M$, say $M_{i,j}$, we can associate it with a subset of strings in <script type="math/tex">\{0,1\}^m</script>, which means that the the $i$th node given one of this set of strings will transit to the $j$th node in the next layer. Moreover, the same string does not appear twice in the a row. and the set of all strings in a row of $M$ is exactly the set of all strings <script type="math/tex">\{0,1\}^m</script>.</p>
 

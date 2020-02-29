@@ -8,7 +8,7 @@ permalink: /Notes/
 **Disclaimer.** Proofs don't necessarily follow the proof in the original references.  
 [Part 01](https://jiyuzhang1994.github.io/CryptoLec01/) : Logistics; Secret, Perfect Security, One-Time Pad.  
 [Part 02](https://jiyuzhang1994.github.io/CryptoLec02/) : Discussion on OWFs; OWPs, TDPs; Complexity assumptions; Candidates functions.   
-[Part 03](https://jiyuzhang1994.github.io/CryptoLec03/) : Next-Bit Unpredictability; Pseudorandom Generators; Hybrid Arguement.
+[Part 03](https://jiyuzhang1994.github.io/CryptoLec03/) : Next-Bit Unpredictability; Computational Indistinguishability and Pseudorandom Generators; Hybrid Arguement.
 
 [Goldreich-Levin Theorem](https://jiyuzhang1994.github.io/glthm/)
 

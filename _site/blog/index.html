@@ -61,13 +61,27 @@
       <a class="sidebar-nav-item" href="/Links/">Links</a>
     </nav>
 
-    <p>&copy; 2019. All rights reserved.</p>
+    <p>&copy; 2020. All rights reserved.</p>
   </div>
 </div>
 
 
     <div class="content container">
       <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/barrington/">
+        Barrington's Theorem
+      </a>
+    </h1>
+
+    <span class="post-date">20 Feb 2020</span>
+    
+      
+
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -81,15 +95,16 @@
       <ul>
   <li><a href="#algo">An Algorithm for Estimating Success Probability via Nisan’s PRG</a></li>
   <li><a href="#sakszhou">Saks and Zhou’s Algorithm</a></li>
+  <li><a href="#correctness">Correctness Proof</a></li>
 </ul>
 
-<p>Given a ROBP of our interest, there is a trivial algorithm to compute the $(i,j)$-th entry of one layer’s transition matrix $M$: for input $(i,j)$, simply enumerates all transition strings <script type="math/tex">\{0,1\}^m</script> and counts the number of strings that lead to $j$, then divide this number by $2^m$. This algorithm uses space $O(d+m)$.</p>
+<p>Given a ROBP of width $d$ of our interest, it is naturally associated with a $d\times d$ transition matrix $M$, and there is a trivial algorithm to compute the $(i,j)$-th entry of $M$: for input $(i,j)$, simply enumerates all transition strings <script type="math/tex">\{0,1\}^m</script> and counts the number of strings that lead to $j$, then divide this number by $2^m$. This algorithm uses space $O(m+\log d)$. We say this algorithm computes exact  $M$.</p>
 
-<p>To derandomize $BPL$, it’s enough to show a deterministic algorithm that runs in small space and estimates the $(i, j)$-th  entry with error $1/d$ in the matrix $M^{2^r}$. We say this algorithm approximates $M^{2^r}$.</p>
+<p>To derandomize $BPL$, it’s enough to show a deterministic algorithm that, given as input a matrix $M$, a positive integer $r$ and a pair of indices $(i, j)$, runs in small space and estimates the $(i, j)$-th  entry with error $1/d$ in the matrix $M^{2^r}$. We say this algorithm approximates $M^{2^r}$.</p>
 
-<p>For reasons above, from now on we phrase everything in terms of matrix exponentiation.</p>
+<p>For reasons above, from now on we phrase everything in terms of computing/approximating matrix exponentiation.</p>
 
-<p><strong>Fact.</strong> The repeated squaring algorithm computes exact $M^{2^r}$ with space $O(rd)$.</p>
+<p><strong>Fact.</strong> Given a $d\times d$ matrix $M$, a positive integer $r$, and a pair of indices $(i, j)$, the repeated squaring algorithm computes exact $M^{2^r}$ using space $O(r \log d)$.</p>
 
 <p>From Nisan’s generator, we should see that it implicitly gives an algorithm for approximating matrix exponentiation. Let’s show the algorithm below.</p>
 
@@ -97,11 +112,11 @@
 
 <p>The algorithm starts by randomly picking a set of hash functions and store these functions, we call the space we need for this purpose the <em>random bit complexity</em>. We think of this step as the outer layer of this algorithm. It then starts to feed the pseudorandom bits, produced by computing these hash functions, to the ROBP and computes using the trivial counting algorithm. We call the space for this purpose the <em>processing space complexity</em>. We think of this step as the inner layer (or subroutine) of the algorithm. The following algorithm from [1] captures the subroutine for processing matrices. Saks and Zhou’s algorithm is a variant of this subroutine.</p>
 
-<p><strong>Lemma 4.1</strong> (Saks and Zhou; Nisan) For a $d\times d$ matrix $M$ and integers $r, m$, there is an algorithm PRS(M, r, m; h) (meaning <em>Pseudorandom Repeated Squaring</em>) that takes a random string <script type="math/tex">h\in \{0,1\}^{2m\cdot r}</script>, runs in space $O(m+r+\log d)$ and, if $m= O(\log d)$, approximates the matrix $M^{2^r}$ with error $O(1/d)$.</p>
+<p><strong>Lemma 1.1</strong> (Saks and Zhou; Nisan) For a $d\times d$ matrix $M$ and integers $r, m$, there is an algorithm PRS(M, r, m; h) (meaning Pseudorandom Repeated Squaring) that takes a random string <script type="math/tex">h\in \{0,1\}^{2m\cdot r}</script>, runs in space $O(m+r+\log d)$ and, if $m= O(\log d)$, approximates the matrix $M^{2^r}$ with error $O(1/d)$ except with probability $O(1/d)$.</p>
 
-<p>Therefore, if we use Nisan’s generator and apply the algorithm in Lemma 4.1 in a straightforward way, we have an algorithm for deterministically simulating $BPL$ in space $O(\log n^2)$ (for random bit complexity) + $O(\log n)$ (for processing space complexity) = $O(\log n^2)$. For comparison, the recursive repeated squaring algorithm has processing space complexity $O(\log n^2)$.</p>
+<p>Therefore, if we use Nisan’s generator and apply the algorithm in Lemma 4.1 in a straightforward way, we have an algorithm for deterministically simulating $BPL$ in space $O(\log^2 n)$ (for random bit complexity) + $O(\log n)$ (for processing space complexity) = $O(\log^2 n)$. For comparison, the recursive repeated squaring algorithm has processing space complexity $O(\log^2 n)$.</p>
 
-<p>The main idea of Saks and Zhou for proving $BPL\subseteq L^{3/2}$ is , by combining these two algorithms (<em>PRS + Recursive Repeated Squaring</em>) in a sophisticated way, so the final random bit complexity falls down to $O(\log n^{3/2})$ and the processing space complexity becomes $O(\log n^{3/2})$.</p>
+<p>The main idea of Saks and Zhou for proving $BPL\subseteq L^{3/2}$ is , by combining these two algorithms (<em>PRS + Recursive Repeated Squaring</em>) in a sophisticated way, so the final random bit complexity falls down to $O(\log^{3/2} n)$ and the processing space complexity becomes $O(\log^{3/2} n)$.</p>
 
 <h2 id="2--saks-and-zhous-algorithm">2. <a name="sakszhou"></a> Saks and Zhou’s Algorithm</h2>
 
@@ -123,7 +138,7 @@
 
 <p>We now start to give an overview of Saks and Zhou’s algorithm. The idea is to apply PRS recursively, but not in the direct way.</p>
 
-<p>Let $A^r(M)$ be the matrix obtained by repeatedly squaring $M$ for $r$ times, i.e. $A^r(M) = M^{2^r}$. Consider $A^r(M) = A^{r_1\cdot r_2}(M) = A^{r_2}(A^{r_1}(M))$ where $r_1 \cdot r_2 = r$, if we apply PRS recursively, that is, we repeatedly compute $A^{r_1}$ for $r_2$ times. Now the random bit complexity will be $r_2\cdot r_1 m = O(rd)$ and the processing space complexity is $r_2\cdot O(d)$. Therefore the random bit complexity has not been improved, and we paid additional cost for processing space complexity.</p>
+<p>Let $A^r(M)$ be the matrix obtained by repeatedly squaring $M$ for $r$ times, i.e. $A^r(M) = M^{2^r}$. Consider $A^r(M) = A^{r_1\cdot r_2}(M) = A^{r_2}(A^{r_1}(M))$ where $r_1 \cdot r_2 = r$,  we apply PRS recursively, that is, we repeatedly compute $A^{r_1}$ for $r_2$ times. Now the random bit complexity will be $r_2\cdot r_1 m = O(rd)$ and the processing space complexity is $r_2\cdot O(d)$. Therefore the random bit complexity has not been improved, and we paid additional cost for processing space complexity.</p>
 
 <p>The additional idea is to feed the same random bits for each level of these PRSs, so we can reduce the random bit complexity, and if necessary we are willing to pay more processing space complexity. However it’s hard to prove that there exists such a sequence of random bits that works for every level. To present how Saks and Zhou get avoid of this obstacle, we will introduce some objects which are useful both for presenting and for analyzing.</p>
 
@@ -137,7 +152,7 @@
 
 <p>where $M_i = PRS(M_{i-1}, m, r_1; h)$. We will not directly show that $s_2$ approximates $s_1$ well because… it’s not known how to prove it. Instead we want to show a modified version of $s_2$ that is good for our purpose.</p>
 
-<p>We define the third sequence, which we call  <strong>pseudorandom matrices sequence SZ ver.</strong> (pseudorandom matrices sequence under Saks and Zhou’s manipulation)</p>
+<p>We define the third sequence, modified from $s_2$, which we call  <strong>pseudorandom matrices sequence SZ</strong> (pseudorandom matrices sequence under Saks and Zhou’s manipulation)</p>
 
 <p>$s_3:M_0, M^P_1, M^\Sigma_1, M_1, \ldots, M^P_{r_2}, M^\Sigma_{r_2}, M_{r_2}$</p>
 
@@ -145,7 +160,7 @@
 
 <p>Saks and Zhou’s algorithm recursively computes $M_i$ in $s_3$.</p>
 
-<p>We now present Saks and Zhou’s algorithm which we denote as SZ for computing sequence $M_{r_2}$ in $s_3$, and will prove its correctness in the next section.</p>
+<p>We now present Saks and Zhou’s algorithm which we denote as SZ for computing $M_{r_2}$ in $s_3$, and will prove its correctness in the next section.</p>
 
 <hr />
 
@@ -157,7 +172,7 @@ a $d\times d$ substochastic matrix $M$, intgers $r$ and $a$, indices $u, v\in [d
 <p>Then the parameters $m, D, K, t= K-D$ are computed.</p>
 
 <p><strong>Randomn input (stored in the outer layer as random bit complexity)</strong><br />
-$h \in ({0,1}^{2m})^{r_2}$ and $q\in ({0,1}^{D})^{r_2}$</p>
+<script type="math/tex">h \in (\{0,1\}^{2m})^{r_1}</script> and <script type="math/tex">q\in (\{0,1\}^{D})^{r_2}</script></p>
 
 <p>The algorithm SZ then recursively computes $M_i[u,v]$ in $s_3$</p>
 
@@ -166,9 +181,42 @@ $M_{r_2}[u,v]$</p>
 
 <hr />
 
+<p>The random bit complexity is $O(r_1 m) + O(r_2 D) = O\left ( (r_1+r_2)d \right)$ when $m, D = \theta(d)$.</p>
+
+<p>The processing space complexity is $O(r_2 d)$.</p>
+
+<h2 id="-3-correctness-proof"><a name="correctness"></a> 3. Correctness Proof</h2>
+
 <p>For the rest of this post we’ll prove the following theorem</p>
 
-<p><strong>Theorem 2.4</strong>  The algorithm SZ approximates $A^r(M)$ with error $K-D-2r-\log d$ except with probability $\frac{2^{r+ 2\log d}}{2^m(2^D + 2^{2K+4r+5\log d})}$</p>
+<p><strong>Theorem 3.1</strong>  The algorithm SZ approximates $A^r(M)$ with error $K-D-2r-\log d$ except with probability $\frac{2^{r+ 2\log d}}{2^m\cdot (2^D + 2^{2K+4r+5\log d})}$</p>
+
+<p>We define the fourth sequence, modified from $s_1$, which we call <strong>exact repeated squaring sequence SZ</strong>. This sequence will act as a bridge in our analysis.</p>
+
+<p>$s_4: N_0 = M_0, N^P_1, N^\Sigma_1, N_1, \ldots, N^P_{r_2}, N^\Sigma_{r_2}, N_{r_2}$</p>
+
+<p>We will show three lemmas through which we can see Theorem 3.1 follows.</p>
+
+<p><strong>Lemma 3.2</strong>  For any <script type="math/tex">q\in (\{0,1\}^{D})^{r_2}</script>, the sequence $s_4$ has the property that the item $N_{r_2}$ approximates $A^r(M)$ with error $O(2^{K-D-2r-\log d})$.</p>
+
+<p>With this lemma, we would like to show that $M_{r_2}$ in $s_3$ is close to $N_{r_2}$ in $s_4$. We can actually show that $M_{r_2} = N_{r_2}$ for most of $q$ and $h$.</p>
+
+<p><strong>Definition 3.3</strong> Let $M$ be a substochastic matrix. For integers $r,a,m$, we say a string <script type="math/tex">h \in (\{0,1\}^{2m})^{r_1}</script> is $a$-pseudorandom for $M$ if $PRS(W, r, m;h)$ approximates $A^r(M)$ with error $a$.</p>
+
+<p><strong>Definition 3.4</strong> A nonnegative real number $r$ is $(b,t)$-dangerous for positive integers $b&gt;t$, if $r$ can be written as $2^{-t} I +\rho$, where $I$ is positive and $\rho\in [-2^{-b}, 2^{-b})$, otherwise we say $r$ is $(b,t)$-safe. A substochastic matrix $M$ is $(b,t)$-safe/dangerous if all of its entries are $(b,t)$-safe/dangerous.</p>
+
+<p><strong>Lemma 3.5</strong> For a fixed <script type="math/tex">q\in (\{0,1\}^{D})^{r_2}</script>, if all the matrices in $s_4$ are $(K,t)$-safe, and <script type="math/tex">h \in (\{0,1\}^{2m})^{r_1}</script> is $K$-pseudorandom for $N_i$’s for $0\leq i\leq r_2$. Then $M_{i}=N_{i}$ for all $i$. In particualr, $M_{r_2}=N_{r_2}$.</p>
+
+<p><strong>Lemma 3.6</strong> For a randomly chosen <script type="math/tex">q\in (\{0,1\}^{D})^{r_2}</script>, the probability that all of the matrices $N^\Sigma_i$ in $s_4$ are $(K,t)$-safe is at least $1-2^{-D+r+2\log d}$.</p>
+
+<p><strong>Proof of Theorem 3.1</strong><br />
+<script type="math/tex">% <![CDATA[
+\begin{align*}
+  \Pr [M_{r_2} \neq N_{r_2}] &\leq \Pr[\text{some of the }N_i\text{'s in } s_4 \text{ are }(K,t) \text{-dangerous}] + \Pr [h \text{ is not }K\text{-pseudorandom for each } N_i\in s_4]\\
+  &\leq 2^{-D+r+2\log d} + 2^{-m+2K+4r+5\log d}\\
+ \end{align*} %]]></script></p>
+
+<p>Proofs for Lemma 3.2, Lemma 3.5, Lemma 3.6 to be completed.</p>
 
 <h2 id="references">References</h2>
 
@@ -197,7 +245,7 @@ $M_{r_2}[u,v]$</p>
 
 <h2 id="-1-robp-and-matrix-exponentiation"><a name="robp"></a> 1. ROBP and Matrix Exponentiation</h2>
 
-<p>Recall that we are interested in the ROBP where each layer of it has the same set of nodes, and the set is of size $2^s$. Each node in a layer has $2^m$ out edges each labeled with a binary string of length $m$ and maps to a node in the next layer. We can visualize the computation on a ROBP as following:  we associate the transition from the $i$th layer to the $i+1$th layer with a $2^s\times 2^s$ transition matrix $M$ which is substochastic. Therefore each time the ROBP makes a transition, the previous product is multiplied with the same $M$. After $r$ times transition the resulting matrix is denoted as $M^r$. The entry $M^r_{i, j}$ is the probability that the ROBP starts at node $i$ and ends at node $j$ after $r$ transitions when we choose input uniformly at random. The randomness is taken over the possible inputs to this ROBP.</p>
+<p>Recall that we are interested in the ROBP where each layer of it has the same set of nodes, and the set is of size $2^s$. Each node in a layer has $2^m$ out edges each labeled with a binary string of length $m$ and maps to a node in the next layer. We can visualize the computation on a ROBP as following:  we associate the transition from the $i$th layer to the $i+1$th layer with a $2^s\times 2^s$ transition matrix $M$ which is substochastic. Therefore each time the ROBP makes a transition, the previous product is multiplied with the same $M$. After $r$ times transition the resulting matrix is denoted as $M^r$. The entry $M^r_{i, j}$ is the probability that the ROBP starts at node $i$ and ends at node $j$ after $r$ transitions when we choose input uniformly at random. This view of the distribution as matrix will also be useful for analyzing.</p>
 
 <p>Let’s examine some more properties about the matrix $M$. For each entry in $M$, say $M_{i,j}$, we can associate it with a subset of strings in <script type="math/tex">\{0,1\}^m</script>, which means that the the $i$th node given one of this set of strings will transit to the $j$th node in the next layer. Moreover, the same string does not appear twice in the a row. and the set of all strings in a row of $M$ is exactly the set of all strings <script type="math/tex">\{0,1\}^m</script>.</p>
 
