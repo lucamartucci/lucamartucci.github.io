@@ -41,7 +41,7 @@ So basically to construct $B_2$ all we need is to "embed" a $\theta^{-1}$ at the
 
 **Proof.** 
 
-We just embed a $sigma^{-1}$ at the end of the PBP, so that it outputs $e$ if the original PBP outputs $\sigma$ and it outputs $\sigma^{-1}$ if the original PBP outputs $e$.
+We just embed a $\sigma^{-1}$ at the end of the PBP, so that it outputs $e$ if the original PBP outputs $\sigma$ and it outputs $\sigma^{-1}$ if the original PBP outputs $e$.
 
 
 **Lemma 3.** There exists 5-cycles $\sigma, \tau$ such that $\sigma \tau \sigma^{-1} \tau^{-1}$ is also a 5-cycle. 
@@ -51,6 +51,17 @@ We just embed a $sigma^{-1}$ at the end of the PBP, so that it outputs $e$ if th
 A concrete example is $\sigma = 12345$ and $\tau=13542$. Then $(12345)(13542)(54321)(24531) = (13254)$.  
 
 
-Note that, Lemma 3 basically gives us an $AND$ gate. We can concatenate the four PBPs $B_1, B_2, B_3, B_4$ recognizes $\sigma,\tau,\sigma^{-1},\tau^{-1}$ respectively. If either $B_1(x)=e$ or $B_2(x)=e$, then $B_1B_2B_3B_4(x) = e$.  If both $B_1(x)=e$ and $B_2(x)=e$, then it outputs $e$. Otherwise it outputs $\sigma \tau \sigma^{-1} \tau^{-1}$.
+Note that, Lemma 3 basically gives us an $AND$ gate. We can concatenate the four PBPs $B_1, B_2, B_3, B_4$ recognizes $\sigma,\tau,\sigma^{-1},\tau^{-1}$ respectively. If either $B_1(x)=e$ or $B_2(x)=e$, then $B_1B_2B_3B_4(x) = e$.  If both $B_1(x)=e$ and $B_2(x)=e$, then it outputs $e$. Otherwise it outputs $\sigma \tau \sigma^{-1} \tau^{-1}$. Combining with Lemma 2, we can also get $OR$ gate, by negating the previous outputs and applying $AND$ on them.  
+
+
+**Proof of Theorem 1**  
+
+The proof goes by induction:  
+
+If the depth of the circuit is 0 then there is a length-1 PBP. Assume the depth of the circuit is $d-1$ and has length $4^{d-1}$ PBP and, assume WLOG, that at the top is an AND gate. The inputs of it are computed by $B_1$ and $B_2$. Then we concatenate $B_1B_2B_1^{-1}B_2^{-1}$, and now the theorem follows by lemma 3. The depth is $4^{d-1} \cdot 4 = 4^d$.
+
+**References**  
+
+[1] David A. Barringont. "Bounded-width polynomial-size branching programs recog- 1 nize exactly those languages in NC". https://people.cs.umass.edu/~barring/publications/bwbp.pdf
 
 
