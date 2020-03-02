@@ -62,6 +62,6 @@ If the depth of the circuit is 0 then there is a length-1 PBP. Assume the depth 
 
 **References**  
 
-[1] David A. Barrington. "Bounded-width polynomial-size branching programs recog- 1 nize exactly those languages in NC". https://people.cs.umass.edu/~barring/publications/bwbp.pdf
+[1] David A. Barrington. "Bounded-width polynomial-size branching programs recognize exactly those languages in NC^1". https://people.cs.umass.edu/~barring/publications/bwbp.pdf
 
 
