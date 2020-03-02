@@ -31,7 +31,7 @@ We proceed to prove a few lemmas, then we will prove that $O(\log n)$-depth circ
 
 Let $\sigma = (\sigma_1\sigma_2\sigma_3\sigma_4\sigma_5)$ and $\tau = (\tau_1\tau_2\tau_3\tau_4\tau_5)$. Consider the permutation $\theta = (\tau_1\rightarrow \sigma_1)$, then $\theta^{-1} \sigma \theta$ = $\tau$. To see why this holds, consider $\tau_i$,  
 
-$\theta^{-1} \sigma \theta(\tau_1): \tau_i\rightarrow \sigma_i \rightarrow \sigma_{i+1}\rightarrow\tau_{i+1}$  
+$\theta^{-1} \sigma \theta(\tau_i): \tau_i\rightarrow \sigma_i \rightarrow \sigma_{i+1}\rightarrow\tau_{i+1}$  
 
 Therefore $B_1(x) = \sigma \Rightarrow B_2(x) = \tau$ and $B_1(x) = e \Rightarrow B_2(x) = e$.
 
