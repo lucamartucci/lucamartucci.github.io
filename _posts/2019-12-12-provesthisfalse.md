@@ -19,17 +19,21 @@ Does the converse hold? There is a warning below:
 
 The matrices 
 
-\begin{bmatrix}
-2 & 1 \\
+$$
+A= \begin{bmatrix}
+2 & 1\\
 0 & 2 
 \end{bmatrix}
-
+$$
 and 
-
-\begin{bmatrix}
-1 & 0 \\
+$$
+B = \begin{bmatrix}
+2 & 0\\
 0 & 2 
 \end{bmatrix}  
-
+$$
 has the same eigenvalues but are not similar.
 
+OK, it's easy to verify that they have the same eigenvalues, but how to prove they are not similar?
+
+A first thought in mind is, we want to prove there does not exist $P$ such that $P^{-1}AP = B$
