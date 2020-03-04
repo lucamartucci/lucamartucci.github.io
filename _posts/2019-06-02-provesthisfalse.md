@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /provesthisfalse/
-title: how to prove sth is wrong
+title: how to prove sth is wrong (proof by contradiction)
 tags: Proof
 ---
 
@@ -44,4 +44,6 @@ Indeed, $det(B) = det(P^{-1}AP) = det(P^{-1})\cdot det(A) \cdot det(P) = det(A)$
 
 Actually, this gives us a general strategy to prove some statement $p$ is false: **by finding some necessary property $q$ of $p$ and show that $q$ does not hold**.  
 
-Therefore, if you want to prove $p$ is false, you first show $p\Rightarrow q$ for some $q$, then you show that $q$ is false.
+Therefore, if you want to prove $p$ is false, you first show $p\Rightarrow q$ for some $q$, then you show that $q$ is false. 
+
+The hard thing is to search for such a property $q$.
