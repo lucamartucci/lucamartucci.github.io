@@ -48,7 +48,7 @@ We just embed a $\sigma^{-1}$ at the end of the PBP, so that it outputs $e$ if t
 
 **Proof.**  
 
-A concrete example is $\sigma = 12345$ and $\tau=13542$. Then $(12345)(13542)(54321)(24531) = (13254)$.  
+A concrete example is $\sigma = (12345)$ and $\tau=(13542)$. Then $(12345)(13542)(54321)(24531) = (13254)$.  
 
 
 Note that, Lemma 3 basically gives us an $AND$ gate. We can concatenate the four PBPs $B_1, B_2, B_3, B_4$ recognizes $\sigma,\tau,\sigma^{-1},\tau^{-1}$ respectively. If either $B_1(x)=e$ or $B_2(x)=e$, then $B_1B_2B_3B_4(x) = e$.  If both $B_1(x)=e$ and $B_2(x)=e$, then it outputs $e$. Otherwise it outputs $\sigma \tau \sigma^{-1} \tau^{-1}$. Combining with Lemma 2, we can also get $OR$ gate, by negating the previous outputs and applying $AND$ on them.  
