@@ -45,7 +45,3 @@ Indeed, $det(B) = det(P^{-1}AP) = det(P^{-1})\cdot det(A) \cdot det(P) = det(A)$
 Actually, this gives us a general strategy to prove some statement $p$ is false: **by showing some necessary property $q$ of $p$ does not hold**.  
 
 If you want to prove $p$ is false, you first show that $p\Rightarrow q$, then you show that $q$ is false.
-
-Another example: Ryan Williams' proof for $NEXP\not\subseteq ACC_0$ goes like this:  
-
-$NEXP$ has poly-size $ACC_0$ circuits $\Rightarrow$ NEXP has small witness circuits in $ACC_0$ $\Rightarrow$ Faster satisfiability algorithm $\Rightarrow$ which is wrong due to nondeterministic time hierarchy theorem.  
