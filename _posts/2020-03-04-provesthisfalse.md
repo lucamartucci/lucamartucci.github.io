@@ -42,6 +42,6 @@ Then you google "how to prove two matrices are not similar". You find a [post](h
 
 Indeed, $det(B) = det(P^{-1}AP) = det(P^{-1})\cdot det(A) \cdot det(P) = det(A)$.  
 
-Actually, this gives us a general strategy to prove some statement $p$ is false: **by showing some necessary property $q$ of $p$ does not hold**.  
+Actually, this gives us a general strategy to prove some statement $p$ is false: **by finding some necessary property $q$ of $p$ and show that $q$ does not hold**.  
 
-If you want to prove $p$ is false, you first show that $p\Rightarrow q$, then you show that $q$ is false.
+Therefore, if you want to prove $p$ is false, you first show $p\Rightarrow q$ for some $q$, then you show that $q$ is false.
