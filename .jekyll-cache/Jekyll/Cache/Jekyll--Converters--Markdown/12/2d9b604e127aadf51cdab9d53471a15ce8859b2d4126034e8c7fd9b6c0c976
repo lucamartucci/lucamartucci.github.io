@@ -1,0 +1,10 @@
+I"]<p><strong>Lemma 2.21 (Linear Dependence Lemma)</strong> Suppose $v_1, \ldots, v_m$ is a linear dependent list. Then there exists a $j\in {1, \ldots, m}$ such that,</p>
+
+<p>(a) $v_j\in span(v_1,\ldots, v_{j-1})$, and<br />
+(b) If $v_j$ is removed from the list, then the remaining list spans $span(v_1, \ldots, v_m)$.</p>
+
+<p>(b) is easy once we have proved (a). To prove (a), assume it is not the case. Then in particular $v_m$ is not a linear combination of $v_1,\ldots,v_{m-1}$, which means $v_1,\ldots ,v_m$ are linearly independent, a contradiction.</p>
+
+<p>In fact this lemma is very powerful.</p>
+
+:ET

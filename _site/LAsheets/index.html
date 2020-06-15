@@ -11,7 +11,7 @@
 
   <title>
     
-      Argument of Correctness of Undo Implementation &middot; Jiyu Zhang
+      Linear Algebra Review Sheets &middot; Jiyu Zhang
     
   </title>
 
@@ -67,22 +67,14 @@
 
 
     <div class="content container">
-      <p>Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. In case the recuiter might be interested, I’d like to provide a proof here that my idea of implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.</p>
+      <p><strong>Lemma 2.21 (Linear Dependence Lemma)</strong> Suppose $v_1, \ldots, v_m$ is a linear dependent list. Then there exists a $j\in {1, \ldots, m}$ such that,</p>
 
-<h2 id="introduction">Introduction</h2>
-<p>Undo is the operation that can undo the user’s last $n$ operation(inserting/deleting characters).</p>
+<p>(a) $v_j\in span(v_1,\ldots, v_{j-1})$, and<br />
+(b) If $v_j$ is removed from the list, then the remaining list spans $span(v_1, \ldots, v_m)$.</p>
 
-<p>The difficulty lies in how can one keep track of the original position of the characters deleted. Well, in my implementation, nothing else is needed: just remove the node(which contains a character) and put it into a stack.</p>
+<p>(b) is easy once we have proved (a). To prove (a), assume it is not the case. Then in particular $v_m$ is not a linear combination of $v_1,\ldots,v_{m-1}$, which means $v_1,\ldots ,v_m$ are linearly independent, a contradiction.</p>
 
-<p>The data strucutre I used for text editor is a doubly linked list, each node has a value contains the specific character, and a <strong>prev</strong> pointer to the previous character node and a <strong>next</strong> pointer to the next character node. Visualized as following:</p>
-
-<div>$$a\leftarrow s \rightarrow b$$  </div>
-
-<p>To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: <strong>what if when (the deleted) $s$ is to recover, its previous nodes a or b are not in the data structure, i.e. a and b haven’t been recovered</strong>. Therefore we can’t find its position. While I argue that this will not happen.</p>
-
-<h2 id="the-argument">The Argument</h2>
-<p>I’d like to show the following: <strong>when $s$ is to recover, its previous or next nodes must exist in the data structure</strong>, which is a simple argument by contradiction:<br />
-Suppose for the contradiction that $a$ and $b$ are not in the data structure, then $a$ and $b$ must be deleted before $s$ is deleted. However, in this case, by the time $s$ is deleted, its <strong>prev</strong> and <strong>next</strong> cannot be $a$ and $b$, which is a contradiction.</p>
+<p>In fact this lemma is very powerful.</p>
 
 
     </div>

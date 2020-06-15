@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-02-29T14:46:37+08:00</updated>
+ <updated>2020-06-15T10:20:27+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -13,11 +13,149 @@
 
  
  <entry>
+   <title>negligible, non-negligible, noticeable</title>
+   <link href="http://localhost:4000/negligible/"/>
+   <updated>2020-06-13T00:00:00+08:00</updated>
+   <id>http://localhost:4000/negligible</id>
+   <content type="html">&lt;p&gt;Picture examples for negligible, non-negligible, noticeable function.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/negligible.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Some Notes on Zero Knowledge Proofs</title>
+   <link href="http://localhost:4000/zknotes/"/>
+   <updated>2020-06-03T00:00:00+08:00</updated>
+   <id>http://localhost:4000/zknotes</id>
+   <content type="html">&lt;p&gt;I’m reposting this to clearify questions I had when study these notes. I’ll be using the conventional notations in [1].&lt;/p&gt;
+
+&lt;p&gt;There are two properties that Interactive Proofs must satisfy. Informally, a good interactive proof system for a language $L$ consists of a pair of prover and verifier $(P, V)$ that satisfies the following:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;if $x\in L$, then there is a very large probability that $V$ accepts. (the &lt;strong&gt;completeness&lt;/strong&gt;)&lt;/li&gt;
+  &lt;li&gt;if $x\not\in L$, then a malicious prover has very tiny chance to convince $V$ that $x\in L$. ( the &lt;strong&gt;soundness&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Note that, in completeness, we consider both honest prover and honest verifier. The honest prover may be either computationally bounded or computationally unrestricted depending on the model we concern. In soundness, we consider malicious prover who can arbitrarily deviate from the protocol, and is computationally unrestricted. The verifier is considered to be honest in this case.&lt;/p&gt;
+
+&lt;p&gt;Zero knowledge proofs are, interactive proofs with an additional property called the zero knowledge property. The property says that in the interaction the prover doesn’t convey any knowledge but that the statement is true. In order to achieve this, we need to carefully define what is “knowledge”.&lt;/p&gt;
+
+&lt;p&gt;As [1] suggests, “A conversation therefore conveys knowledge when the conversation allows the recipient to complete a “new” task that the recipient could not complete before”.&lt;/p&gt;
+
+&lt;p&gt;In the computational world, “The amount of knowledge conveyed in a message can be quantified by considering the running time and size of a Turing machine that generates the message”. Therefore, the zero knowledge can mean that what you see doesn’t give you extra power to compute something. That is, the verifier can’t compute anything new given the messages communicated between the two parties.&lt;/p&gt;
+
+&lt;p&gt;It turns out that this (zero knowledge) is modeled by showing that, for any adversarial p.p.t. verifier &lt;script type=&quot;math/tex&quot;&gt;V^*&lt;/script&gt; who tries to extract knowledge from the interaction, there exists a p.p.t. simulator &lt;script type=&quot;math/tex&quot;&gt;S^*&lt;/script&gt; such that the following distributions are computationally indistinguishable:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;$View[P(x) \leftrightarrow V^*(x)]$&lt;/li&gt;
+  &lt;li&gt;$S^*(x)$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Informally, &lt;strong&gt;whatever Alice learns in the process can be produced by herself&lt;/strong&gt;. So Alice can essentially simulate the interaction independently.&lt;/p&gt;
+
+&lt;p&gt;The following are some important notes I’d like to make.&lt;/p&gt;
+
+&lt;h2 id=&quot;requiring-s-to-ouputcompute-vs-randomness&quot;&gt;Requiring &lt;script type=&quot;math/tex&quot;&gt;S^*&lt;/script&gt; to ouput/compute &lt;script type=&quot;math/tex&quot;&gt;V^*&lt;/script&gt;’s randomness&lt;/h2&gt;
+
+&lt;p&gt;One thing [1] doesn’t specify is that the simulator necessarily needs to output the randomness the verifier is using. This is justified in [2] by giving an example of an interactive proof for graph isomorphism. The example shows the following:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;the protocol enables the verifier to learn the isomorphism (the witness) the prover holds.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;there exists a perfect simulator if we don’t require the simulator to output the randomness of the verifier.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Readers should refer to page 7-6 of [2] to see the example. We only explained what properties the protocol has.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-power-of-simulator&quot;&gt;The power of simulator&lt;/h2&gt;
+
+&lt;p&gt;Another question we might have is: since a language equiped with a zk proof has a simulator, then it should be possible for a malicious prover to utilize this simulator to cheat the verifier, which seems to immediately contradict the soundness. The answer is that, the simulator is usually allowed to do more than what the prover can do. Specifically, the simulator can &lt;strong&gt;rewind&lt;/strong&gt; the verifier.&lt;/p&gt;
+
+&lt;p&gt;Rewinding means that the simulator may essentially query the verifier from any previous internal states of it. In contrast, the real prover is defined not to be able to do this. &lt;strong&gt;&lt;em&gt;What we can ask&lt;/em&gt;&lt;/strong&gt; is why this model is of interest. An example is that you can consider the situation when you (a real prover) are entering a system and you’re asked to answer a sequence of questions. If in some steps you say:”I want to go back to one of the previous questions, forget what I said just now.” Then this immediately causes the doubt of the verifier and it may simply halt and reject it.&lt;/p&gt;
+
+&lt;p&gt;To remark, the simulator lives in the same world as the verifier does. They have the same auxiliary input. The simulator can rewind the verifier, and can be quantum if the verifier is quantum.&lt;/p&gt;
+
+&lt;p&gt;Some remarks that might be helpful for understanding can be found at page 18 of [3]&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;br /&gt;
+[1] R.Pass &amp;amp; A.Shelat. A Course in Cryptography.&lt;br /&gt;
+[2] Rafail Ostrovsky. Foundations of Cryptography Draft Lecture Notes.&lt;br /&gt;
+[3] Yehuda Lindell. How To Simulate It – A Tutorial on the Simulation Proof Technique. https://eprint.iacr.org/2016/046.pdf&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Quantum Query Complexity and The Polynomial Method</title>
+   <link href="http://localhost:4000/pmethod/"/>
+   <updated>2020-05-28T00:00:00+08:00</updated>
+   <id>http://localhost:4000/pmethod</id>
+   <content type="html">
+</content>
+ </entry>
+ 
+ <entry>
    <title>Barrington's Theorem</title>
    <link href="http://localhost:4000/barrington/"/>
    <updated>2020-02-20T00:00:00+08:00</updated>
    <id>http://localhost:4000/barrington</id>
-   <content type="html">
+   <content type="html">&lt;p&gt;In this post we prove Barrintong’s theorem.&lt;/p&gt;
+
+&lt;p&gt;Barrington’s theorem implies that the complexity class NC1 is equal to the class of constant width branching programs. Since we know that constant width branching program can be computed by NC1 circuits.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fact.&lt;/strong&gt; Constant width branching programs can be computed by general fan-in 2 circuits with $O(\log n)$ depth.&lt;/p&gt;
+
+&lt;p&gt;The idea is to compute recursively using divide and conquer (divide the branching program into the first half and the second half).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Theorem 1.&lt;/strong&gt; (Barrington) For any general circuit of fan-in 2 and depth $d$, there is a constant width (actually, width 5) branching program of length $4^d$ that simulates it. Especially when $d=O(\log n)$, then the branching program is of length at most $n^{O(1)}$.&lt;/p&gt;
+
+&lt;p&gt;Recall that a width $w$ branching program has layers of the same vertices. Each vertex in the $i$-th layer has two out edges (labeled 0 and 1) mapping to two vertices in the next layer, depending on the input &lt;script type=&quot;math/tex&quot;&gt;x_i\in \{0,1\}&lt;/script&gt;. So essentially between every two consecutive layers there are two mappings $f, g : [w] \rightarrow [w]$.  We consider a special branching program called &lt;strong&gt;Permutation Branching Program (PBP)&lt;/strong&gt; where $f,g$ are permutations.&lt;/p&gt;
+
+&lt;p&gt;Note that the computing process of PBP can be viewed as the composition of these permutations.  We say a permutation in $S_5$ is a 5-cycle if it is exactly a cycle of length 5. For example, $1\rightarrow 3\rightarrow 5\rightarrow 4 \rightarrow 2 \rightarrow 1$. We denote it as $(13542)$ for convenience.&lt;/p&gt;
+
+&lt;p&gt;we define that the PBP $B$ &lt;em&gt;$\sigma$-computes&lt;/em&gt; a language $L$ if  there exists a 5-cycle $\sigma$ such that  $B(x)=\sigma\Rightarrow x\in L$ and $B(x) = e \Rightarrow x\not\in L$ where $e\in S_5$ is the identity.&lt;/p&gt;
+
+&lt;p&gt;We proceed to prove a few lemmas, then we will prove that $O(\log n)$-depth circuit can be recognized by a 5-cycle PBP.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lemma 1.&lt;/strong&gt; Let $\sigma, \tau$ be any two 5-cycle. If there is a PBP $B_1$ $\sigma$-computes a language $L$, then there is a PBP $B_2$ of the same length that $\tau$-computes $L$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proof.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Let $\sigma = (\sigma_1\sigma_2\sigma_3\sigma_4\sigma_5)$ and $\tau = (\tau_1\tau_2\tau_3\tau_4\tau_5)$. Consider the permutation $\theta = (\tau_1\rightarrow \sigma_1)$, then $\theta^{-1} \sigma \theta$ = $\tau$. To see why this holds, consider $\tau_i$,&lt;/p&gt;
+
+&lt;p&gt;$\theta^{-1} \sigma \theta(\tau_i): \tau_i\rightarrow \sigma_i \rightarrow \sigma_{i+1}\rightarrow\tau_{i+1}$&lt;/p&gt;
+
+&lt;p&gt;Therefore $B_1(x) = \sigma \Rightarrow B_2(x) = \tau$ and $B_1(x) = e \Rightarrow B_2(x) = e$.&lt;/p&gt;
+
+&lt;p&gt;So basically to construct $B_2$ all we need is to “embed” a $\theta^{-1}$ at the front and a $\theta$ at the end.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lemma 2.&lt;/strong&gt; If a language $L$ can be $\sigma$-computed  by a PBP for a 5-cycle $\sigma$, then its complement can be $\tau$-computed by a PBP of the same length for a 5-cycle $\tau$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proof.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We just embed a $\sigma^{-1}$ at the end of the PBP, so that it outputs $e$ if the original PBP outputs $\sigma$ and it outputs $\sigma^{-1}$ if the original PBP outputs $e$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lemma 3.&lt;/strong&gt; There exists 5-cycles $\sigma, \tau$ such that $\sigma \tau \sigma^{-1} \tau^{-1}$ is also a 5-cycle.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proof.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A concrete example is $\sigma = (12345)$ and $\tau=(13542)$. Then $(12345)(13542)(54321)(24531) = (13254)$.&lt;/p&gt;
+
+&lt;p&gt;Note that, Lemma 3 basically gives us an $AND$ gate. We can concatenate the four PBPs $B_1, B_2, B_3, B_4$ recognizes $\sigma,\tau,\sigma^{-1},\tau^{-1}$ respectively. If either $B_1(x)=e$ or $B_2(x)=e$, then $B_1B_2B_3B_4(x) = e$.  If both $B_1(x)=e$ and $B_2(x)=e$, then it outputs $e$. Otherwise it outputs $\sigma \tau \sigma^{-1} \tau^{-1}$. Combining with Lemma 2, we can also get $OR$ gate, by negating the previous outputs and applying $AND$ on them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proof of Theorem 1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The proof goes by induction:&lt;/p&gt;
+
+&lt;p&gt;If the depth of the circuit is 0 then there is a length-1 PBP. Assume the depth of the circuit is $d-1$ and has length $4^{d-1}$ PBP and, assume WLOG, that at the top is an AND gate. The inputs of it are computed by $B_1$ and $B_2$. Then we concatenate $B_1B_2B_1^{-1}B_2^{-1}$, and now the theorem follows by lemma 3. The depth is $4^{d-1} \cdot 4 = 4^d$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;[1] David A. Barrington. “Bounded-width polynomial-size branching programs recognize exactly those languages in NC^1”. https://people.cs.umass.edu/~barring/publications/bwbp.pdf&lt;/p&gt;
+
 </content>
  </entry>
  
@@ -610,139 +748,6 @@ The running time of GL algorithm is $O(n^2 \log n \cdot \epsilon^{-4})$, it make
 
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 &lt;p&gt;Lecture Notes 11, 12 of Luca Trevisan’s Spring 2009 Cryptography Courses, see this &lt;a href=&quot;https://people.eecs.berkeley.edu/~luca/cs276/#notes&quot;&gt;Link&lt;/a&gt;.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>差分隐私 Differential Privacy</title>
-   <link href="http://localhost:4000/dpsurvey/"/>
-   <updated>2019-08-16T00:00:00+08:00</updated>
-   <id>http://localhost:4000/DPsurvey</id>
-   <content type="html">&lt;p&gt;注：这篇文章的目的在于通过介绍问题背景与实例来使读者对差分隐私这一概念的建立直觉/初步的理解，并对它的数学定义进行讨论。由于时间关系，我们不对前沿的细节做深入的调研，只做简单地了解。&lt;/p&gt;
-
-&lt;h2 id=&quot;一问题背景&quot;&gt;一、问题背景&lt;/h2&gt;
-
-&lt;p&gt;在大数据时代，很多互联网公司将收集的用户使用信息或记录保存于数据库，并通过数据分析手段来提高用户的体验。 在这个过程中不可避免地就会出现隐私泄露的问题。数据集中可能包含有用户的医疗诊断信息，个人消费偏好等信息，个人的此类信息遭遇泄露的话，难免会被有心人利用并导致对个人不利的后果。&lt;/p&gt;
-
-&lt;p&gt;一个比较典型的隐私泄露事件发生在06年的时候，Netflix（美国一家媒体服务提供商） 发起了一个有100万美金奖励的数据挖掘竞赛。 他们发布了一组关于用户浏览记录的数据集， 如果有人能通过这份数据集使他们的推荐系统的效能提高10%就可获得奖金。 当然，为了保护用户隐私，他们声称已经把包含用户ID的信息都删除以实现匿名化。 问题在于，这样是否真的已经将用户的信息隐藏起来？答案是否定的。来自 UT Austin 的 Arvind Narayanan 和 Vitaly Shmatikov 的工作[1]通过把已公布的数据库与 Internet Movie Database (IMDb) 结合起来，实现了一定程度反匿名化，暴露了用户的信息。&lt;/p&gt;
-
-&lt;p&gt;可以举一个简单的例子来从直觉上解释怎么做到反匿名的过程: 假如有一个数据库 $A$，里面包含了一些用户的 性别，出生日期，邮政编码，或是在一段时间内看过某场电影，但没有姓名，身份证信息。而另外一个数据库 $B$ 里包含一些用户的姓名，性别，邮政编码，出生日期，医疗信息，住址。 这样，通过对比这两个公开的数据库（比如相同的邮编和出生日期），我们可以很容易地猜出 $B$ 中的哪些人对应 $A$ 中的哪些信息。这样的攻击我们称为&lt;strong&gt;链接攻击 (Linkage Attack)&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;另外一个例子解释攻击者可以通过不同的询问方式来问出私人信息。攻击者第一次进行这样的提问：“在2001年，P大学的大一新生有多少人家庭年收入35万以上？” 他得到准确答案是200。他接着提问：“在2002年， P大学的大二学生有多少人家庭年收入在35万以上？” 这次他得到答案是199。 于是他通过另外一种方式得知一名叫张知秋的同学在大二时退学了（比如查询在校学生表格）。 这样他可以得出结论：张知秋同学的家庭年收入在35万以上。这样的攻击我们称为&lt;strong&gt;差分攻击 (Differencing Attack)&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;差分隐私就是为了防止这样的攻击而提出，它的最终目的是使得数据分析者能对数据库进行&lt;strong&gt;隐私保护的数据分析(privacy-preserving data analysis)&lt;/strong&gt;。在差分隐私机制中，我们希望通过对数据库返回的值进行一定的处理，从而使得返回结果具有一定的随机性，但大致保持一定的精确度。这样，就能防止攻击者通过对比不同的查询结果来获取&lt;strong&gt;个体&lt;/strong&gt;的私人隐私。注意我们希望保护的是&lt;strong&gt;特定的某个个体&lt;/strong&gt;的隐私，也就是说，对于任何的个体，他的隐私都不被泄露。&lt;/p&gt;
-
-&lt;h2 id=&quot;二差分隐私机制&quot;&gt;二、差分隐私机制&lt;/h2&gt;
-
-&lt;p&gt;为了解决隐私泄露的问题，差分隐私的概念由Dwork等人提出。从直觉上介绍，一个差分隐私机制掌控有一个数据库，接收用户的查询要求，根据要求返回一个统计数值。比如可以是这个数据库里带有某个性质的人的人数。 但返回精确的数值必定会导致隐私泄露，所以在差分隐私机制中我们引入随机性，使得每次机制返回的值不相同，但大致保持一定的准确度，从而达到隐私保护的作用。&lt;/p&gt;
-
-&lt;p&gt;回到第一部分最后一个例子中，假如对于攻击者的第一次询问的回答是：198。那么攻击者会有这样的结论：大概有200个人年收入在35万以上。假如对于攻击者第二次询问的回答是：201。同样地，攻击者得到的结论是：大概有200个人年收入在35万以上。这样一来，他就没有办法进行差分攻击来获得某个个体的隐私信息。&lt;/p&gt;
-
-&lt;p&gt;具体地说，差分隐私要求对于分析者（或以上的攻击者）的提问，根据数据库$A$概率性地输出一个结果，这个结果在基于数据库包含某个用户$i$的情况和不包含$i$的情况下是相似的。 等价地说，假如有两个数据库 $A$ 和 $A^\prime$ ，其中$A$包含$i$的信息，$A^\prime$不包含$i$的信息，那么我们的差分隐私机制接收提问者的问题，然后分别基于这两个数据库的所输出的结果是大致相似的。更通俗地说，特定的某个$i$在不在分析考虑范围内对差分隐私机制所输出的结果影响不大。接下来我们严格定义这一概念。&lt;/p&gt;
-
-&lt;h2 id=&quot;三定义&quot;&gt;三、定义&lt;/h2&gt;
-&lt;p&gt;我们定义数据集 $D$ 和 $D^\prime$ （$D,D^\prime\in \chi^n$， $\chi$为数据空间)为相邻数据集如果它们只在某一个位置不同。 如果它们在$k$个位置不同，我们称它们间的距离为$k$。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;定义&lt;/strong&gt; 我们设随机算法为 $M$，数据分析者的查询函数空间为 $Q$，$M$的输出空间为$Y$。我们说 $M$ 是 &lt;strong&gt;$\epsilon-$差分隐私&lt;/strong&gt;的，如果对于任意两个相邻数据集 $D$ 和 $D^\prime$，查询函数$q\in Q$，以及 $Y$ 的子集 $S$，$M$ 满足&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;Pr[M(D)\in S]\leq e^\epsilon\cdot Pr[M(D^\prime)\in S]&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;讨论&lt;/strong&gt; 在定义两个输出相接近时，为什么不使用&lt;em&gt;统计距离（statistical distance）&lt;/em&gt;？ 也就是说，为什么不使用定义 $SD \left( M(D),M(D^\prime)\right)&amp;lt;\epsilon$？&lt;/p&gt;
-
-&lt;p&gt;我们分两种情况讨论使用统计距离的不合理性 —&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;设 $\epsilon&amp;lt; \frac{1}{10n}$，那么对于原数据库 $D$ 以及任意不同的数据库 $D^\prime$（即使$D$与$D^\prime$之间的距离为$n$），$M(D)$ 与 $M(D^\prime)$ 的统计距离最多相差$n\cdot \frac{1}{10n}=\frac{1}{10}$。特别地，$M(D)$与$M(0^n)$的距离最多为$\frac{1}{10}$。 换句话说，基于任意两个数据集的分析结果差距都不大，那我们所收集的$D$的使用价值就不大。&lt;/li&gt;
-  &lt;li&gt;设$\epsilon\geq\frac{1}{10n}$。考虑以下机制：以$\frac{1}{10}$的概率随机输出数据库的某行信息。可以验证这样的机制满足我们的定义。但这样的机制是不被允许的 （暴露了输出的那个&lt;strong&gt;个体&lt;/strong&gt;的信息）。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;四一个差分隐私机制的例子&quot;&gt;四、一个差分隐私机制的例子&lt;/h2&gt;
-
-&lt;p&gt;我们考虑计数查询函数&lt;script type=&quot;math/tex&quot;&gt;q\in Q:\chi^n \rightarrow \{0, 1\}&lt;/script&gt; 并定义 $q(x) = \sum_i^{n} q(x_i)\ mod\ 2$， 考虑以下机制：&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;M(x,q) = q(x) + Lap(1/\epsilon)&lt;/script&gt;
-
-&lt;p&gt;其中 $Lap(\lambda)$ 为拉普拉斯分布，其概率密度函数正比于$e^{-\mid y\mid /\lambda}$。我们证明$M$为&lt;strong&gt;$\epsilon-$差分隐私&lt;/strong&gt;的。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;证明&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;可以得到$[M(q,x)=y]$的概率密度函数正比于$e^{-\epsilon\mid y-q(x)\mid}$。 同样地，$[M(q,x^\prime)=y]$正比于$e^{-\epsilon\mid y-q(x^\prime)\mid}$。 由于$q(x)$与$q(x^\prime)$最多相差为1，因此将他们的概率密度函数相除，剩余因数大小为$e^\epsilon$，刚好满足$\epsilon-$差分隐私的要求。&lt;/p&gt;
-
-&lt;h2 id=&quot;参考文献&quot;&gt;参考文献&lt;/h2&gt;
-
-&lt;p&gt;[1] Narayanan, Arvind, and Vitaly Shmatikov. “Robust de-anonymization of large sparse datasets.” Security and Privacy, 2008. SP 2008. IEEE Symposium on. IEEE, 2008.&lt;br /&gt;
-[2] Dwork “Differential Privacy: A Survey of Results”. https://web.cs.ucdavis.edu/~franklin/ecs289/2010/dwork_2008.pdf&lt;br /&gt;
-[3] Dwork and Roth “The Algorithmic Foundations
-of Differential Privacy”. https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf&lt;br /&gt;
-[4] Vadhan “The Complexity of Differential Privacy” http://privacytools.seas.harvard.edu/files/privacytools/files/complexityprivacy_1.pdf&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Zero-Knowledge Proofs:Definitions and Variants</title>
-   <link href="http://localhost:4000/zkdefvar/"/>
-   <updated>2019-08-14T00:00:00+08:00</updated>
-   <id>http://localhost:4000/zkdefvar</id>
-   <content type="html">&lt;p&gt;零知识证明是一种特殊的交互式证明方法（Interactive Proof）。我们知道，在交互式证明中， 我们要求证明或协议（Protocol）满足两个性质：完备性（Completeness）和 可靠性（Soundness），其中可靠性是为了防止恶意的（adversarial）证明者（Prover）。 一个恶意的证明者会想要欺骗验证者（Verifier）从而使验证者相信一个错误的命题，可靠性要求证明者只能有很小的概率能够欺骗验证者。而零知识证明在此之外增设了需满足的第三个性质–零知识性（Zero Knowledge）。不同于可靠性是为了针对恶意的证明者，零知识性是为了防止恶意的验证者获取一些他们想要的信息。&lt;/p&gt;
-
-&lt;p&gt;简单地说，零知识证明要求只保证验证者能确信命题的正确性， 除此以外，在证明过程中验证者不能获取其他任何的信息。比如说，在图同构问题（Graph Isomorphism）中，对于两个同构的图（G, H）这样的输入（a yes instance），零知识证明要求在交互证明结束后验证者 &lt;strong&gt;只能得出 “G和H确实是同构的”&lt;/strong&gt; 这样一个结论，除此以外，他不能获取其他任何信息。比如说验证者不能得到一个排列（Permutation）- π， 使得对 G 的节点施加 π 后得到 H（i.e. π(G)=H）。&lt;/p&gt;
-
-&lt;p&gt;那么应该怎么合理地正式表达（Formulate）这样的要求呢？我们采用以下的方法来阐述这样的要求：任何验证者能从零知识证明过程中获取的信息，都能被与验证者有相同的计算能力的模拟者（Simulator）通过计算得到。模拟者（Simulator）在零知识证明中是一个很重要的概念，根据对模拟者的要求不同，会衍生出一些变体（variants）的定义，这点会在之后介绍。接下来要正式定义零知识：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;定义1.&lt;/strong&gt;  对于一个协议 PV，我们用 View(PV(x)) 来表示在输入为x的情况下，按照 PV 来进行交互证明过程中，验证者视角所看到的信息。具体地说，View(PV(x)) 包含有：
-1.整个证明过程中证明者P和验证者V之间来往的讯息
-2.验证者V所使用的随机性（Randomness），或者说验证者的用来投掷并决定下一步的硬币（Coins）&lt;/p&gt;
-
-&lt;p&gt;此外，用 [View(PV(x))] 来表示 View(PV(x)) 在P和V所用的随机性下的概率分布（distribution）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;定义2.&lt;/strong&gt;  对于一个语言 L，我们称一个交互式证明或协议 PV 是&lt;strong&gt;零知识&lt;/strong&gt;的，如果&lt;/p&gt;
-
-&lt;div&gt;
-$$\forall V^{\prime} \exists S\in PPT\ s.t\ \ \forall x\in L$$  
-&lt;/div&gt;
-&lt;div&gt;
-$$[View(S(x))]\simeq [View(PV^{\prime}(x))]$$
-&lt;/div&gt;
-
-&lt;p&gt;也就是说，对于任何验证者，都存在一个模拟者（多项式时间的概率图灵机）使得对于（语言L内）任意的x作为输入时，模拟者与验证者所看到的变量的分布是（几乎）相同的。
-更通俗地说， 对于任何验证者视角下交互证明过程中的变量的分布，该验证者都能自身生成（generate）这样的分布。&lt;/p&gt;
-
-&lt;p&gt;需要补充说明的是，上面定义里的量词是针对所有的 V’。特别地，PV’不一定是 L 的交互式证明或协议。也就是说，在上面的定义里，V’的目标只是想尽办法从证明者P那里获取有用的信息。而如果我们要求 PV’ 是一个 L 的交互式证明或协议，那么我们称之为&lt;strong&gt;诚实验证者零知识&lt;/strong&gt;（Honest Verifier Zero Knowledge，i.e. HVZK）。&lt;/p&gt;
-
-&lt;p&gt;另一方面，根据分布的“相同”的不同定义，零知识性质也可分类为：&lt;strong&gt;完全零知识&lt;/strong&gt;（Perfect Zero Knowledge），&lt;strong&gt;统计零知识&lt;/strong&gt;（Statistical Zero Knowledge), 以及 &lt;strong&gt;计算零知识&lt;/strong&gt;（Computational Zero Knowledge）。其中完全零知识是指验证者与模拟者的输出分布完全相等，统计零知识是指两者的输出分布统计上接近（Statistically close），而计算零知识就是说这两个输出分布在多项式时间内是不可区分的。&lt;/p&gt;
-
-&lt;p&gt;在Oded的survey中，他还有提到通常还需要要考虑到敌方（adversary）有辅助信息（auxiliary information）的情况。在这种情况下的零知识，称之为&lt;strong&gt;辅助输入零知识&lt;/strong&gt;（auxiliary-input zero knowledge）。辅助输入零知识需要在定义2里用[View(S(x, z))]和[View((P V’(z))(x))] 来分别替代模拟者的输出分布和验证者的输出分布，其中z代表的是辅助信息。&lt;/p&gt;
-
-&lt;p&gt;除了以上的变体外，Oded的survey里提到了从对模拟者的要求出发衍生的一些变体， 其中一个就是要求有一个&lt;strong&gt;通用模拟者&lt;/strong&gt;（Universal Simulator），这个模拟者拥有验证者B’的程序作为辅助输入。为了这个目的，我们需将定义2里的模拟者 S(x) 修改为 S(x, &amp;lt;B’&amp;gt;)，其中 &amp;lt;B’&amp;gt; 表示B’的程序(program)的描述。更进一步加强定义的话，我们还可以要求把验证者的程序作为一个黑箱（Black Box）或是神谕机（Oracle），称之为&lt;strong&gt;黑箱模拟&lt;/strong&gt;（Black-box Simulation）。似乎最初大家都相信把B’的程序当作输入和把B’的程序作为黑箱使用对于零知识来说是没有区别的，不过Boaz Barak [3] 在2001年的论文给出了它们的区别。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;参考文献(References)&lt;/strong&gt;&lt;br /&gt;
-[1] Oded Goldreich. Zero-knowledge twenty years after its invention. Unpublished manuscript. 2002.&lt;br /&gt;
-[2] Rafail Ostrovsky. Foundations of Cryptography Draft Lecture Notes.&lt;br /&gt;
-[3] Boaz Barak. How to go beyond the black-box simulation barrier. FOCS 2011.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Argument of Correctness of Undo Implementation</title>
-   <link href="http://localhost:4000/ProofOfUndo/"/>
-   <updated>2019-08-12T00:00:00+08:00</updated>
-   <id>http://localhost:4000/ProofOfUndo</id>
-   <content type="html">&lt;p&gt;Recently I’ve implemented a simple project of text editor = =. One part of this project is to implement the undo functionality. In case the recuiter might be interested, I’d like to provide a proof here that my idea of implementation can correctly recover deleted characters in its original position, the potential problematic case won’t happen.&lt;/p&gt;
-
-&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Undo is the operation that can undo the user’s last $n$ operation(inserting/deleting characters).&lt;/p&gt;
-
-&lt;p&gt;The difficulty lies in how can one keep track of the original position of the characters deleted. Well, in my implementation, nothing else is needed: just remove the node(which contains a character) and put it into a stack.&lt;/p&gt;
-
-&lt;p&gt;The data strucutre I used for text editor is a doubly linked list, each node has a value contains the specific character, and a &lt;strong&gt;prev&lt;/strong&gt; pointer to the previous character node and a &lt;strong&gt;next&lt;/strong&gt; pointer to the next character node. Visualized as following:&lt;/p&gt;
-
-&lt;div&gt;$$a\leftarrow s \rightarrow b$$  &lt;/div&gt;
-
-&lt;p&gt;To recover the deleted node $s$, simply find its (relative) position by referring to its previous or next node, then insert it in.  While one thing might be problematic: &lt;strong&gt;what if when (the deleted) $s$ is to recover, its previous nodes a or b are not in the data structure, i.e. a and b haven’t been recovered&lt;/strong&gt;. Therefore we can’t find its position. While I argue that this will not happen.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-argument&quot;&gt;The Argument&lt;/h2&gt;
-&lt;p&gt;I’d like to show the following: &lt;strong&gt;when $s$ is to recover, its previous or next nodes must exist in the data structure&lt;/strong&gt;, which is a simple argument by contradiction:&lt;br /&gt;
-Suppose for the contradiction that $a$ and $b$ are not in the data structure, then $a$ and $b$ must be deleted before $s$ is deleted. However, in this case, by the time $s$ is deleted, its &lt;strong&gt;prev&lt;/strong&gt; and &lt;strong&gt;next&lt;/strong&gt; cannot be $a$ and $b$, which is a contradiction.&lt;/p&gt;
-
 </content>
  </entry>
  
