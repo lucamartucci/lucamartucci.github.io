@@ -37,15 +37,19 @@ For our analysis of $A$, we say $x$'s are "good" if
 
 $$\Pr \left[y\leftarrow f(x) : A_0(1^n, y) = x  \right] \geq \frac{1}{2m^2p(mn)}$$  
 
-We know that the probability that $A$ fails to invert $f(x)$ is at most  
-
-$$(1-\frac{1}{2m^2p(mn)})^{2nm^2 p(mn)} \leq e^{-n}$$  
-
-which is negligible.  
-
 We next show that  
 
 1. On those good $x$'s, $A$ can invert $f(x)$ with good probability.  
 2. There are sufficiently many good $x$'s.  
 
 Finally we can show it contradicts the fact that $f$ is $q(n)$-weak one-way.  
+
+On these good $x$'s, we know that the probability that $A$ fails to invert $f(x)$ is at most  
+
+$$(1-\frac{1}{2m^2p(mn)})^{2nm^2 p(mn)} \leq e^{-n}$$  
+
+which is negligible.  
+
+We'll now show there are at least $2^n(1-\frac{1}{2q(n)})$ good $x$'s.
+
+
