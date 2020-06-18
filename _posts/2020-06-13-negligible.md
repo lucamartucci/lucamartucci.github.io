@@ -4,6 +4,6 @@ permalink: /negligible/
 title: negligible, non-negligible, noticeable
 ---
 
-Picture examples for negligible, non-negligible, noticeable function.  
+Figure examples for negligible, non-negligible, noticeable functions.  
 
 ![](/assets/negligible.jpg)
