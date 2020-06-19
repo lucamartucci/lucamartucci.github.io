@@ -8,7 +8,7 @@ We prove that if there exists a weak one-way function, then there exists a stron
 
 **Theorem 1.** For any weak one-way function $$f:\{0,1\}^*\to \{0,1\}^*$$, **there exists a polynomial** $m(\cdot)$ such that $$f^\prime (x_1,\ldots ,x_{m(n)})= f(x_1), \ldots, f(x_{m(n)})$$ is a strong one-way function.  
 
-**Proof**  
+**Proof.**  
 
 Suppose $f$ is $q(n)$-weak, we show that there exists a polynomial $m(\cdot)$ such that if $f^\prime$ as above is not a strong o.w.f, we can invert $f(x)$ with probability greater than $2q(n)$ for random input $x$.  
 
@@ -31,7 +31,7 @@ $A_0(y, f, A^\prime)$:
 
 ***
 
-We also would like to amplify our probability for success by repeating $A_0$ as many times as possible  (as long as it is in p.p.t). We define $A$ which repeats $A_0$ for $2nm^2 p(mn)$ times.  
+We also would like to amplify our probability for success by repeating $A_0$ as many times as possible  (as long as it is in p.p.t). We define $A$ which repeats $A_0$ for $2nm^2 p(mn)$ times.  We'll show that $A$ inverts $f$ with good probability.  
 
 For our analysis of $A$, we say $x$'s are "good" if  
 
@@ -50,6 +50,18 @@ $$(1-\frac{1}{2m^2p(mn)})^{2nm^2 p(mn)} \leq e^{-n}$$
 
 which is negligible.  
 
-We'll now show there are at least $2^n(1-\frac{1}{2q(n)})$ good $x$'s.
+We'll now show there are at least $2^n(1-\frac{1}{2q(n)})$ good $x$'s. We prove this by contradiction.  
+
+Assume there are at most $2^n(1-\frac{1}{2q(n)})$ good $x$'s, we show (1) does not hold.  
+
+$$\begin{align*}
+  \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y})= \vec{x} \right] \leq \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^mn, \vec{y}) \text{ succeeds} | \text{all } x_i \text{'s are good} \right]\\  
+  + \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^mn, \vec{y}) \text{ succeeds} | \text{some } x_i \text{'s are bad} \right]\\  
+  &\leq \frac{1}{4} - \epsilon + \frac{1}{4} - \epsilon\\
+  &\leq \frac{1}{2} - 2\epsilon
+ \end{align*}$$  
 
 
+**References**  
+
+[1] R.Pass & A.Shelat. A Course in Cryptography.  
