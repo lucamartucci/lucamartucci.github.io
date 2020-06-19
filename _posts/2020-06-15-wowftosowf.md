@@ -55,11 +55,11 @@ We'll now show there are at least $2^n(1-\frac{1}{2q(n)})$ good $x$'s. We prove 
 Assume there are at most $2^n(1-\frac{1}{2q(n)})$ good $x$'s, we show (1) does not hold.  
 
 $$\begin{align*}
-  \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y})= \vec{x} \right] \leq \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^mn, \vec{y}) \text{ succeeds} | \text{all } x_i \text{'s are good} \right]\\  
-  + \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^mn, \vec{y}) \text{ succeeds} | \text{some } x_i \text{'s are bad} \right]\\  
-  &\leq \frac{1}{4} - \epsilon + \frac{1}{4} - \epsilon\\
-  &\leq \frac{1}{2} - 2\epsilon
+  \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y})= \vec{x} \right] &\leq \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y}) \text{ succeeds} \land \text{all } x_i \text{'s are good} \right]\\  
+  &+ \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y}) \text{ succeeds} \land \text{some } x_i \text{'s are bad} \right]\\   
  \end{align*}$$  
+ 
+
 
 
 **References**  
