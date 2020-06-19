@@ -59,7 +59,45 @@ $$\begin{align*}
   &+ \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y}) \text{ succeeds} \land \text{some } x_i \text{'s are bad} \right]\\   
  \end{align*}$$  
  
+for each $j\in [m]$:  
 
+$$\begin{align*}
+  \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y}) \text{ succeeds} \land x_j \text{ is bad} \right] &\leq \Pr \left[ \vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y}) = \vec{x} \mid x_j \text{ is bad} \right]\\  
+  &\leq m\cdot \Pr \left[ \vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}), y_j=f(x_j): A_0(1^n, y_j) = x_j \mid x_j \text{ is bad} \right]\\
+  &\leq m\cdot \frac{1}{2m^2p(mn)} \leq \frac{1}{2mp(mn)}   
+ \end{align*}$$
+
+The second inequality holds because, to invert $f^\prime$, we need to invert $x_i$ for each $i\in[m]$. So the probability is less than we take a union bound on inverting each $x_i$ using $A_0$, conditioned on $x_j$ is bad.  
+
+Now to bound $$\Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y}) \text{ succeeds} \land \text{some } x_i \text{'s are bad} \right]$$, we again take a union bound over all the $j\in[m]$.  Therefore  
+
+$$\Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y}) \text{ succeeds} \land \text{some } x_i \text{'s are bad} \right]\leq m\cdot \frac{1}{2mp(mn)}\leq \frac{1}{2p(mn)}$$  
+
+Also,  
+
+$$\begin{align*}
+\Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y}) \text{ succeeds} \land \text{all } x_i \text{'s are good} \right] &\leq \Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}: \text{all } x_i \text{'s are good} \right] \\
+&\leq (1-\frac{1}{2q(n)})^m \\
+&\leq e^{-n}\\
+\end{align*}$$  
+
+which is negligible.  
+
+Thus 
+
+$$\Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y})= \vec{x} \right]\leq \frac{1}{2p(mn)} + e^{-n} < \frac{1}{p(mn)}$$  
+
+Contradicts (1).  
+
+Now we can show the probability that $A$ fails to inverts $f$ is 
+
+$$\begin{align*}  
+\Pr\left[ A(y, f, A^\prime) \text{fails} \right] &\leq e^{-n}\cdot \Pr[x \text{ is good}] + 1\cdot \Pr[x \text { is bad}]\\
+&\leq e^{-n} + \frac{1}{2q(n)}\\ 
+&< \frac{1}{q(n)}
+\end{align*}$$
+
+So $f$ is not $q(n)$-weak.  
 
 
 **References**  
