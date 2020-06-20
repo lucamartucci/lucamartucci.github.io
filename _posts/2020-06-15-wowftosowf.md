@@ -67,7 +67,7 @@ $$\begin{align*}
   &\leq m\cdot \frac{1}{2m^2p(mn)} \leq \frac{1}{2mp(mn)}   
  \end{align*}$$
 
-The second inequality holds because, to invert $f^\prime$, we need to invert $x_i$ for each $i\in[m]$. So the probability is less than we take a union bound on inverting each $x_i$ using $A_0$, conditioned on $x_j$ is bad.  
+The second inequality holds because, to invert $f^\prime$, we need to invert $x_i$ for each $i\in[m]$. So the probability is less than that we take a union bound on inverting each $x_i$ using $A_0$, conditioned on that $x_j$ is bad.  
 
 Now to bound $$\Pr \left[\vec{x} \leftarrow \{0,1\}^{m\cdot n}, \vec{y}=f^\prime(\vec{x}): A^\prime(1^{mn}, \vec{y}) \text{ succeeds} \land \text{some } x_i \text{'s are bad} \right]$$, we again take a union bound over all the $j\in[m]$.  Therefore  
 
