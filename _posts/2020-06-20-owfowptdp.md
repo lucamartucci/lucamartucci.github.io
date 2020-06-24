@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: /CryptoLec02/
+permalink: /owfowptdp/
 title: Intro to Cryptography 02:One Way Functions
 tags: Cryptography
 ---
@@ -20,7 +20,9 @@ where $negl(n)$ is the negligible function.
 
 **Definition 1.2 (negligible function)** A function $negl(\cdot)$ is negligible if $\forall$ $c>0$ $\exists$ $N_c$ such that $\forall$ $n>N_c$, $negl(n)<\frac{1}{n^c}$.  
 
-**Discussion.** We note that requiring the unary number $1^n$ as adversary's input is necessary. Consider the function $$f(x) = \lvert x\rvert$$. The adversary's input has length $log(\lvert x \rvert)$, while the original $x$ has length exponential in that. This function should be one-way because the adversary doesn't have enough time to write down the answer. But it is intuitively easy to invert. 
+For picture examples of **negligible/non-negligible/noticeable functions**, see [this post](https://jiyuzhang1994.github.io/negligible/).
+
+**Discussion.** Note that requiring the unary number $1^n$ as adversary's input is necessary for excluding pathetic functions. For example, consider the function $$f(x) = \lvert x\rvert$$. The adversary's input has length $log(\lvert x \rvert)$, while the original $x$ has length exponential in that. This function should be one-way because the adversary doesn't have enough time to write down the answer. But it is intuitively easy to invert. 
 
 **Discussion.** The function that satisfies the above definition is called a **uniformly strong one-way** function. We will talk about weak one-way function later. It is *uniform* because we assume the adversary is a uniform algorithm that can take any input length. If in the second requirement above, we allow the adversary to use different algorithms for different lengths (i.e. it is a non-uniform circuits family.), then we say the function is **non-uniform strong one-way**.   
 
@@ -37,7 +39,7 @@ However, there is a theorem due to Yao says that any weak one-way function can b
 
 **Theorem 1.4 (Yao)** There exists a weak one-way function iff there is a strong one-way function.  
 
-**Proof** will complete later.
+**Proof** See [this post](https://jiyuzhang1994.github.io/wowftosowf/).
 
 We now introduce one-way permutations,  trapdoor permutations.  
 
@@ -50,7 +52,7 @@ Trapdoor functions are OWPs that, given auxiliary information, can
 1. It satisfies all requirements in Definition 1.5  
 2. There is a polynomial-time algorithm $I$, a constant $c$ and a string $t_k$ such that, for all large enough $k$, $t_k$ is of length at most $O(k^c)$, and for any $x\in \{0,1\}^k$, $I(f(x), t_k) = z$ where $f(z) = f(x)$.
 
-## 2. Necessary Complexity Assumptions
+## 2. Complexity Assumptions
 
 We state necessary complexity assumptions for the existence of one-way functions. These assumptions are useful for us to argue in the form: a protocol $A$ is not secure because it can break our complexity assumptions.  
 
@@ -72,6 +74,10 @@ While we don't know whether $BPP \neq NP$ or $P/poly \neq NP$ hold, we can show 
     According to the above, its' equivalent to say that for any fixed $x$, for a random string of length $r$, the probability that $M^\prime(x, r)$ accepts is at most $2^{-r}$. We use the union bound to bound that, for all possible inputs $$x\in \{0,1\}^n$$, the probability that $M^\prime$ rejects at least one of these $x$ is at most $2^{n-r} < 1$. Therefore, for a random string, there is a positive probability (greater than $1-2^{n-r}$) that can make all $x$ be accepted by $M^\prime$. We take the existence of such a string and hardwire it into our circuit. By doing this the circuits family can decide $L$ without any randomness.  
     
 ## 3. Candidates Functions for OWFs, OWPs and TDPs  
+
+In this we introduce specific problems and assumptions and give explicit candidates for OWFs, OWPs, and TDPs.
+
+### Integer Multiplication
 
 
 
