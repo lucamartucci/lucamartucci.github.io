@@ -5,7 +5,14 @@ permalink: /Notes/
 ---
 
 ### Cryptography   
-**Disclaimer.** Proofs don't necessarily follow the proof in the original references.  
+
+These notes are written with a (probably) ultimate goal to be a self-contained notes. The current goal is to (1) help understand definitions. (2) get familiar with main results (3) study/practice classical proof techniques. 
+
+1. For reason (3), proofs don't necessarily follow the proofs in the original references. 
+2. Since these notes are written discretely, there might be some notational issues in each part, i.e. different notations are used. I'll unify them later.  
+3. For reason (2), some familiar proofs are omitted but I'll give references.   
+
+
 [Part 01](https://jiyuzhang1994.github.io/CryptoLec01/) : Logistics; Secret, Perfect Security, One-Time Pad.  
 [Part 02](https://jiyuzhang1994.github.io/owfowptdp/) : Discussion on OWFs; OWPs, TDPs; Complexity assumptions; Candidates functions.   
 [Part 03](https://jiyuzhang1994.github.io/CryptoLec03/) : Next-Bit Unpredictability; Computational Indistinguishability and Pseudorandom Generators; Hybrid Arguement.
