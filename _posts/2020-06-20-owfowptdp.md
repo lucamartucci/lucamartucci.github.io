@@ -25,7 +25,7 @@ $$\Pr \left[ x \leftarrow \{0,1\}^n,\ f(x) = y :\ z\leftarrow A(y, 1^n),\ f(z) =
 
 **Discussion.** The function that satisfies the above definition is called a **uniformly strong one-way** function. We will talk about weak one-way function later. It is *uniform* because we assume the adversary is a uniform algorithm that can take any input length. If in the second requirement above, we allow the adversary to use different algorithms for different lengths (i.e. it is a non-uniform circuits family.), then we say the function is **non-uniformly strong one-way**.   
 
-In the rest of these notes we will assume the adversary (instand call it a single algorithm) $$A = \{A_1, A_2, \ldots\} $$ is non-uniform. When we talk about OWFs, OWPs and TDPs, we implicitly talk about non-uniformly one-way primitives.  
+In the rest of these notes we will assume the adversary (instand call it a single algorithm) $$A = \{A_1, A_2, \ldots\} $$ is non-uniform. When we talk about OWFs, OWPs and TDPs, we implicitly talk about non-uniform primitives, i.e. the adversary is non-uniform.  
 
 We now introduce weak one-way functions. A weak one-way function is a function that is hard to invert with noticeable probability.
 
@@ -93,7 +93,23 @@ While we don't know whether $BPP \neq NP$ or $P/poly \neq NP$ hold, we can show 
 
 In this section we introduce specific problems and assumptions and give explicit candidates for OWFs, OWPs, and TDPs.
 
-### Integer Multiplication
+**Definition 3.1 (Integer Multiplication)** $$f: \mathbb{N}^2 \to \mathbb{N}$$ is defined by:  
 
+$$f(x,y) = x\cdot y$$  
 
+Denote the set of all $n$-bit prime numbers as $\prod_n$  
+**Assumption 3.2 (Factoring Assumption)** $\forall$ adversary $A$, $\exists$ an $\epsilon(\cdot)$ such that  
 
+$$\Pr \left[ p,q\leftarrow \prod_n, N = pq: A(1^n, N)\in \{p, q\}  \right] \leq \epsilon(n)$$  
+
+**Theorem 3.3** If the factoring assumption is true, then integer multiplication is a weak one-way function.
+
+**Proof.** Suppose it's not weak one-way, show that you can break the factoring assumption.  
+
+**Assumption 3.4** (Discrete log) Let $G_q$ be a group of **prime order** $q$ and $Gen_q$ be the set of generators of $G_q$ , $\forall$ adversary $A$, $\exists$ an $\epsilon(\cdot)$ such that  
+
+$$\Pr \left[ q\leftarrow \prod_n, g\leftarrow Gen_q, x\leftarrow \mathbb{Z}_q: A(g^x) = x \right]\leq \epsilon(n)$$  
+
+**Discussion.** $G_q$ being a prime order is essential, and we usually choose a prime $q = 2p +1$, which is called a Sophie Germain prime or a "safe" prime. Otherwise, there are known efficient algorithms for solving discrete log in some special cases. See discussion in this [page](https://www.doc.ic.ac.uk/~mrh/330tutor/ch06s02.html).  
+
+**Discussion.** However, as noted in P&S, there are several problems of using Sophie Germain primes. Some basic theoretical properties are unknown: it is not known (a) whether there are infinite number of SG primes, and (b) the procedure: picking a random $p$ then check whether $q=2p+1$ is a prime is not known to be efficient as the size of $q$ increases.  
