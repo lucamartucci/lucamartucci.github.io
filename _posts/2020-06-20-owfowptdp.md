@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /owfowptdp/
-title: Part 2: One Way Functions
+title: Part 2:One Way Functions
 tags: Cryptography
 ---
 
