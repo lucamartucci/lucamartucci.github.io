@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /owfowptdp/
-title: Intro to Cryptography 02:One Way Functions
+title: Part 2: One Way Functions
 tags: Cryptography
 ---
 
@@ -32,7 +32,7 @@ We now introduce weak one-way functions. A weak one-way function is a function t
 **Definition 1.3 (weak OWFs)** A function is called weak one-way if  
 
 1. For any $x$ that is in the domain of $f$, $f(x)=y$ can be computed in polynomial time.  
-2. $\exists\ c$ such that for any PPT algorithm $A$ and all suffciently large $n$ ($n>N_c$ for some $N_c$) 
+2. $\exists\ c$ such that for any PPT adversary $A$ and all suffciently large $n$ ($n>N_c$ for some $N_c$) 
 $$\Pr\left[x \leftarrow \{0,1\}^n,\ f(x) = y:\ z\leftarrow A(y, 1^n),\ f(z) = y\right]\geq \frac{1}{n^c}$$  
 where $negl(n)$ is the negligible function.
 
@@ -97,10 +97,10 @@ In this section we introduce specific problems and assumptions and give explicit
 
 $$f(x,y) = x\cdot y$$  
 
-Denote the set of all $n$-bit prime numbers as $\prod_n$  
+Denote the set of all $n$-bit prime numbers as $\Pi_n$  
 **Assumption 3.2 (Factoring Assumption)** $\forall$ adversary $A$, $\exists$ an $\epsilon(\cdot)$ such that  
 
-$$\Pr \left[ p,q\leftarrow \prod_n, N = pq: A(1^n, N)\in \{p, q\}  \right] \leq \epsilon(n)$$  
+$$\Pr \left[ p,q\leftarrow \Pi_n, N = pq: A(1^n, N)\in \{p, q\}  \right] \leq \epsilon(n)$$  
 
 **Theorem 3.3** If the factoring assumption is true, then integer multiplication is a weak one-way function.
 
@@ -108,8 +108,9 @@ $$\Pr \left[ p,q\leftarrow \prod_n, N = pq: A(1^n, N)\in \{p, q\}  \right] \leq 
 
 **Assumption 3.4** (Discrete log) Let $G_q$ be a group of **prime order** $q$ and $Gen_q$ be the set of generators of $G_q$ , $\forall$ adversary $A$, $\exists$ an $\epsilon(\cdot)$ such that  
 
-$$\Pr \left[ q\leftarrow \prod_n, g\leftarrow Gen_q, x\leftarrow \mathbb{Z}_q: A(g^x) = x \right]\leq \epsilon(n)$$  
+$$\Pr \left[ q\leftarrow \Pi_n, g\leftarrow Gen_q, x\leftarrow \mathbb{Z}_q: A(g^x) = x \right]\leq \epsilon(n)$$  
 
 **Discussion.** $G_q$ being a prime order is essential, and we usually choose a prime $q = 2p +1$, which is called a Sophie Germain prime or a "safe" prime. Otherwise, there are known efficient algorithms for solving discrete log in some special cases. See discussion in this [page](https://www.doc.ic.ac.uk/~mrh/330tutor/ch06s02.html).  
 
 **Discussion.** However, as noted in P&S, there are several problems of using Sophie Germain primes. Some basic theoretical properties are unknown: it is not known (a) whether there are infinite number of SG primes, and (b) the procedure: picking a random $p$ then check whether $q=2p+1$ is a prime is not known to be efficient as the size of $q$ increases.  
+
