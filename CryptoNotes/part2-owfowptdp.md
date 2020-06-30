@@ -29,7 +29,7 @@ In the rest of these notes we will assume the adversary (instand call it a singl
 
 We now introduce weak one-way functions. A weak one-way function is a function that is hard to invert with noticeable probability.
 
-**Definition 1.3 (weak OWFs)** A function is called weak one-way if  
+**Definition 1.3 (weak OWF)** A function is called weak one-way if  
 
 1. For any $x$ that is in the domain of $f$, $f(x)=y$ can be computed in polynomial time.  
 2. $\exists\ c$ such that for any PPT adversary $A$ and all suffciently large $n$ ($n>N_c$ for some $N_c$) 
@@ -40,7 +40,7 @@ However, there is a theorem due to Yao says that any weak one-way function can b
 
 **Theorem 1.4 (Yao)** There exists a weak one-way function iff there is a strong one-way function.  
 
-**Proof** See [this post](https://jiyuzhang1994.github.io/wowftosowf/).
+**Proof.** See [this post](https://jiyuzhang1994.github.io/wowftosowf/).
 
 We now introduce one-way permutations,  trapdoor permutations.  
 
