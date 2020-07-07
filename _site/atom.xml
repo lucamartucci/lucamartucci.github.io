@@ -4,13 +4,29 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-07-07T22:40:45+08:00</updated>
+ <updated>2020-07-08T00:50:51+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Quantum Links</title>
+   <link href="http://localhost:4000/quantum/"/>
+   <updated>2020-07-07T00:00:00+08:00</updated>
+   <id>http://localhost:4000/quantum</id>
+   <content type="html">&lt;p&gt;A list of links for Quantum Computation:&lt;/p&gt;
+
+&lt;p&gt;Aaronson: &lt;a href=&quot;https://www.scottaaronson.com/blog/?p=3943&quot;&gt;18fall notes&lt;/a&gt; [1]; &lt;a href=&quot;https://www.scottaaronson.com/barbados-2016.pdf&quot;&gt;Barbados notes&lt;/a&gt; [2], &lt;a href=&quot;http://stellar.mit.edu/S/course/6/fa14/6.845/&quot;&gt;14fall course&lt;/a&gt; [3].&lt;/p&gt;
+
+&lt;p&gt;O’Donnell: &lt;a href=&quot;http://www.cs.cmu.edu/~odonnell/quantum15/&quot;&gt;15fall course&lt;/a&gt; [4], &lt;a href=&quot;https://www.youtube.com/playlist?list=PLm3J0oaFux3YL5qLskC6xQ24JpMwOAeJz&quot;&gt;18fall videos&lt;/a&gt; [5].&lt;/p&gt;
+
+&lt;p&gt;Watrous’ &lt;a href=&quot;https://cs.uwaterloo.ca/~watrous/LectureNotes.html&quot;&gt;lecture notes&lt;/a&gt; [6].&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Hardness Amplification for weak O.W.Fs</title>
@@ -200,15 +216,6 @@
 [1] R.Pass &amp;amp; A.Shelat. A Course in Cryptography.&lt;br /&gt;
 [2] Rafail Ostrovsky. Foundations of Cryptography Draft Lecture Notes.&lt;br /&gt;
 [3] Yehuda Lindell. How To Simulate It – A Tutorial on the Simulation Proof Technique. https://eprint.iacr.org/2016/046.pdf&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Quantum Query Complexity and The Polynomial Method</title>
-   <link href="http://localhost:4000/pmethod/"/>
-   <updated>2020-05-28T00:00:00+08:00</updated>
-   <id>http://localhost:4000/pmethod</id>
-   <content type="html">
 </content>
  </entry>
  
