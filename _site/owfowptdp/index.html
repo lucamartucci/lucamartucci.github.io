@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Part 2:One Way Functions &middot; Jiyu Zhang
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+   <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true
+       }
+     });
+   </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Jiyu Zhang
+        </a>
+      </h1>
+      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item active" href="/">About Me</a>
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+      <a class="sidebar-nav-item" href="/Notes/">Notes</a>
+      <a class="sidebar-nav-item" href="/Links/">Links</a>
+      <a class="sidebar-nav-item" href="/Misc/">Misc</a>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <p>In this note we mainly discuss common cryptographic primitives: one-way functions (OWF), one-way permutations (OWP) and trapdoor functions (TDP).</p>
+
+<h2 id="1one-way-functions-and-relatives">1.One-way functions and relatives</h2>
+
+<p><strong>Definition 1.1 (negligible function)</strong> A function $\epsilon(\cdot)$ is negligible if $\forall$ $c&gt;0$ $\exists$ $N_c$ such that $\forall$ $n&gt;N_c$, $\epsilon(n)&lt;\frac{1}{n^c}$.</p>
+
+<p>For picture examples of <strong>negligible/non-negligible/noticeable</strong> functions, see <a href="https://jiyuzhang1994.github.io/negligible/">this post</a>.</p>
+
+<p>Intuitively, a one-way function is a function that is easy to compute but difficult to invert. Formally,</p>
+
+<p><strong>Definition 1.2 (uniform OWF)</strong> A function <script type="math/tex">f: \{0,1\}^* \rightarrow \{0,1\}^*</script> is said to be one-way if</p>
+
+<ol>
+  <li>For any $x$ that is in the domain of $f$, $f(x)=y$ can be computed in polynomial time.</li>
+  <li>For any PPT algorithm $A$ and all suffciently large $n$ ($n&gt;N_c$ for some $N_c$),<br />
+<script type="math/tex">\Pr \left[ x \leftarrow \{0,1\}^n,\ f(x) = y :\ z\leftarrow A(y, 1^n),\ f(z) = y \right]\leq \epsilon(n)</script></li>
+</ol>
+
+<p><strong>Discussion.</strong> Note that requiring the unary number $1^n$ as adversary’s input is necessary for excluding pathetic functions. For example, consider the function <script type="math/tex">f(x) = \lvert x\rvert</script>. The adversary’s input has length $log(\lvert x \rvert)$, while the original $x$ has length exponential in that. This function should be one-way because the adversary doesn’t have enough time to write down the answer. But it is intuitively easy to invert.</p>
+
+<p><strong>Discussion.</strong> The function that satisfies the above definition is called a <strong>uniformly strong one-way</strong> function. We will talk about weak one-way function later. It is <em>uniform</em> because we assume the adversary is a uniform algorithm that can take any input length. If in the second requirement above, we allow the adversary to use different algorithms for different lengths (i.e. it is a non-uniform circuits family.), then we say the function is <strong>non-uniformly strong one-way</strong>.</p>
+
+<p>In the rest of these notes we will assume the adversary (instand call it a single algorithm) <script type="math/tex">A = \{A_1, A_2, \ldots\}</script> is non-uniform. When we talk about OWFs, OWPs and TDPs, we implicitly talk about non-uniform primitives, i.e. the adversary is non-uniform.</p>
+
+<p>We now introduce weak one-way functions. A weak one-way function is a function that is hard to invert with noticeable probability.</p>
+
+<p><strong>Definition 1.3 (weak OWF)</strong> A function is called weak one-way if</p>
+
+<ol>
+  <li>For any $x$ that is in the domain of $f$, $f(x)=y$ can be computed in polynomial time.</li>
+  <li>$\exists\ c$ such that for any PPT adversary $A$ and all suffciently large $n$ ($n&gt;N_c$ for some $N_c$) 
+<script type="math/tex">\Pr\left[x \leftarrow \{0,1\}^n,\ f(x) = y:\ z\leftarrow A(y, 1^n),\ f(z) = y\right]\geq \frac{1}{n^c}</script><br />
+where $negl(n)$ is the negligible function.</li>
+</ol>
+
+<p>However, there is a theorem due to Yao says that any weak one-way function can be transformed into a strong one-way function.</p>
+
+<p><strong>Theorem 1.4 (Yao)</strong> There exists a weak one-way function iff there is a strong one-way function.</p>
+
+<p><strong>Proof.</strong> See <a href="https://jiyuzhang1994.github.io/wowftosowf/">this post</a>.</p>
+
+<p>We now introduce one-way permutations,  trapdoor permutations.</p>
+
+<p><strong>Definition 1.5 (OWP)</strong> A function $f$ is a one-way permutation if</p>
+<ol>
+  <li>It satisfies all requirements of one-way function.</li>
+  <li>It is a permutation.</li>
+</ol>
+
+<p>Trapdoor functions are OWPs that, given auxiliary information, can easily invert $f(x)$.</p>
+
+<p><strong>Definition 1.6 (TDP)</strong> A function $f$ is a TDP if</p>
+<ol>
+  <li>It satisfies all requirements in Definition 1.5</li>
+  <li>There is a polynomial-time algorithm $I$, a constant $c$ and a string $t_k$ such that, for all large enough $k$, $t_k$ is of length at most $O(k^c)$, and for any $x\in {0,1}^k$, $I(f(x), t_k) = z$ where $f(z) = f(x)$.</li>
+</ol>
+
+<p><strong>Remark.</strong> The above definition of OWFs might be inconvenient for practically cryptographical use. We’ll give some informal reasons:</p>
+
+<ol>
+  <li>The definition is hard to extend to permutations.</li>
+  <li>The definition is <script type="math/tex">\{0,1\}^*</script>, and it doesn’t allow us to sample (i.e. randomly choose) inputs according our security parameters $n$.</li>
+</ol>
+
+<p><strong>Definition 1.7 (Collection of OWFs)</strong>  A set of functions <script type="math/tex">\{f_i:D_i \to R_i\}_{i\in I}</script> is a collection of one-way functions if</p>
+
+<ol>
+  <li>$\exists$ an efficient algorithm $Gen$ that on $1^n$ samples an index $i\in I$.</li>
+  <li>$\exists$ an efficient algorithm $Samp$ that on $i$ samples an element $x$ in the domain $D_i$ of $f_i$.</li>
+  <li>$\exists$ an efficient algorithm that on $i, x$ evaluates $f_i(x)$.</li>
+  <li>it’s hard to invert, i.e. for $n$ and any p.p.t $A$</li>
+</ol>
+
+<script type="math/tex; mode=display">\Pr[i\leftarrow Gen(1^n), x\leftarrow D_i, y\leftarrow f_i(x):A(1^n, y) = x]\leq negl(n)</script>
+
+<h2 id="2-complexity-assumptions">2. Complexity Assumptions</h2>
+
+<p>We state necessary complexity assumptions for the existence of one-way functions. These assumptions are useful for us to argue in the form: a protocol $A$ is not secure because it can break our complexity assumptions.</p>
+
+<p>First of all, we should observe that</p>
+
+<p><strong>Theorem 2.1</strong> If $P=NP$, then one-way functions don’t exist.</p>
+
+<p><strong>Proof.</strong> If $P=NP$, then the adversary can non-deterministically guess all values of $x$ and evaluate f(x) to verify the answer.</p>
+
+<p>Since we assume (in the uniform model) that the adversary is a PPT (i.e. in BPP), we should see that even $BPP = NP$ will imply the non-existence of uniform OWF.</p>
+
+<p>In summary, our two basic assumptios will be: $P\subseteq BPP \not\subseteq NP$.</p>
+
+<p>While we don’t know whether $BPP \neq NP$ or $P/poly \neq NP$ hold, we can show that $BPP \subseteq P/poly$.</p>
+
+<p><strong>Theorem 2.2 (Adleman)</strong> $BPP\subseteq P/poly$</p>
+
+<p><strong>Proof.</strong> For a language $L$ in BPP that can be recognized by a Turing machine $M$, it can be shown that by repeatedly running $M$ many (at most polynomial) times and taking the majority vote, we can reduce the error probability to arbitrary exponentially small value. Let’s assume the error probability on both sides is $2^{-r}$ for some $r&gt;n$, so the number of coin flips used by the new Turing machine $M^\prime$ is at most $r$.<br />
+    According to the above, its’ equivalent to say that for any fixed $x$, for a random string of length $r$, the probability that $M^\prime(x, r)$ accepts is at most $2^{-r}$. We use the union bound to bound that, for all possible inputs <script type="math/tex">x\in \{0,1\}^n</script>, the probability that $M^\prime$ rejects at least one of these $x$ is at most $2^{n-r} &lt; 1$. Therefore, for a random string, there is a positive probability (greater than $1-2^{n-r}$) that can make all $x$ be accepted by $M^\prime$. We take the existence of such a string and hardwire it into our circuit. By doing this the circuits family can decide $L$ without any randomness.</p>
+
+<h2 id="3-candidates-functions-for-owfs-owps-and-tdps">3. Candidates Functions for OWFs, OWPs and TDPs</h2>
+
+<p>In this section we introduce specific problems and assumptions and give explicit candidates for OWFs, OWPs, and TDPs.</p>
+
+<p><strong>Definition 3.1 (Integer Multiplication)</strong> <script type="math/tex">f: \mathbb{N}^2 \to \mathbb{N}</script> is defined by:</p>
+
+<script type="math/tex; mode=display">f(x,y) = x\cdot y</script>
+
+<p>Denote the set of all $n$-bit prime numbers as $\Pi_n$<br />
+<strong>Assumption 3.2 (Factoring Assumption)</strong> $\forall$ adversary $A$, $\exists$ an $\epsilon(\cdot)$ such that</p>
+
+<script type="math/tex; mode=display">\Pr \left[ p,q\leftarrow \Pi_n, N = pq: A(1^n, N)\in \{p, q\}  \right] \leq \epsilon(n)</script>
+
+<p><strong>Theorem 3.3</strong> If the factoring assumption is true, then integer multiplication is a weak one-way function.</p>
+
+<p><strong>Proof.</strong> Suppose it’s not weak one-way, show that you can break the factoring assumption.</p>
+
+<p><strong>Assumption 3.4</strong> (Discrete log) Let $G_q$ be a group of <strong>prime order</strong> $q$ and $Gen_q$ be the set of generators of $G_q$ , $\forall$ adversary $A$, $\exists$ an $\epsilon(\cdot)$ such that</p>
+
+<script type="math/tex; mode=display">\Pr \left[ q\leftarrow \Pi_n, g\leftarrow Gen_q, x\leftarrow \mathbb{Z}_q: A(g^x) = x \right]\leq \epsilon(n)</script>
+
+<p><strong>Discussion.</strong> $G_q$ being a prime order is essential, and we usually choose a prime $q = 2p +1$, which is called a Sophie Germain prime or a “safe” prime. Otherwise, there are known efficient algorithms for solving discrete log in some special cases. See discussion in this <a href="https://www.doc.ic.ac.uk/~mrh/330tutor/ch06s02.html">page</a>.</p>
+
+<p><strong>Discussion.</strong> However, as noted in P&amp;S, there are several problems of using Sophie Germain primes. Some basic theoretical properties are unknown: it is not known (a) whether there are infinite number of SG primes, and (b) the procedure: picking a random $p$ then check whether $q=2p+1$ is a prime is not known to be efficient as the size of $q$ increases.</p>
+
+
+    </div>
+
+  </body>
+</html>
