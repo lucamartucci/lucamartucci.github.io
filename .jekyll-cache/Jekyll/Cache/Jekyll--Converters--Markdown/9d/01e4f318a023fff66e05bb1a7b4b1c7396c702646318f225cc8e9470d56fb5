@@ -1,4 +1,4 @@
-I"ê<p>We prove that if there exists a weak one-way function, then there exists a strong one-way functions, in the sense that the weak o.w.f can be converted into a strong o.w.f. We call this transformation as <strong>Hardness Amplification</strong>.</p>
+I"è<p>We prove that if there exists a weak one-way function, then there exists a strong one-way function, in the sense that the weak o.w.f can be converted into a strong o.w.f. We call this transformation as <strong>Hardness Amplification</strong>.</p>
 
 <p><strong>Theorem 1.</strong> For any weak one-way function <script type="math/tex">f:\{0,1\}^*\to \{0,1\}^*</script>, <strong>there exists a polynomial</strong> $m(\cdot)$ such that <script type="math/tex">f^\prime (x_1,\ldots ,x_{m(n)})= f(x_1), \ldots, f(x_{m(n)})</script> is a strong one-way function.</p>
 
