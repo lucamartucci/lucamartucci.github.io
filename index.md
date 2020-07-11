@@ -1,6 +1,6 @@
 ---
 layout: default
-title: About Me
+title: Home
 ---
 
 I'm a second-year master student at Rutgers University. I have broad interest in theoretical computer science and discrete mathematics.  
