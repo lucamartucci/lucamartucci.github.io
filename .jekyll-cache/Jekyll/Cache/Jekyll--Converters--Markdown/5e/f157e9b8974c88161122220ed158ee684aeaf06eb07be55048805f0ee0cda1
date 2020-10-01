@@ -1,0 +1,26 @@
+I"�<p>The current goal of writings in this section is to (1) help understand definitions; (2) get familiar with main results; (3) study/practice classical proof techniques; (4) practice writing mathematical proofs.</p>
+
+<ol>
+  <li>For reason (3), I often write proofs on my own, therefore proofs don’t necessarily follow the proofs in the original references.</li>
+  <li>Since these notes are written discretely, there might be some notational issues in each part, i.e. different notations are used. I’ll unify them later.</li>
+  <li>For reason (2), some familiar-to-me proofs are omitted but I’ll give references.</li>
+</ol>
+
+<h3 id="cryptography">Cryptography</h3>
+
+<p><a href="https://jiyuzhang1994.github.io/wowftosowf/">weak one-way function to strong one-way function</a></p>
+
+<p><a href="https://jiyuzhang1994.github.io/glthm/">Goldreich-Levin Theorem</a></p>
+
+<p><a href="https://jiyuzhang1994.github.io/negligible/">negligible, non-negligible, noticeable function</a></p>
+
+<p><a href="https://jiyuzhang1994.github.io/zknotes/">some notes on zero-knowledge proofs</a></p>
+
+<h3 id="derandomization">Derandomization</h3>
+
+<p><a href="https://jiyuzhang1994.github.io/derandbpl/">BPL and Fooling BPL</a></p>
+
+<p><a href="https://jiyuzhang1994.github.io/nisanprg/">Nisan’s Pseudorandom Generator for Space-Bounded Computation</a></p>
+
+<p><a href="https://jiyuzhang1994.github.io/sakszhou/">BPL is in L^{3/2}</a></p>
+:ET

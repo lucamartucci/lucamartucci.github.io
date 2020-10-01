@@ -1,74 +1,4 @@
-<!DOCTYPE html>
-<html lang="en-us">
-
-  <head>
-  <link href="https://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  <title>
-    
-      Nisan's Pseudorandom Generator for Space-Bounded Computation &middot; Jiyu Zhang
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="/public/favicon.ico">
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
-   <script type="text/x-mathjax-config">
-     MathJax.Hub.Config({
-       tex2jax: {
-         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-         processEscapes: true
-       }
-     });
-   </script>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-</head>
-
-
-  <body class="theme-base-0d">
-
-    <div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <h1 style="font-size: 43px">
-        <a href="/">
-          Jiyu Zhang
-        </a>
-      </h1>
-      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a class="sidebar-nav-item active" href="/">Home</a>
-      <a class="sidebar-nav-item" href="/blog/">Blog</a>
-      <a class="sidebar-nav-item" href="/Notes/">Notes</a>
-      <a class="sidebar-nav-item" href="/Links/">Links</a>
-      <a class="sidebar-nav-item" href="/Misc/">Misc</a>
-    </nav>
-
-    <p>&copy; 2020. All rights reserved.</p>
-  </div>
-</div>
-
-
-    <div class="content container">
-      <ul>
+I"1<ul>
   <li><a href="#robp">ROBP and Matrix Exponentiation</a></li>
   <li><a href="#pre">Preliminaries</a></li>
   <li><a href="#prg">Nisan’s Pseudorandom Generator</a></li>
@@ -224,8 +154,4 @@ Consider the matrix $M^2[x_1,x_2]$ of $Q^2[x_1, x_2]$ where $x_1x_2$ is chosen u
 
 <script type="math/tex; mode=display">\left \lvert\Pr_{x, h_1, \ldots ,h_{\log r}}\left[ Q(i; G(x)) = j\right ]- \Pr_{x_1, \ldots , x_{2^r}}\left[ Q(i; x_1, \ldots , x^{2^r}) = j\right ]\right \lvert \leq 1/d</script>
 
-
-    </div>
-
-  </body>
-</html>
+:ET
