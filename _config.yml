@@ -8,7 +8,7 @@ relative_permalinks: false
 
 # Setup
 title:            Jiyu Zhang
-tagline:          'A Jekyll theme'
+tagline:          ''
 description:      'Contact: <br /> zjy9462 at gmail dot com'
 url:              'http://hyde.getpoole.com'
 baseurl:           
