@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      The Halting Problem &middot; Jiyu Zhang
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+   <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true
+       }
+     });
+   </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+
+
+  <body class="theme-base-0f">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1 style="font-size: 43px">
+        <a href="/">
+          Jiyu Zhang
+        </a>
+      </h1>
+      <p class="lead">Contact: <br /> zjy9462 at gmail dot com</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item active" href="/">Home</a>
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+      <a class="sidebar-nav-item" href="/Notes/">Notes</a>
+      <a class="sidebar-nav-item" href="/teaching/">Teaching</a>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <p>This is the manuscript I worte in an email to explain the halting problem to my group partners in UCSB’s language class. It is intended for audience with zero background.</p>
+
+<p>Warm-ups: I want you to be comfortable with/ believe the following set-up.</p>
+
+<ol>
+  <li>
+    <p>A computer program takes as input a string and outputs an answer, in this case we say it halts. However it may fall in loops on this input and runs forever, we say it doesn’t halt in this case.</p>
+  </li>
+  <li>
+    <p>Computer programs themselves are represented as (binary) strings in the computer.</p>
+  </li>
+  <li>
+    <p>Therefore, it is important to get comfortable with the idea that a computer program can take as input a description (string) of another computer program, and answer something accordingly, or it never halts.</p>
+  </li>
+</ol>
+
+<p>The Halting Problem asks:</p>
+
+<p>Does there exist a computer program D that can do the following?</p>
+
+<p>—–D’s description—–</p>
+
+<p>D(D1,x):</p>
+
+<p>D takes as input a pair (D1, x), and determines whether D1 will halt on x or not.</p>
+
+<p>If D1 halts on x, D outputs YES. If D1 doesn’t halt on x, D outputs NO.</p>
+
+<p>—–END of D’s description—–</p>
+
+<p>The answer to the Halting Problem is no. i.e. there doesn’t exist such a computer program D.</p>
+
+<p>Proof: assume there exists such a D, we show a contradiction.</p>
+
+<p>We use D as a subroutine to build a computer program D2. (This is possible because D is just a string description, we can embed this string into D2’s description).</p>
+
+<p>D2 does the following:</p>
+
+<p>—–D2’s description—–</p>
+
+<p>D2(D1)</p>
+
+<p>D2 takes as D1 as input, it utilizes the subroutine D to decide whether D1 will halt on D1 (itself).</p>
+
+<p>if D claims D1 will halt on D1, i.e. D(D1,D1) = YES,  then D2 doesn’t halt.</p>
+
+<p>if D claims D1 doesn’t halt on D1, i.e. D(D1,D1) = No, then D2 halts and outputs YES.</p>
+
+<p>—–END of D2’s description—–</p>
+
+<p>Now what will happen when D2 takes as input itself’s description?</p>
+
+<p>if D claims D2 will halt on D2, i.e. D(D2, D2) = YES, then D2 doesn’t halt.</p>
+
+<p>if D claims D2 won’t halt on D2, i.e. D(D2, D2) = NO, then D2 halts and answers YES.</p>
+
+<p>You should see that we have reached a contradiction.</p>
+
+    </div>
+
+  </body>
+</html>
