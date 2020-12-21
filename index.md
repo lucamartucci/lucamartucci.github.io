@@ -8,16 +8,16 @@ I'm a first-year PhD student at UCSB. I was a second-year master student at Rutg
 
 [Thinking and communicating about mathematics](https://sites.math.rutgers.edu/~saks/300S/Part1.pdf).
 
+  
 
+  
+  
+  
+  
+  
 
-
-
-
-
-
-
-
-
+  
+  
 
 ## Teaching
 
