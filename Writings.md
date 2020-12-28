@@ -4,15 +4,15 @@ title: Notes
 permalink: /Writings/
 ---
 
-Here are some expository notes, or my theoretical projects. I wrote for practice.
+I maintain some expository notes, or my theoretical projects. I wrote for practice.
 
-A Novice Mathematician
+* A Novice Mathematician
 
-[My Inspiration](https://www.overleaf.com/read/jzrrthtbccmh) (TCS notes)
+* [My Inspiration](https://www.overleaf.com/read/jzrrthtbccmh) (TCS notes)
 
-Quantum Cryptography 
+* [Classical/Quantum Cryptography](https://www.overleaf.com/read/ftscsyjbrmkz) 
 
-Here are my solutions to problems in some textbooks.
+I also maintain a solution project to problems in some textbooks.
 
 
 
