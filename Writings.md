@@ -4,7 +4,7 @@ title: Notes
 permalink: /Writings/
 ---
 
-I maintain some expository notes, or my theoretical projects. I wrote for practice.
+I maintain some notes, aka my theoretical projects. I wrote mainly for practice and as personal reminder.
 
 * A Novice Mathematician
 
