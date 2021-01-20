@@ -3,5 +3,20 @@ layout: default
 title: Teaching
 permalink: /teaching/
 ---
-CS40, Foundation of Computer Science. [Fall 2020](https://jiyuzhang1994.github.io/CS40f20/).  
-Office Hours: Thursday 5-8pm, PDT. Zoom link can be found on GauchoSpace.
+
+
+Some comments from the students (source: ESCI survey reports)  
+
+From CS40:
+
+"Jiyu led a very organized discussion section and had clear explanations of all the pertinent concepts."
+
+"Helped with homework assignments, gave enough information for me to figure out questions on my own."
+
+"Very helpful and responsible."
+
+
+
+
+
+
