@@ -8,9 +8,9 @@ I maintain some notes, aka my theoretical projects. I wrote mainly for practice 
 
 * A Novice Mathematician
 
-* [My Inspiration](https://www.overleaf.com/read/jzrrthtbccmh) (TCS notes)
+* My Inspiration (TCS notes)
 
-* [Classical/Quantum Cryptography](https://www.overleaf.com/read/ftscsyjbrmkz) 
+* Classical/Quantum Cryptography
 
 I also maintain a solution project to problems in some textbooks.
 
