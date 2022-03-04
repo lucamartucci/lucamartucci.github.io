@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-I'm a PhD student at UCSB. I was a master student at Rutgers University. I'm interested in mathematical problems (combinatorics and probability) with motivation from Computational Complexity, Foundation of Cryptography, Learning Theory.
+I was a master student at Rutgers University. I'm interested in mathematical problems (combinatorics and probability) with motivation from Computational Complexity, Foundation of Cryptography, Learning Theory.
 
 Currently I think a lot about Fourier properties of DNFs.
  
@@ -24,6 +24,8 @@ Currently I think a lot about Fourier properties of DNFs.
 ## Teaching
 
 I was/am a teaching assistant for: 
+
+@UCSB
 
 CS8, Introduction to Computer Science. [Summer 2021]
 
