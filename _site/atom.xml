@@ -4,22 +4,13 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2021-06-02T18:25:37+08:00</updated>
+ <updated>2022-04-24T17:54:01+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
  </author>
 
- 
- <entry>
-   <title>My test-of-time award for quantum computing notes</title>
-   <link href="http://localhost:4000/20201010/"/>
-   <updated>2020-10-20T00:00:00+08:00</updated>
-   <id>http://localhost:4000/20201020</id>
-   <content type="html">&lt;p&gt;goes to John Watrou’s &lt;a href=&quot;https://cs.uwaterloo.ca/~watrous/LectureNotes.html&quot;&gt;lecture notes&lt;/a&gt;!&lt;/p&gt;
-</content>
- </entry>
  
 
 </feed>
