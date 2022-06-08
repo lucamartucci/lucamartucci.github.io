@@ -3,7 +3,9 @@ layout: default
 title: Home
 ---
 
-I'll be moving to Bocconi University to continue my PhD study. Previously I studied at UCSB, Rutgers University. I'm interested in mathematical problems with motivation from Computational Complexity, Foundation of Cryptography, Learning Theory.
+I'll be moving to Bocconi University to continue my PhD study. I am one of the international students who are banned from entering the US to pursue academic study, more specifically, affected by the [proclamation 10043](https://www.nafsa.org/regulatory-information/proclamation-suspending-entry-chinese-students-and-researchers-connected-prc).
+
+Previously I studied at UCSB, Rutgers University. I'm interested in mathematical problems with motivation from Computational Complexity, Foundation of Cryptography, Learning Theory.
 
 Currently I think about:
 
