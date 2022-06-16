@@ -3,11 +3,14 @@ layout: default
 title: Home
 ---
 
-I'm excited to be moving to Bocconi University to continue my PhD study. Previously I studied at UCSB, Rutgers University. I'm interested in mathematical problems with motivation from Computational Complexity, Foundation of Cryptography, Learning Theory.
+I'm excited to be moving to Bocconi University to continue my PhD study. I'm interested in interesting mathematical problems with motivation from computing.
 
-Currently I think about:
+Currently I mainly think about:
 
-* Structural and Fourier properties of [DNFs](https://en.wikipedia.org/wiki/Disjunctive_normal_form).
+* Design and analysis of heuristic algorithms for average-case problems
+* Analysis of Boolean functions. Especially structural and Fourier properties of [DNFs](https://en.wikipedia.org/wiki/Disjunctive_normal_form).
+
+I also have interest in applications of theory to understand practical problems.
  
 Please don't hesitate to contact me if you have interest in discussing.  
   
