@@ -7,7 +7,7 @@ I'm excited to be moving to Bocconi University to continue my PhD study. I'm int
 
 Currently I mainly think about:
 
-* Design and analysis of heuristic algorithms for average-case problems
+* Design and analysis of heuristic algorithms for average-case problems, especially using spectral methods.
 * Analysis of Boolean functions. Especially structural and Fourier properties of [DNFs](https://en.wikipedia.org/wiki/Disjunctive_normal_form).
 
 I also have interest in applications of theory to understand practical problems.
@@ -24,7 +24,7 @@ I especially like the the following introductory chapters about being a mathemat
 
 ---
 
-I am one of those international students who are banned from entering the US to pursue academic study, more specifically, affected by the [proclamation 10043](https://www.nafsa.org/regulatory-information/proclamation-suspending-entry-chinese-students-and-researchers-connected-prc).
+I am one of those international students who are prevented from entering the US (by cancelling student visas) to join academic activities, more specifically, due to the [proclamation 10043](https://www.nafsa.org/regulatory-information/proclamation-suspending-entry-chinese-students-and-researchers-connected-prc). I don't see any valid reasons behind this policy.
 
 
 
