@@ -8,9 +8,9 @@ I'm excited to be moving to Bocconi University to continue my PhD study. I'm int
 Currently I mainly think about:
 
 * Design and analysis of heuristic algorithms for average-case problems, especially using spectral methods.
-* Analysis of Boolean functions. Especially structural and Fourier properties of [DNFs](https://en.wikipedia.org/wiki/Disjunctive_normal_form).
+* Analysis of Boolean functions. Especially structural and Fourier properties of concrete models, like [DNFs](https://en.wikipedia.org/wiki/Disjunctive_normal_form).
 
-I also have interest in applications of theory to understand practical problems.
+I also have interest in interactions between CS theory and practical problems, especially in understanding experimental results on real data, and in developing good algorithms guided by theory.
  
 Please don't hesitate to contact me if you have interest in discussing.  
   
