@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-I'm excited to be moving to Bocconi University to continue my PhD study. I'm like interesting mathematical problems with motivation from computing.
+I'm excited to be moving to Bocconi University to continue my PhD study. I like interesting mathematical problems with motivation from computing.
 
 Currently I mainly think about:
 
