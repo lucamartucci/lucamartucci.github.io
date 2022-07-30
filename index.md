@@ -19,7 +19,7 @@ Currently I mainly think about:
 * Design and analysis of heuristic algorithms for average-case problems.
 * Analysis of Boolean functions. Especially structural and Fourier properties of concrete models, like [DNFs](https://en.wikipedia.org/wiki/Disjunctive_normal_form).
 
-I also have a growing interest in projects aim at closing the gap between theory and practice, especially in understanding experimental results on real instances, and in developing good heuristic algorithms guided by theory.
+I also have a growing interest in projects that aim at closing the gap between theory and practice, especially in understanding experimental results on real instances, and in developing good heuristics guided by theory.
  
 Please don't hesitate to contact me if you have interest in discussing.  
   
