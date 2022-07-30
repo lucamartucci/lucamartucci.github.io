@@ -9,7 +9,7 @@ relative_permalinks: false
 # Setup
 title:            Jiyu Zhang
 tagline:          ''
-description:      'Contact: <br /> jiyu dot zhang at phd dot unibocconi dot it'
+description:      ''
 url:              'http://hyde.getpoole.com'
 baseurl:           
 
