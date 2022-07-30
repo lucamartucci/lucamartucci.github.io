@@ -3,11 +3,14 @@ layout: default
 title: Home
 ---
 
-I'm a PhD student in the Stat&CS program at Bocconi University. Previously I studied at UCSB and Rutgers University, many thanks to all the professors who taught and helped me there.	
+I am a PhD student in the Stat&CS program at Bocconi University. Previously I studied at UCSB and Rutgers University, I'm grateful to all the professors who taught and helped me there.	
 
-You can reach me at *jiyu dot zhang at phd dot unibocconi dot it*
+You may reach me at *jiyu dot zhang at phd dot unibocconi dot it*
 
-***
+---
+
+## Academic Interests
+
 
 I like interesting mathematical problems with motivation from computation.
 
@@ -30,9 +33,10 @@ I especially like the the following introductory chapters about being a mathemat
 
 ---
 
+
 ## 10043
 
-I am one of those international students who are (yes, still in effect) prevented from entering the US to join academic activities, mainly by revoking visas. More specifically, this is due to the [proclamation 10043](https://www.nafsa.org/regulatory-information/proclamation-suspending-entry-chinese-students-and-researchers-connected-prc). Besides its unclear definition of 'military-civil fusion strategy' and its misidentification of students in execution. I don't see any valid reasons behind this policy.
+I am one of those international students who are (yes, still in effect) prevented from entering the US to join academic activities, mainly by revoking visas. More specifically, this is due to the [Proclamation 10043](https://www.nafsa.org/regulatory-information/proclamation-suspending-entry-chinese-students-and-researchers-connected-prc). Besides its unclear definition of 'military-civil fusion strategy' and its misidentification of students in execution, I don't see any valid reasons behind this policy.
 
 
 
