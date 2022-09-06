@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-07-31T02:07:36+08:00</updated>
+ <updated>2022-09-06T21:42:26+02:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -15,7 +15,7 @@
  <entry>
    <title>Test</title>
    <link href="http://localhost:4000/test/"/>
-   <updated>2022-04-24T00:00:00+08:00</updated>
+   <updated>2022-04-24T00:00:00+02:00</updated>
    <id>http://localhost:4000/test</id>
    <content type="html">&lt;p&gt;test&lt;/p&gt;
 </content>
