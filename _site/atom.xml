@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Jiyu Zhang</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2022-09-16T19:16:28+02:00</updated>
- <id>http://localhost:4000</id>
+ <link href="http://hyde.getpoole.com/atom.xml" rel="self"/>
+ <link href="http://hyde.getpoole.com/"/>
+ <updated>2022-09-20T18:38:36+02:00</updated>
+ <id>http://hyde.getpoole.com</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Moving to Milan</title>
-   <link href="http://localhost:4000/milan/"/>
+   <link href="http://hyde.getpoole.com/milan/"/>
    <updated>2022-09-16T00:00:00+02:00</updated>
-   <id>http://localhost:4000/milan</id>
+   <id>http://hyde.getpoole.com/milan</id>
    <content type="html">&lt;p&gt;I finally settled(?) in Milan.&lt;/p&gt;
 
 &lt;p&gt;(?) (I still haven’t received my permit of stay, and a lot of more things are in process, but in Italy it takes time.)&lt;/p&gt;
@@ -41,6 +41,8 @@
 &lt;p&gt;The coffee here is so affordable, on a vendor machine it is 0.40 euro to have an Espresso. In a store probably a little more but still less than 2 euros (Starbucks? here I haven’t heard about it yet).  Last week I had my first Italian pizza, and it easily outranked all the pizzas I had before.&lt;/p&gt;
 
 &lt;p&gt;What about gelatos? Yesterday my fellow students kindly invited me to have a gelato, my reaction was: sorry, I’m not prepared. I’ll have one when I am in that mood. So let’s save it for a moment.&lt;/p&gt;
+
+&lt;p&gt;[Update: my fellow student told me later: in Italy, you should always be in that mood!]&lt;/p&gt;
 
 &lt;p&gt;I start to pick some new habits. I learned to put my backpack in front when I was on the bus/tram/subway. I am thinking about having a new wallet to store the coins.&lt;/p&gt;
 
@@ -67,9 +69,9 @@
  
  <entry>
    <title>Test</title>
-   <link href="http://localhost:4000/test/"/>
+   <link href="http://hyde.getpoole.com/test/"/>
    <updated>2022-04-24T00:00:00+02:00</updated>
-   <id>http://localhost:4000/test</id>
+   <id>http://hyde.getpoole.com/test</id>
    <content type="html">&lt;p&gt;test&lt;/p&gt;
 </content>
  </entry>
