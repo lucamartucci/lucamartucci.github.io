@@ -4,7 +4,7 @@
  <title>Jiyu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-09-29T17:00:52+02:00</updated>
+ <updated>2022-09-29T18:39:25+02:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -17,11 +17,9 @@
    <link href="http://localhost:4000/milan/"/>
    <updated>2022-09-16T00:00:00+02:00</updated>
    <id>http://localhost:4000/milan</id>
-   <content type="html">&lt;!--more--&gt;
+   <content type="html">&lt;p&gt;I finally settled(?) in Milan.&lt;/p&gt;
 
-&lt;h1 id=&quot;moving-to-milan&quot;&gt;Moving to Milan&lt;/h1&gt;
-
-&lt;p&gt;I finally settled(?) in Milan.&lt;/p&gt;
+&lt;!--more--&gt;
 
 &lt;p&gt;(?) (I still haven’t received my permit of stay, and a lot of more things are in process, but in Italy it takes time.)&lt;/p&gt;
 

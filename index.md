@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-Hi! I am a PhD student in the Stat&CS program at Bocconi University, where I have the good fortune to have [Luca Trevisan](https://lucatrevisan.github.io/) as my advisor. Previously I studied at UCSB and Rutgers University, I'm grateful to all the professors who taught and helped me there. 	
+Hi! I am a PhD student in the Stat&CS program at Bocconi University, where I have the good fortune to have [_Luca Trevisan_](https://lucatrevisan.github.io/) as my advisor. Previously I studied at UCSB and Rutgers University, I'm grateful to all the professors who taught and helped me there. 	
 
 
 
