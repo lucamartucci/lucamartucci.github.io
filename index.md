@@ -5,9 +5,7 @@ title: Home
 
 Hi! I am a PhD student in the Stat&CS program at Bocconi University, where I have the good fortune to be advised by [*Luca Trevisan*](https://lucatrevisan.github.io/). Previously I studied at UCSB and Rutgers University, I'm grateful to the professors who taught and helped me there. 	
 
-You can reach me at  
-
-***jiyu dot zhang at phd dot unibocconi dot it***
+You can reach me at &nbsp;***jiyu dot zhang at phd dot unibocconi dot it***
 
 ---
 
