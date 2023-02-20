@@ -12,7 +12,7 @@ You can reach me at &nbsp;***jiyu dot zhang at phd dot unibocconi dot it***
 ## Research Interests
 
 
-In general I like interesting mathematical problems with motivation from computation, which are usually tagged with Algorithms, Computational Complexity Theory, Pseudorandomness.
+In general I like interesting mathematical problems with motivation from computation, which are usually tagged with Algorithms, Computational Complexity Theory, Pseudorandomness, Combinatorics.
 
 I also have a growing interest in projects that aim at closing the gap between theory and practice, especially in understanding experimental results on real instances, and in developing good heuristics guided by theory.
  
