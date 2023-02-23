@@ -18,4 +18,4 @@ I wondered if the store owner just thinks it's cool to relate typewriters to Tur
 
 Maybe Turing did had some inspiration from typewriters.
 
-But I doubt he would endorse typewriters in stores.
+But I doubt the typewriter stores would have his endorsement.
