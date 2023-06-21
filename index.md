@@ -20,7 +20,10 @@ I found inspiration from the following introductory chapters about being a mathe
 
 ## 10043
 
-Since 2020, the [Proclamation 10043](https://www.federalregister.gov/documents/2020/06/04/2020-12217/suspension-of-entry-as-nonimmigrants-of-certain-students-and-researchers-from-the-peoples-republic) (still in effect) has been preventing Chinese students from obtaining visas to enter the US. Apparently it has plagiarized the term 'military-civil fusion strategy' from some unknown websites. Furthermore its misclassification of students has well indicated the people in charge either fall short of understanding of scientific research, or are just ill-intentioned.
+Since 2020, the [Proclamation 10043](https://www.federalregister.gov/documents/2020/06/04/2020-12217/suspension-of-entry-as-nonimmigrants-of-certain-students-and-researchers-from-the-peoples-republic) (still in effect) has been preventing Chinese students from obtaining visas to enter the US. This is nonsense but ill-intentioned for: 
+
+1. there is no evidence showing the affected students are supported by the military or the rarely-heard "military-civil fusion strategy".
+2.  the affected student are majoring in subjects having no potential military/economic impact. The governor apparently has a poor understanding of these scientific terms...
 
 See also [Scott's post](https://scottaaronson.blog/?p=7028) for a relevant discussion.
 
