@@ -17,15 +17,7 @@ Since 2020, the [Proclamation 10043](https://www.federalregister.gov/documents/2
 
 ---
  
-## Miscellaneous
 
-I was inspired by this introductory chapter about being a mathematician: [Thinking and communicating about mathematics](https://sites.math.rutgers.edu/~saks/300S/Part1.pdf)  
-
-I'm a typical post-90s grown up in China. I develop broad (some superficial) interests in things from different culture that attract me. I enjoyed the rich east Asian and the western cultural things, in the form of pop music, dramas, anime, video games, NBA, classics. Now I spend more time thinking about math. Recently, I'm into [Jay Chou](https://en.wikipedia.org/wiki/Jay_Chou)'s music (again).  
-
-It's easy to find a topic to talk with me :). I keep an open mind to new things!
-
----
 
 
 
