@@ -4,7 +4,16 @@ permalink: /miscellaneous/
 title: miscellaneous  
 
 ---
+more about me:
 
-I like (and was inspired by) this article about being a mathematician: [Thinking and communicating about mathematics](https://sites.math.rutgers.edu/~saks/300S/Part1.pdf) 
+I'm a typical post-90s grown up in China. I enjoy pop music, dramas, animes, classics, video games, NBA. I might consider to post about them in the future :) Recently I'm into [Jay Chou](https://en.wikipedia.org/wiki/Jay_Chou)'s music (again) 
 
-I'm a typical post-90s grown up in China. I enjoy pop music, dramas, animes, classics, video games, NBA. I might consider to post about them in the future :) Recently I'm into [Jay Chou](https://en.wikipedia.org/wiki/Jay_Chou)'s music (again)  
+writings I like:
+
+ [Thinking and communicating about mathematics](https://sites.math.rutgers.edu/~saks/300S/Part1.pdf) by Mike Saks  
+
+*what does a mathematician do?*
+
+ [Advice to a Beginning Graduate Student](https://www.cs.cmu.edu/~mblum/research/pdf/grad.html) by Manuel Blum
+
+*what would you expect for PhD life (in theory)?*
