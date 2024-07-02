@@ -11,12 +11,7 @@ You can reach me at &nbsp;***jiyu dot zhang at phd dot unibocconi dot it***
 
 ---
 
-## 10043
 
-Since 2020, the [Proclamation 10043](https://www.federalregister.gov/documents/2020/06/04/2020-12217/suspension-of-entry-as-nonimmigrants-of-certain-students-and-researchers-from-the-peoples-republic) (still in effect) has been preventing Chinese students from obtaining visas to enter the US. 
-
----
- 
 
 
 
