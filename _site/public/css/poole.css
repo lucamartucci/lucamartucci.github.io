@@ -234,7 +234,7 @@ img {
   border-radius: 5px;
 }
 
-img + em { }
+
 
 /* Tables */
 table {
@@ -417,7 +417,7 @@ a.pagination-item:hover {
   }
   .pagination-item {
     float: left;
-    width: 50%;
+    width: 100%;
   }
   .pagination-item:first-child {
     margin-bottom: 0;
