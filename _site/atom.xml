@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>JiYu Zhang</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2024-11-05T15:08:23+01:00</updated>
- <id>http://localhost:4000</id>
+ <link href="http://hyde.getpoole.com/atom.xml" rel="self"/>
+ <link href="http://hyde.getpoole.com/"/>
+ <updated>2024-11-05T15:57:15+01:00</updated>
+ <id>http://hyde.getpoole.com</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Things you can find in Milan</title>
-   <link href="http://localhost:4000/typerwriter/"/>
+   <link href="http://hyde.getpoole.com/typerwriter/"/>
    <updated>2023-02-22T00:00:00+01:00</updated>
-   <id>http://localhost:4000/typewriter</id>
+   <id>http://hyde.getpoole.com/typewriter</id>
    <content type="html">&lt;p&gt;Turing-endorsed typewriters.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -34,9 +34,9 @@
  
  <entry>
    <title>Moving to Milan</title>
-   <link href="http://localhost:4000/milan/"/>
+   <link href="http://hyde.getpoole.com/milan/"/>
    <updated>2022-09-16T00:00:00+02:00</updated>
-   <id>http://localhost:4000/milan</id>
+   <id>http://hyde.getpoole.com/milan</id>
    <content type="html">&lt;p&gt;I finally settled(?) in Milan.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -97,9 +97,9 @@
  
  <entry>
    <title>Test</title>
-   <link href="http://localhost:4000/test/"/>
+   <link href="http://hyde.getpoole.com/test/"/>
    <updated>2022-04-24T00:00:00+02:00</updated>
-   <id>http://localhost:4000/test</id>
+   <id>http://hyde.getpoole.com/test</id>
    <content type="html">&lt;p&gt;test&lt;/p&gt;
 </content>
  </entry>
