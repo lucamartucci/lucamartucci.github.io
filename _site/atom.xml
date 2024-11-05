@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>JiYu Zhang</title>
- <link href="http://hyde.getpoole.com/atom.xml" rel="self"/>
- <link href="http://hyde.getpoole.com/"/>
- <updated>2023-12-02T14:25:51+01:00</updated>
- <id>http://hyde.getpoole.com</id>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2024-11-05T01:45:03+01:00</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
@@ -13,49 +13,10 @@
 
  
  <entry>
-   <title>Public Inefficiency in Italy</title>
-   <link href="http://hyde.getpoole.com/embassy/"/>
-   <updated>2023-06-19T00:00:00+02:00</updated>
-   <id>http://hyde.getpoole.com/embassy</id>
-   <content type="html">&lt;p&gt;September 28th 2023&lt;/p&gt;
-
-&lt;p&gt;Today I went to the police station in Milan to renew my permit of stay. The guard wouldn’t let me in if I just explain to him I missed the last appointment because I was in China with my family. In fact last time, they told me it’s okay if I missed it, I would receive another appointment automatically. Anyway, the trick is that you have to complain to them you could not make an appointment online. That means, if you complain, it works. Otherwise they ask you to “come tomorrow” recursively.&lt;/p&gt;
-
-&lt;p&gt;So I got in, and was able to talk to the police who is in charge of immigrating affairs. After working on the computer for a while, it seemed that he couldn’t handle my case, instead he told me he would give me another date so I could come – the date is three months later.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;June 19th 2023&lt;/p&gt;
-
-&lt;p&gt;As Chinese it’s already annoying enough to obtain a visa to enter any western country, however when the Italian embassy gets involved, things become exponentially harder.&lt;/p&gt;
-
-&lt;p&gt;Italian wants to be decent, everything needs to be formally addressed. One problem: even the office staff don’t understand the business.&lt;/p&gt;
-
-&lt;p&gt;My family wants to visit me in the summer. To help my family to get a visa, I need to obtain a certificate of relationship for them.&lt;/p&gt;
-
-&lt;p&gt;Problem 1: even this certificate is not clearly defined, you cannot find any format of this certificate on the website.&lt;/p&gt;
-
-&lt;p&gt;Problem 2: they do not specify who would authorize the document.&lt;/p&gt;
-
-&lt;p&gt;So I went to the Chinese embassy in Milan to obtain a certificate, which was reasonable because all my documents are in Chinese so they can recognize and verify. After weeks of effort, finally my family received the certificate and submitted it to the Italian embassy, and they said: we cannot acknowledge your document (because we don’t trust the Chinese embassy), we need an authorization from the Italian side. “&lt;/p&gt;
-
-&lt;p&gt;Va bene, now you ask them: WHERE in Italy should I go to obtain the authorization. They respond: we don’t know, but our boss explicitly required that. Perhaps in comune di Milano or the Prefettura, you know, someone came here last week with that authorized document so it’s not impossible… Here is&lt;/p&gt;
-
-&lt;p&gt;Problem 3: you cannot directly talk to the officer who has the authority to issue your visa, but you can only talk to the one who helps you to communicate. They even create a GAP in your communication, and you cannot ask directly what you need!&lt;/p&gt;
-
-&lt;p&gt;Finally,&lt;/p&gt;
-
-&lt;p&gt;Problem 4: when I went to the comune di Milano and the Prefettura, apparently they don’t know what the Italian embassy staff is talking about…&lt;/p&gt;
-
-&lt;p&gt;TO BE UPDATED&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
    <title>Things you can find in Milan</title>
-   <link href="http://hyde.getpoole.com/typerwriter/"/>
+   <link href="http://localhost:4000/typerwriter/"/>
    <updated>2023-02-22T00:00:00+01:00</updated>
-   <id>http://hyde.getpoole.com/typewriter</id>
+   <id>http://localhost:4000/typewriter</id>
    <content type="html">&lt;p&gt;Turing-endorsed typewriters.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -73,9 +34,9 @@
  
  <entry>
    <title>Moving to Milan</title>
-   <link href="http://hyde.getpoole.com/milan/"/>
+   <link href="http://localhost:4000/milan/"/>
    <updated>2022-09-16T00:00:00+02:00</updated>
-   <id>http://hyde.getpoole.com/milan</id>
+   <id>http://localhost:4000/milan</id>
    <content type="html">&lt;p&gt;I finally settled(?) in Milan.&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -136,9 +97,9 @@
  
  <entry>
    <title>Test</title>
-   <link href="http://hyde.getpoole.com/test/"/>
+   <link href="http://localhost:4000/test/"/>
    <updated>2022-04-24T00:00:00+02:00</updated>
-   <id>http://hyde.getpoole.com/test</id>
+   <id>http://localhost:4000/test</id>
    <content type="html">&lt;p&gt;test&lt;/p&gt;
 </content>
  </entry>
