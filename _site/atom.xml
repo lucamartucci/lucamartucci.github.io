@@ -4,7 +4,7 @@
  <title>JiYu Zhang</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2024-11-05T01:45:03+01:00</updated>
+ <updated>2024-11-05T11:29:10+01:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -21,7 +21,7 @@
 
 &lt;!--more--&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/typewriter.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/typewriter.jpeg&quot; alt=&quot;&quot; width=&quot;350&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I wondered if the store owner just thinks it’s cool to relate typewriters to Turing machines. However, in &lt;a href=&quot;https://en.wikipedia.org/wiki/Turing_machine&quot;&gt;Wikipedia&lt;/a&gt; it writes:&lt;/p&gt;
 

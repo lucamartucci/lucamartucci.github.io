@@ -10,7 +10,7 @@ Turing-endorsed typewriters.
 
 <!--more-->
 
-![](/assets/typewriter.jpeg)
+![](/assets/typewriter.jpeg){: width="350" }
 
 I wondered if the store owner just thinks it's cool to relate typewriters to Turing machines. However, in [Wikipedia](https://en.wikipedia.org/wiki/Turing_machine) it writes:
 
