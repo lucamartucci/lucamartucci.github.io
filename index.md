@@ -5,10 +5,10 @@ title: Home
 
 
 
-![Lausanne, summer 2024](/assets/prog.jpg){: width="300" }{: style="float: right; margin-left: 5em;"}
+![Lausanne, summer 2024](/assets/prog.jpg){: width="320" }{: style="float: right; margin-left: 5em;"}
 
 
-Hi! I am a PhD student in the Stat&CS program at Bocconi University, where I was advised by Prof. [Luca Trevisan](https://lucatrevisan.github.io/). Lately I've been co-advised by Prof. [Salil Vadhan](https://salil.seas.harvard.edu/) and Prof. [Alon Rosen](https://www.alonrosen.net/).  
+Hi! I am a PhD student in the Stat&CS program at Bocconi University, where I had the good fortune to be advised by [Luca Trevisan](https://lucatrevisan.github.io/). Lately I'm also fortunate to have been co-advised by [Salil Vadhan](https://salil.seas.harvard.edu/) and [Alon Rosen](https://www.alonrosen.net/).  
 
 I like interesting mathematical questions motivated by the theory of computing, which are usually tagged with Algorithms, Computational Complexity Theory, Pseudorandomness, Combinatorics.  
 
