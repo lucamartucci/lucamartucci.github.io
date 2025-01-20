@@ -12,6 +12,12 @@ Hi! I am a PhD student in the Stat&CS program at Bocconi University, where I had
 
 I like interesting mathematical questions motivated by the theory of computing, which are usually tagged with Algorithms, Computational Complexity Theory, Pseudorandomness, Combinatorics.  
 
+Specific topics I'm actively thinking about now include
+
+* Spectral Graph Theory
+* Applications of the Sum-of-Squares algorithms
+* Average-Case Complexity, Computationhal Complexity of Statistical Inference
+
 
 You can reach me at &nbsp;***jiyu dot zhang at phd dot unibocconi dot it***
 
