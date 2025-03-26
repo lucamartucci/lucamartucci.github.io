@@ -16,7 +16,6 @@ Recently I have been thinking about questions related to
 
 * spectral graph theory
 * applications of the Sum-of-Squares algorithms
-* complexity of optimization/inference probkems
 
 
 You can reach me at &nbsp;***jiyu dot zhang at phd dot unibocconi dot it***
