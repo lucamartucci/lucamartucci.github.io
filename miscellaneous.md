@@ -19,4 +19,4 @@ writings I like:
 
 more about me:
 
-I'm a typical post-90s grew up in China, I like various pop musics from my generation. Recently I'm into listening to [Fish Leong](https://www.youtube.com/watch?v=7FiQV1-z06Q).
+I'm a typical post-90s grew up in China, I like various pop songs from my generation. Recently I'm into listening to [Fish Leong](https://www.youtube.com/watch?v=7FiQV1-z06Q).
