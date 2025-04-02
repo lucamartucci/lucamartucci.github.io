@@ -10,7 +10,7 @@ title: Home
 
 Hi! I am a PhD student in the Stat&CS program at Bocconi University, where I have the good fortune to have been advised by [Luca Trevisan](https://lucatrevisan.github.io/), and lately by [Alon Rosen](https://www.alonrosen.net/) and [Salil Vadhan](https://salil.seas.harvard.edu/).
 
-I like mathematical questions motivated by the theory of computing, meaning that they're concerned with *algorithms*,  *computational complexity theory*, and *computational randomness* or *pseudo-randomness*. 
+I like mathematical questions motivated by the theory of computing, meaning that they're concerned with *algorithms* and *computational complexity theory*. 
 
 Recently I have been thinking about questions related to
 
