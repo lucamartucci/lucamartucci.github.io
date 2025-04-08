@@ -15,7 +15,7 @@ I like mathematical questions motivated by the theory of computing, meaning that
 Recently I have been thinking about questions related to
 
 * spectral graph theory
-* applications of semidefinite programming (e.g, the Sum-of-Squares algorithms)
+* applications of the Sum-of-Squares algorithms
 * average-case complexity of optimization/inference problems
 
 You can reach me at &nbsp;***jiyu dot zhang at phd dot unibocconi dot it***
