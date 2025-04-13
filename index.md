@@ -10,9 +10,9 @@ title: Home
 
 Hi! I am a PhD student in the Stat&CS program at Bocconi University, where I have the good fortune to have been advised by [Luca Trevisan](https://lucatrevisan.github.io/), and lately by [Alon Rosen](https://www.alonrosen.net/) and [Salil Vadhan](https://salil.seas.harvard.edu/).
 
-I like mathematical questions motivated by the theory of computing, meaning that they're concerned with *algorithms* and *computational complexity theory*. 
+I like mathematical questions motivated by the theory of computing, meaning that they are concerned with *algorithms*, *computational complexity theory*, and *computational pseudorandomness*.
 
-Recently I have been thinking about questions related to
+Recently I have been thinking about questions related to the topics of
 
 * spectral graph theory
 * applications of the Sum-of-Squares algorithms
