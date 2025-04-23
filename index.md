@@ -16,7 +16,7 @@ In particular, recently I have been thinking about questions related to the topi
 
 * spectral graph theory
 * applications of linear/semidefinite programming, the Sum-of-Squares algorithms
-* algorithms and complexity of average-case optimization/inference problems
+
 
 You can reach me at &nbsp;***jiyu dot zhang at phd dot unibocconi dot it***
 
