@@ -12,10 +12,10 @@ Hi! I am a PhD student in the Stat&CS program at Bocconi University, where I hav
 
 I am interested in questions motivated by the theory of computing, meaning that they are concerned with *algorithms* and *computational complexity*.
 
-In particular, recently I have been thinking about questions related to the topics of
+In particular, recently I have been thinking about questions related to
 
 * spectral and algebraic graph theory
-* applications of linear/semidefinite programming, including the Sum-of-Squares algorithms
+* applications of linear/semidefinite programming to combinatorial optimization and statistical inference problems, especially the sum-of-squares algorithms.
 
 
 You can reach me at &nbsp;***jiyu dot zhang at phd dot unibocconi dot it***
