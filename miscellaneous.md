@@ -21,6 +21,6 @@ more about me:
 
 I am a typical post-90s from China, I like various pop songs from my generation. Recently I'm into listening to [Fish Leong](https://www.youtube.com/watch?v=7FiQV1-z06Q).  
 
-I enjoyed going to the netbar to play video games. My latest hobby is playing DotA 2.
+When I'm not thinking about math, you can probably find me in the netbar playing DotA2.
 
 
