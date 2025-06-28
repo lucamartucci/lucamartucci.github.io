@@ -10,7 +10,7 @@ title: Curriculum Vitae
   Thesis: *Dissipative-Hamiltonian evolution within the GENERIC paradigm* [(pdf)](thesis.pdf), supervised by Prof. Giuseppe Savaré.
 
 * **University of Wisconsin-Madison** (Fall 2024)
-  *Exchenge Semester*
+  *Exchange Semester*
 
 ---
 
