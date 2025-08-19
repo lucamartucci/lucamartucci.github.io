@@ -7,16 +7,16 @@ title: Portfolio
 
   Image-classification techniques to isolate and recognize individual characters from high-resolution tablet images written in Sumerian cuneiforms and translation via Transformer-like architectures.
 
-* **Gene-based classification of Hypoxia in cancer cells** ([code]())
+* **Gene-based classification of Hypoxia in cancer cells** ([code](AILab.html))
   
   Machine Learning models for the classification of the state of hypoxia in cells, involving dimensionality reduction (PCA, t-SNE, UMAP), supervised and unsupervised learning (clustering, KNN, XGBoost, SVM, NN), hyperparameter optimization (Optuna), encoding, and ensemble models.
 
-* **Monte Carlo simulation of the 3-dimensional Ising model** ([code]())
+* **Monte Carlo simulation of the 3-dimensional Ising model** ([code](3DIsing.html))
   
   Simulation of the Ising model on a 3D lattice using the Metropolis algorithm. Analysis of phase transitions and
 magnetization behavior near the critical temperature.
 
-* **Evolutionary algorithms to find minimal surfaces** ([code]())
+* **Evolutionary algorithms to find minimal surfaces** ([code](EvMinSurf.html))
   
   Computing solutions to the plateau problem with fixed volume and Dirichlet boundary condition in the plane,
 using various evolutionary computing selection and variation operators.
@@ -26,7 +26,7 @@ using various evolutionary computing selection and variation operators.
   Subgame perfect equilibria for a model two-player JENGA match, and the influence of players’ risk behavior on
 their strategy profiles.
 
-* **Pilot Machine Learning project** ([code]())
+* **Pilot Machine Learning project** ([code](ML.html))
   
   End-to-end pipeline for sample data to perform a multiclass classification task, involving data scaling, cleaning,
 and visualization, dimensionality reduction (PCA, UMAP) and a comparison of the results of different models.
