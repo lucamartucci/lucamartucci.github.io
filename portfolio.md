@@ -3,7 +3,7 @@ layout: default
 title: Portfolio
 ---
 
-* **Deep learning Sumerian translation and recognition** ([pdf](SuBERT.pdf), [<i class="fab fa-github"></i>]([https://github.com/lucamartucci/NBAstat](https://github.com/sstraccialini/AI-project-SuBERT)))
+* **Deep learning Sumerian translation and recognition** ([pdf](SuBERT.pdf), [<i class="fab fa-github"></i>](https://github.com/sstraccialini/AI-project-SuBERT))
 
   Image-classification techniques to isolate and recognize individual characters from high-resolution tablet images written in Sumerian cuneiforms and translation via Transformer-like architectures.
 
