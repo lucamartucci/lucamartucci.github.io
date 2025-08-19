@@ -3,7 +3,7 @@ layout: default
 title: Portfolio
 ---
 
-* **Deep learning Sumerian translation and recognition** ([<i class="fab fa-github"></i>]([https://github.com/lucamartucci/NBAstat](https://github.com/sstraccialini/AI-project-SuBERT)))
+* **Deep learning Sumerian translation and recognition** ([pdf](SuBERT.pdf), [<i class="fab fa-github"></i>]([https://github.com/lucamartucci/NBAstat](https://github.com/sstraccialini/AI-project-SuBERT)))
 
   Image-classification techniques to isolate and recognize individual characters from high-resolution tablet images written in Sumerian cuneiforms and translation via Transformer-like architectures.
 
@@ -31,7 +31,7 @@ their strategy profiles.
   End-to-end pipeline for sample data to perform a multiclass classification task, involving data scaling, cleaning,
 and visualization, dimensionality reduction (PCA, UMAP) and a comparison of the results of different models.
 
-* **What makes a winning NBA team?** ([<i class="fab fa-github"></i>](https://github.com/lucamartucci/NBAstat))
+* **What makes a winning NBA team?** ([pdf](What makes a winning NBA team?.pdf), [<i class="fab fa-github"></i>](https://github.com/lucamartucci/NBAstat))
   
   Data analysis of teams statistics, for the 2021-2 and 2022-3 NBA seasons, with the ideal target of detecting the
 most relevant parameters influencing the winning percentage of each team.
