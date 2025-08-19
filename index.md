@@ -5,7 +5,7 @@ title: Curriculum Vitae
 
 * **Imperial College London** (Incoming, Fall 2025)
 
-*   *MSc in Applied Mathematics*
+  *MSc in Applied Mathematics*
 
 * **Bocconi University** (2022-2025)
   
@@ -18,6 +18,7 @@ title: Curriculum Vitae
   *Exchange Semester*
 
 ---
+
 
 
 
