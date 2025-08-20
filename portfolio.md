@@ -35,4 +35,5 @@ and visualization, dimensionality reduction (PCA, UMAP) and a comparison of the 
   
   Data analysis of teams statistics, for the 2021-2 and 2022-3 NBA seasons, with the ideal target of detecting the
 most relevant parameters influencing the winning percentage of each team.
+
 ---
