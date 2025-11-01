@@ -258,13 +258,22 @@ a.sidebar-nav-item:focus {
   color: #0000FF;
 }
 
-/* Cobalt Blue */
-.theme-base-cobalt .sidebar {
-  background-color: #2F4F4F; /* Cobalt blue */
+/* Elegant Grey */
+.theme-base-grey .sidebar {
+  background-color: #2F4F4F; /* Elegant Grey */
 }
-.theme-base-cobalt .content a,
-.theme-base-cobalt .related-posts li a:hover {
-  color: #0047AB;
+.theme-base-grey .content a,
+.theme-base-grey .related-posts li a:hover {
+  color: #2F4F4F;
+}
+
+/* Elegant Blue */
+.theme-base-blue .sidebar {
+  background-color: #36384C; /* Elegant Blue */
+}
+.theme-base-blue .content a,
+.theme-base-blue .related-posts li a:hover {
+  color: #36384C;
 }
 
 img.centered {
