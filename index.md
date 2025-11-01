@@ -3,7 +3,7 @@ layout: default
 title: Curriculum Vitae
 ---
 
-* **Imperial College London** (Incoming, Fall 2025)
+* **Imperial College London** (2025-2026)
 
   *MSc in Applied Mathematics*
 
@@ -11,13 +11,14 @@ title: Curriculum Vitae
   
   *BSc in Mathematical and Computing Sciences for Artificial Intelligence*
   
-  Thesis: *Dissipative-Hamiltonian evolution within the GENERIC paradigm* ([pdf](thesis.pdf)), supervised by Prof. Giuseppe Savaré.
+  Thesis: *Dissipative-Hamiltonian evolution within the GENERIC paradigm* ([pdf](thesis.pdf)), supervised by Prof. [Giuseppe Savaré](https://gsavare.github.io/).
 
 * **University of Wisconsin-Madison** (Fall 2024)
   
   *Exchange Semester*
 
 ---
+
 
 
 
