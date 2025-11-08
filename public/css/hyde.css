@@ -24,6 +24,8 @@
  * Themes
  */
 
+@import url('https://fonts.cdnfonts.com/css/soria');
+
 
 /*
  * Global resets
@@ -32,7 +34,7 @@
  */
 
 html {
-  font-family: "PT Sans", Helvetica, Arial, sans-serif;
+  font-family: "Soria", "PT Sans", Helvetica, Arial, sans-serif;
 }
 @media (min-width: 48em) {
   html {
@@ -283,6 +285,10 @@ a.sidebar-nav-item:focus {
 .theme-base-dblue .content a,
 .theme-base-dblue .related-posts li a:hover {
   color: #4675A5;
+}
+/* Color content */
+.theme-base-dblue .content {
+  color: #2F4F6F;
 }
 
 img.centered {
