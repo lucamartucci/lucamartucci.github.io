@@ -210,6 +210,18 @@ a.sidebar-nav-item:focus {
   color: #2F4F6F !important;
 }
 
+body.theme-base-dblue .content,
+body.theme-base-dblue .content p,
+body.theme-base-dblue .content h1,
+body.theme-base-dblue .content h2,
+body.theme-base-dblue .content h3,
+body.theme-base-dblue .content h4,
+body.theme-base-dblue .content h5,
+body.theme-base-dblue .content h6,
+body.theme-base-dblue .content li {
+  color: #2F4F6F !important;
+}
+
 img.centered {
   display: block;
   margin-left: auto;
