@@ -276,6 +276,15 @@ a.sidebar-nav-item:focus {
   color: #7D7AA5;
 }
 
+/* Dark Blue */
+.theme-base-dblue .sidebar {
+  background-color: #2F4F6F; /* Dark Blue */
+}
+.theme-base-dblue .content a,
+.theme-base-dblue .related-posts li a:hover {
+  color: #4675A5;
+}
+
 img.centered {
   display: block;
   margin-left: auto;
