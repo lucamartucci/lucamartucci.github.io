@@ -288,7 +288,7 @@ a.sidebar-nav-item:focus {
 }
 /* Color content */
 .theme-base-dblue .content {
-  color: #2F4F6F;
+  color: #2F4F6F !important;
 }
 
 img.centered {
