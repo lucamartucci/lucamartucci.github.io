@@ -214,6 +214,17 @@ body.theme-base-dblue .content a {
   color: #4675A5 !important;
 }
 
+body.theme-base-dblue .content h1,
+body.theme-base-dblue .content h2,
+body.theme-base-dblue .content h3,
+body.theme-base-dblue .content h4,
+body.theme-base-dblue .content h5,
+body.theme-base-dblue .content h6,
+body.theme-base-dblue .content strong,
+body.theme-base-dblue .content b {
+  color: #2F4F6F !important;
+}
+
 img.centered {
   display: block;
   margin-left: auto;
