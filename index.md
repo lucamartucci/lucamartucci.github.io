@@ -7,6 +7,8 @@ title: Curriculum Vitae
 
   MSc in Applied Mathematics
 
+  Thesis: *Bayesian nonparametric inference in Vlasov-Fokker-Planck models* ([pdf](vfp.pdf), [code](vfp.html)), supervised by Prof. [Grigorios Pavliotis](https://www.ma.imperial.ac.uk/~pavl/).
+
 * **Bocconi University** (2022-2025)
   
   BSc in Mathematical and Computing Sciences for Artificial Intelligence
