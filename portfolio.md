@@ -4,37 +4,22 @@ permalink: /portfolio/
 title: portfolio
 ---
 
-* **Deep learning Sumerian translation and recognition** ([pdf](SuBERT.pdf), [<i class="fab fa-github"></i>](https://github.com/sstraccialini/AI-project-SuBERT))
+**Miscellaneous notes**
 
-  Image-classification techniques to isolate and recognize individual characters from high-resolution tablet images written in Sumerian cuneiforms and translation via Transformer-like architectures.
+* Does additive noise destroy a pitchfork bifurcation? ([pdf](rds.pdf))
 
-* **Gene-based classification of Hypoxia in cancer cells** ([code](AILab.html))
-  
-  Machine Learning models for the classification of the state of hypoxia in cells, involving dimensionality reduction (PCA, t-SNE, UMAP), supervised and unsupervised learning (clustering, KNN, XGBoost, SVM, NN), hyperparameter optimization (Optuna), encoding, and ensemble models.
+* Fixed points, degree, index and all that... ([pdf](fxpts.pdf))
 
-* **Monte Carlo simulation of the 3-dimensional Ising model** ([code](3DIsing.html))
-  
-  Simulation of the Ising model on a 3D lattice using the Metropolis algorithm. Analysis of phase transitions and
-magnetization behavior near the critical temperature.
+* Quantum Information Theory ([pdf](qit.pdf))
 
-* **Evolutionary algorithms to find minimal surfaces** ([code](EvMinSurf.html))
-  
-  Computing solutions to the plateau problem with fixed volume and Dirichlet boundary condition in the plane,
-using various evolutionary computing selection and variation operators.
+* How to win at JENGA ([pdf](Jenga.pdf))
 
-* **Analysis of JENGA using Game Theory** ([pdf](Jenga.pdf))
-  
-  Subgame perfect equilibria for a model two-player JENGA match, and the influence of players’ risk behavior on
-their strategy profiles.
+**Formalisation in LEAN**
 
-* **Pilot Machine Learning project** ([code](ML.html))
-  
-  End-to-end pipeline for sample data to perform a multiclass classification task, involving data scaling, cleaning,
-and visualization, dimensionality reduction (PCA, UMAP) and a comparison of the results of different models.
+* The Heisenberg uncertainty principle ([pdf](Martucci_Luca_Project3_Report.pdf))
 
-* **What makes a winning NBA team?** ([pdf](nba.pdf), [<i class="fab fa-github"></i>](https://github.com/lucamartucci/NBAstat))
-  
-  Data analysis of teams statistics, for the 2021-2 and 2022-3 NBA seasons, with the ideal target of detecting the
-most relevant parameters influencing the winning percentage of each team.
+* Von Neumann's proof of the Radon-Nikodym theorem ([pdf](Martucci_Luca_Project2_Report.pdf))
 
+* The Banach fixed point theorem ([pdf](Martucci_Luca_Project1_Report.pdf))
+ 
 ---
