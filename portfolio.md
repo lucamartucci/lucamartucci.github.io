@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /portfolio/  
-title: Portfolio
+title: portfolio
 ---
 
 * **Deep learning Sumerian translation and recognition** ([pdf](SuBERT.pdf), [<i class="fab fa-github"></i>](https://github.com/sstraccialini/AI-project-SuBERT))
