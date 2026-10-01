@@ -3,6 +3,12 @@ layout: default
 title: Curriculum Vitae
 ---
 
+* **Imperial College London** (2026-Present)
+
+  PhD student in Mathematics
+
+  Supervisors: [Angeliki Menegaki](https://angelikimenegaki.wordpress.com/) & [Grigorios Pavliotis](https://www.ma.imperial.ac.uk/~pavl/).
+  
 * **Imperial College London** (2025-2026)
 
   MSc in Applied Mathematics
