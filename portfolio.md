@@ -34,6 +34,6 @@ title: portfolio
 
 * Pilot Machine Learning project ([code](ML.html))
 
-* What makes a winning NBA team?** ([pdf](nba.pdf), [<i class="fab fa-github"></i>](https://github.com/lucamartucci/NBAstat))
+* What makes a winning NBA team? ([pdf](nba.pdf), [<i class="fab fa-github"></i>](https://github.com/lucamartucci/NBAstat))
 
 ---
