@@ -10,14 +10,14 @@ plugins: [jekyll-sitemap]
 
 # Setup
 title:            Luca Martucci
-tagline:          ''
-description:      ''
-url:              ''
-baseurl:           
+tagline:          'Mathematics, Imperial College London'
+description:      'Personal website of Luca Martucci, mathematics researcher at Imperial College London.'
+url:              'https://lucamartucci.github.io'
+baseurl:          ''
 
 author:
-  name:           'Mark Otto'
-  url:            'https://twitter.com/mdo'
+  name:           'Luca Martucci'
+  url:            'https://lucamartucci.github.io'
 
 paginate:         10000
 
@@ -25,7 +25,7 @@ paginate:         10000
 version:          2.1.0
 
 github:
-  repo:           https://github.com/poole/hyde
+  repo:           https://github.com/lucamartucci/lucamartucci.github.io
 
 # plug-ins
 excerpt_separator: '<!--more-->'
