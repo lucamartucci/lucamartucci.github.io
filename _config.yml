@@ -11,7 +11,7 @@ plugins: [jekyll-sitemap]
 # Setup
 title:            Luca Martucci
 tagline:          'Mathematics, Imperial College London'
-description:      'Personal website of Luca Martucci, mathematics researcher at Imperial College London.'
+description:      'Personal website of Luca Martucci, PhD student in Mathematics at Imperial College London.'
 url:              'https://lucamartucci.github.io'
 baseurl:          ''
 
