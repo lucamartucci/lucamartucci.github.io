@@ -6,6 +6,8 @@ highlighter:      rouge
 permalink:        pretty
 relative_permalinks: false
 
+plugins: [jekyll-sitemap]
+
 # Setup
 title:            Luca Martucci
 tagline:          ''
