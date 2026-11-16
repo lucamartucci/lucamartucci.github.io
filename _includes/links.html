@@ -1,0 +1,1 @@
+{% if include.links %}<span class="links">{% for l in include.links %}<a class="tag" href="{{ l.url }}"{% if l.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{% if l.label == 'GitHub' %}<i class="fa-brands fa-github" aria-hidden="true"></i> {% endif %}{{ l.label }}</a>{% endfor %}</span>{% endif %}

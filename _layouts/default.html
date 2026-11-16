@@ -1,15 +1,78 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-GB">
 
   {% include head.html %}
 
-  <body class="theme-base-grey">
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
     {% include sidebar.html %}
 
-    <div class="content container">
+    <main id="main" class="content">
       {{ content }}
-    </div>
 
+      <footer class="site-footer">
+        <p>© {{ site.time | date: '%Y' }} {{ site.author.name }} · Last updated {{ site.time | date: '%B %Y' }}</p>
+      </footer>
+    </main>
+
+    <script>
+      // Light / dark switch. The first visit follows the system setting (see head.html);
+      // an explicit choice is remembered, otherwise the page keeps following the system.
+      (function () {
+        var root = document.documentElement;
+        var btn = document.querySelector('.theme-toggle');
+        var label = btn && btn.querySelector('.theme-toggle-label');
+        function sync() {
+          var dark = root.getAttribute('data-theme') === 'dark';
+          if (!btn) return;
+          btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+          label.textContent = dark ? 'Light mode' : 'Dark mode';
+        }
+        if (btn) btn.addEventListener('click', function () {
+          var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          try { localStorage.setItem('theme', next); } catch (e) {}
+          sync();
+        });
+        if (window.matchMedia) {
+          var mq = window.matchMedia('(prefers-color-scheme: dark)');
+          var onChange = function (e) {
+            var saved = null;
+            try { saved = localStorage.getItem('theme'); } catch (err) {}
+            if (!saved) { root.setAttribute('data-theme', e.matches ? 'dark' : 'light'); sync(); }
+          };
+          if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange);
+        }
+        sync();
+      })();
+
+      // Mark the sidebar link of the section currently being read.
+      (function () {
+        var items = [].slice.call(document.querySelectorAll('.nav-section')).map(function (link) {
+          return { link: link, el: document.getElementById(link.dataset.section) };
+        }).filter(function (s) { return s.el; });
+        if (!items.length) return;
+        function update() {
+          var current = null;
+          var doc = document.documentElement;
+          if (window.innerHeight + window.scrollY >= doc.scrollHeight - 2) {
+            current = items[items.length - 1];
+          } else {
+            items.forEach(function (s) {
+              if (s.el.getBoundingClientRect().top <= window.innerHeight * 0.35) current = s;
+            });
+          }
+          items.forEach(function (s) {
+            var on = s === current;
+            s.link.classList.toggle('is-current', on);
+            if (on) s.link.setAttribute('aria-current', 'location'); else s.link.removeAttribute('aria-current');
+          });
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+      })();
+    </script>
   </body>
 </html>

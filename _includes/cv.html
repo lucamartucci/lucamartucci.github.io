@@ -1,0 +1,13 @@
+<ol class="cv">
+{% for e in site.data.cv %}
+  <li class="cv-entry">
+    <span class="cv-dates">{{ e.dates }}</span>
+    <div class="cv-body">
+      <h3 class="cv-institution">{{ e.institution }}</h3>
+      <p class="cv-role">{{ e.role }}</p>
+      {% if e.note %}<div class="cv-note">{{ e.note | markdownify }}</div>{% endif %}
+      {% include links.html links=e.links %}
+    </div>
+  </li>
+{% endfor %}
+</ol>

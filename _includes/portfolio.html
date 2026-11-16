@@ -1,0 +1,13 @@
+{% for g in site.data.portfolio %}
+<div class="work-group">
+  <h3 class="work-group-title">{{ g.group }}</h3>
+  <ul class="work-list">
+  {% for item in g.items %}
+    <li class="work-item">
+      <span class="work-title">{{ item.title }}</span>
+      {% include links.html links=item.links %}
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+{% endfor %}

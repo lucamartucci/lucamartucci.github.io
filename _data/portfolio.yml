@@ -1,0 +1,52 @@
+# Portfolio, grouped. Each item has a title and a list of links.
+# Link labels: PDF, Code, GitHub (GitHub gets its icon automatically).
+
+- group: Miscellaneous notes
+  items:
+    - title: Does additive noise destroy a pitchfork bifurcation?
+      links:
+        - { label: PDF, url: rds.pdf }
+    - title: Fixed points, degree, index and all that…
+      links:
+        - { label: PDF, url: fxpts.pdf }
+    - title: How to win at JENGA
+      links:
+        - { label: PDF, url: Jenga.pdf }
+    - title: Quantum Information Theory
+      links:
+        - { label: PDF, url: qit.pdf }
+
+- group: Formalisation in Lean
+  items:
+    - title: The Heisenberg uncertainty principle
+      links:
+        - { label: PDF, url: Martucci_Luca_Project3_Report.pdf }
+    - title: Von Neumann's proof of the Radon–Nikodym theorem
+      links:
+        - { label: PDF, url: Martucci_Luca_Project2_Report.pdf }
+    - title: The Banach fixed point theorem
+      links:
+        - { label: PDF, url: Martucci_Luca_Project1_Report.pdf }
+
+- group: Computing projects
+  items:
+    - title: Deep learning Sumerian translation and recognition
+      links:
+        - { label: PDF, url: SuBERT.pdf }
+        - { label: GitHub, url: "https://github.com/sstraccialini/AI-project-SuBERT" }
+    - title: Gene-based classification of hypoxia in cancer cells
+      links:
+        - { label: Code, url: AILab.html }
+    - title: Monte Carlo simulation of the three-dimensional Ising model
+      links:
+        - { label: Code, url: 3DIsing.html }
+    - title: Evolutionary algorithms to find minimal surfaces
+      links:
+        - { label: Code, url: EvMinSurf.html }
+    - title: Pilot machine learning project
+      links:
+        - { label: Code, url: ML.html }
+    - title: What makes a winning NBA team?
+      links:
+        - { label: PDF, url: nba.pdf }
+        - { label: GitHub, url: "https://github.com/lucamartucci/NBAstat" }

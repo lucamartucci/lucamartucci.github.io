@@ -1,0 +1,29 @@
+# Curriculum Vitæ entries, shown newest first.
+# Fields: dates, institution, role, note (optional, Markdown allowed), links (optional).
+
+- dates: 2026 – present
+  institution: Imperial College London
+  role: PhD in Mathematics
+  note: "Supervisors: Angeliki Menegaki & Grigorios Pavliotis."
+
+- dates: 2025 – 2026
+  institution: Imperial College London
+  role: MSc in Applied Mathematics
+  note: "Thesis: *Bayesian nonparametric inference in Vlasov–Fokker–Planck models*, supervised by Prof. Pavliotis."
+  links:
+    - label: PDF
+      url: vfp.pdf
+    - label: Code
+      url: vfp.html
+
+- dates: 2022 – 2025
+  institution: Bocconi University
+  role: BSc in Mathematical and Computing Sciences for Artificial Intelligence
+  note: "Thesis: *Dissipative-Hamiltonian evolution within the GENERIC paradigm*, supervised by Prof. [Giuseppe Savaré](https://gsavare.github.io/)."
+  links:
+    - label: PDF
+      url: thesis.pdf
+
+- dates: Fall 2024
+  institution: University of Wisconsin–Madison
+  role: Exchange Semester
