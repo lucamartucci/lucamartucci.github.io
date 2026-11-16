@@ -232,3 +232,28 @@ img.centered {
 }
 
 
+
+
+/*
+ * Single-page sections
+ */
+html {
+  scroll-behavior: smooth;
+}
+.page-section {
+  scroll-margin-top: 2rem;
+  padding-bottom: 2rem;
+}
+.page-section + .page-section {
+  border-top: 1px solid #eee;
+  padding-top: 2rem;
+}
+.sidebar-nav-item.section-link {
+  font-weight: bold;
+}
+.sidebar-nav-item.external-link {
+  font-weight: normal;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

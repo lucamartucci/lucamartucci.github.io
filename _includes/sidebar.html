@@ -4,16 +4,16 @@
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
       <h1 style="font-size: 43px">
-        <a href="{{ site.baseurl }}/">
+        <a href="{{ site.baseurl }}/#about">
           {{ site.title }}
         </a>
       </h1>
     </div>
 
     <nav class="sidebar-nav">
-      <a class="sidebar-nav-item" href="https://profiles.imperial.ac.uk/luca.martucci25" target="_blank">Imperial Profile</a>
-      <a class="sidebar-nav-item active" href="{{ site.baseurl }}/">Curriculum Vitæ</a>
-      <a class="sidebar-nav-item active" href="{{ site.baseurl }}/portfolio">Portfolio</a>
+      <a class="sidebar-nav-item external-link" href="https://profiles.imperial.ac.uk/luca.martucci25" target="_blank">Imperial Profile</a>
+      <a class="sidebar-nav-item section-link" data-section="cv" href="{{ site.baseurl }}/#cv">Curriculum Vitæ</a>
+      <a class="sidebar-nav-item section-link" data-section="portfolio" href="{{ site.baseurl }}/#portfolio">Portfolio</a>
     </nav>
 
     <p>© {{ site.time | date: '2026. ' }}  All rights reserved.</p>
